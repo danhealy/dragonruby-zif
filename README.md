@@ -4,7 +4,7 @@ Zif is a collection of features commonly required in 2D games.  The name is a re
 
 
 ## Installation:
-1. Create a `/ib` directory in the same directory as `app`, and then copy the `lib/zif` directory into it.
+1. Create a `/lib` directory in the same directory as `app`, and then copy the `lib/zif` directory into it.
 2. In your `main.rb`, require the Zif files in this order, before your code:
 
 ```ruby
