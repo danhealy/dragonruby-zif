@@ -39,7 +39,7 @@ require 'lib/zif/game.rb'
 # Features
 ## Module
 ### Zif
-The `Zif` module itself has a collection of frequently used helpers, like `Zif.sub_positions` for subtracting one array with two elements (e.g. `[x, y]`) from another
+The `Zif` module itself has a collection of frequently used helpers, like `Zif.sub_positions` for subtracting one array with two elements (e.g. `[x, y]`) from another.
 
 ## Mixins
 These modules are designed to be included in another class.
@@ -155,7 +155,7 @@ end
 ```
 
 ## Classes for 2D Scrolling Games
-If your game's play area extends beyond the screen resolution, you likely want some way of
+If your game's play area extends beyond the screen resolution, you likely want some way of managing this!  These classes are designed for this use case.
 
 ### Zif::LayeredTileMap
 
