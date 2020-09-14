@@ -125,7 +125,7 @@ A `Sequence` is a series of `Actions` to be run in order.
 
 @dragon.run_animation_sequence(:fly)
 ```
-![](dragonruby-ui-sample.gif)
+![](dragon_actions.gif)
 
 ### Zif::Scene
 A `Scene` is a full-screen view of your game.  The concept in `Zif::Game` is to show one `Scene` at a time. So each `Scene` in your game should be a subclass of `Zif::Scene` which overrides `#perform_tick`. Using the structure in `Zif::Game`, `#perform_tick` comes after input handling and before updating `Actionable`s. So your subclass should use `#perform_tick` to add/remove clickables/`Actionable`s, and respond to any detected input. Switching scenes is handled in `Zif::Game`, based on the return value of `#perform_tick`.  You can optionally define `#prepare_scene` - a method invoked prior to the first tick it is the active scene, and `#unload_scene` which is invoked after the Scene has been switched.
