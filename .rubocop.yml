@@ -1,0 +1,73 @@
+AllCops:
+  NewCops: disable
+  Include:
+    - 'app/**/*.rb'
+    - 'lib/**/*.rb'
+  Exclude:
+    - 'app/tests.rb'
+    - 'app/repl.rb'
+
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Metrics/ParameterLists:
+  Enabled: false
+
+# A lot of this shit is blown up by assigning x/y/w/h/path/source_x/source_y etc all the damn time
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Max: 100
+
+Metrics/ClassLength:
+  Max: 1000
+
+Metrics/CyclomaticComplexity:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 100
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Normally I like using double quotes but I think DR/mRuby can't hang
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/IfInsideElse:
+  AllowIfModifier: true
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/RandomWithOffset:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table

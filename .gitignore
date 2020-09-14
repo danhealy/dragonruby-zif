@@ -1,0 +1,7 @@
+.DS_Store
+tmp/*
+logs/*
+exceptions/*
+console_history.txt
+.dragonruby/*
+docs/search_results.txt
