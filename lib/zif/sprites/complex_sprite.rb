@@ -43,6 +43,7 @@ module Zif
     end
 
     def clicked?(point, kind=:up)
+      # puts "ComplexSprite#clicked? : #{point}"
       @render_target.containing_sprite.clicked?(point, kind)
     end
   end

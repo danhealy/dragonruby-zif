@@ -27,10 +27,11 @@ module Zif
     def process_click
       return if @clickables.empty?
 
-      @mouse_point = $gtk.args.inputs.mouse.point
-      mouse_bits   = $gtk.args.inputs.mouse.button_bits
-      mouse_up     = $gtk.args.inputs.mouse.up
-      mouse_down   = $gtk.args.inputs.mouse.down # mouse_bits > @last_mouse_bits
+      @mouse_point    = $gtk.args.inputs.mouse.point
+      mouse_bits      = $gtk.args.inputs.mouse.button_bits
+      mouse_up        = $gtk.args.inputs.mouse.up
+      mouse_down      = $gtk.args.inputs.mouse.down # mouse_bits > @last_mouse_bits
+      mouse_only_down = mouse_down && !mouse_up
 
       return unless mouse_down || mouse_up || @expecting_mouse_up.any?
 
@@ -40,9 +41,9 @@ module Zif
                (mouse_down ? :down : :changed)
              end
 
-      awaiting_clicks = mouse_down ? @clickables : @expecting_mouse_up
+      awaiting_clicks = mouse_only_down ? @clickables : @expecting_mouse_up
 
-      # puts "Zif::InputService#process_click: #{@mouse_point} point, #{mouse_bits} bits, kind: #{kind}.
+      # puts "Zif::InputService#process_click: #{@mouse_point} point, #{mouse_bits} bits, kind: #{kind}."
       # puts "                                 #{awaiting_clicks.count} registered"
 
       awaiting_clicks.each do |clickable|
@@ -51,8 +52,9 @@ module Zif
         clicked_sprite = clickable.clicked?(@mouse_point, kind)
         next unless clicked_sprite
 
-        @expecting_mouse_up |= [clicked_sprite] if mouse_down
+        @expecting_mouse_up |= [clicked_sprite] if mouse_only_down
 
+        # puts "Zif::InputService#process_click: #{@expecting_mouse_up.length} expecting"
         # puts "Zif::InputService#process_click: -> sprite handled click #{clicked_sprite}"
       end
 

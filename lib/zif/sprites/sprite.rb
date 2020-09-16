@@ -51,7 +51,7 @@ module Zif
     end
 
     def clicked?(point, kind=:up)
-      # puts "Sprite:#{@name}: clicked? #{kind} #{point} -> #{rect} = #{point.inside_rect?(rect)}"
+      # puts "Sprite:#{@name}: clicked? #{kind} #{kind.class} #{point} -> #{rect} = #{point.inside_rect?(rect)}"
       return nil if (kind == :down) && !point.inside_rect?(rect)
 
       click_handler = case kind
