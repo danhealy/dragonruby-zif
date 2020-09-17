@@ -47,7 +47,7 @@ module Zif
   class Game
     include Traceable
     attr_gtk
-    attr_accessor :scene, :services, :clickables, :action_service, :scene_registry
+    attr_accessor :scene, :services, :action_service, :scene_registry
 
     # Suggested that you override this and set @scene
     def initialize
@@ -58,7 +58,6 @@ module Zif
       @services.register(@tracer_service_name, Zif::TickTraceService.new)
       @services.register(:sprite_registry, Zif::SpriteRegistry.new)
       @services.register(:input_service, Zif::InputService.new)
-      @clickables = [] # TODO: Replace with ClickService
       @scene_registry = {}
     end
 
@@ -74,9 +73,11 @@ module Zif
     # This should not be overridden. Override #perform_tick instead
     def standard_tick(&_block)
       @services[:tracer].reset_tick
-      @services[:input_service].process_click
       mark('#standard_tick: begin')
-      # TODO: handle click inputs here
+
+      @services[:input_service].process_click
+      mark('#standard_tick: input_service #process_click')
+
       tick_result = @scene.perform_tick
       mark('#standard_tick: Scene #perform_tick complete')
 
