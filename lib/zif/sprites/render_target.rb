@@ -66,11 +66,11 @@ module Zif
       targ.labels     << @labels     if @labels&.any?
     end
 
-    def clicked?(point, _kind=:up)
+    def clicked?(point, kind=:up)
       relative = relative_point(point)
       puts "#{self.class.name}:#{name}: clicked? #{point} -> relative #{relative}"
 
-      find_and_return = ->(sprite) { sprite.respond_to?(:clicked?) && sprite.clicked?(relative, up) }
+      find_and_return = ->(sprite) { sprite.respond_to?(:clicked?) && sprite.clicked?(relative, kind) }
       @sprites.reverse_each.find(&find_and_return) || @primitives.reverse_each.find(&find_and_return)
     end
 
