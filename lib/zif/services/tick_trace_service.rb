@@ -17,8 +17,12 @@ module Zif
       reset_tick
     end
 
-    def is_enabled= enabled
-      @is_enabled = enabled
+    def enable!
+      @enabled = true
+    end
+    
+    def disable!
+      @enabled = false
     end
 
     def enabled?
