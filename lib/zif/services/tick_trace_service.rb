@@ -32,7 +32,7 @@ module Zif
     end
 
     def mark(label)
-      return if !@is_enabled
+      return unless enabled?
 
       t = Time.now
       @times << {
