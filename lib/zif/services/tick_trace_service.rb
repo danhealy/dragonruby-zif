@@ -21,8 +21,8 @@ module Zif
       @is_enabled = enabled
     end
 
-    def is_enabled?
-      @is_enabled
+    def enabled?
+      @enabled
     end
 
     def reset_tick
