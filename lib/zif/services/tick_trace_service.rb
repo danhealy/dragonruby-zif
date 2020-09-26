@@ -13,7 +13,7 @@ module Zif
     # 0.02 cooresponds to 20ms
     def initialize(time_threshold=0.02)
       @time_threshold = time_threshold
-      @is_enabled = true
+      @enabled = true
       reset_tick
     end
 
