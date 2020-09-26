@@ -48,6 +48,8 @@ module Zif
     end
 
     def finish
+      return unless enabled?
+
       elapsed = @last_time - @start_time
       return unless elapsed > @time_threshold
 
