@@ -13,7 +13,20 @@ module Zif
     # 0.02 cooresponds to 20ms
     def initialize(time_threshold=0.02)
       @time_threshold = time_threshold
+      @enabled = true
       reset_tick
+    end
+
+    def enable!
+      @enabled = true
+    end
+    
+    def disable!
+      @enabled = false
+    end
+
+    def enabled?
+      @enabled
     end
 
     def reset_tick
@@ -23,6 +36,8 @@ module Zif
     end
 
     def mark(label)
+      return unless enabled?
+
       t = Time.now
       @times << {
         label:   label,
@@ -33,6 +48,8 @@ module Zif
     end
 
     def finish
+      return unless enabled?
+
       elapsed = @last_time - @start_time
       return unless elapsed > @time_threshold
 
