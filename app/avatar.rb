@@ -31,7 +31,7 @@ class Avatar < Zif::Sprite
 
     new_basic_animation(
       :fly,
-      1.upto(4).map { |i| ["dragon_#{i}", 4] } + 3.downto(2).map { |i| ["dragon_#{i}", 4] }
+      [1, 2, 3, 4, 3, 2].map { |i| ["dragon_#{i}", 4] }
     )
   end
 

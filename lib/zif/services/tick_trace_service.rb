@@ -20,7 +20,7 @@ module Zif
     def enable!
       @enabled = true
     end
-    
+
     def disable!
       @enabled = false
     end

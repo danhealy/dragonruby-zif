@@ -61,6 +61,12 @@ module Zif
       return @layers[name]
     end
 
+    def new_bitmasked_tiled_layer(name, render_only_visible=false)
+      @layers[name] = Zif::BitmaskedTiledLayer.new(self, name, @z_index, render_only_visible)
+      @z_index += 1
+      return @layers[name]
+    end
+
     def max_width
       @tile_width * @logical_width
     end

@@ -9,7 +9,16 @@ module Zif
 
     # I wish I could print the name of the caller method here...
     def mark(msg='Mark')
-      tracer&.mark("#{self.class.name}: #{msg}")
+      tracer&.mark("#{mark_prefix}#{msg}")
+    end
+
+    def mark_and_print(msg='Mark')
+      puts "#{mark_prefix}#{msg}"
+      mark(msg)
+    end
+
+    def mark_prefix
+      "#{self.class.name}: "
     end
   end
 end

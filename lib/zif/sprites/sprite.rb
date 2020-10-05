@@ -65,7 +65,7 @@ module Zif
 
       # puts "Sprite:#{@name}: click handler: #{kind} #{click_handler}"
 
-      click_handler&.call(point)
+      click_handler&.call(self, point)
       return self unless @render_target && !absorb_click?
 
       @render_target.clicked?(point, kind)
