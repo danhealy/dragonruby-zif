@@ -10,7 +10,7 @@ This repo is an example app - the `Zif` library is entirely contained within the
 ### Running the Example App:
 1. Create a fresh copy of DragonRuby GTK - you can call this folder `dragonruby-zif-testbed` and it should contain the `dragonruby` executable.
 2. Change directory in your terminal to `dragonruby-zif-testbed`
-3. Clone this entire `dragonruby-zif` repo inside the `dragonruby-zif-testbed` directory - `git clone ...`.
+3. Clone this entire `dragonruby-zif` repo inside the `dragonruby-zif-testbed` directory - `git clone https://github.com/danhealy/dragonruby-zif.git`.
 4. Run using `./dragonruby dragonruby-zif/`
 
 ## Installation in your app:
