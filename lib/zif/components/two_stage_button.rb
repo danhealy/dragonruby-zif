@@ -11,12 +11,12 @@ module Zif
       @normal = []
       @pressed = []
       @is_pressed = false
-      @render_target.containing_sprite.on_mouse_up = lambda { |point|
+      @render_target.containing_sprite.on_mouse_up = lambda { |_sprite, point|
         block.call(point) if block
         toggle_pressed if @is_pressed
       }
-      @render_target.containing_sprite.on_mouse_changed = ->(point) { on_mouse_changed(point) }
-      @render_target.containing_sprite.on_mouse_down = ->(_point) { toggle_pressed }
+      @render_target.containing_sprite.on_mouse_changed = ->(_sprite, point) { on_mouse_changed(point) }
+      @render_target.containing_sprite.on_mouse_down = ->(_sprite, _point) { toggle_pressed }
     end
 
     def pressed_height

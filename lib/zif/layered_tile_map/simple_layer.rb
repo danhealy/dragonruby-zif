@@ -75,7 +75,12 @@ module Zif
     end
 
     def clicked?(point, kind=:up)
-      visible_sprites.reverse_each.find { |sprite| sprite.respond_to?(:clicked?) && sprite.clicked?(point, kind) }
+      relative_point = Zif.add_positions(point, containing_sprite.source_xy)
+      visible_sprites(
+        relative_point + [1, 1]
+      ).reverse_each.find do |sprite|
+        sprite.respond_to?(:clicked?) && sprite.clicked?(relative_point, kind)
+      end
     end
   end
 end

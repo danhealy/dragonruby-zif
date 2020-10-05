@@ -120,13 +120,13 @@ class World < Zif::Scene
     refresh_map
     @map.layers[:tiles].should_render = false
 
-    @map.layers[:tiles].containing_sprite.on_mouse_up = lambda do |point|
+    @map.layers[:tiles].containing_sprite.on_mouse_up = lambda do |_sprite, point|
       combined_click = Zif.add_positions(point, @camera.pos)
       puts "Map clicked! #{point} -> #{combined_click}"
       @avatar.start_walking(combined_click)
     end
 
-    @map.layers[:tiles].containing_sprite.on_mouse_down = ->(point) { puts "Map clicked down! #{point}" }
+    @map.layers[:tiles].containing_sprite.on_mouse_down = ->(_sprite, point) { puts "Map clicked down! #{point}" }
 
     $game.services[:action_service].reset_actionables
     $game.services[:input_service].reset_clickables

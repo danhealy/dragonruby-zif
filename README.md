@@ -2,8 +2,18 @@
 
 Zif is a collection of features commonly required in 2D games.  The name is a reference to [Zero Insertion Force connectors used on the original Nintendo](https://console5.com/wiki/Improving_NES-001_Reliability) - You can drop it in your project and it should just work.  Everything is namespaced to `Zif` so any existing classes or namespaces you have should be preserved.
 
+## Example App
+This repo is an example app - the `Zif` library is entirely contained within the `lib` directory.
 
-## Installation:
+![](full_demo.gif)
+
+### Running the Example App:
+1. Create a fresh copy of DragonRuby GTK - you can call this folder `dragonruby-zif-testbed` and it should contain the `dragonruby` executable.
+2. Change directory in your terminal to `dragonruby-zif-testbed`
+3. Clone this entire `dragonruby-zif` repo inside the `dragonruby-zif-testbed` directory - `git clone ...`.
+4. Run using `./dragonruby dragonruby-zif/`
+
+## Installation in your app:
 1. Create a `/lib` directory in the same directory as `app`, and then copy the `lib/zif` directory into it.
 2. In your `main.rb`, require the Zif files in this order, before your code:
 
@@ -62,6 +72,7 @@ require 'lib/zif/camera.rb'
 # Depends on render_target.rb, expects to be initialized with a LayeredTileMap-like @map
 require 'lib/zif/layered_tile_map/simple_layer.rb'
 require 'lib/zif/layered_tile_map/tiled_layer.rb'
+require 'lib/zif/layered_tile_map/bitmasked_tiled_layer.rb'
 
 # Depends on simple_layer.rb, tiled_layer.rb, traceable.rb
 require 'lib/zif/layered_tile_map/layered_tile_map.rb'
@@ -104,7 +115,7 @@ end
 
 A render target is a way to programmatically create a sprite.  It acts just like `$gtk.args.outputs` in that it accepts an array of `sprites` and other `primitives`.  It gets rendered on the tick where its `width` and `height` are defined (allocated).  To display it, you need to create a sprite and reference the name of the render target as the `path`.
 
-This class handles this for you: it accepts `sprites` `labels` and `primitives` arrays.  You can force it to `#redraw`.  It produces a `#containing_sprite` which references itself, and you can use `#project_to` and `#project_from` to control panning and zooming.  It can be used with the `InputService` as it responds to `#clicked?` - and passes the click down to the component sprites and primitives.
+This class handles this for you: it accepts `sprites` `labels` and `primitives` arrays.  You can force it to `#redraw`.  It produces a `#containing_sprite` (a `Zif::Sprite`) which references itself as the `path` and sets the `source_*` attributes to match the `width` and `height`. You can use `#project_to` and `#project_from` to control panning and zooming of the containing sprite.  It can be used with the `InputService` as it responds to `#clicked?` - and passes the click down to the component sprites and primitives.
 
 **Example usage**:
 ```ruby
@@ -153,9 +164,12 @@ A `Sequence` is a series of `Actions` to be run in order.
   )
 )
 
+# Register the flying animation by name.
+# Tell it to use the 4 images 1 through 4, then reverse back to 1.
+# Hold each image for 4 ticks.
 @dragon.new_basic_animation(
   :fly,
-  1.upto(4).map { |i| ["dragon_#{i}", 4] } + 3.downto(2).map { |i| ["dragon_#{i}", 4] }
+  [1,2,3,4,3,2].map { |i| ["dragon_#{i}", 4] }
 )
 
 @dragon.run_animation_sequence(:fly)
@@ -180,7 +194,7 @@ class MyGame < Zif::Game
 end
 
 def tick(args)
-  if args.tick_count == 2
+  if args.tick_count == 2 # Some things can't be initialized in DR on the first tick.
     $game = MyGame.new
     $game.scene.prepare_scene # if needed on first scene
   end
@@ -266,6 +280,9 @@ Designed to be used with `Zif::LayeredTileMap`, this is an extension of `RenderT
 ### Zif::TiledLayer
 A subclass of `SimpleLayer`, this redefines `source_sprites` as a 2-dimensional array, indexed by logical (tile) position.
 
+### Zif::BitmaskedTiledLayer
+A TiledLayer where the sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.  This class expects that you've registered your autotile images using a `SpriteRegistry` available at `$services[:sprite_registry]`.  See `Zif::SpriteRegistry#register_autotiles`
+
 ### Zif::Camera
 Designed to work with `Zif::LayeredTileMap`, the Camera is initialized with a set of layer sprites, typically these are the `containing_sprite`s of large render targets. It zooms these sprites to fit the viewable area of the screen. It is responsible for directing the layers to reposition based on camera movements.
 
@@ -290,7 +307,7 @@ Register your sprite as something to check for running `Action`s by using `#regi
 ### Zif::InputService
 On each tick, `#process_click` should be run, which will detect clicks and pass them on to each sprite which has been registered via `#register_clickable`.  It expects each clickable object to define a `#clicked?(point, kind)` method.  If the sprite decides it has been clicked, it should return itself from this method.
 
-`Zif::Sprite` defines `#clicked?` and a set of ivars which are expected to contain callback lambdas: `@on_mouse_down, @on_mouse_up, @on_mouse_changed`.  If it can't handle the click but it knows it is the `containing_sprite` for a `Zif::RenderTarget`, it passes the click through.
+`Zif::Sprite` defines `#clicked?` and a set of ivars which are expected to contain callback lambdas: `@on_mouse_down, @on_mouse_up, @on_mouse_changed`.  These callbacks will receive as arguments the `sprite` itself and the location of the mouse in `point`.  If it can't handle the click but it knows it is the `containing_sprite` for a `Zif::RenderTarget`, it passes the click through.
 
 `Zif::RenderTarget` also defines `#clicked?`, and passes clicks down to the component `@sprites` and `@primitives` of the render target.
 
@@ -307,9 +324,16 @@ $services[:sprite_registry].register_basic_sprite("dragon_1", 82, 66)
 @dragon = $services[:sprite_registry].construct("dragon_1")
 ```
 
+`#register_basic_sprite` accepts a block: this is a convenience, it sets the block to the constructed `Sprite`'s `@on_mouse_up` callback.
+
+You can setup an alias for a registered sprite by using `#alias_sprite`
+
+You can automatically register images used for autotiling / `Zif::BitmaskedTiledLayer` using the `#register_autotiles` method.  See the comments at `Zif::BitmaskedTiledLayer` and `Zif::SpriteRegistry#register_autotiles`.
 
 ### Zif::TickTraceService
 Generally, you want your game to run at a full 60fps.  If your tick takes longer than 16.6ms, you'll drop below that number.  The TickTrace service is designed to report when a tick has taken longer than a threshold (20ms by default), and hopefully narrow down the slowest section of code. `#reset_tick` must be called at the beginning of a tick, and then `#finish` at the end.  If you use `Zif::Game`, this is done for you, all you need to do is `include Traceable` in any class you want to mark, set the `@tracer_service_name` ivar to `:tracer`, and then `mark('a section of code')`.  Since backtraces are not supplied in DRGTK, the best it can do is tell you the name of the class it was invoked in.  By convention, you should include the name of the method which calls `#mark`:  `mark('#my_method: a section of code')`
+
+`#mark_and_print` is also available, if you want to print to the console when you mark the section.
 
 **Example output:**
 

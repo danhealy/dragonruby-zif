@@ -30,6 +30,7 @@ module Zif
 
     def stop_animating
       return unless @cur_animation && @animation_sequences && @animation_sequences[@cur_animation]
+
       stop_action(@animation_sequences[@cur_animation])
     end
   end

@@ -24,6 +24,7 @@ module Zif
       @clickables.delete(clickable)
     end
 
+    # rubocop:disable Metrics/PerceivedComplexity
     def process_click
       return if @clickables.empty?
 
@@ -61,5 +62,6 @@ module Zif
       @expecting_mouse_up = [] if mouse_up
       @last_mouse_bits = mouse_bits
     end
+    # rubocop:enable Metrics/PerceivedComplexity
   end
 end
