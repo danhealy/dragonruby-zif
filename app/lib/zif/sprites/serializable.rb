@@ -24,11 +24,15 @@ module Zif
       attrs = {}
       instance_variables.each do |var|
         str = var.to_s.gsub('@', '')
-        next if str == 'args' # Too much spam
+        next if exclude_from_serialize.include? str
 
         attrs[str.to_sym] = instance_variable_get var if respond_to? "#{str}="
       end
       attrs
+    end
+
+    def exclude_from_serialize
+      %w[args] # Too much spam
     end
   end
 end

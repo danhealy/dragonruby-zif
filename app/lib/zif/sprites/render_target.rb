@@ -5,12 +5,13 @@ module Zif
     include Zif::Serializable
 
     attr_accessor :name, :width, :height, :bg_color
-    attr_accessor :sprites, :labels, :primitives
+    attr_accessor :sprites, :labels, :primitives, :z
 
-    def initialize(name, bg_color=:black, width=1, height=1)
+    def initialize(name, bg_color=:black, width=1, height=1, z=0)
       @name       = name
       @width      = width
       @height     = height
+      @z          = z
       @sprites    = []
       @labels     = []
       @primitives = []
@@ -34,6 +35,7 @@ module Zif
         s.name = "rt_#{@name}_containing_sprite"
         s.x = 0
         s.y = 0
+        s.z = @z
         s.w = @width
         s.h = @height
         s.path = @name
@@ -54,28 +56,35 @@ module Zif
     # This is the only way to force any changes to the RT.  You must call this any time you want to redraw @sprites, etc
     def redraw
       # puts "RenderTarget#redraw: #{@name} #{@width} #{@height} #{@sprites.length} sprites, #{@labels.length} labels"
+      # $services[:tracer].mark("#redraw: #{@name} Begin")
       targ = $gtk.args.outputs[@name]
       targ.width  = @width
       targ.height = @height
-
       # It's important to set the background color intentionally.  Even if alpha == 0, semi-transparent images in
       # render targets will pick up this color as an additive.  Usually you want black.
       targ.background_color = @bg_color
       targ.primitives << @primitives if @primitives&.any?
       targ.sprites    << @sprites    if @sprites&.any?
       targ.labels     << @labels     if @labels&.any?
+      # $services[:tracer].mark("#redraw: #{@name} Complete")
     end
 
     def clicked?(point, kind=:up)
       relative = relative_point(point)
-      puts "#{self.class.name}:#{name}: clicked? #{point} -> relative #{relative}"
+      # puts "#{self.class.name}:#{name}: clicked? #{point} -> relative #{relative}"
 
       find_and_return = ->(sprite) { sprite.respond_to?(:clicked?) && sprite.clicked?(relative, kind) }
       @sprites.reverse_each.find(&find_and_return) || @primitives.reverse_each.find(&find_and_return)
     end
 
     def relative_point(point)
-      Zif.add_positions(Zif.sub_positions(point, containing_sprite.xy), containing_sprite.source_xy)
+      Zif.add_positions(
+        Zif.sub_positions(
+          point, # FIXME??: Zif.position_math(:mult, point, containing_sprite.source_wh),
+          containing_sprite.xy
+        ),
+        containing_sprite.source_xy
+      )
     end
 
     # Expects rect is x, y, w, h
@@ -92,6 +101,10 @@ module Zif
           Zif::Sprite.rect_hash_to_source_hash(rect)
         )
       )
+    end
+
+    def exclude_from_serialize
+      %w[sprites primitives]
     end
   end
 end

@@ -10,6 +10,8 @@ module Zif
   # which took the most time to execute.  The game will begin to dip below 60fps if your tick takes longer than about
   # 16ms, but the default threshold is 20ms so it should only notify you if something is really off.
   class TickTraceService
+    attr_accessor :time_threshold
+
     # 0.02 cooresponds to 20ms
     def initialize(time_threshold=0.02)
       @time_threshold = time_threshold

@@ -53,5 +53,9 @@ module Zif
       y = sprite.logical_y
       @source_sprites[y][x] = nil
     end
+
+    def exclude_from_serialize
+      %w[source_sprites sprites primitives]
+    end
   end
 end

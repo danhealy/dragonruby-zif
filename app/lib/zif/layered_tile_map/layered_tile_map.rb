@@ -26,7 +26,7 @@ module Zif
   class LayeredTileMap
     include Zif::Traceable
     attr_accessor :target_name
-    attr_accessor :tile_width, :tile_height, :logical_width, :logical_height, :z_index
+    attr_accessor :tile_width, :tile_height, :logical_width, :logical_height, :z
     attr_accessor :layers
 
     # logical_ refers to integer multiples of tiles
@@ -41,7 +41,7 @@ module Zif
       @tile_height    = tile_height
       @logical_width  = logical_width
       @logical_height = logical_height
-      @z_index        = 0
+      @z              = 0
 
       @layers = {}
 
@@ -49,21 +49,21 @@ module Zif
     end
 
     def new_simple_layer(name, render_only_visible=false, clear_sprites_after_draw=false)
-      @layers[name] = Zif::SimpleLayer.new(self, name, @z_index, render_only_visible, clear_sprites_after_draw)
-      @z_index += 1
+      @layers[name] = Zif::SimpleLayer.new(self, name, @z, render_only_visible, clear_sprites_after_draw)
+      @z += 1
       return @layers[name]
     end
 
     # You really don't want clear_sprites_after_draw
     def new_tiled_layer(name, render_only_visible=false)
-      @layers[name] = Zif::TiledLayer.new(self, name, @z_index, render_only_visible)
-      @z_index += 1
+      @layers[name] = Zif::TiledLayer.new(self, name, @z, render_only_visible)
+      @z += 1
       return @layers[name]
     end
 
     def new_bitmasked_tiled_layer(name, render_only_visible=false)
-      @layers[name] = Zif::BitmaskedTiledLayer.new(self, name, @z_index, render_only_visible)
-      @z_index += 1
+      @layers[name] = Zif::BitmaskedTiledLayer.new(self, name, @z, render_only_visible)
+      @z += 1
       return @layers[name]
     end
 
@@ -127,7 +127,7 @@ module Zif
         tile_height:    tile_height,
         logical_width:  logical_width,
         logical_height: logical_height,
-        z_index:        z_index,
+        z:              z,
         layers:         layers.keys
       }
     end

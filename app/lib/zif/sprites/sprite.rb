@@ -11,7 +11,7 @@ module Zif
     attr_accessor :name
 
     # Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap)
-    attr_accessor :logical_x, :logical_y
+    attr_accessor :logical_x, :logical_y, :z
 
     # If this sprite is a parent *container* for a Render Target, reference it here
     # Not for sprites which are *children* of a Render Target!
@@ -25,6 +25,7 @@ module Zif
       @logical_y = 0
       @x         = 0
       @y         = 0
+      @z         = 0
       @w         = 0
       @h         = 0
       @a         = 255
@@ -70,6 +71,27 @@ module Zif
 
       @render_target.clicked?(point, kind)
     end
+
+    # Experimenting with draw_override, please ignore
+    #
+    # def primitive_marker
+    #   :sprite
+    # end
+    #
+    # def sprite
+    #   self
+    # end
+    #
+    # def draw_override(ffi_draw)
+    #   ffi_draw.draw_sprite_3 @x, @y, @w, @h,
+    #                               @path.s_or_default,
+    #                               @angle,
+    #                               @a, @r, @g, @b,
+    #                               nil, nil, nil, nil,
+    #                               !!@flip_horizontally, !!@flip_vertically,
+    #                               0.5, 0.5,
+    #                               @source_x, @source_y, @source_w, @source_h
+    # end
 
     # ------------------------
     # Some convenience methods
@@ -138,8 +160,9 @@ module Zif
     end
 
     # If for some reason you want source_ attrs without "source_"
+    # Like using RenderTarget#project_from
     def source_as_rect_hash
-      Sprite.to_rect_hash(source_rect)
+      Sprite.rect_array_to_hash(source_rect)
     end
 
     def color

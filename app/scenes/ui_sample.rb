@@ -88,7 +88,7 @@ class UISample < Zif::Scene
     # You probably want to remove the things registered with the services when scenes change
     # You can remove items explicitly using #remove_.., but #reset_.. will clear everything
     $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset_clickables
+    $game.services[:input_service].reset
   end
 
   def change_color

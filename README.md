@@ -3,7 +3,7 @@
 Zif is a collection of features commonly required in 2D games.  The name is a reference to [Zero Insertion Force connectors used on the original Nintendo](https://console5.com/wiki/Improving_NES-001_Reliability) - You can drop it in your project and it should just work.  Everything is namespaced to `Zif` so any existing classes or namespaces you have should be preserved.
 
 ## Example App
-This repo is an example app - the `Zif` library is entirely contained within the `lib` directory.
+This repo is an example app - the `Zif` library is entirely contained within the `app/lib` directory.
 
 ![](full_demo.gif)
 
@@ -14,72 +14,72 @@ This repo is an example app - the `Zif` library is entirely contained within the
 4. Run using `./dragonruby dragonruby-zif/`
 
 ## Installation in your app:
-1. Create a `/lib` directory in the same directory as `app`, and then copy the `lib/zif` directory into it.
+1. Create a `lib` directory inside the `app` directory, and then copy the `app/lib/zif` directory into it.
 2. In your `main.rb`, require the Zif files in this order, before your code:
 
 ```ruby
 # No dependencies
-require 'lib/zif/zif.rb'
-require 'lib/zif/sprites/serializable.rb'
-require 'lib/zif/services/services.rb'
-require 'lib/zif/services/input_service.rb'
-require 'lib/zif/services/tick_trace_service.rb'
-require 'lib/zif/labels/label.rb'
+require 'app/lib/zif/zif.rb'
+require 'app/lib/zif/sprites/serializable.rb'
+require 'app/lib/zif/services/services.rb'
+require 'app/lib/zif/services/input_service.rb'
+require 'app/lib/zif/services/tick_trace_service.rb'
+require 'app/lib/zif/labels/label.rb'
 
 # Expects $services to be services.rb, works with tick_trace_service.rb
-require 'lib/zif/trace/traceable.rb'
+require 'app/lib/zif/trace/traceable.rb'
 
 # Expects to be included in a Sprite subclass
-require 'lib/zif/sprites/assignable.rb'
+require 'app/lib/zif/sprites/assignable.rb'
 
 # Depends on serializable.rb
-require 'lib/zif/actions/action.rb'
-require 'lib/zif/scenes/scene.rb'
+require 'app/lib/zif/actions/action.rb'
+require 'app/lib/zif/scenes/scene.rb'
 
 # Depends on serializable.rb, action.rb
-require 'lib/zif/actions/sequence.rb'
+require 'app/lib/zif/actions/sequence.rb'
 
 # Depends on action.rb, sequence.rb
-require 'lib/zif/actions/actionable.rb'
+require 'app/lib/zif/actions/actionable.rb'
 
 # Depends on sequence.rb - expects an Actionable class
-require 'lib/zif/actions/animatable.rb'
-require 'lib/zif/services/action_service.rb'
+require 'app/lib/zif/actions/animatable.rb'
+require 'app/lib/zif/services/action_service.rb'
 
 # Depends on serializable.rb, assignable.rb, actionable.rb, animatable.rb
-require 'lib/zif/sprites/sprite.rb'
+require 'app/lib/zif/sprites/sprite.rb'
 
 # Depends on sprite.rb, zif.rb
-require 'lib/zif/sprites/render_target.rb'
+require 'app/lib/zif/sprites/render_target.rb'
 
 # Depends on render_target.rb
-require 'lib/zif/sprites/complex_sprite.rb'
+require 'app/lib/zif/sprites/complex_sprite.rb'
 
 # Depends on sprite.rb
-require 'lib/zif/services/sprite_registry.rb'
-require 'lib/zif/panels/nine_panel_edge.rb'
+require 'app/lib/zif/services/sprite_registry.rb'
+require 'app/lib/zif/panels/nine_panel_edge.rb'
 
 # Depends on complex_sprite.rb
-require 'lib/zif/components/two_stage_button.rb'
-require 'lib/zif/panels/nine_panel.rb'
+require 'app/lib/zif/components/two_stage_button.rb'
+require 'app/lib/zif/panels/nine_panel.rb'
 
 # Depends on scene.rb, render_target.rb
-require 'lib/zif/scenes/hud.rb'
+require 'app/lib/zif/scenes/hud.rb'
 
 # Depends on actionable.rb, zif.rb, - expects $game to be a game.rb
-require 'lib/zif/camera.rb'
+require 'app/lib/zif/camera.rb'
 
 # Depends on render_target.rb, expects to be initialized with a LayeredTileMap-like @map
-require 'lib/zif/layered_tile_map/simple_layer.rb'
-require 'lib/zif/layered_tile_map/tiled_layer.rb'
-require 'lib/zif/layered_tile_map/bitmasked_tiled_layer.rb'
+require 'app/lib/zif/layered_tile_map/simple_layer.rb'
+require 'app/lib/zif/layered_tile_map/tiled_layer.rb'
+require 'app/lib/zif/layered_tile_map/bitmasked_tiled_layer.rb'
 
 # Depends on simple_layer.rb, tiled_layer.rb, traceable.rb
-require 'lib/zif/layered_tile_map/layered_tile_map.rb'
+require 'app/lib/zif/layered_tile_map/layered_tile_map.rb'
 
 # Depends on traceable.rb, services.rb, input_service.rb, tick_trace_service.rb, action_service.rb, sprite_registry.rb,
 #            scene.rb
-require 'lib/zif/game.rb'
+require 'app/lib/zif/game.rb'
 ```
 
 # Features

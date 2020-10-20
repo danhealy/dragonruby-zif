@@ -3,6 +3,8 @@ module Zif
   # Specifically, when #run_all_actions is invoked this will call #perform_actions on all Actionable objects which have
   # been previously registered using #register_actionable.
   class ActionService
+    attr_accessor :actionables
+
     def initialize
       reset_actionables
     end

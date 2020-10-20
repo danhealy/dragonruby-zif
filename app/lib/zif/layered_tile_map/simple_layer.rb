@@ -2,19 +2,19 @@ module Zif
   # Designed to be used with Zif::LayeredTileMap.
   # A simple layer consisting of an initially empty array of sprites.
   class SimpleLayer < RenderTarget
-    attr_accessor :map, :layer_name, :z_index, :source_sprites
+    attr_accessor :map, :layer_name, :z, :source_sprites
     attr_accessor :should_render, :render_only_visible, :clear_sprites_after_draw
 
-    def initialize(map, name, z_index=0, render_only_visible=false, clear_sprites_after_draw=false)
+    def initialize(map, name, z=0, render_only_visible=false, clear_sprites_after_draw=false)
       @map                      = map
       @layer_name               = name
-      @z_index                  = z_index
+      @z                        = z
       @render_only_visible      = render_only_visible
       @clear_sprites_after_draw = clear_sprites_after_draw
       @should_render            = true
       reinitialize_sprites
 
-      super(target_layer_name, :black, @map.max_width, @map.max_height)
+      super(target_layer_name, :black, @map.max_width, @map.max_height, @z)
     end
 
     def reinitialize_sprites
@@ -41,12 +41,12 @@ module Zif
     end
 
     def position_sprite(sprite, logical_x, logical_y)
-      sprite.assign(
-        x:         logical_x * @map.tile_width,
-        y:         logical_y * @map.tile_height,
-        logical_x: logical_x,
-        logical_y: logical_y
-      )
+      # Skip Sprite#assign, this is perf critical
+      sprite.x         = logical_x * @map.tile_width
+      sprite.y         = logical_y * @map.tile_height
+      sprite.logical_x = logical_x
+      sprite.logical_y = logical_y
+      sprite
     end
 
     def add_positioned_sprite(sprite)
@@ -75,12 +75,27 @@ module Zif
     end
 
     def clicked?(point, kind=:up)
-      relative_point = Zif.add_positions(point, containing_sprite.source_xy)
+      relative_point = Zif.add_positions(
+        Zif.position_math(
+          :mult,
+          point,
+          Zif.position_math(
+            :fdiv,
+            containing_sprite.source_wh,
+            containing_sprite.wh
+          )
+        ),
+        containing_sprite.source_xy
+      )
       visible_sprites(
         relative_point + [1, 1]
       ).reverse_each.find do |sprite|
         sprite.respond_to?(:clicked?) && sprite.clicked?(relative_point, kind)
       end
+    end
+
+    def exclude_from_serialize
+      %w[source_sprites sprites primitives]
     end
   end
 end

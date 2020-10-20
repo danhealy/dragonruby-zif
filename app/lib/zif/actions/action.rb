@@ -98,7 +98,7 @@ module Zif
         reset_duration
       end
 
-      perform_callback if complete? && @callback
+      perform_callback if @callback && complete?
       return @dirty
     end
 
@@ -121,6 +121,7 @@ module Zif
     end
 
     def complete?
+      # puts "Action#complete?: Action complete! #{self.inspect} #{@node.class}" if @repeat.zero?
       @repeat.zero?
     end
 

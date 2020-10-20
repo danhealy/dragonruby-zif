@@ -28,10 +28,10 @@ module Zif
     end
 
     def remove_at(x, y)
-      puts "remove_at: #{x}, #{y}: was #{@source_sprites[y][x]}"
+      # puts "#remove_at: #{x}, #{y}: was #{@source_sprites[y][x]}"
       @presence_data[y][x] = false
       @source_sprites[y][x] = nil
-      puts "remove_at: #{x}, #{y}: now #{@source_sprites[y][x]}"
+      # puts "#remove_at: #{x}, #{y}: now #{@source_sprites[y][x]}"
       redraw_at(x, y)
     end
 
@@ -111,6 +111,10 @@ module Zif
           @source_sprites[i][j] = position_sprite(sprite, j, i)
         end
       end
+    end
+
+    def exclude_from_serialize
+      %w[presence_data bitmask_data source_sprites sprites primitives]
     end
   end
 end

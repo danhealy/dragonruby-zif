@@ -120,19 +120,19 @@ class World < Zif::Scene
     refresh_map
     @map.layers[:tiles].should_render = false
 
-    @map.layers[:tiles].containing_sprite.on_mouse_up = lambda do |_sprite, point|
-      combined_click = Zif.add_positions(point, @camera.pos)
-      puts "Map clicked! #{point} -> #{combined_click}"
-      @avatar.start_walking(combined_click)
+    @map.layers[:tiles].containing_sprite.on_mouse_up = lambda do |sprite, point|
+      map_clicked(sprite, translate_point_to_camera(point))
     end
 
     @map.layers[:tiles].containing_sprite.on_mouse_down = ->(_sprite, point) { puts "Map clicked down! #{point}" }
 
     $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset_clickables
+    $game.services[:input_service].reset
     $game.services[:action_service].register_actionable(@avatar)
     $game.services[:action_service].register_actionable(@camera)
     $game.services[:input_service].register_clickable(@map.layers[:tiles].containing_sprite)
+
+    $game.services[:input_service].register_scrollable(@camera)
 
     $gtk.args.outputs.static_sprites << @camera.layers
     # $gtk.args.outputs.static_labels  << @hud_labels
@@ -155,11 +155,25 @@ class World < Zif::Scene
     mark('#perform_tick: Finished')
   end
 
+  def translate_point_to_camera(point)
+    @camera.translate_pos(point)
+  end
+
+  def map_clicked(_sprite, point)
+    puts "Map clicked! #{point}"
+
+    @avatar.start_walking(point)
+  end
+
   def refresh_map
-    current_camera_pos = @map.logical_pos(*@camera.pos)
-    @map.layers[:stuff].should_render = current_camera_pos != @last_rendered_camera
+    current_camera_zoom = @camera.zoom_factor
+    current_camera_pos  = @map.logical_pos(*@camera.pos)
+    camera_changed      = (current_camera_pos != @last_rendered_camera) || (current_camera_zoom != @last_camera_zoom)
+    @map.layers[:stuff].should_render ||= camera_changed
     @map.refresh
+    @map.layers[:stuff].should_render = false
     @last_rendered_camera = current_camera_pos
+    @last_camera_zoom     = current_camera_zoom
   end
 
   def prepare_scene
