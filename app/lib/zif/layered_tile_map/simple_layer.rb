@@ -3,7 +3,7 @@ module Zif
   # A simple layer consisting of an initially empty array of sprites.
   class SimpleLayer < RenderTarget
     attr_accessor :map, :layer_name, :z, :source_sprites
-    attr_accessor :should_render, :render_only_visible, :clear_sprites_after_draw
+    attr_accessor :should_render, :render_only_visible, :clear_sprites_after_draw, :rerender_rect
 
     def initialize(map, name, z=0, render_only_visible=false, clear_sprites_after_draw=false)
       @map                      = map
@@ -12,6 +12,7 @@ module Zif
       @render_only_visible      = render_only_visible
       @clear_sprites_after_draw = clear_sprites_after_draw
       @should_render            = true
+      @rerender_rect            = nil
       reinitialize_sprites
 
       super(target_layer_name, :black, @map.max_width, @map.max_height, @z)
@@ -32,8 +33,7 @@ module Zif
       [coll, coll - remain]
     end
 
-    # FIXME: Default screen height / width should be dynamic or at least based on @map
-    # TODO: Untested, the Tiled version is tested though
+    # This is not very performant with lots of sprites!  Consider using TiledLayer instead.
     def visible_sprites(rect=containing_sprite.source_rect)
       @source_sprites.select do |sprite|
         sprite.intersect_rect? rect
@@ -61,13 +61,17 @@ module Zif
     def rerender
       return unless @should_render
 
-      @sprites = if @render_only_visible
-                   visible_sprites.to_a
-                 else
-                   @source_sprites
-                 end
+      if @rerender_rect
+        redraw_from_buffer(visible_sprites(@rerender_rect).to_a, @rerender_rect)
+      else
+        @sprites = if @render_only_visible
+                     visible_sprites.to_a
+                   else
+                     @source_sprites
+                   end
 
-      redraw
+        redraw
+      end
 
       reinitialize_sprites if @clear_sprites_after_draw
 

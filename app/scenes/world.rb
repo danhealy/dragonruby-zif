@@ -8,7 +8,6 @@ class World < Zif::Scene
 
   def initialize
     @tracer_service_name = :tracer
-    @missed_ticks = 0
 
     mark('#initialize: Begin')
     @map = Zif::LayeredTileMap.new('map', 64, 64, 50, 50)
@@ -43,6 +42,7 @@ class World < Zif::Scene
     initialize_tiles
 
     mark('#initialize: Tiles initialized')
+    @scene_timer = 60 * 60
   end
 
   # For loading bar
@@ -152,7 +152,11 @@ class World < Zif::Scene
     mark('#perform_tick: Map refreshed')
 
     perform_tick_debug_labels
+
     mark('#perform_tick: Finished')
+
+    @scene_timer -= 1
+    return :load_double_buffer_render_test if $gtk.args.inputs.keyboard.key_up.space || @scene_timer.zero?
   end
 
   def translate_point_to_camera(point)
@@ -185,18 +189,22 @@ class World < Zif::Scene
   # rubocop:disable Layout/LineLength
   def perform_tick_debug_labels
     color = {r: 255, g: 255, b: 255, a: 255}
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 200 - 8, text: "#{$gtk.args.gtk.current_framerate}fps" }.merge(color)
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 200 - 128, text: "Missed Ticks: #{@missed_ticks}" }.merge(color)
+    $gtk.args.outputs.labels << { x: 8, y: 720 - 8, text: "#{self.class.name}.  Press spacebar to transition to next scene, or wait #{@scene_timer} ticks." }.merge(color)
+    $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
+    $gtk.args.outputs.labels << { x: 8, y: 60, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
 
     if @avatar
-      $gtk.args.outputs.labels << { x: 8, y: 720 - 200 - 48, text: "Avatar: #{@avatar.xy.join('x')}" }.merge(color)
-      $gtk.args.outputs.labels << { x: 8, y: 720 - 200 - 28, text: "Moving: #{$gtk.args.inputs.directional_vector}" }.merge(color) if $gtk.args.inputs.directional_vector
-      $gtk.args.outputs.labels << { x: 8, y: 720 - 200 - 28, text: "Moving: #{@avatar.moving_to}" }.merge(color) unless @avatar.moving_to&.all?(&:zero?)
+      $gtk.args.outputs.labels << { x: 8, y: 720 - 68, text: "Avatar: #{@avatar.xy.join('x')}" }.merge(color)
+      # $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "Moving: #{$gtk.args.inputs.directional_vector}" }.merge(color) if $gtk.args.inputs.directional_vector
+      $gtk.args.outputs.labels << { x: 8, y: 720 - 48, text: "Moving: #{@avatar.moving_to}" }.merge(color) unless @avatar.moving_to&.all?(&:zero?)
     end
 
     return unless @camera
 
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 200 - 68, text: "Camera: #{@camera.pos.join('x')} -> #{@camera.cur_w}x#{@camera.cur_h}.  Target #{@camera.target_x}x#{@camera.target_y}" }.merge(color)
+    point = $gtk.args.mouse.point
+
+    $gtk.args.outputs.labels << { x: 8, y: 720 - 88, text: "Camera: #{@camera.pos.join('x')} -> #{@camera.cur_w}x#{@camera.cur_h}.  Target #{@camera.target_x}x#{@camera.target_y}" }.merge(color)
+    $gtk.args.outputs.labels << { x: 8, y: 720 - 108, text: "Mouse: #{point} window -> #{translate_point_to_camera(point)} world" }.merge(color)
   end
   # rubocop:enable Layout/LineLength
 end

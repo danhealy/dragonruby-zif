@@ -60,6 +60,7 @@ require 'app/lib/zif/layered_tile_map/layered_tile_map.rb'
 #            scene.rb
 require 'app/lib/zif/game.rb'
 
+# Example app specific files:
 require 'app/ui/labels/future_label.rb'
 require 'app/ui/panels/glass_panel.rb'
 require 'app/ui/panels/metal_panel.rb'
@@ -70,6 +71,7 @@ require 'app/ui/components/tall_button.rb'
 require 'app/scenes/world.rb'
 require 'app/scenes/world_loader.rb'
 require 'app/scenes/ui_sample.rb'
+require 'app/scenes/double_buffer_render_test.rb'
 
 require 'app/avatar.rb'
 
@@ -85,6 +87,7 @@ class ZifExample < Zif::Game
 
     register_scene(:ui_sample, UISample)
     register_scene(:load_world, WorldLoader)
+    register_scene(:load_double_buffer_render_test, DoubleBufferRenderTest)
     @scene = UISample.new
   end
 end
