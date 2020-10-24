@@ -54,6 +54,7 @@ module Zif
     end
 
     def complete?
+      # puts "Complete action! - #{@node.class}" if @repeat.zero?
       @repeat.zero?
     end
 

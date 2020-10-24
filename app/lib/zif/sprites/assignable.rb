@@ -10,6 +10,7 @@ module Zif
       @render_target = sprite[:render_target] if sprite[:render_target]
       @x             = sprite[:x]             if sprite[:x]
       @y             = sprite[:y]             if sprite[:y]
+      @z             = sprite[:z]             if sprite[:z]
       @w             = sprite[:w]             if sprite[:w]
       @h             = sprite[:h]             if sprite[:h]
       @path          = sprite[:path]          if sprite[:path]

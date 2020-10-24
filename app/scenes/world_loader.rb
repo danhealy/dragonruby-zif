@@ -35,7 +35,7 @@ class WorldLoader < Zif::Scene
 
   def prepare_scene
     $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset_clickables
+    $game.services[:input_service].reset
   end
 
   def perform_tick

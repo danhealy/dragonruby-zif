@@ -10,6 +10,8 @@ module Zif
   # which took the most time to execute.  The game will begin to dip below 60fps if your tick takes longer than about
   # 16ms, but the default threshold is 20ms so it should only notify you if something is really off.
   class TickTraceService
+    attr_accessor :time_threshold, :slowest_mark, :last_tick_ms
+
     # 0.02 cooresponds to 20ms
     def initialize(time_threshold=0.02)
       @time_threshold = time_threshold
@@ -51,12 +53,14 @@ module Zif
       return unless enabled?
 
       elapsed = @last_time - @start_time
+      @last_tick_ms = format_ms(elapsed)
       return unless elapsed > @time_threshold
 
       culprit = @times.max_by { |time| time[:delta] }
+      @slowest_mark = "'#{culprit[:label]}' #{format_ms(culprit[:delta])}"
 
-      tick_details = "#{format_ms(elapsed)} elapsed > #{format_ms(@time_threshold)} threshold, "
-      tick_details += "longest step '#{culprit[:label]}' #{format_ms(culprit[:delta])}"
+      tick_details = "#{@last_tick_ms} elapsed > #{format_ms(@time_threshold)} threshold, "
+      tick_details += "longest step #{@slowest_mark}"
       puts '=' * 80
       puts "Zif::TickTraceService: Slow tick. #{tick_details}:"
       print_times

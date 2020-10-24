@@ -21,25 +21,34 @@ class UISample < Zif::Scene
     # TwoStageButton (which TallButton inherits from) accepts a block in the constructor
     # The block is executed when the button is registered as a clickable, and it receives the mouse up event
     # You can give sprites callback functions for on_mouse_down, .._changed (mouse is moving while down), and .._up
-    @button = TallButton.new(:static_button, 300, :blue, 'Press Me', 2) do |_point|
-      puts 'UISample: Button pressed!'
+    # In this case, the TwoStageButton initializer sets on_mouse_down and on_mouse_changed automatically
+    # This is because as a button, it needs to update whether or not it is_pressed based on the mouse point.
+    @button = TallButton.new(:static_button, 300, :blue, 'Press Me', 2) do |point|
       # You should check the state of the button as it's possible to click down on the button, but then move the mouse
       # away and let go of the mouse away from the button
-      # The state is updated automatically as TwoStageButton creates an on_mouse_changed callback for you.
+      # The state is updated automatically in the on_mouse_changed callback created by the TwoStageButton initializer
       if @button.is_pressed
+        puts "UISample: Button on_mouse_up, #{point}: mouse inside button. Pressed!"
         @counter += 1
 
         @count_progress = ProgressBar.new(:count_progress, 400, 0, @cur_color) if @counter == 1
         @count_progress.progress = @counter / 10.0
 
         @load_next_scene_next_tick = true if @counter >= 10
+      else
+        puts "UISample: Button on_mouse_up, #{point}: mouse outside button. Not pressed."
       end
     end
+
+    @scene_timer = 60 * 60 * 1
   end
 
   # #prepare_scene and #unload_scene are called by Game before the scene gets run for the first time, and after it
   # detects a scene change has been requested, respectively
+  # This is a good spot to set up services, and manually control the global $gtk.args.outputs
   def prepare_scene
+    $gtk.args.outputs.static_sprites.clear
+
     # These can't be in initialize due to $game not being set during init
     @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
       puts 'UISample: Delay button pressed!'
@@ -88,7 +97,7 @@ class UISample < Zif::Scene
     # You probably want to remove the things registered with the services when scenes change
     # You can remove items explicitly using #remove_.., but #reset_.. will clear everything
     $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset_clickables
+    $game.services[:input_service].reset
   end
 
   def change_color
@@ -117,22 +126,18 @@ class UISample < Zif::Scene
     # You generally want to append to args.outputs.___ only once per tick
     $gtk.args.outputs.sprites << @all_sprites
 
-    @all_labels << {
-      x:    8,
-      y:    720 - 8,
-      text: "#{$gtk.args.gtk.current_framerate}fps",
-      r:    255,
-      g:    255,
-      b:    255,
-      a:    255
-    }
+    color = {r: 255, g: 255, b: 255, a: 255}
+    # rubocop:disable Layout/LineLength
+    @all_labels << { x: 8, y: 720 - 8, text: "#{self.class.name}.  Press spacebar to transition to next scene, or wait #{@scene_timer} ticks." }.merge(color)
+    @all_labels << { x: 8, y: 720 - 28, text: "#{$services[:tracer].last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
+    # rubocop:enable Layout/LineLength
 
     $gtk.args.outputs.labels << @all_labels
-
     return :load_world if @load_next_scene
 
     # Delay loading next scene so you can see the button come up on the 20th click
-    @load_next_scene = @load_next_scene_next_tick
+    @scene_timer -= 1
+    @load_next_scene = @load_next_scene_next_tick || $gtk.args.inputs.keyboard.key_up.space || @scene_timer.zero?
   end
 
   def display_metal_panel
@@ -162,7 +167,7 @@ class UISample < Zif::Scene
     cuts = ('%04b' % (($gtk.args.tick_count / 60) % 16)).chars.map { |bit| bit == '1' }
     glass = GlassPanel.new(:glass_panel, 600, 600, cuts)
 
-    @all_labels << { x: 600, y: 700, text: "Glass panel cuts: #{cuts}" }.merge(DEBUG_LABEL_COLOR)
+    @all_labels << { x: 600, y: 685, text: "Glass panel cuts: #{cuts}" }.merge(DEBUG_LABEL_COLOR)
     @all_sprites << glass.containing_sprite(550, 60)
   end
 

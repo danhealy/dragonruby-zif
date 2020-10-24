@@ -12,6 +12,8 @@ module Zif
     end
 
     def register_animation_sequence(seq_name, sequence)
+      # puts "Registering animation #{seq_name} with repeat #{sequence.repeat}"
+
       @animation_sequences ||= {}
       @animation_sequences[seq_name] = sequence
     end
@@ -19,11 +21,11 @@ module Zif
     def run_animation_sequence(seq_name)
       raise ArgumentError, "No animation sequence named '#{seq_name}' registered" unless @animation_sequences[seq_name]
 
-      # puts "Running animation sequence #{seq_name} #{@animation_sequences[seq_name].inspect}"
       stop_animating
 
       @cur_animation = seq_name
       @animation_sequences[@cur_animation].cur_action.reset_duration
+      # puts "Running animation sequence #{@cur_animation} #{@animation_sequences[@cur_animation].inspect}"
 
       run(@animation_sequences[@cur_animation])
     end
@@ -31,6 +33,7 @@ module Zif
     def stop_animating
       return unless @cur_animation && @animation_sequences && @animation_sequences[@cur_animation]
 
+      # puts "Stopping animation #{@cur_animation} -> #{@animation_sequences[@cur_animation]}"
       stop_action(@animation_sequences[@cur_animation])
     end
   end

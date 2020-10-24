@@ -22,8 +22,14 @@ module Zif
       end
     end
 
+    def running_actions?
+      @actions ||= []
+      @actions.any?
+    end
+
     def stop_action(action)
-      @actions.delete(action)
+      # puts "Stopping action #{action}: #{@actions}"
+      @actions&.delete(action)
     end
 
     # Generic factory - sets @node

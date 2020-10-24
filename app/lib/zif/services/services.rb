@@ -4,6 +4,7 @@ module Zif
   # Example:
   # $game.services[:tracer].mark("Hello")
   class Services
+    attr_accessor :services
     def initialize
       @services = {}
     end
