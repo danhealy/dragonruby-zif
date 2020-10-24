@@ -21,18 +21,22 @@ class UISample < Zif::Scene
     # TwoStageButton (which TallButton inherits from) accepts a block in the constructor
     # The block is executed when the button is registered as a clickable, and it receives the mouse up event
     # You can give sprites callback functions for on_mouse_down, .._changed (mouse is moving while down), and .._up
-    @button = TallButton.new(:static_button, 300, :blue, 'Press Me', 2) do |_point|
-      puts 'UISample: Button pressed!'
+    # In this case, the TwoStageButton initializer sets on_mouse_down and on_mouse_changed automatically
+    # This is because as a button, it needs to update whether or not it is_pressed based on the mouse point.
+    @button = TallButton.new(:static_button, 300, :blue, 'Press Me', 2) do |point|
       # You should check the state of the button as it's possible to click down on the button, but then move the mouse
       # away and let go of the mouse away from the button
-      # The state is updated automatically as TwoStageButton creates an on_mouse_changed callback for you.
+      # The state is updated automatically in the on_mouse_changed callback created by the TwoStageButton initializer
       if @button.is_pressed
+        puts "UISample: Button on_mouse_up, #{point}: mouse inside button. Pressed!"
         @counter += 1
 
         @count_progress = ProgressBar.new(:count_progress, 400, 0, @cur_color) if @counter == 1
         @count_progress.progress = @counter / 10.0
 
         @load_next_scene_next_tick = true if @counter >= 10
+      else
+        puts "UISample: Button on_mouse_up, #{point}: mouse outside button. Not pressed."
       end
     end
 
@@ -41,6 +45,7 @@ class UISample < Zif::Scene
 
   # #prepare_scene and #unload_scene are called by Game before the scene gets run for the first time, and after it
   # detects a scene change has been requested, respectively
+  # This is a good spot to set up services, and manually control the global $gtk.args.outputs
   def prepare_scene
     $gtk.args.outputs.static_sprites.clear
 
