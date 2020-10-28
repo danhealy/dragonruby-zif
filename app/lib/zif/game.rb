@@ -59,6 +59,7 @@ module Zif
       @services.register(:sprite_registry, Zif::SpriteRegistry.new)
       @services.register(:input_service, Zif::InputService.new)
       @scene_registry = {}
+      @pause_actions = false
     end
 
     def register_scene(scene_name, scene)

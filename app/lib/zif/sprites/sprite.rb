@@ -72,27 +72,6 @@ module Zif
       @render_target.clicked?(point, kind)
     end
 
-    # Experimenting with draw_override, please ignore
-    #
-    # def primitive_marker
-    #   :sprite
-    # end
-    #
-    # def sprite
-    #   self
-    # end
-    #
-    # def draw_override(ffi_draw)
-    #   ffi_draw.draw_sprite_3 @x, @y, @w, @h,
-    #                               @path.s_or_default,
-    #                               @angle,
-    #                               @a, @r, @g, @b,
-    #                               nil, nil, nil, nil,
-    #                               !!@flip_horizontally, !!@flip_vertically,
-    #                               0.5, 0.5,
-    #                               @source_x, @source_y, @source_w, @source_h
-    # end
-
     # ------------------------
     # Some convenience methods
 
@@ -153,6 +132,10 @@ module Zif
 
     def source_center
       [(@source_x + @source_w.idiv(2)).to_i, (@source_y + @source_h.idiv(2)).to_i]
+    end
+
+    def zoom_factor
+      [@w.fdiv(@source_w), @h.fdiv(@source_h)]
     end
 
     def source_rect_hash

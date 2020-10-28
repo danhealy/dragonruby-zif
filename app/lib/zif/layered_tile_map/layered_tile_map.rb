@@ -48,6 +48,12 @@ module Zif
       @tracer_service_name = :tracer
     end
 
+    def new_active_layer(name)
+      @layers[name] = Zif::ActiveLayer.new(self, name, @z)
+      @z += 1
+      return @layers[name]
+    end
+
     def new_simple_layer(name, render_only_visible=false, clear_sprites_after_draw=false)
       @layers[name] = Zif::SimpleLayer.new(self, name, @z, render_only_visible, clear_sprites_after_draw)
       @z += 1

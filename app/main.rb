@@ -4,7 +4,6 @@ require 'app/lib/zif/sprites/serializable.rb'
 require 'app/lib/zif/services/services.rb'
 require 'app/lib/zif/services/input_service.rb'
 require 'app/lib/zif/services/tick_trace_service.rb'
-require 'app/lib/zif/labels/label.rb'
 
 # Expects $services to be services.rb, works with tick_trace_service.rb
 require 'app/lib/zif/trace/traceable.rb'
@@ -22,6 +21,9 @@ require 'app/lib/zif/actions/sequence.rb'
 # Depends on action.rb, sequence.rb
 require 'app/lib/zif/actions/actionable.rb'
 
+# Depends on actionable.rb
+require 'app/lib/zif/labels/label.rb'
+
 # Depends on sequence.rb - expects an Actionable class
 require 'app/lib/zif/actions/animatable.rb'
 require 'app/lib/zif/services/action_service.rb'
@@ -31,6 +33,7 @@ require 'app/lib/zif/sprites/sprite.rb'
 
 # Depends on sprite.rb, zif.rb
 require 'app/lib/zif/sprites/render_target.rb'
+require 'app/lib/zif/sprites/compound_sprite.rb'
 
 # Depends on render_target.rb
 require 'app/lib/zif/sprites/complex_sprite.rb'
@@ -48,6 +51,10 @@ require 'app/lib/zif/scenes/hud.rb'
 
 # Depends on actionable.rb, zif.rb, - expects $game to be a game.rb
 require 'app/lib/zif/camera.rb'
+
+# Depends on compound_sprite.rb, expects to be initialized with a LayeredTileMap-like @map
+require 'app/lib/zif/layered_tile_map/layerable.rb'
+require 'app/lib/zif/layered_tile_map/active_layer.rb'
 
 # Depends on render_target.rb, expects to be initialized with a LayeredTileMap-like @map
 require 'app/lib/zif/layered_tile_map/simple_layer.rb'
@@ -68,10 +75,12 @@ require 'app/ui/panels/metal_cutout.rb'
 require 'app/ui/components/progress_bar.rb'
 require 'app/ui/components/tall_button.rb'
 
+require 'app/scenes/zif_example_scene.rb'
 require 'app/scenes/world.rb'
 require 'app/scenes/world_loader.rb'
 require 'app/scenes/ui_sample.rb'
 require 'app/scenes/double_buffer_render_test.rb'
+require 'app/scenes/compound_sprite_test.rb'
 
 require 'app/avatar.rb'
 
@@ -88,6 +97,7 @@ class ZifExample < Zif::Game
     register_scene(:ui_sample, UISample)
     register_scene(:load_world, WorldLoader)
     register_scene(:load_double_buffer_render_test, DoubleBufferRenderTest)
+    register_scene(:load_compound_sprite_test, CompoundSpriteTest)
     @scene = UISample.new
   end
 end

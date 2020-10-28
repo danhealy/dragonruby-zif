@@ -4,15 +4,14 @@
 # - Action service (handles actions "tweening"/"easing" of the Dragon sprite)
 # - Sprite registry (provides a prototype to construct the Dragon sprite by name)
 # - TickTrace service (will get triggered when the "Simulate Lag" button is clicked, reports slow sections of code)
-class UISample < Zif::Scene
-  include Zif::Traceable
+class UISample < ZifExampleScene
   attr_accessor :cur_color, :button, :counter, :count_progress, :random_lengths, :all_sprites, :all_labels
 
   DEBUG_LABEL_COLOR = { r: 255, g: 255, b: 255 }.freeze
 
   def initialize
-    super()
-
+    super
+    @next_scene = :load_world
     $gtk.args.outputs.background_color = [0, 0, 0]
     @counter = 0
     @random_lengths = Array.new(10) { rand(160) + 40 } # Just some shared random numbers
@@ -39,16 +38,13 @@ class UISample < Zif::Scene
         puts "UISample: Button on_mouse_up, #{point}: mouse outside button. Not pressed."
       end
     end
-
-    @scene_timer = 60 * 60 * 1
   end
 
   # #prepare_scene and #unload_scene are called by Game before the scene gets run for the first time, and after it
   # detects a scene change has been requested, respectively
   # This is a good spot to set up services, and manually control the global $gtk.args.outputs
   def prepare_scene
-    $gtk.args.outputs.static_sprites.clear
-
+    super
     # These can't be in initialize due to $game not being set during init
     @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
       puts 'UISample: Delay button pressed!'
@@ -93,13 +89,6 @@ class UISample < Zif::Scene
     $game.services[:input_service].register_clickable(@delay_button)
   end
 
-  def unload_scene
-    # You probably want to remove the things registered with the services when scenes change
-    # You can remove items explicitly using #remove_.., but #reset_.. will clear everything
-    $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset
-  end
-
   def change_color
     @cur_color = %i[blue green red white yellow].sample
   end
@@ -110,8 +99,8 @@ class UISample < Zif::Scene
 
   def perform_tick
     $gtk.args.outputs.background_color = [0, 0, 0]
-    @all_sprites = []
     @all_labels = []
+    @all_sprites = []
 
     change_color if color_should_change?
 
@@ -125,19 +114,12 @@ class UISample < Zif::Scene
 
     # You generally want to append to args.outputs.___ only once per tick
     $gtk.args.outputs.sprites << @all_sprites
-
-    color = {r: 255, g: 255, b: 255, a: 255}
-    # rubocop:disable Layout/LineLength
-    @all_labels << { x: 8, y: 720 - 8, text: "#{self.class.name}.  Press spacebar to transition to next scene, or wait #{@scene_timer} ticks." }.merge(color)
-    @all_labels << { x: 8, y: 720 - 28, text: "#{$services[:tracer].last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
-    # rubocop:enable Layout/LineLength
-
     $gtk.args.outputs.labels << @all_labels
-    return :load_world if @load_next_scene
 
-    # Delay loading next scene so you can see the button come up on the 20th click
-    @scene_timer -= 1
-    @load_next_scene = @load_next_scene_next_tick || $gtk.args.inputs.keyboard.key_up.space || @scene_timer.zero?
+    finished = super
+    return finished if finished
+
+    @force_next_scene ||= @load_next_scene_next_tick # rubocop:disable Naming/MemoizedInstanceVariableName
   end
 
   def display_metal_panel

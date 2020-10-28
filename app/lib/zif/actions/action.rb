@@ -99,7 +99,8 @@ module Zif
       end
 
       perform_callback if @callback && complete?
-      return @dirty
+
+      @dirty
     end
 
     def progress

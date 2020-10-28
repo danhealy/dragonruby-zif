@@ -1,11 +1,10 @@
 # Demonstration of the performance improvement by using the double buffering technique for RenderTargets
-class DoubleBufferRenderTest < Zif::Scene
-  include Zif::Traceable
-
-  attr_accessor :map, :tiles
+class DoubleBufferRenderTest < ZifExampleScene
+  attr_accessor :map
 
   def initialize
-    @tracer_service_name = :tracer
+    super
+    @next_scene = :load_compound_sprite_test
     # Turn the threshold down to see a breakdown of performance:
     # tracer.time_threshold = 0.002
 
@@ -15,8 +14,8 @@ class DoubleBufferRenderTest < Zif::Scene
     @map.new_simple_layer(:fully_rerender)
     @map.new_simple_layer(:double_buffered_rerender)
 
-    @map.layers[:fully_rerender].source_sprites = initialize_sprites('full')
-    @map.layers[:double_buffered_rerender].source_sprites = initialize_sprites('double_buffered', 1)
+    @map.layers[:fully_rerender].source_sprites = initialize_sprites(:fully_rerender)
+    @map.layers[:double_buffered_rerender].source_sprites = initialize_sprites(:double_buffered_rerender, 1)
 
     @rendering = true
     @full_render = false
@@ -32,22 +31,38 @@ class DoubleBufferRenderTest < Zif::Scene
         s.b = page.zero? ? 200 : 0
         s.r = 100 + x_i
         s.g = 100 + y_i
-        s.x = (x_i * (16+1)) + (page * 640) + 50
-        s.y = (y_i * (16+1)) + 70
+        s.x = (x_i * (16 + 1)) + (page * 640) + 50
+        s.y = (y_i * (16 + 1)) + 70
         s.w = 16
         s.h = 16
+        s.on_mouse_up = lambda do |_sprite, _point|
+          flags_from_clicks(name)
+        end
       end
     end
   end
 
   def prepare_scene
-    $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset
-    $gtk.args.outputs.static_sprites.clear
-    $gtk.args.outputs.static_labels.clear
+    super
+
+    $game.services[:input_service].register_clickable(@map.layers[:fully_rerender].containing_sprite)
+    $game.services[:input_service].register_clickable(@map.layers[:double_buffered_rerender].containing_sprite)
+
     cs = @map.layer_containing_sprites
     $gtk.args.outputs.static_sprites << cs
-    @scene_timer = 60 * 60 * 1
+  end
+
+  def flags_from_clicks(layer)
+    if (@full_render && (layer == :fully_rerender)) || (!@full_render && (layer == :double_buffered_rerender))
+      @rendering = !@rendering
+    end
+
+    if (@full_render && (layer == :double_buffered_rerender)) || (!@full_render && (layer == :fully_rerender))
+      @full_render = !@full_render
+      @rendering   = true
+    end
+
+    puts "Clicked #{layer}.  Rendering #{@rendering}, active layer #{@full_render}"
   end
 
   def perform_tick
@@ -65,9 +80,7 @@ class DoubleBufferRenderTest < Zif::Scene
     perform_tick_debug_labels
 
     mark('#perform_tick: Finished')
-
-    @scene_timer -= 1
-    return :ui_sample if $gtk.args.inputs.keyboard.key_up.space || @scene_timer.zero?
+    super
   end
 
   def rerender_focus
@@ -94,14 +107,9 @@ class DoubleBufferRenderTest < Zif::Scene
   def perform_tick_debug_labels
     color = {r: 255, g: 255, b: 255, a: 255}
     active_color = {r: 255, g: 0, b: 0, a: 255}
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 8, text: "#{self.class.name}.  Press spacebar to transition to next scene, or wait #{@scene_timer} ticks." }.merge(color)
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
     $gtk.args.outputs.labels << { x: 8, y: 720 - 48, text: "Render mode (press X to change, Z for off): #{@rendering ? (@full_render ? 'Full re-render' : 'Double buffer re-render') : 'Off'}" }.merge(color)
-
     $gtk.args.outputs.labels << { x: 50,  y: 720 - 100, text: 'Full re-render' }.merge(@rendering && @full_render ? active_color : color)
     $gtk.args.outputs.labels << { x: 690, y: 720 - 100, text: 'Double buffered re-render' }.merge(@rendering && !@full_render ? active_color : color)
-
-    $gtk.args.outputs.labels << { x: 8, y: 60, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
   end
   # rubocop:enable Layout/LineLength
   # rubocop:enable Style/NestedTernaryOperator
