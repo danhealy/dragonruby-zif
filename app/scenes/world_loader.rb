@@ -2,9 +2,12 @@
 # It's required because the World will take a little while to generate all of the floor sprites
 # It's also a demonstration of automatic scene switching
 class WorldLoader < Zif::Scene
+  include Zif::Traceable
+
   attr_accessor :world, :ready
 
   def initialize
+    @tracer_service_name = :tracer
     @world = World.new
     @ready = false
     @floor_progress = ProgressBar.new(:world_loader_progress, 640, @world.initialization_percent(:tiles), :green)
@@ -57,6 +60,13 @@ class WorldLoader < Zif::Scene
     end
     $gtk.args.outputs.sprites << sprites
     $gtk.args.outputs.labels << labels
+
+    # rubocop:disable Layout/LineLength
+    color = {r: 255, g: 255, b: 255, a: 255}
+    $gtk.args.outputs.labels << { x: 8, y: 720 - 8, text: "#{self.class.name}." }.merge(color)
+    $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
+    $gtk.args.outputs.labels << { x: 8, y: 60, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
+    # rubocop:enable Layout/LineLength
 
     # Returning the other Scene instance so the Game knows to switch scenes.  Demonstrating an automatic scene switch
     return @world if @ready

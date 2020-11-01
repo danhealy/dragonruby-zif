@@ -1,25 +1,21 @@
 # An example which uses Zif::LayeredTileMap and Zif::Camera
-class World < Zif::Scene
-  include Zif::Traceable
+class World < ZifExampleScene
   attr_accessor :map, :camera, :avatar, :last_rendered_camera
 
   # For init
   attr_accessor :ready, :progress, :finished_at
 
   def initialize
-    @tracer_service_name = :tracer
-
+    super
+    @next_scene = :load_double_buffer_render_test
     mark('#initialize: Begin')
     @map = Zif::LayeredTileMap.new('map', 64, 64, 50, 50)
     @map.new_tiled_layer(:tiles)
-    @map.new_tiled_layer(:stuff, true)
-    @map.new_simple_layer(:avatar)
-    @map.new_simple_layer(:top_effects, false, true)
+    @map.new_active_layer(:avatar)
+    @map.layers[:avatar].should_render = true
     mark('#initialize: Map + layers created')
     @map.force_refresh
     @map.layers[:tiles].should_render = false
-    @map.layers[:stuff].should_render = false
-    @map.layers[:avatar].should_render = true
     mark('#initialize: Map refreshed')
 
     @avatar = Avatar.new(
@@ -42,7 +38,6 @@ class World < Zif::Scene
     initialize_tiles
 
     mark('#initialize: Tiles initialized')
-    @scene_timer = 60 * 60
   end
 
   # For loading bar
@@ -56,7 +51,7 @@ class World < Zif::Scene
   def initialize_tiles
     return if @ready
 
-    %i[tiles stuff].each do |kind|
+    %i[tiles].each do |kind| # stuff
       next if @progress[kind] >= @finished_at[kind]
 
       cur_y, cur_x = @progress[kind].divmod @map.logical_width
@@ -126,8 +121,6 @@ class World < Zif::Scene
 
     @map.layers[:tiles].containing_sprite.on_mouse_down = ->(_sprite, point) { puts "Map clicked down! #{point}" }
 
-    $game.services[:action_service].reset_actionables
-    $game.services[:input_service].reset
     $game.services[:action_service].register_actionable(@avatar)
     $game.services[:action_service].register_actionable(@camera)
     $game.services[:input_service].register_clickable(@map.layers[:tiles].containing_sprite)
@@ -154,9 +147,7 @@ class World < Zif::Scene
     perform_tick_debug_labels
 
     mark('#perform_tick: Finished')
-
-    @scene_timer -= 1
-    return :load_double_buffer_render_test if $gtk.args.inputs.keyboard.key_up.space || @scene_timer.zero?
+    super
   end
 
   def translate_point_to_camera(point)
@@ -170,17 +161,11 @@ class World < Zif::Scene
   end
 
   def refresh_map
-    current_camera_zoom = @camera.zoom_factor
-    current_camera_pos  = @map.logical_pos(*@camera.pos)
-    camera_changed      = (current_camera_pos != @last_rendered_camera) || (current_camera_zoom != @last_camera_zoom)
-    @map.layers[:stuff].should_render ||= camera_changed
     @map.refresh
-    @map.layers[:stuff].should_render = false
-    @last_rendered_camera = current_camera_pos
-    @last_camera_zoom     = current_camera_zoom
   end
 
   def prepare_scene
+    super
     finish_initialization if @ready && @camera.nil?
 
     @avatar.run_animation_sequence(:fly)
@@ -189,9 +174,6 @@ class World < Zif::Scene
   # rubocop:disable Layout/LineLength
   def perform_tick_debug_labels
     color = {r: 255, g: 255, b: 255, a: 255}
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 8, text: "#{self.class.name}.  Press spacebar to transition to next scene, or wait #{@scene_timer} ticks." }.merge(color)
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
-    $gtk.args.outputs.labels << { x: 8, y: 60, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
 
     if @avatar
       $gtk.args.outputs.labels << { x: 8, y: 720 - 68, text: "Avatar: #{@avatar.xy.join('x')}" }.merge(color)

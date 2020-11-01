@@ -28,10 +28,12 @@ module Zif
 
     def perform_tick
       # puts "Sequence#perform_tick"
-      cur_action.perform_tick
+      @dirty = cur_action.perform_tick
 
       next_action if cur_action.complete?
       perform_callback if complete? && @callback
+
+      @dirty
     end
 
     def cur_action
