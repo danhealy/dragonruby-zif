@@ -27,14 +27,22 @@ module Zif
       ELLIPSIS
     end
 
-    def color
+    def default_color
       COLOR
+    end
+
+    def primitive_marker
+      :label
     end
 
     def initialize(text, size=-1, align=0)
       @text = text
       @size = size
       @align = align
+      @r = default_color[:r]
+      @g = default_color[:g]
+      @b = default_color[:b]
+      @a = default_color[:a]
       recalculate_minimums
     end
 
@@ -62,15 +70,9 @@ module Zif
       ''
     end
 
-    # For passing to .labels
-    # args.outputs.labels << my_label.label_attrs
-    def label_attrs
-      {
-        text:           @text,
-        font:           font,
-        size_enum:      @size,
-        alignment_enum: @align
-      }.merge(color)
+    def recenter_in(w, h, offset)
+      @x = w.fdiv(2)
+      @y = (h + min_height).fdiv(2) + offset
     end
   end
 end

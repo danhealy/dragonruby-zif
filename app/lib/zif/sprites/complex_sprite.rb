@@ -25,11 +25,12 @@ module Zif
     end
 
     def draw_target
-      # puts "ComplexSprite#draw_target: #{@width}w #{@height}h"
+      # puts "ComplexSprite#draw_target: #{@target_name} #{@width}w #{@height}h"
       @render_target.resize(@width, @height)
       @render_target.redraw
       @render_target.project_to({w: @width, h: @height})
       @render_target.project_from({w: @width, h: @height})
+      # puts "yup"
     end
 
     def rect

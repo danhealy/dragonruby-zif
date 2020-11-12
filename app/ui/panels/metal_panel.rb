@@ -119,16 +119,14 @@ class MetalPanel < Zif::NinePanel
       margin_x = 10
       top_margin = 4
       available_width = @upper_edge_panel.left_edge.w + (upper_left_corner.w - margin_x)
+
       header = FutureLabel.new(label, -1, 0).tap do |l|
+        l.x = margin_x
+        l.y = @height - top_margin
         l.text = l.truncate(available_width)
       end
 
-      @labels << header.label_attrs.merge(
-        {
-          x: margin_x,
-          y: @height - top_margin
-        }
-      )
+      @labels << header
     end
 
     redraw

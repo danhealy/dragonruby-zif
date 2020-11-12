@@ -1,64 +1,57 @@
 module Zif
   # Define a set of sprites for both the pressed state and the normal state
   # Use #toggle_pressed to switch states
-  # Override the height methods to center the label
-  # #resize and #redraw should occur in subclass initialize
-  class TwoStageButton < ComplexSprite
-    attr_accessor :normal, :pressed, :is_pressed, :label
+  #
+  # label_y_offset and pressed_height are for adjusting the height of the label when recentering.
+  # Offset always applied, pressed_height used instead of @h if pressed
+  class TwoStageButton < CompoundSprite
+    attr_accessor :normal, :pressed, :is_pressed, :label,
+                  :label_y_offset, :pressed_height
 
-    def initialize(target_name, &block)
-      super(target_name)
+    def initialize(name, &block)
+      super(name)
       @normal = []
       @pressed = []
       @is_pressed = false
-      @render_target.containing_sprite.on_mouse_up = lambda { |_sprite, point|
+      @on_mouse_up = lambda { |_sprite, point|
         block.call(point) if block
         toggle_pressed if @is_pressed
       }
-      @render_target.containing_sprite.on_mouse_changed = ->(_sprite, point) { on_mouse_changed(point) }
-      @render_target.containing_sprite.on_mouse_down = ->(_sprite, _point) { toggle_pressed }
+      @on_mouse_changed = ->(_sprite, point) { toggle_on_change(point) }
+      @on_mouse_down = ->(_sprite, _point) { toggle_pressed }
+      @label_y_offset = 0
     end
 
-    def pressed_height
-      0
+    def toggle_on_change(point)
+      toggle_pressed if point.inside_rect?(rect) != @is_pressed
     end
 
-    def normal_height
-      0
+    def press
+      @is_pressed = true
+      recenter_label
+      @sprites = @pressed
     end
 
-    def label_y_offset
-      4
-    end
-
-    def label_y_pressed_offset
-      6
-    end
-
-    def cur_height
-      @is_pressed ? pressed_height : normal_height
-    end
-
-    def on_mouse_changed(point)
-      toggle_pressed if point.inside_rect?(containing_sprite.rect) != @is_pressed
+    def unpress
+      @is_pressed = false
+      recenter_label
+      @sprites = @normal
     end
 
     def toggle_pressed
-      @is_pressed = !@is_pressed
-      redraw
+      if @is_pressed
+        unpress
+      else
+        press
+      end
     end
 
-    def redraw
-      @render_target.sprites = @is_pressed ? @pressed : @normal
-      if @label
-        @render_target.labels = [@label.label_attrs.merge(
-          {
-            x: (width / 2).floor,
-            y: ((pressed_height + @label.min_height) / 2) + label_y_offset - (@is_pressed ? label_y_pressed_offset : 0)
-          }
-        )]
-      end
-      draw_target
+    def recenter_label
+      label = @labels.first
+      return unless label
+
+      cur_h = @is_pressed ? (@pressed_height || @h) : @h
+      label&.recenter_in(@w, cur_h, @label_y_offset)
     end
   end
 end

@@ -11,14 +11,14 @@ class WorldLoader < Zif::Scene
     @world = World.new
     @ready = false
     @floor_progress = ProgressBar.new(:world_loader_progress, 640, @world.initialization_percent(:tiles), :green)
-    @floor_label = FutureLabel.new('Generating Floor...', 0, 1).label_attrs.merge({
-      x: 640,
-      y: 400,
-      r: 255,
-      g: 255,
-      b: 255,
-      a: 255
-    })
+    @floor_label = FutureLabel.new('Generating Floor...', 0, 1).tap do |l|
+      l.x = 640
+      l.y = 400
+      l.r = 255
+      l.g = 255
+      l.b = 255
+      l.a = 255
+    end
 
     @stuff_progress = ProgressBar.new(
       :world_loader_stuff_progress,
@@ -26,14 +26,14 @@ class WorldLoader < Zif::Scene
       @world.initialization_percent(:stuff),
       :red
     )
-    @stuff_label = FutureLabel.new('Generating Stuff...', 0, 1).label_attrs.merge({
-      x: 640,
-      y: 300,
-      r: 255,
-      g: 255,
-      b: 255,
-      a: 255
-    })
+    @stuff_label = FutureLabel.new('Generating Stuff...', 0, 1).tap do |l|
+      l.x = 640
+      l.y = 300
+      l.r = 255
+      l.g = 255
+      l.b = 255
+      l.a = 255
+    end
   end
 
   def prepare_scene

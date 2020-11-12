@@ -38,6 +38,8 @@ class UISample < ZifExampleScene
         puts "UISample: Button on_mouse_up, #{point}: mouse outside button. Not pressed."
       end
     end
+    @button.x = 600
+    @button.y = 350
   end
 
   # #prepare_scene and #unload_scene are called by Game before the scene gets run for the first time, and after it
@@ -45,13 +47,15 @@ class UISample < ZifExampleScene
   # This is a good spot to set up services, and manually control the global $gtk.args.outputs
   def prepare_scene
     super
+    mark('#prepare_scene: begin')
     # These can't be in initialize due to $game not being set during init
     @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
-      puts 'UISample: Delay button pressed!'
-      $game.services[:tracer].mark('UISample: Button was clicked - demonstrating Tick Trace service')
+      mark_and_print('delay_button: Button was clicked - demonstrating Tick Trace service')
       sleep(0.5)
-      $game.services[:tracer].mark('UISample: Woke up from 500ms second nap')
+      mark_and_print('delay_button: Woke up from 500ms second nap')
     end
+    @delay_button.x = 600
+    @delay_button.y = 240
 
     # Create a sprite from a prototype registered in the Sprite Registry service
     # This returns a Zif::Sprite with the proper w/h/path settings
@@ -87,6 +91,7 @@ class UISample < ZifExampleScene
     $game.services[:action_service].register_actionable(@dragon)
     $game.services[:input_service].register_clickable(@button)
     $game.services[:input_service].register_clickable(@delay_button)
+    mark('#prepare_scene: complete')
   end
 
   def change_color
@@ -123,6 +128,7 @@ class UISample < ZifExampleScene
   end
 
   def display_metal_panel
+    mark('#display_metal_panel: begin')
     cur_w = MetalPanel.min_width + 200 + (200 * Zif.ease($gtk.args.tick_count, @random_lengths[1])).floor
     cur_h = MetalPanel.min_height + 200 + (200 * Zif.ease($gtk.args.tick_count, @random_lengths[2])).floor
 
@@ -146,6 +152,7 @@ class UISample < ZifExampleScene
   end
 
   def display_glass_panel
+    mark('#display_glass_panel: begin')
     cuts = ('%04b' % (($gtk.args.tick_count / 60) % 16)).chars.map { |bit| bit == '1' }
     glass = GlassPanel.new(:glass_panel, 600, 600, cuts)
 
@@ -154,6 +161,7 @@ class UISample < ZifExampleScene
   end
 
   def display_progress_bar
+    mark('#display_progress_bar: begin')
     cur_progress       = (0.5 + 0.5 * Zif.ease($gtk.args.tick_count, @random_lengths[3])).round(4)
     cur_progress_width = 150 + (50 * Zif.ease($gtk.args.tick_count, @random_lengths[4])).floor
 
@@ -167,13 +175,18 @@ class UISample < ZifExampleScene
   end
 
   def display_button
+    mark('#display_button: begin')
     cur_button_length = 20 + 200 + (200 * Zif.ease($gtk.args.tick_count, @random_lengths[5])).floor
-    changing_button = TallButton.new(:colorful_button, cur_button_length, @cur_color, "Don't Press Me")
-    @all_sprites << changing_button.containing_sprite(600, 470)
+    changing_button = TallButton.new(:colorful_button, cur_button_length, @cur_color, "Don't Press Me").tap do |b|
+      b.x = 600
+      b.y = 470
+    end
+    @all_sprites << changing_button
   end
 
   def display_interactable_button
-    @all_sprites << @button.containing_sprite(600, 350)
+    mark('#display_interactable_button: begin')
+    @all_sprites << @button
     @all_sprites << @count_progress.containing_sprite(600, 410) if @count_progress
     label_text = "Buttons.  #{"#{@counter}/10 " if @counter.positive?}"
     label_text += (@button.is_pressed ? "It's pressed!" : 'Press one.').to_s
@@ -185,7 +198,8 @@ class UISample < ZifExampleScene
   end
 
   def display_lag_button
-    @all_sprites << @delay_button.containing_sprite(600, 240)
+    mark('#display_lag_button: begin')
+    @all_sprites << @delay_button
     @all_labels << {
       x:    600,
       y:    320,
@@ -194,6 +208,7 @@ class UISample < ZifExampleScene
   end
 
   def display_action_example
+    mark('#display_action_example: begin')
     @all_sprites << @dragon
     @all_labels << {
       x:    600,

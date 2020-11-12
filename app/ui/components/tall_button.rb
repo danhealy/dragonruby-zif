@@ -8,36 +8,20 @@ class TallButton < Zif::TwoStageButton
   PRESSED_HEIGHT = 45
   NORMAL_HEIGHT = 49
   LABEL_Y_OFFSET = 4
-  LABEL_Y_PRESSED_OFFSET = 6
-
-  def pressed_height
-    PRESSED_HEIGHT
-  end
-
-  def normal_height
-    NORMAL_HEIGHT
-  end
-
-  def label_y_offset
-    LABEL_Y_OFFSET
-  end
-
-  def label_y_pressed_offset
-    LABEL_Y_PRESSED_OFFSET
-  end
 
   def self.min_width
     EDGE_WIDTH + 1 + EDGE_WIDTH
   end
 
-  def initialize(target_name, width, color=:blue, label_text=nil, label_size=-1, &block)
-    super(target_name, &block)
-
+  def initialize(name, width, color=:blue, label_text=nil, label_size=-1, &block)
+    super(name, &block)
     @color = VALID_COLORS.include?(color) ? color : :blue
-    @min_width = TallButton.min_width
-    @min_height = [PRESSED_HEIGHT, NORMAL_HEIGHT].min
 
-    resize(width, cur_height)
+    @w = width
+    @h = NORMAL_HEIGHT
+    @pressed_height = PRESSED_HEIGHT - 1
+    @label_y_offset = 0
+    view_actual_size!
 
     @normal << Zif::Sprite.new.tap do |s|
       s.x = 0
@@ -50,13 +34,13 @@ class TallButton < Zif::TwoStageButton
     @normal << Zif::Sprite.new.tap do |s|
       s.x = EDGE_WIDTH
       s.y = 0
-      s.w = width - (2 * EDGE_WIDTH)
+      s.w = @w - (2 * EDGE_WIDTH)
       s.h = NORMAL_HEIGHT
       s.path = "#{SPRITES_PATH}/button_normal_#{@color}_center.png"
     end
 
     @normal << Zif::Sprite.new.tap do |s|
-      s.x = width - EDGE_WIDTH
+      s.x = @w - EDGE_WIDTH
       s.y = 0
       s.w = EDGE_WIDTH
       s.h = NORMAL_HEIGHT
@@ -75,13 +59,13 @@ class TallButton < Zif::TwoStageButton
     @pressed << Zif::Sprite.new.tap do |s|
       s.x = EDGE_WIDTH
       s.y = 0
-      s.w = width - (2 * EDGE_WIDTH)
+      s.w = @w - (2 * EDGE_WIDTH)
       s.h = PRESSED_HEIGHT
       s.path = "#{SPRITES_PATH}/button_pressed_#{@color}_center.png"
     end
 
     @pressed << Zif::Sprite.new.tap do |s|
-      s.x = width - EDGE_WIDTH
+      s.x = @w - EDGE_WIDTH
       s.y = 0
       s.w = EDGE_WIDTH
       s.h = PRESSED_HEIGHT
@@ -90,16 +74,20 @@ class TallButton < Zif::TwoStageButton
     end
 
     if label_text
-      @label = FutureLabel.new(label_text, label_size, 1).tap do |l|
-        l.text = l.truncate(width - (2 * EDGE_WIDTH))
-      end
+      @labels << FutureLabel.new(label_text, label_size, 1)
+      recenter_label
+      label_text = label_text
     end
 
-    redraw
+    unpress
   end
 
   def label_text=(text)
-    @label.text = text
-    redraw
+    label = @labels.first
+    return unless label
+
+    label.text = text
+    recalculate_minimums
+    label.text = label.truncate(@w - (2 * EDGE_WIDTH))
   end
 end
