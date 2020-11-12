@@ -4,7 +4,7 @@ module Zif
     include Zif::Actionable
 
     attr_accessor :x, :y, :r, :g, :b, :a
-    attr_accessor :text, :max_width, :min_width, :min_height, :size, :align
+    attr_accessor :text, :max_width, :min_width, :min_height, :size, :align, :full_text
 
     alias alignment_enum align
     alias size_enum size
@@ -37,6 +37,7 @@ module Zif
 
     def initialize(text, size=-1, align=0)
       @text = text
+      @full_text = text
       @size = size
       @align = align
       @r = default_color[:r]
@@ -46,8 +47,12 @@ module Zif
       recalculate_minimums
     end
 
-    def full_size_rect
+    def rect
       $gtk.calcstringbox(@text, @size, font).map(&:round)
+    end
+
+    def full_size_rect
+      $gtk.calcstringbox(@full_text, @size, font).map(&:round)
     end
 
     # You should invoke this if the text is changing & you care about truncation
@@ -59,20 +64,31 @@ module Zif
     # Determine the largest possible portion of the text we can display
     # End the text with an ellispsis if truncation occurs
     def truncate(width)
-      return @text if @max_width <= width
-
-      (@text.length - 1).downto 0 do |i|
-        truncated = "#{@text[0..i]}#{ellipsis}"
-        cur_width, = $gtk.calcstringbox(truncated, @size, font)
-        return truncated if cur_width <= width
+      if @max_width <= width
+        @text = @full_text
+        return
       end
 
-      ''
+      (@full_text.length - 1).downto 0 do |i|
+        truncated = "#{@full_text[0..i]}#{ellipsis}"
+        cur_width, = $gtk.calcstringbox(truncated, @size, font)
+        if cur_width <= width
+          @text = truncated
+          return
+        end
+      end
+
+      @text = ''
+    end
+
+    def retruncate(width)
+      recalculate_minimums
+      truncate(width)
     end
 
     def recenter_in(w, h, offset)
-      @x = w.fdiv(2)
-      @y = (h + min_height).fdiv(2) + offset
+      @x = w.idiv(2)
+      @y = (h + min_height).idiv(2) + offset
     end
   end
 end

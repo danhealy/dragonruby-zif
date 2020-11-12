@@ -57,6 +57,21 @@ class UISample < ZifExampleScene
     @delay_button.x = 600
     @delay_button.y = 240
 
+    @changing_button = TallButton.new(:colorful_button, 20, @cur_color, "Don't Press Me").tap do |b|
+      b.x = 600
+      b.y = 470
+    end
+
+    @changing_button.run(
+      Zif::Sequence.new(
+        [
+          @changing_button.new_action({width: 420}, 2.seconds, :linear),
+          @changing_button.new_action({width: 20},  2.seconds, :linear)
+        ],
+        :forever
+      )
+    )
+
     # Create a sprite from a prototype registered in the Sprite Registry service
     # This returns a Zif::Sprite with the proper w/h/path settings
     @dragon = $game.services[:sprite_registry].construct('dragon_1').tap do |s|
@@ -88,6 +103,7 @@ class UISample < ZifExampleScene
     # You have to explicity tell the action and input services which sprites to handle
     # Clickables must be registered with the input service to be tested when a click is detected
     # Actionables must be registered with the action service to be notified to update based on the running Actions
+    $game.services[:action_service].register_actionable(@changing_button)
     $game.services[:action_service].register_actionable(@dragon)
     $game.services[:input_service].register_clickable(@button)
     $game.services[:input_service].register_clickable(@delay_button)
@@ -96,6 +112,7 @@ class UISample < ZifExampleScene
 
   def change_color
     @cur_color = %i[blue green red white yellow].sample
+    @changing_button&.change_color(@cur_color)
   end
 
   def color_should_change?
@@ -105,14 +122,14 @@ class UISample < ZifExampleScene
   def perform_tick
     $gtk.args.outputs.background_color = [0, 0, 0]
     @all_labels = []
-    @all_sprites = []
+    @all_sprites = [@changing_button]
 
     change_color if color_should_change?
 
-    display_metal_panel
+    # display_metal_panel
     display_glass_panel
     display_progress_bar
-    display_button
+    #display_button
     display_interactable_button
     display_lag_button
     display_action_example
@@ -172,16 +189,6 @@ class UISample < ZifExampleScene
       y:    640,
       text: "Progress bar: width #{cur_progress_width}, progress #{(cur_progress * 100).round}%"
     }.merge(DEBUG_LABEL_COLOR)
-  end
-
-  def display_button
-    mark('#display_button: begin')
-    cur_button_length = 20 + 200 + (200 * Zif.ease($gtk.args.tick_count, @random_lengths[5])).floor
-    changing_button = TallButton.new(:colorful_button, cur_button_length, @cur_color, "Don't Press Me").tap do |b|
-      b.x = 600
-      b.y = 470
-    end
-    @all_sprites << changing_button
   end
 
   def display_interactable_button

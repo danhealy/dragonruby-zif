@@ -46,12 +46,28 @@ module Zif
       end
     end
 
+    def label
+      @labels.first
+    end
+
     def recenter_label
-      label = @labels.first
       return unless label
 
       cur_h = @is_pressed ? (@pressed_height || @h) : @h
-      label&.recenter_in(@w, cur_h, @label_y_offset)
+      label.recenter_in(@w, cur_h, @label_y_offset)
+    end
+
+    def retruncate_label(padding=0)
+      return unless label
+
+      label.retruncate(@w - padding)
+    end
+
+    def label_text=(text)
+      return unless label
+
+      label.text = text
+      retruncate_label
     end
   end
 end
