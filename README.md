@@ -149,7 +149,7 @@ A sprite which has been added to a `CompoundSprite`'s `@sprites` array will be d
 
 You can use `CompoundSprite` to draw several sprites which need to move together or relative to each other.  You can move the entire collection by changing the `CompoundSprite`'s `x` and `y` values, or you can move the component sprites relative to each other individually.
 
-This class is the basis for `ActiveLayer`.
+This class is the basis for `ActiveLayer` and many of the UI elements (TwoStageButton, ProgressBar, NinePanel, etc).
 
 
 ### Zif::RenderTarget
