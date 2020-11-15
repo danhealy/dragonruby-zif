@@ -71,7 +71,7 @@ class MetalCutout < Zif::NinePanel
     lower_right_corner.x = @w - BOTTOM_WIDTH
     upper_edge.w         = @w - 2 * TOP_WIDTH
     lower_edge.w         = @w - 2 * BOTTOM_WIDTH
-    @fill.w = @w
+    @fill.w              = @w
   end
 
   def resize_height(height)
@@ -82,6 +82,6 @@ class MetalCutout < Zif::NinePanel
     upper_left_corner.y  = @h - TOP_WIDTH
     upper_right_corner.y = @h - TOP_WIDTH
     upper_edge.y         = @h - TOP_WIDTH
-    @fill.h = @h - BOTTOM_WIDTH - TOP_WIDTH
+    @fill.h              = @h - BOTTOM_WIDTH - TOP_WIDTH
   end
 end

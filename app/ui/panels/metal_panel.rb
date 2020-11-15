@@ -112,11 +112,13 @@ class MetalPanel < Zif::NinePanel
 
     @upper_edge_panel.resize_width(@w - BIG_CORNER - SMALL_CORNER)
     @upper_edge_panel.reposition(BIG_CORNER, @h - BIG_CORNER)
+
     right_edge.x         = BIG_CORNER + upper_edge_panel.width
     lower_edge.w         = @w - 2 * SMALL_CORNER
     upper_right_corner.x = @w - SMALL_CORNER
     lower_right_corner.x = @w - SMALL_CORNER
-    @fill.w = @w - 2 * SMALL_CORNER
+    @fill.w              = @w - 2 * SMALL_CORNER
+
     @header.truncate(@upper_edge_panel.left_edge.w + (upper_left_corner.w - @header.x))
   end
 
@@ -124,13 +126,14 @@ class MetalPanel < Zif::NinePanel
     return if @h == height
 
     @h = height
+
     @upper_edge_panel.reposition(BIG_CORNER, @h - BIG_CORNER)
 
     upper_right_corner.y = @h - SMALL_CORNER
     upper_left_corner.y  = @h - BIG_CORNER
     left_edge.h          = @h - 2 * SMALL_CORNER
     right_edge.h         = @h - 2 * SMALL_CORNER
-    @fill.h                   = @h - 2 * SMALL_CORNER
-    @header.y                 = @h - 4
+    @fill.h              = @h - 2 * SMALL_CORNER
+    @header.y            = @h - 4
   end
 end
