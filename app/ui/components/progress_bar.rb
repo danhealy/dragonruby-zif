@@ -3,12 +3,10 @@
 # Filling the shadow is a bar with fixed edges and stretchy center.
 # Setting the progress causes a redraw.
 # If progress is zero, the filled bar disappears.
-class ProgressBar < Zif::ComplexSprite
+class ProgressBar < Zif::CompoundSprite
   SPRITES_PATH = 'sprites/kenney-uipack-space/PNG'.freeze
 
-  attr_accessor :filled_bar, :shadow
-  attr_accessor :filled_bar_mid, :filled_bar_edge
-  attr_accessor :color, :orientation, :max_width
+  attr_accessor :color, :orientation, :filled_bar, :shadow
 
   EDGE_MARGIN = 6
   HEIGHT = 26
@@ -24,26 +22,17 @@ class ProgressBar < Zif::ComplexSprite
   end
 
   # Width and Height assume horizontal orientation, naming is inverted for vertical
-  def initialize(target_name, width, progress=0.0, color=:blue, orientation=:horizontal)
-    super(target_name)
+  # TODO: :vertical not yet supported.. pull requests welcome.
+  def initialize(name=Zif.random_name('progress_bar'), width=100, progress=0.0, color=:blue, orientation=:horizontal)
+    super(name)
 
-    @render_target.bg_color = [255, 255, 255, 0]
-
+    @progress = [[progress, 1.0].min, 0.0].max
     @orientation = orientation
-    @progress = progress
-    @color = VALID_COLORS.include?(color) ? color : :blue
     @shadow = []
     @filled_bar = []
+    @h = HEIGHT
 
-    # TODO: :vertical not yet supported..
-    if @orientation == :horizontal
-      @min_width  = ProgressBar.min_width
-      @min_height = HEIGHT
-      resize(width, HEIGHT)
-      @max_width = [width, @width].max
-    end
-
-    @shadow << Zif::Sprite.new.tap do |s|
+    @shadow_left = Zif::Sprite.new.tap do |s|
       s.x = 0
       s.y = 0
       s.w = EDGE_MARGIN
@@ -51,57 +40,59 @@ class ProgressBar < Zif::ComplexSprite
       s.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_shadow_left.png"
     end
 
-    @shadow << Zif::Sprite.new.tap do |s|
+    @shadow_mid = Zif::Sprite.new.tap do |s|
       s.x = EDGE_MARGIN
       s.y = 0
-      s.w = @max_width - (2 * EDGE_MARGIN)
       s.h = HEIGHT
       s.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_shadow_mid.png"
     end
 
-    @shadow << Zif::Sprite.new.tap do |s|
-      s.x = @max_width - EDGE_MARGIN
+    @shadow_right = Zif::Sprite.new.tap do |s|
       s.y = 0
       s.w = EDGE_MARGIN
       s.h = HEIGHT
       s.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_shadow_right.png"
     end
 
+    @shadow = [@shadow_left, @shadow_mid, @shadow_right]
+
     @filled_bar_left = Zif::Sprite.new.tap do |s|
       s.x = 0
       s.y = 0
       s.w = EDGE_MARGIN
       s.h = HEIGHT
-      s.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_#{@color}_left.png"
     end
 
     @filled_bar_mid = Zif::Sprite.new.tap do |s|
       s.x = EDGE_MARGIN
       s.y = 0
       s.h = HEIGHT
-      s.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_#{@color}_mid.png"
     end
 
     @filled_bar_edge = Zif::Sprite.new.tap do |s|
       s.y = 0
       s.w = EDGE_MARGIN
       s.h = HEIGHT
-      s.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_#{@color}_right.png"
     end
 
     @filled_bar = [@filled_bar_left, @filled_bar_mid, @filled_bar_edge]
 
-    apply_progress
-    redraw
+    @sprites = @shadow + @filled_bar
+
+    change_color(color)
+    resize_width(width)
   end
 
-  def redraw
-    @render_target.sprites = @shadow + @filled_bar
-    draw_target
+  def change_color(color)
+    @color = VALID_COLORS.include?(color) ? color : :blue
+
+    @filled_bar_left.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_#{@color}_left.png"
+    @filled_bar_mid.path  = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_#{@color}_mid.png"
+    @filled_bar_edge.path = "#{SPRITES_PATH}/#{SPRITE_NAMES[@orientation]}_#{@color}_right.png"
   end
 
   def apply_progress
-    cur_width = (@progress * (@max_width - 2 * EDGE_MARGIN)).round
+    cur_width = (@progress * (@w - 2 * EDGE_MARGIN)).round
     if cur_width.zero?
       @filled_bar.each(&:hide)
     else
@@ -118,6 +109,24 @@ class ProgressBar < Zif::ComplexSprite
 
     @progress = clamped_progress
     apply_progress
-    redraw
+  end
+
+  # alias for actions
+  def width=(new_width)
+    resize_width(new_width)
+  end
+
+  def width
+    @w
+  end
+
+  def resize_width(width)
+    return if @w == width
+
+    @w = width
+
+    @shadow_mid.w   = @w - (2 * EDGE_MARGIN)
+    @shadow_right.x = @w - EDGE_MARGIN
+    apply_progress
   end
 end

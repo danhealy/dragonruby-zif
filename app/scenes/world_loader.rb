@@ -11,6 +11,9 @@ class WorldLoader < Zif::Scene
     @world = World.new
     @ready = false
     @floor_progress = ProgressBar.new(:world_loader_progress, 640, @world.initialization_percent(:tiles), :green)
+    @floor_progress.x = 320
+    @floor_progress.y = 340
+
     @floor_label = FutureLabel.new('Generating Floor...', 0, 1).tap do |l|
       l.x = 640
       l.y = 400
@@ -26,6 +29,8 @@ class WorldLoader < Zif::Scene
       @world.initialization_percent(:stuff),
       :red
     )
+    @stuff_progress.x = 320
+    @stuff_progress.y = 240
     @stuff_label = FutureLabel.new('Generating Stuff...', 0, 1).tap do |l|
       l.x = 640
       l.y = 300
@@ -39,6 +44,8 @@ class WorldLoader < Zif::Scene
   def prepare_scene
     $game.services[:action_service].reset_actionables
     $game.services[:input_service].reset
+    $gtk.args.outputs.static_sprites.clear
+    $gtk.args.outputs.static_labels.clear
   end
 
   def perform_tick
@@ -47,7 +54,7 @@ class WorldLoader < Zif::Scene
     @ready = @world.ready # Need to offset this by 1 tick to fix the progress bar at the end
     @world.initialize_tiles
 
-    sprites = [@floor_progress.containing_sprite(320, 340)]
+    sprites = [@floor_progress]
     labels = [@floor_label]
 
     @floor_progress.progress = @world.initialization_percent(:tiles)
@@ -56,7 +63,7 @@ class WorldLoader < Zif::Scene
       labels << @stuff_label
       @stuff_progress.progress = @world.initialization_percent(:stuff)
 
-      sprites << @stuff_progress.containing_sprite(320, 240)
+      sprites << @stuff_progress
     end
     $gtk.args.outputs.sprites << sprites
     $gtk.args.outputs.labels << labels

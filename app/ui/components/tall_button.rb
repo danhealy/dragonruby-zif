@@ -8,13 +8,8 @@ class TallButton < Zif::TwoStageButton
   EDGE_WIDTH = 6
   PRESSED_HEIGHT = 45
   NORMAL_HEIGHT = 49
-  LABEL_Y_OFFSET = 4
 
-  def self.min_width
-    EDGE_WIDTH + 1 + EDGE_WIDTH
-  end
-
-  def initialize(name, width, color=:blue, label_text=nil, label_size=-1, &block)
+  def initialize(name=Zif.random_name('tall_button'), width=100, color=:blue, label_text=nil, label_size=-1, &block)
     super(name, &block)
 
     @h = NORMAL_HEIGHT

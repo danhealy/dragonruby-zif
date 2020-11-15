@@ -5,16 +5,16 @@ module Zif
   # label_y_offset and pressed_height are for adjusting the height of the label when recentering.
   # Offset always applied, pressed_height used instead of @h if pressed
   class TwoStageButton < CompoundSprite
-    attr_accessor :normal, :pressed, :is_pressed, :label,
+    attr_accessor :normal, :pressed, :is_pressed,
                   :label_y_offset, :pressed_height
 
-    def initialize(name, &block)
+    def initialize(name=Zif.random_name('two_stage_button'), &block)
       super(name)
       @normal = []
       @pressed = []
       @is_pressed = false
       @on_mouse_up = lambda { |_sprite, point|
-        block.call(point) if block
+        block&.call(point)
         toggle_pressed if @is_pressed
       }
       @on_mouse_changed = ->(_sprite, point) { toggle_on_change(point) }

@@ -74,7 +74,7 @@ module Zif
         cur_width, = $gtk.calcstringbox(truncated, @size, font)
         if cur_width <= width
           @text = truncated
-          return
+          return # rubocop:disable Lint/NonLocalExitFromIterator
         end
       end
 

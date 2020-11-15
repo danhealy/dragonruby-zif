@@ -3,12 +3,14 @@ module Zif
   class CompoundSprite < Sprite
     attr_accessor :sprites, :labels
 
-    def initialize(name=:unknown)
+    def initialize(name=Zif.random_name('compound_sprite'))
       super(name)
       @sprites     = []
       @labels      = []
     end
 
+    # You want to use this, unless you're trying to zoom/pan.
+    # These attrs need to be set before we can display component sprites.
     def view_actual_size!
       @source_x = 0
       @source_y = 0
@@ -16,14 +18,22 @@ module Zif
       @source_h = @h
     end
 
-    # We must set source if it hasn't been set yet.  Assume full size.
     def source_rect
       cur_rect = super
-      view_actual_size! if cur_rect.any?(&:nil?)
+
+      # The source attrs must be set to something... assume full size.
+      if cur_rect.any?(&:nil?)
+        view_actual_size!
+        cur_rect = super
+      end
+
       cur_rect
     end
 
     def draw_override(ffi_draw)
+      # Treat an alpha setting of 0 as an indication that it should be hidden, to match Sprite behavior
+      return if @a.zero?
+
       x_zoom, y_zoom = zoom_factor
       cur_source_rect = source_rect
 
@@ -36,7 +46,9 @@ module Zif
       #             Therefore, anything even *partially* visible will be *fully* drawn.
 
       # puts "#{@name}: Begin drawing"
-      @sprites.each do |sprite|
+      sprites.each do |sprite|
+        next if sprite.nil?
+
         cur_rect = sprite.rect
 
         # puts "#{@name}: #{sprite.name} #{cur_rect} #{cur_source_rect}"
@@ -66,8 +78,9 @@ module Zif
           sprite.source_h
         )
       end
+
       # puts "#{@name}: Drew sprites"
-      @labels.each do |label|
+      labels.each do |label|
         # TODO: Skip if not in visible window
         ffi_draw.draw_label(
           ((label.x - @source_x) * x_zoom) + @x,
