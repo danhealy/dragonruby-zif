@@ -55,14 +55,11 @@ require 'app/lib/zif/sprites/sprite.rb'
 require 'app/lib/zif/sprites/render_target.rb'
 require 'app/lib/zif/sprites/compound_sprite.rb'
 
-# Depends on render_target.rb
-require 'app/lib/zif/sprites/complex_sprite.rb'
-
 # Depends on sprite.rb
 require 'app/lib/zif/services/sprite_registry.rb'
 require 'app/lib/zif/panels/nine_panel_edge.rb'
 
-# Depends on complex_sprite.rb
+# Depends on compound_sprite.rb
 require 'app/lib/zif/components/two_stage_button.rb'
 require 'app/lib/zif/panels/nine_panel.rb'
 
