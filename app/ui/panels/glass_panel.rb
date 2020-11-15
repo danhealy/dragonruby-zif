@@ -2,47 +2,31 @@
 # This is a normal nine slice where each corner has two options.
 class GlassPanel < Zif::NinePanel
   SPRITES_PATH = 'sprites/kenney-uipack-space/danhealy-modified'.freeze
+  CUT_CORNER   = "#{SPRITES_PATH}/glass_cut_corner.png".freeze
+  ROUND_CORNER = "#{SPRITES_PATH}/glass_round_corner.png".freeze
   WIDTH = 16
 
-  def self.min_width
-    WIDTH + 1 + WIDTH
-  end
+  attr_accessor :cuts
 
-  def self.min_height
-    min_width
-  end
-
-  def initialize(target_name, width, height, cut_corners=[false, false, false, false])
-    super(target_name)
-
-    @min_width  = GlassPanel.min_width
-    @min_height = GlassPanel.min_height
-
-    resize(width, height)
+  def initialize(width, height, cut_corners=[false, false, false, false], name=Zif.random_name('glass_panel'))
+    super(name)
 
     self.upper_left_corner = Zif::Sprite.new.tap do |s|
       s.x = 0
-      s.y = @height - WIDTH
       s.w = WIDTH
       s.h = WIDTH
-      s.path = "#{SPRITES_PATH}/glass_#{cut_corners[3] ? 'cut' : 'round'}_corner.png"
     end
 
     self.upper_right_corner = Zif::Sprite.new.tap do |s|
-      s.x = @width - WIDTH
-      s.y = @height - WIDTH
       s.w = WIDTH
       s.h = WIDTH
-      s.path = "#{SPRITES_PATH}/glass_#{cut_corners[2] ? 'cut' : 'round'}_corner.png"
       s.flip_horizontally = true
     end
 
     self.lower_right_corner = Zif::Sprite.new.tap do |s|
-      s.x = @width - WIDTH
       s.y = 0
       s.w = WIDTH
       s.h = WIDTH
-      s.path = "#{SPRITES_PATH}/glass_#{cut_corners[1] ? 'cut' : 'round'}_corner.png"
       s.flip_vertically = true
       s.flip_horizontally = true
     end
@@ -52,30 +36,24 @@ class GlassPanel < Zif::NinePanel
       s.y = 0
       s.w = WIDTH
       s.h = WIDTH
-      s.path = "#{SPRITES_PATH}/glass_#{cut_corners[0] ? 'cut' : 'round'}_corner.png"
       s.flip_vertically = true
     end
 
     self.upper_edge = Zif::Sprite.new.tap do |s|
       s.x = WIDTH
-      s.y = @height - WIDTH
-      s.w = @width - 2 * WIDTH
       s.h = WIDTH
       s.path = "#{SPRITES_PATH}/glass_side.png"
     end
 
     self.right_edge = Zif::Sprite.new.tap do |s|
-      s.x = @width - WIDTH
       s.y = WIDTH
       s.w = WIDTH
-      s.h = @height - 2 * WIDTH
       s.path = "#{SPRITES_PATH}/glass_side_right.png"
     end
 
     self.lower_edge = Zif::Sprite.new.tap do |s|
       s.x = WIDTH
       s.y = 0
-      s.w = @width - 2 * WIDTH
       s.h = WIDTH
       s.path = "#{SPRITES_PATH}/glass_side.png"
       s.flip_vertically = true
@@ -85,7 +63,6 @@ class GlassPanel < Zif::NinePanel
       s.x = 0
       s.y = WIDTH
       s.w = WIDTH
-      s.h = @height - 2 * WIDTH
       s.path = "#{SPRITES_PATH}/glass_side_right.png"
       s.flip_horizontally = true
     end
@@ -93,11 +70,44 @@ class GlassPanel < Zif::NinePanel
     @fill = Zif::Sprite.new.tap do |s|
       s.x = WIDTH
       s.y = WIDTH
-      s.w = @width - 2 * WIDTH
-      s.h = @height - 2 * WIDTH
       s.path = "#{SPRITES_PATH}/glass_center.png"
     end
 
-    redraw
+    resize(width, height)
+    change_cuts(cut_corners)
+  end
+
+  def change_cuts(cut_corners)
+    @cuts = cut_corners
+    lower_left_corner.path  = cut_corners[0] ? CUT_CORNER : ROUND_CORNER
+    lower_right_corner.path = cut_corners[1] ? CUT_CORNER : ROUND_CORNER
+    upper_right_corner.path = cut_corners[2] ? CUT_CORNER : ROUND_CORNER
+    upper_left_corner.path  = cut_corners[3] ? CUT_CORNER : ROUND_CORNER
+  end
+
+  def resize_width(width)
+    return if @w == width
+
+    @w = width
+
+    upper_right_corner.x = @w - WIDTH
+    lower_right_corner.x = @w - WIDTH
+    upper_edge.w         = @w - 2 * WIDTH
+    right_edge.x         = @w - WIDTH
+    lower_edge.w         = @w - 2 * WIDTH
+    @fill.w = @w - 2 * WIDTH
+  end
+
+  def resize_height(height)
+    return if @h == height
+
+    @h = height
+
+    upper_left_corner.y  = @h - WIDTH
+    upper_right_corner.y = @h - WIDTH
+    upper_edge.y         = @h - WIDTH
+    right_edge.h         = @h - 2 * WIDTH
+    left_edge.h          = @h - 2 * WIDTH
+    @fill.h = @h - 2 * WIDTH
   end
 end

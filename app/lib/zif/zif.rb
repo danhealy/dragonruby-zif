@@ -95,4 +95,8 @@ module Zif
   def self.ease(t, total)
     Math.sin(((t / total.to_f) * Math::PI) / 2.0)
   end
+
+  def self.random_name(type='unknown')
+    "#{type}_#{Kernel.tick_count}_#{rand(100_000)}"
+  end
 end

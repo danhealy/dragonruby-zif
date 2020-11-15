@@ -14,7 +14,7 @@ class FutureLabel < Zif::Label
     FONT
   end
 
-  def color
+  def default_color
     COLOR
   end
 end
