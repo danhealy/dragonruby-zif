@@ -60,6 +60,7 @@ module Zif
       targ = $gtk.args.outputs[@name]
       targ.width  = @width
       targ.height = @height
+
       # It's important to set the background color intentionally.  Even if alpha == 0, semi-transparent images in
       # render targets will pick up this color as an additive.  Usually you want black.
       targ.background_color = @bg_color

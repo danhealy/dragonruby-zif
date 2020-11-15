@@ -5,33 +5,17 @@ class MetalCutout < Zif::NinePanel
   TOP_WIDTH = 7
   BOTTOM_WIDTH = 6
 
-  def self.min_width
-    TOP_WIDTH + 1 + TOP_WIDTH
-  end
-
-  def self.min_height
-    TOP_WIDTH + 1 + BOTTOM_WIDTH
-  end
-
-  def initialize(target_name, width, height)
-    super(target_name)
-
-    @min_width  = MetalCutout.min_width
-    @min_height = MetalCutout.min_height
-
-    resize(width, height)
+  def initialize(width, height, name=Zif.random_name('metal_cutout'))
+    super(name)
 
     self.upper_left_corner = Zif::Sprite.new.tap do |s|
       s.x = 0
-      s.y = @height - TOP_WIDTH
       s.w = TOP_WIDTH
       s.h = TOP_WIDTH
       s.path = "#{SPRITES_PATH}/plate_top_corner.png"
     end
 
     self.upper_right_corner = Zif::Sprite.new.tap do |s|
-      s.x = @width - TOP_WIDTH
-      s.y = @height - TOP_WIDTH
       s.w = TOP_WIDTH
       s.h = TOP_WIDTH
       s.path = "#{SPRITES_PATH}/plate_top_corner.png"
@@ -39,7 +23,6 @@ class MetalCutout < Zif::NinePanel
     end
 
     self.lower_right_corner = Zif::Sprite.new.tap do |s|
-      s.x = @width - BOTTOM_WIDTH
       s.y = 0
       s.w = BOTTOM_WIDTH
       s.h = BOTTOM_WIDTH
@@ -57,8 +40,6 @@ class MetalCutout < Zif::NinePanel
 
     self.upper_edge = Zif::Sprite.new.tap do |s|
       s.x = TOP_WIDTH
-      s.y = @height - TOP_WIDTH
-      s.w = @width - 2 * TOP_WIDTH
       s.h = TOP_WIDTH
       s.path = "#{SPRITES_PATH}/plate_top_edge.png"
     end
@@ -67,7 +48,6 @@ class MetalCutout < Zif::NinePanel
     self.lower_edge = Zif::Sprite.new.tap do |s|
       s.x = BOTTOM_WIDTH
       s.y = 0
-      s.w = @width - 2 * BOTTOM_WIDTH
       s.h = BOTTOM_WIDTH
       s.path = "#{SPRITES_PATH}/plate_center.png"
     end
@@ -77,11 +57,31 @@ class MetalCutout < Zif::NinePanel
     @fill = Zif::Sprite.new.tap do |s|
       s.x = 0
       s.y = BOTTOM_WIDTH
-      s.w = @width
-      s.h = @height - BOTTOM_WIDTH - TOP_WIDTH
       s.path = "#{SPRITES_PATH}/plate_center.png"
     end
+    resize(width, height)
+  end
 
-    redraw
+  def resize_width(width)
+    return if @w == width
+
+    @w = width
+
+    upper_right_corner.x = @w - TOP_WIDTH
+    lower_right_corner.x = @w - BOTTOM_WIDTH
+    upper_edge.w         = @w - 2 * TOP_WIDTH
+    lower_edge.w         = @w - 2 * BOTTOM_WIDTH
+    @fill.w              = @w
+  end
+
+  def resize_height(height)
+    return if @h == height
+
+    @h = height
+
+    upper_left_corner.y  = @h - TOP_WIDTH
+    upper_right_corner.y = @h - TOP_WIDTH
+    upper_edge.y         = @h - TOP_WIDTH
+    @fill.h              = @h - BOTTOM_WIDTH - TOP_WIDTH
   end
 end

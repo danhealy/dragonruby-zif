@@ -1,25 +1,61 @@
 module Zif
   # For setting up a 9-slice panel/window
-  class NinePanel < ComplexSprite
+  class NinePanel < CompoundSprite
     attr_accessor :corners, :edges, :fill, :labels
 
     # Draw 4 corners,
     # 4 edges (with optional transition),
     # then fill the center
-    def initialize(target_name)
-      super(target_name)
+    def initialize(name=Zif.random_name('nine_panel'))
+      super(name)
       @corners = Array.new(4) # ul, ur, ll, lr
       @edges = Array.new(4) # upper, right, lower, left
-      @labels = []
-      @min_height = 4
-      @min_width = 4
     end
 
-    def redraw
-      # It's important that the fill is drawn first so it can overlap the other components (See MetalCutout)
-      @render_target.sprites = [@fill] + @edges + @corners
-      @render_target.labels = @labels
-      draw_target
+    def sprites
+      unless @sprites_assigned
+        @sprites.unshift(
+          @fill,
+          *@edges,
+          *@corners
+        )
+        @sprites.flatten!
+        @sprites_assigned = true
+      end
+
+      @sprites
+    end
+
+    def resize(width, height)
+      resize_width(width)
+      resize_height(height)
+      view_actual_size!
+    end
+
+    def resize_width(_width)
+      raise "#{self.class.name} is expected to define #resize_width, to properly set component sprite attributes"
+    end
+
+    def resize_height(_height)
+      raise "#{self.class.name} is expected to define #resize_height, to properly set component sprite attributes"
+    end
+
+    # Width methods to support actions
+    def width=(new_width)
+      resize_width(new_width)
+    end
+
+    def width
+      @w
+    end
+
+    # Height methods to support actions
+    def height=(new_height)
+      resize_height(new_height)
+    end
+
+    def height
+      @h
     end
 
     # -------------------

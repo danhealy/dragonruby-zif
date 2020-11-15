@@ -19,7 +19,7 @@ module Zif
 
     attr_accessor :on_mouse_down, :on_mouse_up, :on_mouse_changed
 
-    def initialize(name=:unknown)
+    def initialize(name=Zif.random_name('sprite'))
       @name      = name
       @logical_x = 0
       @logical_y = 0
