@@ -10,7 +10,7 @@ module Zif
     attr_accessor :layers, :layer_index
 
     attr_accessor :max_x, :max_y, :min_x, :min_y, :target_x, :target_y, :max_w, :max_h,
-                  :max_zoom_in, :max_zoom_out, :zoom_step, :native_screen_width, :native_screen_height
+                  :max_zoom_in, :max_zoom_out, :zoom_step, :zoom_steps, :native_screen_width, :native_screen_height
 
     attr_reader :pos_x, :pos_y, :cur_w, :cur_h
 
@@ -55,7 +55,9 @@ module Zif
       @max_zoom_out = 2.0
 
       # Each scroll action will increase or decrease zoom factor by this amount:
-      @zoom_step = 0.1
+      @zoom_steps = [0.5, 0.8, 1.0, 1.28, 1.6, 2.0]
+      # Index of above
+      @zoom_step = 2
 
       self.cur_w = starting_width
       self.cur_h = starting_height
@@ -258,17 +260,19 @@ module Zif
     end
 
     def zoom_out(point=(@last_follow || center))
-      zoom_to([zoom_factor.first + @zoom_step, @max_zoom_out].min, point)
+      @zoom_step = [@zoom_step+1, @zoom_steps.length - 1].min
+      zoom_to(@zoom_steps[@zoom_step], point)
     end
 
     def zoom_in(point=(@last_follow || center))
-      zoom_to([zoom_factor.first - @zoom_step, @max_zoom_in].max, point)
+      @zoom_step = [@zoom_step-1, 0].max
+      zoom_to(@zoom_steps[@zoom_step], point)
     end
 
     def zoom_to(factor=1.0, point=(@last_follow || center))
-      base_mult = (factor.round(1) * 80).floor
-      self.cur_w = base_mult * 16
-      self.cur_h = base_mult * 9
+      base_mult = (factor.round(2) * 80)
+      self.cur_w = (base_mult * 16)
+      self.cur_h = (base_mult * 9)
 
       # puts "#zoom_to: Zoomed to #{zoom_factor}"
 

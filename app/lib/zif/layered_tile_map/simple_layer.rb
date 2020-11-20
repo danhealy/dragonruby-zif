@@ -19,7 +19,7 @@ module Zif
     end
 
     def reinitialize_sprites
-      @source_sprites = []
+      self.source_sprites = []
     end
 
     def rerender
@@ -31,7 +31,7 @@ module Zif
         @sprites = if @render_only_visible
                      visible_sprites.to_a
                    else
-                     @source_sprites
+                     source_sprites
                    end
 
         redraw

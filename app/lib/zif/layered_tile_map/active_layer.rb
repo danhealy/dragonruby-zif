@@ -38,6 +38,7 @@ module Zif
     end
 
     def reinitialize_sprites
+      # puts "#{@layer_name}: ActiveLayer reinitialize_sprites"
       @sprites = []
     end
 

@@ -46,29 +46,35 @@ module Zif
       @tracer_service_name = :tracer
     end
 
-    def new_active_layer(name)
-      @layers[name] = Zif::ActiveLayer.new(self, name, @z)
+    def add_layer(name, layer)
+      @layers[name] = layer
       @z += 1
       return @layers[name]
+    end
+
+    def new_active_layer(name)
+      add_layer(name, Zif::ActiveLayer.new(self, name, @z))
     end
 
     # clear_sprites_after_draw kind of replicates the behavior of outputs.sprites vs outputs.static_sprites
     def new_simple_layer(name, render_only_visible=false, clear_sprites_after_draw=false)
-      @layers[name] = Zif::SimpleLayer.new(self, name, @z, render_only_visible, clear_sprites_after_draw)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::SimpleLayer.new(self, name, @z, render_only_visible, clear_sprites_after_draw))
     end
 
     def new_tiled_layer(name, render_only_visible=false)
-      @layers[name] = Zif::TiledLayer.new(self, name, @z, render_only_visible)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::TiledLayer.new(self, name, @z, render_only_visible))
+    end
+
+    def new_active_tiled_layer(name)
+      add_layer(name, Zif::ActiveTiledLayer.new(self, name, @z))
     end
 
     def new_bitmasked_tiled_layer(name, render_only_visible=false)
-      @layers[name] = Zif::BitmaskedTiledLayer.new(self, name, @z, render_only_visible)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::BitmaskedTiledLayer.new(self, name, @z, render_only_visible))
+    end
+
+    def new_active_bitmasked_tiled_layer(name)
+      add_layer(name, Zif::ActiveBitmaskedTiledLayer.new(self, name, @z))
     end
 
     def max_width

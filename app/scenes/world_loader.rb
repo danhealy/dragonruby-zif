@@ -50,6 +50,7 @@ class WorldLoader < Zif::Scene
   end
 
   def perform_tick
+    mark_and_print('#perform_tick: Begin')
     $gtk.args.outputs.background_color = [0, 0, 0, 0]
 
     @ready = @world.ready # Need to offset this by 1 tick to fix the progress bar at the end
@@ -75,6 +76,8 @@ class WorldLoader < Zif::Scene
     $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
     $gtk.args.outputs.labels << { x: 8, y: 60, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
     # rubocop:enable Layout/LineLength
+
+    mark_and_print('#perform_tick: Complete')
 
     # Returning the other Scene instance so the Game knows to switch scenes.  Demonstrating an automatic scene switch
     return @world if @ready

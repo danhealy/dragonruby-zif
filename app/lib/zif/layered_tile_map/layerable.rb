@@ -3,8 +3,13 @@ module Zif
   module Layerable
     attr_accessor :map, :layer_name, :z, :should_render
 
-    def add_positioned_sprite(sprite)
+    def add_positioned_sprite(logical_x, logical_y, sprite)
+      puts "#{@layer_name}: Layerable#add_positioned_sprite"
       source_sprites << position_sprite(sprite, logical_x, logical_y)
+    end
+
+    def remove_positioned_sprite(sprite)
+      remove_sprite(sprite)
     end
 
     def position_sprite(sprite, logical_x, logical_y)

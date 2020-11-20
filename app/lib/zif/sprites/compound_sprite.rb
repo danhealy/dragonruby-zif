@@ -34,10 +34,11 @@ module Zif
       #             Therefore, anything even *partially* visible will be *fully* drawn.
 
       $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing begin")
+      # puts "CompoundSprite(#{@name})#draw_override: Sprite drawing begin"
 
       # Throwback to the days before Enumerable, for performance reasons
       cur_sprite_idx = 0
-      total_sprite_length = sprites.length
+      total_sprite_length = sprites.count
       while cur_sprite_idx < total_sprite_length
         sprite = @sprites[cur_sprite_idx]
         cur_sprite_idx += 1
@@ -57,10 +58,10 @@ module Zif
         )
 
         ffi_draw.draw_sprite_3(
-          ((x - @source_x) * x_zoom).round + @x,
-          ((y - @source_y) * y_zoom).round + @y,
-          (w * x_zoom).round,
-          (h * y_zoom).round,
+          (x - @source_x) * x_zoom + @x,
+          (y - @source_y) * y_zoom + @y,
+          w * x_zoom,
+          h * y_zoom,
           sprite.path.s_or_default,
           sprite.angle,
           sprite.a,
@@ -79,6 +80,7 @@ module Zif
         )
       end
       $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing complete")
+      # puts "CompoundSprite(#{@name})#draw_override: Sprite drawing complete"
 
       labels.each do |label|
         # TODO: Skip if not in visible window

@@ -18,7 +18,7 @@ module Zif
   #
   # Some background (note the author uses a different numbering scheme):
   # https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673
-  class BitmaskedTiledLayer < TiledLayer
+  module Bitmaskable
     attr_accessor :presence_data, :bitmask_data, :bitmasked_sprite_name_prefix
 
     def reinitialize_sprites
@@ -31,6 +31,7 @@ module Zif
       # puts "#remove_at: #{x}, #{y}: was #{@source_sprites[y][x]}"
       @presence_data[y][x] = false
       @source_sprites[y][x] = nil
+      sync_sprites_at(x, y)
       # puts "#remove_at: #{x}, #{y}: now #{@source_sprites[y][x]}"
       redraw_at(x, y)
     end
@@ -102,6 +103,7 @@ module Zif
       (from_y..to_y).each do |i|
         (from_x..to_x).each do |j|
           @source_sprites[i][j] = nil
+          sync_sprites_at(j, i)
           bitmask = @bitmask_data[i][j]
           next unless bitmask
 
@@ -109,6 +111,7 @@ module Zif
           sprite = $services[:sprite_registry].construct(full_name)
 
           @source_sprites[i][j] = position_sprite(sprite, j, i)
+          sync_sprites_at(j, i)
         end
       end
     end
@@ -116,5 +119,15 @@ module Zif
     def exclude_from_serialize
       %w[presence_data bitmask_data source_sprites sprites primitives]
     end
+  end
+
+  class BitmaskedTiledLayer < SimpleLayer
+    include Tileable
+    include Bitmaskable
+  end
+
+  class ActiveBitmaskedTiledLayer < ActiveLayer
+    include Tileable
+    include Bitmaskable
   end
 end

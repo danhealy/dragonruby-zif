@@ -51,11 +51,13 @@ require 'app/lib/zif/camera.rb'
 
 # Depends on compound_sprite.rb, expects to be initialized with a LayeredTileMap-like @map
 require 'app/lib/zif/layered_tile_map/layerable.rb'
+require 'app/lib/zif/layered_tile_map/tileable.rb'
 require 'app/lib/zif/layered_tile_map/active_layer.rb'
 
 # Depends on render_target.rb, expects to be initialized with a LayeredTileMap-like @map
 require 'app/lib/zif/layered_tile_map/simple_layer.rb'
 require 'app/lib/zif/layered_tile_map/tiled_layer.rb'
+require 'app/lib/zif/layered_tile_map/bitmasked_tiled_layer.rb'
 
 # Depends on simple_layer.rb, tiled_layer.rb, traceable.rb
 require 'app/lib/zif/layered_tile_map/layered_tile_map.rb'
