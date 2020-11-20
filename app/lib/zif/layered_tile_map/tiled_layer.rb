@@ -9,11 +9,24 @@ module Zif
 
     # This returns an enumerator which can be used to iterate over only the tiles which are visible.
     # Only for layers which have allocated_tiles!
-    def visible_sprites(rect=containing_sprite.source_rect)
-      logical_x = rect[0].fdiv(@map.tile_width)
-      logical_y = rect[1].fdiv(@map.tile_height)
-      x_range   = rect[2].fdiv(@map.tile_width)
-      y_range   = rect[3].fdiv(@map.tile_height)
+    def visible_sprites(given_rect=nil)
+      if given_rect.nil?
+        containing_sprite.view_actual_size! unless containing_sprite.source_is_set?
+        compare_left   = containing_sprite.source_x
+        compare_bottom = containing_sprite.source_y
+        compare_w      = containing_sprite.source_w
+        compare_h      = containing_sprite.source_h
+      else
+        compare_left   = given_rect.x
+        compare_bottom = given_rect.y
+        compare_w      = given_rect.w
+        compare_h      = given_rect.h
+      end
+
+      logical_x = compare_left.fdiv(@map.tile_width)
+      logical_y = compare_bottom.fdiv(@map.tile_height)
+      x_range   = compare_w.fdiv(@map.tile_width)
+      y_range   = compare_h.fdiv(@map.tile_height)
 
       max_y = [logical_y + y_range.ceil + 1, @map.logical_height].min
       max_x = [logical_x + x_range.ceil + 1, @map.logical_width].min
@@ -27,8 +40,8 @@ module Zif
       # The benefit of doing this instead is that we avoid some extraneous iteration and allocation if we call
       # #visible_tiles more than once per tick.  This definitely feels faster, but I haven't benchmarked.
 
-      starting_a = [logical_x - 1, 0].max
-      starting_b = [logical_y - 1, 0].max
+      starting_a = [logical_x, 0].max
+      starting_b = [logical_y, 0].max
       a = starting_a
       b = starting_b
       Enumerator.new do |yielder|
@@ -42,6 +55,10 @@ module Zif
           break unless @source_sprites[b] && b <= max_y
         end
       end
+    end
+
+    def intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
+      visible_sprites([compare_left, compare_bottom, compare_right - compare_left, compare_top - compare_bottom])
     end
 
     def add_positioned_sprite(logical_x, logical_y, tile_sprite_proto)

@@ -80,29 +80,27 @@ class CompoundSpriteTest < ZifExampleScene
 
     lead_dragon = @dragons[1]
 
-    8000.times do |i|
-      wait, layer = i.divmod(9)
+    50.times do |i|
+      _wait, layer = i.divmod(10)
       pixie = $game.services[:sprite_registry].construct(:white_1).tap do |s|
-        s.x = rand(800)
-        s.y = rand(400)
+        s.x = lead_dragon.x
+        s.y = lead_dragon.y
         s.w = 10
         s.h = 10
         s.source_x = 0
         s.source_y = 0
         s.source_w = 10
         s.source_h = 10
-        s.a = 30
+        s.a = 0
         s.r, s.g, s.b = Zif.rand_rgb(100, 255)
       end
 
-      # Start rotating by a time offset
-      # pixie.run(
-      #   pixie.delayed_action(wait.seconds) {
-      #     # Testing
-      #     pixie.x = lead_dragon.x - layer * 40
-      #     pixie.y = lead_dragon.y
-      #   }
-      # )
+      # Start spraying
+      pixie.run(
+        pixie.delayed_action(rand.seconds) {
+          pixie_spray(pixie, layer)
+        }
+      )
 
       @compound_sprite.sprites << pixie
     end
@@ -184,5 +182,21 @@ class CompoundSpriteTest < ZifExampleScene
 
     mark('#perform_tick: Finished')
     super
+  end
+
+  def pixie_spray(pix, layer)
+    idx = rand(3)
+    dir = @dragons[idx].flip_horizontally ? 1 : -1
+
+    pix.x = @dragons[idx].center_x + (5 * layer) * dir
+    pix.y = @dragons[idx].center_y - 10
+    pix.a = 50
+    pix.run(pix.new_action({x: pix.x + ((rand(100) + 20) * dir)}, 2.seconds, :smooth_stop5))
+    pix.run(pix.new_action({y: pix.y + Zif.relative_rand(50)},   2.seconds, :smooth_stop5))
+    pix.run(
+      pix.fade_out(rand.seconds) {
+        pixie_spray(pix, layer)
+      }
+    )
   end
 end

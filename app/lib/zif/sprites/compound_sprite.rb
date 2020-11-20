@@ -9,19 +9,6 @@ module Zif
       @labels      = []
     end
 
-    # You want to use this, unless you're trying to zoom/pan.
-    # These attrs need to be set before we can display component sprites.
-    def view_actual_size!
-      @source_x = 0
-      @source_y = 0
-      @source_w = @w
-      @source_h = @h
-    end
-
-    def source_is_set?
-      !(@source_x.nil? || @source_y.nil? || @source_w.nil? || @source_h.nil?)
-    end
-
     def source_rect
       view_actual_size! unless source_is_set?
       super
@@ -62,16 +49,18 @@ module Zif
         h = sprite.h
 
         # This performs a little better than calling intersect_rect?
-        next if x + w < @source_x
-        next if x > cur_source_right
-        next if y + h < @source_y
-        next if y > cur_source_top
+        next if (
+          (x     > cur_source_right) ||
+          (y     > cur_source_top)   ||
+          (x + w < @source_x)        ||
+          (y + h < @source_y)
+        )
 
         ffi_draw.draw_sprite_3(
-          ((x - @source_x) * x_zoom) + @x,
-          ((y - @source_y) * y_zoom) + @y,
-          w * x_zoom,
-          h * y_zoom,
+          ((x - @source_x) * x_zoom).round + @x,
+          ((y - @source_y) * y_zoom).round + @y,
+          (w * x_zoom).round,
+          (h * y_zoom).round,
           sprite.path.s_or_default,
           sprite.angle,
           sprite.a,

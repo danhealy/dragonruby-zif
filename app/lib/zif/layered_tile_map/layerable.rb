@@ -26,21 +26,41 @@ module Zif
     end
 
     # This is not very performant with lots of sprites!  Consider using TiledLayer instead.
-    def visible_sprites(rect=containing_sprite.source_rect)
+    def visible_sprites(given_rect)
+      if given_rect.nil?
+        containing_sprite.view_actual_size! unless containing_sprite.source_is_set?
+        compare_left   = containing_sprite.source_x
+        compare_bottom = containing_sprite.source_y
+        compare_right  = compare_left   + containing_sprite.source_w
+        compare_top    = compare_bottom + containing_sprite.source_h
+      else
+        compare_left   = given_rect.x
+        compare_bottom = given_rect.y
+        compare_right  = compare_left   + given_rect.w
+        compare_top    = compare_bottom + given_rect.h
+      end
+
+      intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
+    end
+
+    def intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
       source_sprites.select do |sprite|
-        sprite.intersect_rect? rect
+        x = sprite.x
+        y = sprite.y
+        w = sprite.w
+        h = sprite.h
+
+        !(
+          (x     > compare_right)  ||
+          (y     > compare_top)    ||
+          (x + w < compare_left)   ||
+          (y + h < compare_bottom)
+        )
       end
     end
 
-    # Returns an array of colliding sprites, and non-colliding sprites that were within the visible area
-    def collisions(rect)
-      remain = visible_sprites(rect).to_a
-      coll   = remain.select { |item| item.intersect_rect? rect }
-      [coll, coll - remain]
-    end
-
     def clicked?(point, kind=:up)
-      relative_point = Zif.add_positions(
+      x, y = Zif.add_positions(
         Zif.position_math(
           :mult,
           point,
@@ -52,10 +72,8 @@ module Zif
         ),
         containing_sprite.source_xy
       )
-      visible_sprites(
-        relative_point + [1, 1]
-      ).reverse_each.find do |sprite|
-        sprite.respond_to?(:clicked?) && sprite.clicked?(relative_point, kind)
+      intersecting_sprites(x, y, x, y).reverse_each.find do |sprite|
+        sprite.respond_to?(:clicked?) && sprite.clicked?([x, y], kind)
       end
     end
 
