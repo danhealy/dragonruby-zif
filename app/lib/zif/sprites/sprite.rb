@@ -110,6 +110,8 @@ module Zif
       [(@x + @w.idiv(2)).to_i, (@y + @h.idiv(2)).to_i]
     end
 
+    # Performance tip:
+    # Use the Sprite itself for things like #intersect_rect? rather than creating this array!
     def rect
       [@x, @y, @w, @h]
     end

@@ -42,6 +42,7 @@ class WorldLoader < Zif::Scene
   end
 
   def prepare_scene
+    tracer.clear_averages
     $game.services[:action_service].reset_actionables
     $game.services[:input_service].reset
     $gtk.args.outputs.static_sprites.clear

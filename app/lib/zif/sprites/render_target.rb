@@ -141,23 +141,23 @@ module Zif
     end
 
     def redraw_from_buffer(sprites=[], cut_rect=nil, additional_containing_sprites=[])
-      $services[:tracer].mark("#redraw_from_buffer: #{@name} Begin")
+      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} Begin")
       source_buffer_sprites = cut_rect ? cut_containing_sprites(cut_rect) : [full_containing_sprite]
 
       set_inactive_buffer_name unless @inactive_buffer_name
-      # puts "#redraw_from_buffer: name: #{@name}, inactive: #{@inactive_buffer_name}"
-      # puts "#redraw_from_buffer: cut_rect: #{cut_rect}, source: #{source_buffer_sprites.inspect}"
+      # puts "RenderTarget#redraw_from_buffer: name: #{@name}, inactive: #{@inactive_buffer_name}"
+      # puts "RenderTarget#redraw_from_buffer: cut_rect: #{cut_rect}, source: #{source_buffer_sprites.inspect}"
 
-      $services[:tracer].mark("#redraw_from_buffer: #{@name} Sprites")
+      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} Sprites")
       targ = $gtk.args.outputs[@inactive_buffer_name]
       targ.width  = @width
       targ.height = @height
-      $services[:tracer].mark("#redraw_from_buffer: #{@name} HW")
+      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} HW")
       targ.background_color = @bg_color
       targ.sprites << [source_buffer_sprites] + sprites
 
       switch_buffer(additional_containing_sprites)
-      $services[:tracer].mark("#redraw_from_buffer: #{@name} End")
+      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} End")
     end
 
     # Expects xywh

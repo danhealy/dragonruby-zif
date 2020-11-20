@@ -118,7 +118,7 @@ module Zif
 
     def refresh
       @layers.each do |layer_name, layer|
-        mark("#refresh: Rerendering #{layer_name} at #{layer.containing_sprite.source_rect}")
+        mark("#refresh: Rerendering #{layer_name}")
         layer.rerender
         mark("#refresh: Rerendered #{layer_name}")
       end

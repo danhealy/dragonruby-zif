@@ -36,7 +36,7 @@
 #        water_level = WaterLevelScene.new
 #        water_level.do_special_stuff # like something you can't do in #prepare_scene for whatever reason
 #        @scene = water_level
-#      else # an unhan
+#      else # an unhandled return
 #        @scene = OpeningScene.new
 #      end
 #    end
@@ -92,8 +92,8 @@ module Zif
 
       mark('#standard_tick: Scene switching handled')
 
-      @services[:action_service].run_all_actions
-      mark('#standard_tick: end')
+      mark('#standard_tick: Action service complete') if @services[:action_service].run_all_actions
+      mark('#standard_tick: Complete')
       @services[:tracer].finish
     rescue StandardError => e
       decorate_exception(e)

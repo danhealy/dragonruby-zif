@@ -85,6 +85,7 @@ require 'app/avatar.rb'
 class ZifExample < Zif::Game
   def initialize
     super()
+    @services[:tracer].measure_averages = true
     1.upto 4 do |i|
       @services[:sprite_registry].register_basic_sprite("dragon_#{i}", 82, 66)
     end
