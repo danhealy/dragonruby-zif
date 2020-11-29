@@ -9,13 +9,18 @@ module Zif
   # If your tick takes longer than the time threshold, it will report the full trace info and highlight the section
   # which took the most time to execute.  The game will begin to dip below 60fps if your tick takes longer than about
   # 16ms, but the default threshold is 20ms so it should only notify you if something is really off.
+  #
+  # Turn on running average calculation with @measure_averages==true
   class TickTraceService
-    attr_accessor :time_threshold, :slowest_mark, :last_tick_ms
+    attr_accessor :time_threshold, :slowest_mark, :last_tick_ms,
+                  :measure_averages, :averages, :slowest_avg_mark, :slowest_max_mark
 
     # 0.02 cooresponds to 20ms
-    def initialize(time_threshold=0.02)
+    def initialize(time_threshold=0.02, measure_averages=false)
       @time_threshold = time_threshold
+      @measure_averages = measure_averages
       @enabled = true
+      clear_averages
       reset_tick
     end
 
@@ -37,16 +42,43 @@ module Zif
       @last_time = @start_time
     end
 
+    def clear_averages
+      @averages = Hash.new do |h, k|
+        h[k] = {
+          min:   Float::INFINITY,
+          max:   -Float::INFINITY,
+          avg:   nil,
+          count: 0
+        }
+      end
+    end
+
     def mark(label)
       return unless enabled?
 
       t = Time.now
+      delta = t - @last_time
       @times << {
         label:   label,
-        delta:   t - @last_time,
+        delta:   delta,
         elapsed: t - @start_time
       }
       @last_time = t
+
+      return unless @measure_averages
+
+      @averages[label][:min] = [@averages[label][:min], delta].min
+      @averages[label][:max] = [@averages[label][:max], delta].max
+
+      if @averages[label][:avg]
+        @averages[label][:avg] = (
+          ((@averages[label][:avg] * @averages[label][:count]) + delta).fdiv(@averages[label][:count] + 1)
+        )
+      else
+        @averages[label][:avg] = delta
+      end
+
+      @averages[label][:count] += 1
     end
 
     def finish
@@ -54,7 +86,16 @@ module Zif
 
       elapsed = @last_time - @start_time
       @last_tick_ms = format_ms(elapsed)
-      return unless elapsed > @time_threshold
+
+      if @measure_averages
+        avg_culprit, avg_culprit_time = @averages.max_by { |label, time| time[:avg] }
+        @slowest_avg_mark = "'#{avg_culprit}' #{format_ms(avg_culprit_time[:avg])}"
+        max_culprit, max_culprit_time = @averages.max_by { |label, time| time[:max] }
+        @slowest_max_mark = "'#{max_culprit}' #{format_ms(max_culprit_time[:max])}"
+      end
+
+      over_threshold = (elapsed > @time_threshold)
+      return unless over_threshold
 
       culprit = @times.max_by { |time| time[:delta] }
       @slowest_mark = "'#{culprit[:label]}' #{format_ms(culprit[:delta])}"
@@ -77,7 +118,6 @@ module Zif
     # This is used to extract the name of the last #mark-ed code, useful for exception messages since we don't have
     # line numbers.
     def last_label
-      # @times.map { |time| time&.dig(:label) }.join(" - ")
       @times&.last&.dig(:label)
     end
 

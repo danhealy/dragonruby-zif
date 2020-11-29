@@ -167,6 +167,7 @@ class UISample < ZifExampleScene
       @glass_label,
       @prog_label,
       @button_label,
+      @metal_label,
       {
         x:    600,
         y:    320,
@@ -230,6 +231,7 @@ class UISample < ZifExampleScene
   end
 
   def perform_tick
+    mark('#perform_tick: begin')
     $gtk.args.outputs.background_color = [0, 0, 0, 0]
 
     change_color if color_should_change?
@@ -239,7 +241,11 @@ class UISample < ZifExampleScene
     update_progress_bar
     update_interactable_button
 
+
+    mark('#perform_tick: finished updates')
     finished = super
+
+    mark('#perform_tick: finished super')
     return finished if finished
 
     @force_next_scene ||= @load_next_scene_next_tick # rubocop:disable Naming/MemoizedInstanceVariableName
@@ -259,6 +265,7 @@ class UISample < ZifExampleScene
     else
       @cutout.hide
     end
+    mark('#update_metal_panel: complete')
   end
 
   def update_glass_panel
@@ -266,6 +273,7 @@ class UISample < ZifExampleScene
     cuts = ('%04b' % (($gtk.args.tick_count / 60) % 16)).chars.map { |bit| bit == '1' }
     @glass.change_cuts(cuts)
     @glass_label.text = "Glass panel cuts: #{@glass.cuts}"
+    mark('#update_glass_panel: complete')
   end
 
   def update_progress_bar
@@ -278,6 +286,7 @@ class UISample < ZifExampleScene
     @prog.view_actual_size!
 
     @prog_label.text = "Progress bar: width #{cur_progress_width}, progress #{(cur_progress * 100).round}%"
+    mark('#update_progress_bar: complete')
   end
 
   def update_interactable_button
@@ -285,5 +294,6 @@ class UISample < ZifExampleScene
     label_text = "Buttons.  #{"#{@counter}/10 " if @counter.positive?}"
     label_text += (@button.is_pressed ? "It's pressed!" : 'Press one.').to_s
     @button_label.text = label_text
+    mark('#update_interactable_button: complete')
   end
 end

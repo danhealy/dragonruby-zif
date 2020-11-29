@@ -51,11 +51,13 @@ require 'app/lib/zif/camera.rb'
 
 # Depends on compound_sprite.rb, expects to be initialized with a LayeredTileMap-like @map
 require 'app/lib/zif/layered_tile_map/layerable.rb'
+require 'app/lib/zif/layered_tile_map/tileable.rb'
 require 'app/lib/zif/layered_tile_map/active_layer.rb'
 
 # Depends on render_target.rb, expects to be initialized with a LayeredTileMap-like @map
 require 'app/lib/zif/layered_tile_map/simple_layer.rb'
 require 'app/lib/zif/layered_tile_map/tiled_layer.rb'
+require 'app/lib/zif/layered_tile_map/bitmasked_tiled_layer.rb'
 
 # Depends on simple_layer.rb, tiled_layer.rb, traceable.rb
 require 'app/lib/zif/layered_tile_map/layered_tile_map.rb'
@@ -85,6 +87,7 @@ require 'app/avatar.rb'
 class ZifExample < Zif::Game
   def initialize
     super()
+    @services[:tracer].measure_averages = true
     1.upto 4 do |i|
       @services[:sprite_registry].register_basic_sprite("dragon_#{i}", 82, 66)
     end

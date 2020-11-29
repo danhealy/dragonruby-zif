@@ -35,7 +35,18 @@ module Zif
     end
 
     def run_all_actions
-      @actionables.each(&:perform_actions)
+      actionables_count = @actionables&.length
+
+      return false unless actionables_count&.positive?
+
+      # Avoid blocks here.
+      idx = 0
+      while idx < actionables_count
+        @actionables[idx].perform_actions
+        idx += 1
+      end
+
+      true
     end
   end
 end

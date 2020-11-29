@@ -106,16 +106,39 @@ module Zif
       [@w, @h]
     end
 
-    def center
-      [(@x + @w.idiv(2)).to_i, (@y + @h.idiv(2)).to_i]
+    def center_x
+      (@x + @w.idiv(2)).to_i
     end
 
+    def center_y
+      (@y + @h.idiv(2)).to_i
+    end
+
+    def center
+      [center_x, center_y]
+    end
+
+    # Performance tip:
+    # Use the Sprite itself for things like #intersect_rect? rather than creating this array!
     def rect
       [@x, @y, @w, @h]
     end
 
     def rect_hash
       Sprite.rect_array_to_hash(rect)
+    end
+
+    # You want to use this, unless you're trying to zoom/pan.
+    # These attrs need to be set before we can display component sprites.
+    def view_actual_size!
+      @source_x = 0
+      @source_y = 0
+      @source_w = @w
+      @source_h = @h
+    end
+
+    def source_is_set?
+      !(@source_x.nil? || @source_y.nil? || @source_w.nil? || @source_h.nil?)
     end
 
     def source_xy

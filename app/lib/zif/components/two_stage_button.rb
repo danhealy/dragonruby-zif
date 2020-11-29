@@ -23,7 +23,7 @@ module Zif
     end
 
     def toggle_on_change(point)
-      toggle_pressed if point.inside_rect?(rect) != @is_pressed
+      toggle_pressed if point.inside_rect?(self) != @is_pressed
     end
 
     def press

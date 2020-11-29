@@ -91,12 +91,12 @@ module Zif
     die.times.map { rand(sides) + 1 }.inject(0) { |z, memo| memo + z }
   end
 
-  # DEPRECATED - Use Actions instead
-  def self.ease(t, total)
-    Math.sin(((t / total.to_f) * Math::PI) / 2.0)
-  end
-
   def self.random_name(type='unknown')
     "#{type}_#{Kernel.tick_count}_#{rand(100_000)}"
+  end
+
+  # Usually you want to use Actions instead
+  def self.ease(t, total)
+    Math.sin(((t / total.to_f) * Math::PI) / 2.0)
   end
 end

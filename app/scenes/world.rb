@@ -12,7 +12,6 @@ class World < ZifExampleScene
     @map = Zif::LayeredTileMap.new('map', 64, 64, 50, 50)
     @map.new_tiled_layer(:tiles)
     @map.new_active_layer(:avatar)
-    @map.layers[:avatar].should_render = true
     mark('#initialize: Map + layers created')
     @map.force_refresh
     @map.layers[:tiles].should_render = false
@@ -26,7 +25,7 @@ class World < ZifExampleScene
       @map.max_height
     )
 
-    @map.layers[:avatar].source_sprites = [@avatar]
+    @map.layers[:avatar].sprites << @avatar
 
     @ready = false
     @progress = Hash.new(0)
@@ -34,10 +33,10 @@ class World < ZifExampleScene
     puts "World#initialize: Initializing #{@map.logical_width}x#{@map.logical_height}"
     puts "  =#{@finished_at[:tiles] + 1} Tiles"
 
-    mark('#initialize: Nearly finished')
+    mark_and_print('#initialize: Nearly finished')
     initialize_tiles
 
-    mark('#initialize: Tiles initialized')
+    mark_and_print('#initialize: Tiles initialized')
   end
 
   # For loading bar
@@ -49,6 +48,7 @@ class World < ZifExampleScene
   # So this is a method for loading which is designed to prevent this and allow us to show a loading bar.
   # The idea is that we run this once per tick, several times until initialization is finished.
   def initialize_tiles
+    mark_and_print('#initialize_tiles: Begin')
     return if @ready
 
     %i[tiles].each do |kind| # stuff
@@ -129,7 +129,7 @@ class World < ZifExampleScene
 
     $gtk.args.outputs.static_sprites << @camera.layers
     # $gtk.args.outputs.static_labels  << @hud_labels
-    # puts "World#finish_initialization: Initialized World"
+    puts "World#finish_initialization: Initialized World"
   end
 
   def perform_tick
@@ -165,10 +165,12 @@ class World < ZifExampleScene
   end
 
   def prepare_scene
+    mark_and_print('#prepare_scene: Begin')
     super
     finish_initialization if @ready && @camera.nil?
 
     @avatar.run_animation_sequence(:fly)
+    mark_and_print('#prepare_scene: Complete')
   end
 
   # rubocop:disable Layout/LineLength

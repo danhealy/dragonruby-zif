@@ -9,33 +9,21 @@ module Zif
       @labels      = []
     end
 
-    # You want to use this, unless you're trying to zoom/pan.
-    # These attrs need to be set before we can display component sprites.
-    def view_actual_size!
-      @source_x = 0
-      @source_y = 0
-      @source_w = @w
-      @source_h = @h
-    end
-
     def source_rect
-      cur_rect = super
-
-      # The source attrs must be set to something... assume full size.
-      if cur_rect.any?(&:nil?)
-        view_actual_size!
-        cur_rect = super
-      end
-
-      cur_rect
+      view_actual_size! unless source_is_set?
+      super
     end
 
     def draw_override(ffi_draw)
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: begin")
       # Treat an alpha setting of 0 as an indication that it should be hidden, to match Sprite behavior
       return if @a.zero?
 
+      view_actual_size! unless source_is_set?
+
       x_zoom, y_zoom = zoom_factor
-      cur_source_rect = source_rect
+      cur_source_right = @source_x + @source_w
+      cur_source_top   = @source_y + @source_h
 
       # Since this "sprite" itself won't actually be drawn, we can use the positioning attributes to control the
       # contained sprites.
@@ -45,20 +33,33 @@ module Zif
       # source_w/h: extent of visible window.  Unfortunately we can't clip sprites in half using this method.
       #             Therefore, anything even *partially* visible will be *fully* drawn.
 
-      # puts "#{@name}: Begin drawing"
-      sprites.each do |sprite|
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing begin")
+      # puts "CompoundSprite(#{@name})#draw_override: Sprite drawing begin"
+
+      # Throwback to the days before Enumerable, for performance reasons
+      cur_sprite_idx = 0
+      total_sprite_length = sprites.count
+      while cur_sprite_idx < total_sprite_length
+        sprite = @sprites[cur_sprite_idx]
+        cur_sprite_idx += 1
         next if sprite.nil?
 
-        cur_rect = sprite.rect
+        x = sprite.x
+        y = sprite.y
+        w = sprite.w
+        h = sprite.h
 
-        # puts "#{@name}: #{sprite.name} #{cur_rect} #{cur_source_rect}"
-        next unless cur_rect.intersect_rect?(cur_source_rect, 0.1)
-
-        x, y, w, h = cur_rect
+        # This performs a little better than calling intersect_rect?
+        next if (
+          (x     > cur_source_right) ||
+          (y     > cur_source_top)   ||
+          (x + w < @source_x)        ||
+          (y + h < @source_y)
+        )
 
         ffi_draw.draw_sprite_3(
-          ((x - @source_x) * x_zoom) + @x,
-          ((y - @source_y) * y_zoom) + @y,
+          (x - @source_x) * x_zoom + @x,
+          (y - @source_y) * y_zoom + @y,
           w * x_zoom,
           h * y_zoom,
           sprite.path.s_or_default,
@@ -78,8 +79,9 @@ module Zif
           sprite.source_h
         )
       end
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing complete")
+      # puts "CompoundSprite(#{@name})#draw_override: Sprite drawing complete"
 
-      # puts "#{@name}: Drew sprites"
       labels.each do |label|
         # TODO: Skip if not in visible window
         ffi_draw.draw_label(
@@ -95,7 +97,7 @@ module Zif
           label.font.s_or_default(nil)
         )
       end
-      # puts "#{@name}: Drew labels"
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Label drawing complete")
     end
   end
 end

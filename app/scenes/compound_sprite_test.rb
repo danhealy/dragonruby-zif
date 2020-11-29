@@ -10,6 +10,7 @@ class CompoundSpriteTest < ZifExampleScene
     @next_scene = :ui_sample
 
     @compound_sprite = Zif::CompoundSprite.new.tap do |s|
+      s.name = "Test Sprite"
       s.x = 100
       s.y = 100
       s.w = 800
@@ -32,7 +33,7 @@ class CompoundSpriteTest < ZifExampleScene
       s.a = 30
     end
 
-    [[0, 50], [100, 150], [0, 250]].each do |pos|
+    @dragons = [[0, 50], [100, 150], [0, 250]].map do |pos|
       dragon = $game.services[:sprite_registry].construct('dragon_1').tap do |s|
         s.name = "dragon_#{pos.inspect}"
         s.x = pos[0]
@@ -72,7 +73,36 @@ class CompoundSpriteTest < ZifExampleScene
 
       dragon.run_animation_sequence(:fly)
 
-      @compound_sprite.sprites << dragon
+      dragon
+    end
+
+    @compound_sprite.sprites += @dragons
+
+    lead_dragon = @dragons[1]
+
+    50.times do |i|
+      _wait, layer = i.divmod(10)
+      pixie = $game.services[:sprite_registry].construct(:white_1).tap do |s|
+        s.x = lead_dragon.x
+        s.y = lead_dragon.y
+        s.w = 10
+        s.h = 10
+        s.source_x = 0
+        s.source_y = 0
+        s.source_w = 10
+        s.source_h = 10
+        s.a = 0
+        s.r, s.g, s.b = Zif.rand_rgb(100, 255)
+      end
+
+      # Start spraying
+      pixie.run(
+        pixie.delayed_action(rand.seconds) {
+          pixie_spray(pixie, layer)
+        }
+      )
+
+      @compound_sprite.sprites << pixie
     end
 
     dragon_label = Zif::Label.new('A Thunder of Dragons', 0, 1).tap do |label|
@@ -122,7 +152,7 @@ class CompoundSpriteTest < ZifExampleScene
   def prepare_scene
     super
 
-    @compound_sprite.sprites.each do |dragon|
+    @compound_sprite.sprites.each do |dragon| # and pixies
       $game.services[:action_service].register_actionable(dragon)
     end
     @compound_sprite.labels.each do |dragon_label|
@@ -146,11 +176,27 @@ class CompoundSpriteTest < ZifExampleScene
     @compound_sprite.source_w -= 100 if $gtk.args.inputs.keyboard.key_up.left
 
     # rubocop:disable Layout/LineLength
-    $gtk.args.outputs.labels << { x: 8, y: 100, text: 'Up/Down: Modify source_h.  Right/Left: Modify source_w.', r: 255, g: 255, b: 255, a: 255}
-    $gtk.args.outputs.labels << { x: 8, y: 80, text: "Compund Sprite: #{@compound_sprite.rect} -> #{@compound_sprite.source_rect}.  Zoom #{@compound_sprite.zoom_factor}", r: 255, g: 255, b: 255, a: 255}
+    $gtk.args.outputs.labels << { x: 4, y: 120, text: 'Up/Down: Modify source_h.  Right/Left: Modify source_w.', r: 255, g: 255, b: 255, a: 255}
+    $gtk.args.outputs.labels << { x: 4, y: 100, text: "Compund Sprite: #{@compound_sprite.rect} -> #{@compound_sprite.source_rect}.  Zoom #{@compound_sprite.zoom_factor}", r: 255, g: 255, b: 255, a: 255}
     # rubocop:enable Layout/LineLength
 
     mark('#perform_tick: Finished')
     super
+  end
+
+  def pixie_spray(pix, layer)
+    idx = rand(3)
+    dir = @dragons[idx].flip_horizontally ? 1 : -1
+
+    pix.x = @dragons[idx].center_x + (5 * layer) * dir
+    pix.y = @dragons[idx].center_y - 10
+    pix.a = 50
+    pix.run(pix.new_action({x: pix.x + ((rand(100) + 20) * dir)}, 2.seconds, :smooth_stop5))
+    pix.run(pix.new_action({y: pix.y + Zif.relative_rand(50)},   2.seconds, :smooth_stop5))
+    pix.run(
+      pix.fade_out(rand.seconds) {
+        pixie_spray(pix, layer)
+      }
+    )
   end
 end

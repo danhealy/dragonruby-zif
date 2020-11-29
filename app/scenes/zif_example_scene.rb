@@ -16,12 +16,17 @@ class ZifExampleScene < Zif::Scene
     # You can also do this when a scene is being changed away from, using the #unload_scene method.
     $game.services[:action_service].reset_actionables
     $game.services[:input_service].reset
+    tracer.clear_averages
     $gtk.args.outputs.static_sprites.clear
     $gtk.args.outputs.static_labels.clear
   end
 
   def perform_tick
     display_context_labels
+
+    if $gtk.args.inputs.keyboard.key_up.delete
+      $game.services[:tracer].clear_averages
+    end
 
     if $gtk.args.inputs.keyboard.key_up.pageup
       @pause_timer = !@pause_timer
@@ -38,9 +43,11 @@ class ZifExampleScene < Zif::Scene
   # rubocop:disable Layout/LineLength
   def display_context_labels
     color = {r: 255, g: 255, b: 255, a: 255}
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 8, text: "#{self.class.name}.  Press spacebar to transition to #{@next_scene}, or wait #{@scene_timer} ticks." }.merge(color)
-    $gtk.args.outputs.labels << { x: 8, y: 720 - 28, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
-    $gtk.args.outputs.labels << { x: 8, y: 60, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
+    $gtk.args.outputs.labels << { x: 4, y: 720 - 0, text: "#{self.class.name}.  Press spacebar to transition to #{@next_scene}, or wait #{@scene_timer} ticks." }.merge(color)
+    $gtk.args.outputs.labels << { x: 0, y: 720 - 20, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
+    $gtk.args.outputs.labels << { x: 4, y: 24, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
+    $gtk.args.outputs.labels << { x: 4, y: 44, text: "Max slowest mark: #{tracer&.slowest_max_mark}" }.merge(color)
+    $gtk.args.outputs.labels << { x: 4, y: 64, text: "Avg slowest mark: #{tracer&.slowest_avg_mark}" }.merge(color)
   end
   # rubocop:enable Layout/LineLength
 end

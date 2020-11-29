@@ -37,6 +37,11 @@ module Zif
       Action.new(self, *args, &block)
     end
 
+    # Empty action - just a wait and a callback
+    def delayed_action(wait, repeat=1, &block)
+      new_action({}, wait, :linear, :round, repeat, &block)
+    end
+
     # -----------------------
     # Some example factories:
     def bounce_forever_around(y=110, distance=15, duration=5.seconds)

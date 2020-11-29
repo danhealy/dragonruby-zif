@@ -10,11 +10,11 @@ module Zif
   #
   # As an example, you can have a "tiles" layer which gets redrawn only at the start of the game, an "interactive
   # objects" layer which gets redrawn whenever objects appear or disappear, and then an "avatar" layer which gets
-  # redrawn every time the avatar moves.  The advantage of using RenderTargets here is to keep the positioning
-  # consistent across all of the layers.  You can just pass all of the RT containing sprites to Camera and it will
-  # pan them all in unison.
+  # redrawn every time the avatar moves.  The advantage of using RenderTargets and CompoundSprites here is to keep the
+  # positioning consistent across all of the layers.  You can just pass all of the RT containing sprites to Camera and
+  # it will pan them all in unison.
   #
-  # You setup and configure these layers via #new_simple_layer and #new_tiled_layer.
+  # You setup and configure these layers via #new_simple_layer, #new_tiled_layer, etc.
   #
   # Performance notes:
   #  - Since the memory requirements here are based on the number of layers * area of each layer, consider other
@@ -25,9 +25,7 @@ module Zif
   #    hiccups if you do this often.  Try not to redraw RTs with lots of sprites while action is happening.
   class LayeredTileMap
     include Zif::Traceable
-    attr_accessor :target_name
-    attr_accessor :tile_width, :tile_height, :logical_width, :logical_height, :z
-    attr_accessor :layers
+    attr_accessor :target_name, :tile_width, :tile_height, :logical_width, :logical_height, :z, :layers
 
     # logical_ refers to integer multiples of tiles
     # Setup vars, setup render_targets
@@ -48,29 +46,35 @@ module Zif
       @tracer_service_name = :tracer
     end
 
+    def add_layer(name, layer)
+      @layers[name] = layer
+      @z += 1
+      return @layers[name]
+    end
+
     def new_active_layer(name)
-      @layers[name] = Zif::ActiveLayer.new(self, name, @z)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::ActiveLayer.new(self, name, @z))
     end
 
+    # clear_sprites_after_draw kind of replicates the behavior of outputs.sprites vs outputs.static_sprites
     def new_simple_layer(name, render_only_visible=false, clear_sprites_after_draw=false)
-      @layers[name] = Zif::SimpleLayer.new(self, name, @z, render_only_visible, clear_sprites_after_draw)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::SimpleLayer.new(self, name, @z, render_only_visible, clear_sprites_after_draw))
     end
 
-    # You really don't want clear_sprites_after_draw
     def new_tiled_layer(name, render_only_visible=false)
-      @layers[name] = Zif::TiledLayer.new(self, name, @z, render_only_visible)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::TiledLayer.new(self, name, @z, render_only_visible))
+    end
+
+    def new_active_tiled_layer(name)
+      add_layer(name, Zif::ActiveTiledLayer.new(self, name, @z))
     end
 
     def new_bitmasked_tiled_layer(name, render_only_visible=false)
-      @layers[name] = Zif::BitmaskedTiledLayer.new(self, name, @z, render_only_visible)
-      @z += 1
-      return @layers[name]
+      add_layer(name, Zif::BitmaskedTiledLayer.new(self, name, @z, render_only_visible))
+    end
+
+    def new_active_bitmasked_tiled_layer(name)
+      add_layer(name, Zif::ActiveBitmaskedTiledLayer.new(self, name, @z))
     end
 
     def max_width
@@ -118,7 +122,7 @@ module Zif
 
     def refresh
       @layers.each do |layer_name, layer|
-        mark("#refresh: Rerendering #{layer_name} at #{layer.containing_sprite.source_rect}")
+        mark("#refresh: Rerendering #{layer_name}")
         layer.rerender
         mark("#refresh: Rerendered #{layer_name}")
       end

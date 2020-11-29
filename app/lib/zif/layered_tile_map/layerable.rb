@@ -3,8 +3,8 @@ module Zif
   module Layerable
     attr_accessor :map, :layer_name, :z, :should_render
 
-    def add_positioned_sprite(sprite)
-      source_sprites << position_sprite(sprite, logical_x, logical_y)
+    def remove_positioned_sprite(sprite)
+      remove_sprite(sprite)
     end
 
     def position_sprite(sprite, logical_x, logical_y)
@@ -16,31 +16,47 @@ module Zif
       sprite
     end
 
-    # This only removes it from the data layer, you'll need to redraw to remove it visually
-    def remove_sprite(tile)
-      source_sprites.delete(tile)
-    end
-
     def target_layer_name
       "#{@map.target_name}_#{@layer_name}"
     end
 
     # This is not very performant with lots of sprites!  Consider using TiledLayer instead.
-    def visible_sprites(rect=containing_sprite.source_rect)
+    def visible_sprites(given_rect)
+      if given_rect.nil?
+        containing_sprite.view_actual_size! unless containing_sprite.source_is_set?
+        compare_left   = containing_sprite.source_x
+        compare_bottom = containing_sprite.source_y
+        compare_right  = compare_left   + containing_sprite.source_w
+        compare_top    = compare_bottom + containing_sprite.source_h
+      else
+        compare_left   = given_rect.x
+        compare_bottom = given_rect.y
+        compare_right  = compare_left   + given_rect.w
+        compare_top    = compare_bottom + given_rect.h
+      end
+
+      intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
+    end
+
+    def intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
+      # puts "Layerable#intersecting_sprites: #{@layer_name} #{source_sprites.length}"
       source_sprites.select do |sprite|
-        sprite.intersect_rect? rect
+        x = sprite.x
+        y = sprite.y
+        w = sprite.w
+        h = sprite.h
+        # puts "Layerable#intersecting_sprites: #{x} #{y} #{w} #{h}"
+        !(
+          (x     > compare_right)  ||
+          (y     > compare_top)    ||
+          (x + w < compare_left)   ||
+          (y + h < compare_bottom)
+        )
       end
     end
 
-    # Returns an array of colliding sprites, and non-colliding sprites that were within the visible area
-    def collisions(rect)
-      remain = visible_sprites(rect).to_a
-      coll   = remain.select { |item| item.intersect_rect? rect }
-      [coll, coll - remain]
-    end
-
     def clicked?(point, kind=:up)
-      relative_point = Zif.add_positions(
+      x, y = Zif.add_positions(
         Zif.position_math(
           :mult,
           point,
@@ -52,15 +68,16 @@ module Zif
         ),
         containing_sprite.source_xy
       )
-      visible_sprites(
-        relative_point + [1, 1]
-      ).reverse_each.find do |sprite|
-        sprite.respond_to?(:clicked?) && sprite.clicked?(relative_point, kind)
+
+      # puts "Layerable#clicked?(#{point}): #{@layer_name} #{x} #{y}"
+      intersecting_sprites(x, y, x, y).reverse_each.find do |sprite|
+        # puts "  clicked? -> #{sprite}"
+        sprite.respond_to?(:clicked?) && sprite.clicked?([x, y], kind)
       end
     end
 
     def exclude_from_serialize
-      %w[source_sprites sprites primitives]
+      %w[sprites primitives]
     end
   end
 end
