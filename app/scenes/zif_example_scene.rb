@@ -24,9 +24,7 @@ class ZifExampleScene < Zif::Scene
   def perform_tick
     display_context_labels
 
-    if $gtk.args.inputs.keyboard.key_up.delete
-      $game.services[:tracer].clear_averages
-    end
+    $game.services[:tracer].clear_averages if $gtk.args.inputs.keyboard.key_up.delete
 
     if $gtk.args.inputs.keyboard.key_up.pageup
       @pause_timer = !@pause_timer

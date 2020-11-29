@@ -116,11 +116,13 @@ module Zif
     end
   end
 
+  # The above, built on top of a RenderTarget
   class BitmaskedTiledLayer < SimpleLayer
     include Tileable
     include Bitmaskable
   end
 
+  # The above, built on top of a CompoundSprite
   class ActiveBitmaskedTiledLayer < ActiveLayer
     include Tileable
     include Bitmaskable

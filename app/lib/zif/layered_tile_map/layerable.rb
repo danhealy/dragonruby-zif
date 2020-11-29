@@ -40,13 +40,13 @@ module Zif
 
     def intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
       # puts "Layerable#intersecting_sprites: #{@layer_name} #{source_sprites.length}"
-      source_sprites.select do |sprite|
+      source_sprites.reject do |sprite|
         x = sprite.x
         y = sprite.y
         w = sprite.w
         h = sprite.h
         # puts "Layerable#intersecting_sprites: #{x} #{y} #{w} #{h}"
-        !(
+        (
           (x     > compare_right)  ||
           (y     > compare_top)    ||
           (x + w < compare_left)   ||

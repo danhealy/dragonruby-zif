@@ -1,4 +1,5 @@
 # Demonstrating usage of a CompoundSprite with actions
+# rubocop:disable Metrics/MethodLength
 class CompoundSpriteTest < ZifExampleScene
   include Zif::Traceable
 
@@ -10,7 +11,7 @@ class CompoundSpriteTest < ZifExampleScene
     @next_scene = :ui_sample
 
     @compound_sprite = Zif::CompoundSprite.new.tap do |s|
-      s.name = "Test Sprite"
+      s.name = 'Test Sprite'
       s.x = 100
       s.y = 100
       s.w = 800
@@ -97,9 +98,9 @@ class CompoundSpriteTest < ZifExampleScene
 
       # Start spraying
       pixie.run(
-        pixie.delayed_action(rand.seconds) {
+        pixie.delayed_action(rand.seconds) do
           pixie_spray(pixie, layer)
-        }
+        end
       )
 
       @compound_sprite.sprites << pixie
@@ -191,12 +192,20 @@ class CompoundSpriteTest < ZifExampleScene
     pix.x = @dragons[idx].center_x + (5 * layer) * dir
     pix.y = @dragons[idx].center_y - 10
     pix.a = 50
-    pix.run(pix.new_action({x: pix.x + ((rand(100) + 20) * dir)}, 2.seconds, :smooth_stop5))
-    pix.run(pix.new_action({y: pix.y + Zif.relative_rand(50)},   2.seconds, :smooth_stop5))
+    pix.run(pix.new_action(
+              {
+                x:     pix.x + ((rand(100) + 20) * dir),
+                angle: rand(360 * 5)
+              },
+              2.seconds,
+              :smooth_stop5
+            ))
+    pix.run(pix.new_action({y: pix.y + Zif.relative_rand(50)}, 2.seconds, :smooth_stop5))
     pix.run(
-      pix.fade_out(rand.seconds) {
+      pix.fade_out(rand.seconds) do
         pixie_spray(pix, layer)
-      }
+      end
     )
   end
 end
+# rubocop:enable Metrics/MethodLength

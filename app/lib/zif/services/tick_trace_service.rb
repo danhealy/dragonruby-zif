@@ -71,9 +71,9 @@ module Zif
       @averages[label][:max] = [@averages[label][:max], delta].max
 
       if @averages[label][:avg]
-        @averages[label][:avg] = (
+        @averages[label][:avg] =
           ((@averages[label][:avg] * @averages[label][:count]) + delta).fdiv(@averages[label][:count] + 1)
-        )
+
       else
         @averages[label][:avg] = delta
       end
@@ -88,9 +88,9 @@ module Zif
       @last_tick_ms = format_ms(elapsed)
 
       if @measure_averages
-        avg_culprit, avg_culprit_time = @averages.max_by { |label, time| time[:avg] }
+        avg_culprit, avg_culprit_time = @averages.max_by { |_label, time| time[:avg] }
         @slowest_avg_mark = "'#{avg_culprit}' #{format_ms(avg_culprit_time[:avg])}"
-        max_culprit, max_culprit_time = @averages.max_by { |label, time| time[:max] }
+        max_culprit, max_culprit_time = @averages.max_by { |_label, time| time[:max] }
         @slowest_max_mark = "'#{max_culprit}' #{format_ms(max_culprit_time[:max])}"
       end
 

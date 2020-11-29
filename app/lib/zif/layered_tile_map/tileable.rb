@@ -3,7 +3,7 @@ module Zif
   # Modifies the layer to be based on a 2d source_sprites array.
   module Tileable
     def tile_pos_to_sprite_index(logical_y, logical_x)
-      (logical_y*@map.logical_width)+logical_x
+      (logical_y * @map.logical_width) + logical_x
     end
 
     def tile(logical_y, logical_x)

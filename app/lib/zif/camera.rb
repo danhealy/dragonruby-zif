@@ -260,12 +260,12 @@ module Zif
     end
 
     def zoom_out(point=(@last_follow || center))
-      @zoom_step = [@zoom_step+1, @zoom_steps.length - 1].min
+      @zoom_step = [@zoom_step + 1, @zoom_steps.length - 1].min
       zoom_to(@zoom_steps[@zoom_step], point)
     end
 
     def zoom_in(point=(@last_follow || center))
-      @zoom_step = [@zoom_step-1, 0].max
+      @zoom_step = [@zoom_step - 1, 0].max
       zoom_to(@zoom_steps[@zoom_step], point)
     end
 

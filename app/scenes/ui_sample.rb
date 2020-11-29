@@ -241,7 +241,6 @@ class UISample < ZifExampleScene
     update_progress_bar
     update_interactable_button
 
-
     mark('#perform_tick: finished updates')
     finished = super
 

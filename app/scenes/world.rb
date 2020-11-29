@@ -129,7 +129,7 @@ class World < ZifExampleScene
 
     $gtk.args.outputs.static_sprites << @camera.layers
     # $gtk.args.outputs.static_labels  << @hud_labels
-    puts "World#finish_initialization: Initialized World"
+    puts 'World#finish_initialization: Initialized World'
   end
 
   def perform_tick

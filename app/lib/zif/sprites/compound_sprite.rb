@@ -50,12 +50,11 @@ module Zif
         h = sprite.h
 
         # This performs a little better than calling intersect_rect?
-        next if (
+        next if
           (x     > cur_source_right) ||
           (y     > cur_source_top)   ||
           (x + w < @source_x)        ||
           (y + h < @source_y)
-        )
 
         ffi_draw.draw_sprite_3(
           (x - @source_x) * x_zoom + @x,
