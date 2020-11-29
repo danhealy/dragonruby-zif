@@ -10,7 +10,8 @@
 #   end
 module Zif
   # A mixin for automatically definining #serialize based on instance vars with setter methods
-  # **DO NOT USE THIS** if you have circular references in ivars (Foo.bar <-> Bar.foo)
+  # If you have circular references in ivars (Foo.bar <-> Bar.foo), make sure one of the classes overrides
+  # #exclude_from_serialize and specifies the attr.
   module Serializable
     def inspect
       serialize.to_s
@@ -31,6 +32,7 @@ module Zif
       attrs
     end
 
+    # Override this method to exclude attrs from serialization / printing
     def exclude_from_serialize
       %w[args] # Too much spam
     end

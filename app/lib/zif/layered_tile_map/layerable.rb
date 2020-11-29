@@ -3,11 +3,6 @@ module Zif
   module Layerable
     attr_accessor :map, :layer_name, :z, :should_render
 
-    def add_positioned_sprite(logical_x, logical_y, sprite)
-      puts "#{@layer_name}: Layerable#add_positioned_sprite"
-      source_sprites << position_sprite(sprite, logical_x, logical_y)
-    end
-
     def remove_positioned_sprite(sprite)
       remove_sprite(sprite)
     end
@@ -19,11 +14,6 @@ module Zif
       sprite.logical_x = logical_x
       sprite.logical_y = logical_y
       sprite
-    end
-
-    # This only removes it from the data layer, you'll need to redraw to remove it visually
-    def remove_sprite(tile)
-      source_sprites.delete(tile)
     end
 
     def target_layer_name
@@ -49,12 +39,13 @@ module Zif
     end
 
     def intersecting_sprites(compare_left, compare_bottom, compare_right, compare_top)
+      # puts "Layerable#intersecting_sprites: #{@layer_name} #{source_sprites.length}"
       source_sprites.select do |sprite|
         x = sprite.x
         y = sprite.y
         w = sprite.w
         h = sprite.h
-
+        # puts "Layerable#intersecting_sprites: #{x} #{y} #{w} #{h}"
         !(
           (x     > compare_right)  ||
           (y     > compare_top)    ||
@@ -77,13 +68,16 @@ module Zif
         ),
         containing_sprite.source_xy
       )
+
+      # puts "Layerable#clicked?(#{point}): #{@layer_name} #{x} #{y}"
       intersecting_sprites(x, y, x, y).reverse_each.find do |sprite|
+        # puts "  clicked? -> #{sprite}"
         sprite.respond_to?(:clicked?) && sprite.clicked?([x, y], kind)
       end
     end
 
     def exclude_from_serialize
-      %w[source_sprites sprites primitives]
+      %w[sprites primitives]
     end
   end
 end

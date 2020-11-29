@@ -19,7 +19,18 @@ module Zif
     end
 
     def reinitialize_sprites
-      self.source_sprites = []
+      @source_sprites = []
+      @sprites = []
+    end
+
+    def add_positioned_sprite(logical_x, logical_y, sprite)
+      # puts "SimpleLayer#add_positioned_sprite: #{logical_x} #{logical_y}"
+      @source_sprites << position_sprite(sprite, logical_x, logical_y)
+    end
+
+    # This only removes it from the data layer, you'll need to redraw to remove it visually
+    def remove_sprite(sprite)
+      @source_sprites.delete(sprite)
     end
 
     def rerender

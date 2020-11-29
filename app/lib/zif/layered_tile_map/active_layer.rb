@@ -29,16 +29,20 @@ module Zif
       self
     end
 
+    def add_positioned_sprite(logical_x, logical_y, sprite)
+      # puts "ActiveLayer#add_positioned_sprite: #{logical_x} #{logical_y}"
+      @sprites << position_sprite(sprite, logical_x, logical_y)
+    end
+
+    def remove_sprite(sprite)
+      @sprites.delete(sprite)
+    end
+
     def source_sprites
       @sprites
     end
 
-    def source_sprites=(new_sprites)
-      @sprites = new_sprites
-    end
-
     def reinitialize_sprites
-      # puts "#{@layer_name}: ActiveLayer reinitialize_sprites"
       @sprites = []
     end
 

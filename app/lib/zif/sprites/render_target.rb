@@ -56,7 +56,7 @@ module Zif
     # This is the only way to force any changes to the RT.  You must call this any time you want to redraw @sprites, etc
     def redraw
       # puts "RenderTarget#redraw: #{@name} #{@width} #{@height} #{@sprites.length} sprites, #{@labels.length} labels"
-      # $services[:tracer].mark("#redraw: #{@name} Begin")
+      # $services&.named(:tracer)&..mark("#redraw: #{@name} Begin")
       targ = $gtk.args.outputs[@name]
       targ.width  = @width
       targ.height = @height
@@ -67,7 +67,7 @@ module Zif
       targ.primitives << @primitives if @primitives&.any?
       targ.sprites    << @sprites    if @sprites&.any?
       targ.labels     << @labels     if @labels&.any?
-      # $services[:tracer].mark("#redraw: #{@name} Complete")
+      # $services&.named(:tracer)&..mark("#redraw: #{@name} Complete")
     end
 
     def clicked?(point, kind=:up)
@@ -141,23 +141,23 @@ module Zif
     end
 
     def redraw_from_buffer(sprites=[], cut_rect=nil, additional_containing_sprites=[])
-      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} Begin")
+      # $services&.named(:tracer)&..mark("RenderTarget#redraw_from_buffer: #{@name} Begin")
       source_buffer_sprites = cut_rect ? cut_containing_sprites(cut_rect) : [full_containing_sprite]
 
       set_inactive_buffer_name unless @inactive_buffer_name
       # puts "RenderTarget#redraw_from_buffer: name: #{@name}, inactive: #{@inactive_buffer_name}"
       # puts "RenderTarget#redraw_from_buffer: cut_rect: #{cut_rect}, source: #{source_buffer_sprites.inspect}"
 
-      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} Sprites")
+      # $services&.named(:tracer)&..mark("RenderTarget#redraw_from_buffer: #{@name} Sprites")
       targ = $gtk.args.outputs[@inactive_buffer_name]
       targ.width  = @width
       targ.height = @height
-      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} HW")
+      # $services&.named(:tracer)&..mark("RenderTarget#redraw_from_buffer: #{@name} HW")
       targ.background_color = @bg_color
       targ.sprites << [source_buffer_sprites] + sprites
 
       switch_buffer(additional_containing_sprites)
-      $services[:tracer].mark("RenderTarget#redraw_from_buffer: #{@name} End")
+      # $services&.named(:tracer)&..mark("RenderTarget#redraw_from_buffer: #{@name} End")
     end
 
     # Expects xywh

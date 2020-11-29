@@ -25,7 +25,7 @@ class World < ZifExampleScene
       @map.max_height
     )
 
-    @map.layers[:avatar].source_sprites = [@avatar]
+    @map.layers[:avatar].sprites << @avatar
 
     @ready = false
     @progress = Hash.new(0)

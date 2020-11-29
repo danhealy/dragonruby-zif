@@ -15,7 +15,7 @@ module Zif
     end
 
     def draw_override(ffi_draw)
-      $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: begin")
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: begin")
       # Treat an alpha setting of 0 as an indication that it should be hidden, to match Sprite behavior
       return if @a.zero?
 
@@ -33,7 +33,7 @@ module Zif
       # source_w/h: extent of visible window.  Unfortunately we can't clip sprites in half using this method.
       #             Therefore, anything even *partially* visible will be *fully* drawn.
 
-      $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing begin")
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing begin")
       # puts "CompoundSprite(#{@name})#draw_override: Sprite drawing begin"
 
       # Throwback to the days before Enumerable, for performance reasons
@@ -79,7 +79,7 @@ module Zif
           sprite.source_h
         )
       end
-      $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing complete")
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Sprite drawing complete")
       # puts "CompoundSprite(#{@name})#draw_override: Sprite drawing complete"
 
       labels.each do |label|
@@ -97,7 +97,7 @@ module Zif
           label.font.s_or_default(nil)
         )
       end
-      $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Label drawing complete")
+      # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Label drawing complete")
     end
   end
 end
