@@ -8,7 +8,7 @@ module Zif
 
     def clicked?(point, kind=:up)
       # puts "Clickable:#{@name}: clicked? #{kind} #{kind.class} #{point} -> #{rect} = #{point.inside_rect?(self)}"
-      return nil if (kind == :down) && !point.inside_rect?(rect)
+      return nil if (kind == :down) && !point.inside_rect?(self)
 
       click_handler = case kind
                       when :up
