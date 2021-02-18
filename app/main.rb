@@ -11,6 +11,8 @@ require 'app/lib/zif/trace/traceable.rb'
 # Expects to be included in a Sprite subclass
 require 'app/lib/zif/sprites/assignable.rb'
 
+require 'app/lib/zif/sprites/clickable.rb'
+
 # Depends on serializable.rb
 require 'app/lib/zif/actions/action.rb'
 require 'app/lib/zif/scenes/scene.rb'

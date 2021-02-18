@@ -6,6 +6,7 @@ module Zif
     include Zif::Serializable
     include Zif::Actionable
     include Zif::Animatable
+    include Zif::Clickable
     attr_sprite
 
     attr_accessor :name
@@ -16,8 +17,6 @@ module Zif
     # If this sprite is a parent *container* for a Render Target, reference it here
     # Not for sprites which are *children* of a Render Target!
     attr_accessor :render_target
-
-    attr_accessor :on_mouse_down, :on_mouse_up, :on_mouse_changed
 
     def initialize(name=Zif.random_name('sprite'))
       @name      = name
@@ -47,27 +46,8 @@ module Zif
       @a = 0
     end
 
-    def absorb_click?
-      on_mouse_up || on_mouse_down || on_mouse_changed
-    end
-
     def clicked?(point, kind=:up)
-      # puts "Sprite:#{@name}: clicked? #{kind} #{kind.class} #{point} -> #{rect} = #{point.inside_rect?(rect)}"
-      return nil if (kind == :down) && !point.inside_rect?(rect)
-
-      click_handler = case kind
-                      when :up
-                        on_mouse_up
-                      when :down
-                        on_mouse_down
-                      when :changed
-                        on_mouse_changed
-                      end
-
-      # puts "Sprite:#{@name}: click handler: #{kind} #{click_handler}"
-
-      click_handler&.call(self, point)
-      return self unless @render_target && !absorb_click?
+      return super(point, kind) unless @render_target && !absorb_click?
 
       @render_target.clicked?(point, kind)
     end
