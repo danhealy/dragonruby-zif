@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Zif
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (Z)</a> &raquo;
+    
+    
+    <span class="title">Zif</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Zif
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/zif.rb<span class="defines">,<br />
+  app/lib/zif/game.rb,<br /> app/lib/zif/camera.rb,<br /> app/lib/zif/scenes/hud.rb,<br /> app/lib/zif/labels/label.rb,<br /> app/lib/zif/scenes/scene.rb,<br /> app/lib/zif/actions/action.rb,<br /> app/lib/zif/sprites/sprite.rb,<br /> app/lib/zif/trace/traceable.rb,<br /> app/lib/zif/actions/sequence.rb,<br /> app/lib/zif/panels/nine_panel.rb,<br /> app/lib/zif/services/services.rb,<br /> app/lib/zif/actions/actionable.rb,<br /> app/lib/zif/actions/animatable.rb,<br /> app/lib/zif/sprites/assignable.rb,<br /> app/lib/zif/sprites/serializable.rb,<br /> app/lib/zif/sprites/render_target.rb,<br /> app/lib/zif/panels/nine_panel_edge.rb,<br /> app/lib/zif/services/input_service.rb,<br /> app/lib/zif/services/action_service.rb,<br /> app/lib/zif/sprites/compound_sprite.rb,<br /> app/lib/zif/services/sprite_registry.rb,<br /> app/lib/zif/layered_tile_map/tileable.rb,<br /> app/lib/zif/layered_tile_map/layerable.rb,<br /> app/lib/zif/components/two_stage_button.rb,<br /> app/lib/zif/services/tick_trace_service.rb,<br /> app/lib/zif/layered_tile_map/tiled_layer.rb,<br /> app/lib/zif/layered_tile_map/active_layer.rb,<br /> app/lib/zif/layered_tile_map/simple_layer.rb,<br /> app/lib/zif/layered_tile_map/layered_tile_map.rb,<br /> app/lib/zif/layered_tile_map/bitmasked_tiled_layer.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Throw this file into your app folder, like app/lib/serializable.rb</p>
+
+<p>In your main.rb or wherever you require files:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/serializable.rb</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>In each class you want to automatically serialize:</p>
+
+<pre class="code ruby"><code class="ruby">class Foo
+  include Serializable
+  ...
+end
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Zif/Actionable.html" title="Zif::Actionable (module)">Actionable</a></span>, <span class='object_link'><a href="Zif/Animatable.html" title="Zif::Animatable (module)">Animatable</a></span>, <span class='object_link'><a href="Zif/Assignable.html" title="Zif::Assignable (module)">Assignable</a></span>, <span class='object_link'><a href="Zif/Bitmaskable.html" title="Zif::Bitmaskable (module)">Bitmaskable</a></span>, <span class='object_link'><a href="Zif/Layerable.html" title="Zif::Layerable (module)">Layerable</a></span>, <span class='object_link'><a href="Zif/Serializable.html" title="Zif::Serializable (module)">Serializable</a></span>, <span class='object_link'><a href="Zif/Tileable.html" title="Zif::Tileable (module)">Tileable</a></span>, <span class='object_link'><a href="Zif/Traceable.html" title="Zif::Traceable (module)">Traceable</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Zif/Action.html" title="Zif::Action (class)">Action</a></span>, <span class='object_link'><a href="Zif/ActionService.html" title="Zif::ActionService (class)">ActionService</a></span>, <span class='object_link'><a href="Zif/ActiveBitmaskedTiledLayer.html" title="Zif::ActiveBitmaskedTiledLayer (class)">ActiveBitmaskedTiledLayer</a></span>, <span class='object_link'><a href="Zif/ActiveLayer.html" title="Zif::ActiveLayer (class)">ActiveLayer</a></span>, <span class='object_link'><a href="Zif/ActiveTiledLayer.html" title="Zif::ActiveTiledLayer (class)">ActiveTiledLayer</a></span>, <span class='object_link'><a href="Zif/BitmaskedTiledLayer.html" title="Zif::BitmaskedTiledLayer (class)">BitmaskedTiledLayer</a></span>, <span class='object_link'><a href="Zif/Camera.html" title="Zif::Camera (class)">Camera</a></span>, <span class='object_link'><a href="Zif/CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span>, <span class='object_link'><a href="Zif/Game.html" title="Zif::Game (class)">Game</a></span>, <span class='object_link'><a href="Zif/Hud.html" title="Zif::Hud (class)">Hud</a></span>, <span class='object_link'><a href="Zif/InputService.html" title="Zif::InputService (class)">InputService</a></span>, <span class='object_link'><a href="Zif/Label.html" title="Zif::Label (class)">Label</a></span>, <span class='object_link'><a href="Zif/LayeredTileMap.html" title="Zif::LayeredTileMap (class)">LayeredTileMap</a></span>, <span class='object_link'><a href="Zif/NinePanel.html" title="Zif::NinePanel (class)">NinePanel</a></span>, <span class='object_link'><a href="Zif/NinePanelEdge.html" title="Zif::NinePanelEdge (class)">NinePanelEdge</a></span>, <span class='object_link'><a href="Zif/RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>, <span class='object_link'><a href="Zif/Scene.html" title="Zif::Scene (class)">Scene</a></span>, <span class='object_link'><a href="Zif/Sequence.html" title="Zif::Sequence (class)">Sequence</a></span>, <span class='object_link'><a href="Zif/Services.html" title="Zif::Services (class)">Services</a></span>, <span class='object_link'><a href="Zif/SimpleLayer.html" title="Zif::SimpleLayer (class)">SimpleLayer</a></span>, <span class='object_link'><a href="Zif/Sprite.html" title="Zif::Sprite (class)">Sprite</a></span>, <span class='object_link'><a href="Zif/SpriteRegistry.html" title="Zif::SpriteRegistry (class)">SpriteRegistry</a></span>, <span class='object_link'><a href="Zif/TickTraceService.html" title="Zif::TickTraceService (class)">TickTraceService</a></span>, <span class='object_link'><a href="Zif/TiledLayer.html" title="Zif::TiledLayer (class)">TiledLayer</a></span>, <span class='object_link'><a href="Zif/TwoStageButton.html" title="Zif::TwoStageButton (class)">TwoStageButton</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_positions-class_method" title="add_positions (class method)">.<strong>add_positions</strong>(a, b)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#boomerang-class_method" title="boomerang (class method)">.<strong>boomerang</strong>(i, max)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#distance-class_method" title="distance (class method)">.<strong>distance</strong>(x1, y1, x2, y2)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ease-class_method" title="ease (class method)">.<strong>ease</strong>(t, total)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Usually you want to use Actions instead.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hsv_to_rgb-class_method" title="hsv_to_rgb (class method)">.<strong>hsv_to_rgb</strong>(h, s, v)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><a href="http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically">martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically</a> Ranges 0-359, 0-100, 0-100.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position_math-class_method" title="position_math (class method)">.<strong>position_math</strong>(op = :plus, a = [1, 1], b = [2, 3])  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Example =&gt; [1+2, 1+3] =&gt; [3, 4].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#radian_angle_between_points-class_method" title="radian_angle_between_points (class method)">.<strong>radian_angle_between_points</strong>(x1, y1, x2, y2)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rand_rgb-class_method" title="rand_rgb (class method)">.<strong>rand_rgb</strong>(base, max)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#random_name-class_method" title="random_name (class method)">.<strong>random_name</strong>(type = &#39;unknown&#39;)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#relative_rand-class_method" title="relative_rand (class method)">.<strong>relative_rand</strong>(x)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#roll-class_method" title="roll (class method)">.<strong>roll</strong>(given_dice = {dice: 4, sides: 16, modifier: 2})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Example =&gt; 4d16+2.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#roll_raw-class_method" title="roll_raw (class method)">.<strong>roll_raw</strong>(die = 4, sides = 16)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Example =&gt; 4d16.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sub_positions-class_method" title="sub_positions (class method)">.<strong>sub_positions</strong>(a, b)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_positions-class_method">
+  
+    .<strong>add_positions</strong>(a, b)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_positions'>add_positions</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_position_math'>position_math</span><span class='lparen'>(</span><span class='symbol'>:plus</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="boomerang-class_method">
+  
+    .<strong>boomerang</strong>(i, max)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+3
+4
+5
+6
+7</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 3</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_boomerang'>boomerang</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_max'>max</span>
+
+  <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_max'>max</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>-</span> <span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="distance-class_method">
+  
+    .<strong>distance</strong>(x1, y1, x2, y2)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_distance'>distance</span><span class='lparen'>(</span><span class='id identifier rubyid_x1'>x1</span><span class='comma'>,</span> <span class='id identifier rubyid_y1'>y1</span><span class='comma'>,</span> <span class='id identifier rubyid_x2'>x2</span><span class='comma'>,</span> <span class='id identifier rubyid_y2'>y2</span><span class='rparen'>)</span>
+  <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sqrt'>sqrt</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_x2'>x2</span> <span class='op'>-</span> <span class='id identifier rubyid_x1'>x1</span><span class='rparen'>)</span><span class='op'>**</span><span class='int'>2</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_y2'>y2</span> <span class='op'>-</span> <span class='id identifier rubyid_y1'>y1</span><span class='rparen'>)</span><span class='op'>**</span><span class='int'>2</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ease-class_method">
+  
+    .<strong>ease</strong>(t, total)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Usually you want to use Actions instead</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span><span class='comma'>,</span> <span class='id identifier rubyid_total'>total</span><span class='rparen'>)</span>
+  <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sin'>sin</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span> <span class='op'>/</span> <span class='id identifier rubyid_total'>total</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='const'>Math</span><span class='op'>::</span><span class='const'>PI</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>2.0</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hsv_to_rgb-class_method">
+  
+    .<strong>hsv_to_rgb</strong>(h, s, v)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p><a href="http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically">martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically</a> Ranges 0-359, 0-100, 0-100</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hsv_to_rgb'>hsv_to_rgb</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='id identifier rubyid_s'>s</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>359</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>360</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>100</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_v'>v</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>100</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_h_i'>h_i</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span> <span class='op'>*</span> <span class='int'>6</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+
+  <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='id identifier rubyid_h'>h</span> <span class='op'>*</span> <span class='int'>6</span> <span class='op'>-</span> <span class='id identifier rubyid_h_i'>h_i</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>*</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>*</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_f'>f</span> <span class='op'>*</span> <span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_t'>t</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>*</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_f'>f</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
+
+  <span class='kw'>case</span> <span class='id identifier rubyid_h_i'>h_i</span>
+  <span class='kw'>when</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+    <span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='id identifier rubyid_t'>t</span>
+    <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+  <span class='kw'>when</span> <span class='int'>1</span>
+    <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_q'>q</span>
+    <span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+    <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+  <span class='kw'>when</span> <span class='int'>2</span>
+    <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+    <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_t'>t</span>
+  <span class='kw'>when</span> <span class='int'>3</span>
+    <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='id identifier rubyid_q'>q</span>
+    <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+  <span class='kw'>when</span> <span class='int'>4</span>
+    <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_t'>t</span>
+    <span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+  <span class='kw'>when</span> <span class='int'>5</span>
+    <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+    <span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='id identifier rubyid_q'>q</span>
+  <span class='kw'>end</span>
+  <span class='lbracket'>[</span><span class='lparen'>(</span><span class='id identifier rubyid_r'>r</span> <span class='op'>*</span> <span class='int'>255</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_g'>g</span> <span class='op'>*</span> <span class='int'>255</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_b'>b</span> <span class='op'>*</span> <span class='int'>255</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position_math-class_method">
+  
+    .<strong>position_math</strong>(op = :plus, a = [1, 1], b = [2, 3])  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Example =&gt; [1+2, 1+3] =&gt; [3, 4]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_position_math'>position_math</span><span class='lparen'>(</span><span class='id identifier rubyid_op'>op</span><span class='op'>=</span><span class='symbol'>:plus</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='op'>=</span><span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='lbracket'>[</span><span class='int'>2</span><span class='comma'>,</span> <span class='int'>3</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span>
+    <span class='id identifier rubyid_a'>a</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_op'>op</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_a'>a</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_op'>op</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="radian_angle_between_points-class_method">
+  
+    .<strong>radian_angle_between_points</strong>(x1, y1, x2, y2)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_radian_angle_between_points'>radian_angle_between_points</span><span class='lparen'>(</span><span class='id identifier rubyid_x1'>x1</span><span class='comma'>,</span> <span class='id identifier rubyid_y1'>y1</span><span class='comma'>,</span> <span class='id identifier rubyid_x2'>x2</span><span class='comma'>,</span> <span class='id identifier rubyid_y2'>y2</span><span class='rparen'>)</span>
+  <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_atan2'>atan2</span><span class='lparen'>(</span><span class='id identifier rubyid_x2'>x2</span> <span class='op'>-</span> <span class='id identifier rubyid_x1'>x1</span><span class='comma'>,</span> <span class='id identifier rubyid_y2'>y2</span> <span class='op'>-</span> <span class='id identifier rubyid_y1'>y1</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rand_rgb-class_method">
+  
+    .<strong>rand_rgb</strong>(base, max)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rand_rgb'>rand_rgb</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
+  <span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_base'>base</span> <span class='op'>+</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_max'>max</span> <span class='op'>-</span> <span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="random_name-class_method">
+  
+    .<strong>random_name</strong>(type = &#39;unknown&#39;)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_random_name'>random_name</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span><span class='embexpr_end'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>100_000</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="relative_rand-class_method">
+  
+    .<strong>relative_rand</strong>(x)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_relative_rand'>relative_rand</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="roll-class_method">
+  
+    .<strong>roll</strong>(given_dice = {dice: 4, sides: 16, modifier: 2})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Example =&gt; 4d16+2</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll'>roll</span><span class='lparen'>(</span><span class='id identifier rubyid_given_dice'>given_dice</span><span class='op'>=</span><span class='lbrace'>{</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='comma'>,</span> <span class='label'>modifier:</span> <span class='int'>2</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_roll_raw'>roll_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_given_dice'>given_dice</span><span class='lbracket'>[</span><span class='symbol'>:dice</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_given_dice'>given_dice</span><span class='lbracket'>[</span><span class='symbol'>:sides</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_given_dice'>given_dice</span><span class='lbracket'>[</span><span class='symbol'>:modifier</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="roll_raw-class_method">
+  
+    .<strong>roll_raw</strong>(die = 4, sides = 16)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Example =&gt; 4d16</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_raw'>roll_raw</span><span class='lparen'>(</span><span class='id identifier rubyid_die'>die</span><span class='op'>=</span><span class='int'>4</span><span class='comma'>,</span> <span class='id identifier rubyid_sides'>sides</span><span class='op'>=</span><span class='int'>16</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_die'>die</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_z'>z</span><span class='comma'>,</span> <span class='id identifier rubyid_memo'>memo</span><span class='op'>|</span> <span class='id identifier rubyid_memo'>memo</span> <span class='op'>+</span> <span class='id identifier rubyid_z'>z</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sub_positions-class_method">
+  
+    .<strong>sub_positions</strong>(a, b)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sub_positions'>sub_positions</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_position_math'>position_math</span><span class='lparen'>(</span><span class='symbol'>:minus</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Jan  3 16:59:25 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

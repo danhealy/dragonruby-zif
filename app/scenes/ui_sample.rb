@@ -122,8 +122,8 @@ class UISample < ZifExampleScene
     @changing_button.run(
       Zif::Sequence.new(
         [
-          @changing_button.new_action({width: 420}, 2.seconds, :linear),
-          @changing_button.new_action({width: 20},  2.seconds, :linear)
+          @changing_button.new_action({width: 420}, duration: 2.seconds, easing: :linear),
+          @changing_button.new_action({width: 20},  duration: 2.seconds, easing: :linear)
         ],
         :forever
       )
@@ -145,9 +145,9 @@ class UISample < ZifExampleScene
       Zif::Sequence.new(
         [
           # Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
-          @dragon.new_action({x: 1000}, 1.seconds, :smooth_start) { @dragon.flip_horizontally = true },
+          @dragon.new_action({x: 1000}, duration: 1.seconds, easing: :smooth_start) { @dragon.flip_horizontally = true },
           # Move from the new position (1000x) back to the start 600x over 2 seconds, stopping slowly, then flip again
-          @dragon.new_action({x: 600}, 2.seconds, :smooth_stop) { @dragon.flip_horizontally = false }
+          @dragon.new_action({x: 600}, duration: 2.seconds, easing: :smooth_stop) { @dragon.flip_horizontally = false }
         ],
         :forever
       )

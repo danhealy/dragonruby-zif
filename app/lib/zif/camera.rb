@@ -188,8 +188,8 @@ module Zif
           pos_x: @pos_x + @target_x,
           pos_y: @pos_y + @target_y
         },
-        @follow_duration,
-        @follow_easing
+        duration: @follow_duration,
+        easing:   @follow_easing
       ) { @last_follow = sprite.center }
       run(@last_camera_movement)
     end

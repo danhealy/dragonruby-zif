@@ -66,8 +66,8 @@ class Avatar < Zif::Sprite
         x: @moving_to[0],
         y: @moving_to[1]
       },
-      duration,
-      :smooth_stop
+      duration: duration,
+      easing: :smooth_stop
     ) { stop_walking }
 
     run(@movement_action)

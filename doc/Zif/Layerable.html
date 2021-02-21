@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Zif::Layerable
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Layerable";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span>
+     &raquo; 
+    <span class="title">Layerable</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Zif::Layerable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="ActiveLayer.html" title="Zif::ActiveLayer (class)">ActiveLayer</a></span>, <span class='object_link'><a href="SimpleLayer.html" title="Zif::SimpleLayer (class)">SimpleLayer</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/layered_tile_map/layerable.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Functionality shared between SimpleLayer &amp; ActiveLayer</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layer_name-instance_method" title="#layer_name (instance method)">#<strong>layer_name</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute layer_name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#map-instance_method" title="#map (instance method)">#<strong>map</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute map.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#should_render-instance_method" title="#should_render (instance method)">#<strong>should_render</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute should_render.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#z-instance_method" title="#z (instance method)">#<strong>z</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute z.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clicked%3F-instance_method" title="#clicked? (instance method)">#<strong>clicked?</strong>(point, kind = :up)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exclude_from_serialize-instance_method" title="#exclude_from_serialize (instance method)">#<strong>exclude_from_serialize</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intersecting_sprites-instance_method" title="#intersecting_sprites (instance method)">#<strong>intersecting_sprites</strong>(compare_left, compare_bottom, compare_right, compare_top)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#position_sprite-instance_method" title="#position_sprite (instance method)">#<strong>position_sprite</strong>(sprite, logical_x, logical_y)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_positioned_sprite-instance_method" title="#remove_positioned_sprite (instance method)">#<strong>remove_positioned_sprite</strong>(sprite)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#target_layer_name-instance_method" title="#target_layer_name (instance method)">#<strong>target_layer_name</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#visible_sprites-instance_method" title="#visible_sprites (instance method)">#<strong>visible_sprites</strong>(given_rect)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is not very performant with lots of sprites!  Consider using TiledLayer instead.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="layer_name=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="layer_name-instance_method">
+  
+    #<strong>layer_name</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute layer_name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_layer_name'>layer_name</span>
+  <span class='ivar'>@layer_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="map=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="map-instance_method">
+  
+    #<strong>map</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute map.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_map'>map</span>
+  <span class='ivar'>@map</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="should_render=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="should_render-instance_method">
+  
+    #<strong>should_render</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute should_render.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_should_render'>should_render</span>
+  <span class='ivar'>@should_render</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="z=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="z-instance_method">
+  
+    #<strong>z</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute z.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_z'>z</span>
+  <span class='ivar'>@z</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="clicked?-instance_method">
+  
+    #<strong>clicked?</strong>(point, kind = :up)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='op'>=</span><span class='symbol'>:up</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_position_math'><span class='object_link'><a href="../Zif.html#position_math-class_method" title="Zif.position_math (method)">position_math</a></span></span><span class='lparen'>(</span>
+      <span class='symbol'>:mult</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_point'>point</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_position_math'><span class='object_link'><a href="../Zif.html#position_math-class_method" title="Zif.position_math (method)">position_math</a></span></span><span class='lparen'>(</span>
+        <span class='symbol'>:fdiv</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_wh'>source_wh</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_wh'>wh</span>
+      <span class='rparen'>)</span>
+    <span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_xy'>source_xy</span>
+  <span class='rparen'>)</span>
+
+  <span class='comment'># puts &quot;Layerable#clicked?(#{point}): #{@layer_name} #{x} #{y}&quot;
+</span>  <span class='id identifier rubyid_intersecting_sprites'>intersecting_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_reverse_each'>reverse_each</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sprite'>sprite</span><span class='op'>|</span>
+    <span class='comment'># puts &quot;  clicked? -&gt; #{sprite}&quot;
+</span>    <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:clicked?</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exclude_from_serialize-instance_method">
+  
+    #<strong>exclude_from_serialize</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exclude_from_serialize'>exclude_from_serialize</span>
+  <span class='qwords_beg'>%w[</span><span class='tstring_content'>sprites</span><span class='words_sep'> </span><span class='tstring_content'>primitives</span><span class='tstring_end'>]</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="intersecting_sprites-instance_method">
+  
+    #<strong>intersecting_sprites</strong>(compare_left, compare_bottom, compare_right, compare_top)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_intersecting_sprites'>intersecting_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_compare_left'>compare_left</span><span class='comma'>,</span> <span class='id identifier rubyid_compare_bottom'>compare_bottom</span><span class='comma'>,</span> <span class='id identifier rubyid_compare_right'>compare_right</span><span class='comma'>,</span> <span class='id identifier rubyid_compare_top'>compare_top</span><span class='rparen'>)</span>
+  <span class='comment'># puts &quot;Layerable#intersecting_sprites: #{@layer_name} #{source_sprites.length}&quot;
+</span>  <span class='id identifier rubyid_source_sprites'>source_sprites</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sprite'>sprite</span><span class='op'>|</span>
+    <span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span>
+    <span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>
+    <span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span>
+    <span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span>
+    <span class='comment'># puts &quot;Layerable#intersecting_sprites: #{x} #{y} #{w} #{h}&quot;
+</span>    <span class='lparen'>(</span>
+      <span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span>     <span class='op'>&gt;</span> <span class='id identifier rubyid_compare_right'>compare_right</span><span class='rparen'>)</span>  <span class='op'>||</span>
+      <span class='lparen'>(</span><span class='id identifier rubyid_y'>y</span>     <span class='op'>&gt;</span> <span class='id identifier rubyid_compare_top'>compare_top</span><span class='rparen'>)</span>    <span class='op'>||</span>
+      <span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='id identifier rubyid_w'>w</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_compare_left'>compare_left</span><span class='rparen'>)</span>   <span class='op'>||</span>
+      <span class='lparen'>(</span><span class='id identifier rubyid_y'>y</span> <span class='op'>+</span> <span class='id identifier rubyid_h'>h</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_compare_bottom'>compare_bottom</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="position_sprite-instance_method">
+  
+    #<strong>position_sprite</strong>(sprite, logical_x, logical_y)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12
+13
+14
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_position_sprite'>position_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span>
+  <span class='comment'># Skip Sprite#assign, this is perf critical
+</span>  <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span>         <span class='op'>=</span> <span class='id identifier rubyid_logical_x'>logical_x</span> <span class='op'>*</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_tile_width'>tile_width</span>
+  <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>         <span class='op'>=</span> <span class='id identifier rubyid_logical_y'>logical_y</span> <span class='op'>*</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_tile_height'>tile_height</span>
+  <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_logical_x'>logical_x</span> <span class='op'>=</span> <span class='id identifier rubyid_logical_x'>logical_x</span>
+  <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_logical_y'>logical_y</span> <span class='op'>=</span> <span class='id identifier rubyid_logical_y'>logical_y</span>
+  <span class='id identifier rubyid_sprite'>sprite</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_positioned_sprite-instance_method">
+  
+    #<strong>remove_positioned_sprite</strong>(sprite)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_positioned_sprite'>remove_positioned_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_remove_sprite'>remove_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="target_layer_name-instance_method">
+  
+    #<strong>target_layer_name</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_target_layer_name'>target_layer_name</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_target_name'>target_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='ivar'>@layer_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="visible_sprites-instance_method">
+  
+    #<strong>visible_sprites</strong>(given_rect)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This is not very performant with lots of sprites!  Consider using TiledLayer instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layered_tile_map/layerable.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_visible_sprites'>visible_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_given_rect'>given_rect</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_given_rect'>given_rect</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_view_actual_size!'>view_actual_size!</span> <span class='kw'>unless</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_is_set?'>source_is_set?</span>
+    <span class='id identifier rubyid_compare_left'>compare_left</span>   <span class='op'>=</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_x'>source_x</span>
+    <span class='id identifier rubyid_compare_bottom'>compare_bottom</span> <span class='op'>=</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_y'>source_y</span>
+    <span class='id identifier rubyid_compare_right'>compare_right</span>  <span class='op'>=</span> <span class='id identifier rubyid_compare_left'>compare_left</span>   <span class='op'>+</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_w'>source_w</span>
+    <span class='id identifier rubyid_compare_top'>compare_top</span>    <span class='op'>=</span> <span class='id identifier rubyid_compare_bottom'>compare_bottom</span> <span class='op'>+</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_h'>source_h</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_compare_left'>compare_left</span>   <span class='op'>=</span> <span class='id identifier rubyid_given_rect'>given_rect</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span>
+    <span class='id identifier rubyid_compare_bottom'>compare_bottom</span> <span class='op'>=</span> <span class='id identifier rubyid_given_rect'>given_rect</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>
+    <span class='id identifier rubyid_compare_right'>compare_right</span>  <span class='op'>=</span> <span class='id identifier rubyid_compare_left'>compare_left</span>   <span class='op'>+</span> <span class='id identifier rubyid_given_rect'>given_rect</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span>
+    <span class='id identifier rubyid_compare_top'>compare_top</span>    <span class='op'>=</span> <span class='id identifier rubyid_compare_bottom'>compare_bottom</span> <span class='op'>+</span> <span class='id identifier rubyid_given_rect'>given_rect</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_intersecting_sprites'>intersecting_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_compare_left'>compare_left</span><span class='comma'>,</span> <span class='id identifier rubyid_compare_bottom'>compare_bottom</span><span class='comma'>,</span> <span class='id identifier rubyid_compare_right'>compare_right</span><span class='comma'>,</span> <span class='id identifier rubyid_compare_top'>compare_top</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Jan  3 16:59:25 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

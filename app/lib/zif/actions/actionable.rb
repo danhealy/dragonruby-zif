@@ -38,8 +38,8 @@ module Zif
     end
 
     # Empty action - just a wait and a callback
-    def delayed_action(wait, repeat=1, &block)
-      new_action({}, wait, :linear, :round, repeat, &block)
+    def delayed_action(wait, repeat: 1, &block)
+      new_action({}, duration: wait, easing: :linear, rounding: :round, repeat: repeat, &block)
     end
 
     # -----------------------
@@ -47,8 +47,8 @@ module Zif
     def bounce_forever_around(y=110, distance=15, duration=5.seconds)
       Sequence.new(
         [
-          new_action({y: y - distance}, duration, :smooth_step),
-          new_action({y: y + distance}, duration, :smooth_step)
+          new_action({y: y - distance}, duration: duration, easing: :smooth_step),
+          new_action({y: y + distance}, duration: duration, easing: :smooth_step)
         ],
         :forever
       )
@@ -59,11 +59,11 @@ module Zif
     end
 
     def fade_out(duration=3.seconds, &block)
-      new_action({a: 0}, duration, &block)
+      new_action({a: 0}, duration: duration, &block)
     end
 
     def fade_in(duration=3.seconds, &block)
-      new_action({a: 255}, duration, &block)
+      new_action({a: 255}, duration: duration, &block)
     end
   end
 end

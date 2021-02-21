@@ -47,10 +47,10 @@ class CompoundSpriteTest < ZifExampleScene
         Zif::Sequence.new(
           [
             dragon.new_action(
-              {x: finish_pos}, 10.seconds, :smooth_start
+              {x: finish_pos}, duration: 10.seconds, easing: :smooth_start
             ) { dragon.flip_horizontally = true },
             dragon.new_action(
-              {x: pos[0]}, 10.seconds, :smooth_stop
+              {x: pos[0]}, duration: 10.seconds, easing: :smooth_stop
             ) { dragon.flip_horizontally = false }
           ],
           :forever
@@ -60,8 +60,8 @@ class CompoundSpriteTest < ZifExampleScene
       dragon.run(
         Zif::Sequence.new(
           [
-            dragon.new_action({y: pos[1] + 300}, 5.seconds, :smooth_start),
-            dragon.new_action({y: pos[1] - 300}, 5.seconds, :smooth_stop)
+            dragon.new_action({y: pos[1] + 300}, duration: 5.seconds, easing: :smooth_start),
+            dragon.new_action({y: pos[1] - 300}, duration: 5.seconds, easing: :smooth_stop)
           ],
           :forever
         )
@@ -118,8 +118,8 @@ class CompoundSpriteTest < ZifExampleScene
     dragon_label.run(
       Zif::Sequence.new(
         [
-          dragon_label.new_action({x: 1000}, 10.seconds, :smooth_start),
-          dragon_label.new_action({x: 0   }, 10.seconds, :smooth_stop)
+          dragon_label.new_action({x: 1000}, duration: 10.seconds, easing: :smooth_start),
+          dragon_label.new_action({x: 0   }, duration: 10.seconds, easing: :smooth_stop)
         ],
         :forever
       )
@@ -131,8 +131,8 @@ class CompoundSpriteTest < ZifExampleScene
       sprite.run(
         Zif::Sequence.new(
           [
-            sprite.new_action({x: 300}, 6.seconds, :linear),
-            sprite.new_action({x: 100}, 6.seconds, :linear)
+            sprite.new_action({x: 300}, duration: 6.seconds, easing: :linear),
+            sprite.new_action({x: 100}, duration: 6.seconds, easing: :linear)
           ],
           :forever
         )
@@ -141,8 +141,8 @@ class CompoundSpriteTest < ZifExampleScene
       sprite.run(
         Zif::Sequence.new(
           [
-            sprite.new_action({y: 300}, 3.seconds, :linear),
-            sprite.new_action({y: 100}, 3.seconds, :linear)
+            sprite.new_action({y: 300}, duration: 3.seconds, easing: :linear),
+            sprite.new_action({y: 100}, duration: 3.seconds, easing: :linear)
           ],
           :forever
         )
@@ -197,10 +197,10 @@ class CompoundSpriteTest < ZifExampleScene
                 x:     pix.x + ((rand(100) + 20) * dir),
                 angle: rand(360 * 5)
               },
-              2.seconds,
-              :smooth_stop5
+              duration: 2.seconds,
+              easing: :smooth_stop5
             ))
-    pix.run(pix.new_action({y: pix.y + Zif.relative_rand(50)}, 2.seconds, :smooth_stop5))
+    pix.run(pix.new_action({y: pix.y + Zif.relative_rand(50)}, duration: 2.seconds, easing: :smooth_stop5))
     pix.run(
       pix.fade_out(rand.seconds) do
         pixie_spray(pix, layer)

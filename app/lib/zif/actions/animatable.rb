@@ -6,7 +6,7 @@ module Zif
     # Creates an animation sequence based on an array of [[:path_name, ticks_to_hold]]
     def new_basic_animation(seq_name, paths_and_durations, repeat=:forever, &block)
       actions = paths_and_durations.map do |(path, duration)|
-        new_action({path: "sprites/#{path}.png"}, duration, :immediate, :none)
+        new_action({path: "sprites/#{path}.png"}, duration: duration, easing: :immediate, rounding: :none)
       end
       register_animation_sequence(seq_name, Sequence.new(actions, repeat, &block))
     end

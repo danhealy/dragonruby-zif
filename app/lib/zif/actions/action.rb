@@ -1,12 +1,48 @@
 module Zif
   # Inspired by https://developer.apple.com/documentation/spritekit/skaction
+  #
   # and Squirrel Eiserloh's GDC talk on nonlinear transformations https://www.youtube.com/watch?v=mr5xkf6zSzk
+  #
   # A transition of a set of attributes over time using an easing function (aka tweening, easing)
-  # Meant to be applied to an object using the Actionable mixin
+  # Meant to be applied to an object using the {Zif::Actionable} mixin
+  # @todo Example here
   class Action
     include Zif::Serializable
-    attr_accessor :start, :finish, :callback, :easing, :repeat, :duration, :started_at, :dirty, :rounding, :finish_early
 
+    # @return [Hash] The start conditions for the keys referenced in {finish}
+    attr_accessor :start
+
+    # @return [Hash{Symbol=>Object}]
+    #   Key-value pair of attributes being acted upon, and their final state.
+    #   The +Symbol+ keys must represent a getter *and* setter on the node.  These can be traditional attributes defined
+    #   using +attr_accessor+, or manually defined e.g. +def x=(new_x)+ ..
+    attr_accessor :finish
+
+    # @return [Proc] A callback to run at the end of the action
+    attr_accessor :callback
+
+    # @return [Symbol] Method name of the easing function to apply over the duration, (see {Action::EASING_FUNCS})
+    attr_accessor :easing
+
+    # @return [Numeric] The number of times this will repeat
+    attr_accessor :repeat
+
+    # @return [Integer] The number of ticks it will take to reach the finish condition
+    attr_accessor :duration
+
+    # @return [Integer] Set to +$gtk.args.tick_count - 1+ when created / started
+    attr_accessor :started_at
+
+    # @return [Boolean] True if this action caused a change on the node during this tick
+    attr_accessor :dirty
+
+    # @return [Symbol] The rounding strategy for values being adjusted during the action (see {Action::ROUNDING_FUNCS})
+    attr_accessor :rounding
+
+    # @return [Boolean] Set this to +true+ to override the normal duration and complete this iteration on next tick
+    attr_accessor :finish_early
+
+    # A list of convenient names for repeat counts
     REPEAT_NAMES = {
       once:    1,
       twice:   2,
@@ -24,7 +60,17 @@ module Zif
 
     ROUNDING_FUNCS = %i[ceil floor round none].freeze
 
-    def initialize(node, finish, duration=1.second, easing=:linear, rounding=:round, repeat=1, &block)
+
+    # ------------------
+    # @!group 1. Public Interface
+
+    # @param [Zif::Actionable] node The node the action should be run on
+    # @param [Hash] finish A hash representing the end state of the node at the end of the action
+    # @param [Numeric] duration
+    # @param [Symbol] easing (see {Action::EASING_FUNCS})
+    # @param [Symbol] rounding (see {Action::ROUNDING_FUNCS})
+    # @param [Integer, Symbol] repeat (see {Action::REPEAT_NAMES} for valid symbols)
+    def initialize(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &block)
       raise ArgumentError, "Invalid node: #{node}, expected a Zif::Actionable" unless node.is_a? Zif::Actionable
 
       @node = node
@@ -63,16 +109,48 @@ module Zif
       reset_duration
     end
 
+    # Recalculates the start conditions for the action based on node state.  Easing is calculated as difference between
+    # start and finish conditions over time.
     def reset_start
       @finish.keys.each do |key|
         @start[key] = @node.send(key)
       end
     end
 
+    # Resets {started_at} to the current tick
     def reset_duration
       @started_at = $gtk.args.tick_count - 1
     end
 
+    # Forces the easing to finish on the next {perform_tick}, ignoring duration
+    def finish_early!
+      @finish_early = true
+    end
+
+    # @return [Float] 0.0 -> 1.0 Percentage of duration passed.
+    def progress
+      @finish_early ? 1.0 : ($gtk.args.tick_count - @started_at).fdiv(@duration)
+    end
+
+    # @return [Boolean] True if {progress} is 1.0
+    def iteration_complete?
+      progress == 1.0
+    end
+
+    # @return [Boolean] True if there are no more {repeat}s left on this action
+    def complete?
+      # puts "Action#complete?: Action complete! #{self.inspect} #{@node.class}" if @repeat.zero?
+      @repeat.zero?
+    end
+
+    # ------------------
+
+    # @!group 2. Private-ish methods
+
+    # Performs one tick's worth of easing on all attributes specified by {finish} conditions. Sets {dirty} to true if
+    # something changed. Calls {callback} if finished.
+    # @return [Boolean] {dirty}
+    # @api private
     def perform_tick
       @dirty = false
       @finish.each do |key, val|
@@ -103,102 +181,109 @@ module Zif
       @dirty
     end
 
-    def progress
-      @finish_early ? 1.0 : ($gtk.args.tick_count - @started_at).fdiv(@duration)
-    end
-
-    def finish_early!
-      @finish_early = true
-    end
-
-    def iteration_complete?
-      progress == 1.0
-    end
-
+    # @param [Numeric] start_val
+    # @param [Numeric] finish_val
+    # @return [Numeric] Returns a value between {start_val} and {finish_val} based on function specified by {easing}
+    # @api private
     def ease(start_val, finish_val)
       ret = ((finish_val - start_val) * send(@easing)) + start_val
       # puts "Action#ease: #{start_val} -> #{@easing} (#{self.send(@easing)}) -> #{finish_val} = #{ret}"
       ret
     end
 
-    def complete?
-      # puts "Action#complete?: Action complete! #{self.inspect} #{@node.class}" if @repeat.zero?
-      @repeat.zero?
-    end
-
+    # Calls {callback} with self
+    # @api private
     def perform_callback
       # puts "Action#perform_callback: Callback triggered"
       @callback.call(self)
     end
 
-    # ----------------
-    # Easing Functions
+    # ------------------
 
+    # @!group 3. Easing Functions
+    # Insprired by https://www.youtube.com/watch?v=mr5xkf6zSzk
+
+    # @note Meant to be called indirectly via setting {easing}
     def immediate(_x)
       1.0
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def linear(x=progress)
       x
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def flip(x=progress)
       1 - x
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def mix(a=:linear, b=:linear, rate=0.5, x=progress)
       (1 - rate) * send(a, x) + rate * send(b, x)
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def crossfade(a=:linear, b=:linear, x=progress)
       mix(a, b, x, x)
     end
 
-    # https://www.youtube.com/watch?v=mr5xkf6zSzk
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_start(x=progress)
       x * x
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_start3(x=progress)
       x * x * x
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_start4(x=progress)
       x * x * x * x * x
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_start5(x=progress)
       x * x * x * x * x * x
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_stop(x=progress)
       flip(smooth_start(flip(x)))
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_stop3(x=progress)
       flip(smooth_start3(flip(x)))
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_stop4(x=progress)
       flip(smooth_start4(flip(x)))
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_stop5(x=progress)
       flip(smooth_start5(flip(x)))
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_step(x=progress)
       crossfade(:smooth_start, :smooth_stop, x)
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_step3(x=progress)
       crossfade(:smooth_start3, :smooth_stop3, x)
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_step4(x=progress)
       crossfade(:smooth_start4, :smooth_stop4, x)
     end
 
+    # @note Meant to be called indirectly via setting {easing}
     def smooth_step5(x=progress)
       crossfade(:smooth_start5, :smooth_stop5, x)
     end
