@@ -1,6 +1,7 @@
 # No dependencies
 require 'app/lib/zif/zif.rb'
 require 'app/lib/zif/sprites/serializable.rb'
+require 'app/lib/zif/sprites/clickable.rb'
 require 'app/lib/zif/services/services.rb'
 require 'app/lib/zif/services/input_service.rb'
 require 'app/lib/zif/services/tick_trace_service.rb'
