@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::BitmaskedTiledLayer
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::BitmaskedTiledLayer";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span>
+     &raquo; 
+    <span class="title">BitmaskedTiledLayer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::BitmaskedTiledLayer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="SimpleLayer.html" title="Zif::SimpleLayer (class)">SimpleLayer</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="SimpleLayer.html" title="Zif::SimpleLayer (class)">SimpleLayer</a></span></li>
+          
+            <li class="next">Zif::BitmaskedTiledLayer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Bitmaskable.html" title="Zif::Bitmaskable (module)">Bitmaskable</a></span>, <span class='object_link'><a href="Tileable.html" title="Zif::Tileable (module)">Tileable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/layered_tile_map/bitmasked_tiled_layer.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The above, built on top of a RenderTarget</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Bitmaskable.html" title="Zif::Bitmaskable (module)">Bitmaskable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Bitmaskable.html#bitmask_data-instance_method" title="Zif::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span>, <span class='object_link'><a href="Bitmaskable.html#bitmasked_sprite_name_prefix-instance_method" title="Zif::Bitmaskable#bitmasked_sprite_name_prefix (method)">#bitmasked_sprite_name_prefix</a></span>, <span class='object_link'><a href="Bitmaskable.html#presence_data-instance_method" title="Zif::Bitmaskable#presence_data (method)">#presence_data</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="SimpleLayer.html" title="Zif::SimpleLayer (class)">SimpleLayer</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="SimpleLayer.html#clear_sprites_after_draw-instance_method" title="Zif::SimpleLayer#clear_sprites_after_draw (method)">#clear_sprites_after_draw</a></span>, <span class='object_link'><a href="SimpleLayer.html#render_only_visible-instance_method" title="Zif::SimpleLayer#render_only_visible (method)">#render_only_visible</a></span>, <span class='object_link'><a href="SimpleLayer.html#rerender_rect-instance_method" title="Zif::SimpleLayer#rerender_rect (method)">#rerender_rect</a></span>, <span class='object_link'><a href="SimpleLayer.html#source_sprites-instance_method" title="Zif::SimpleLayer#source_sprites (method)">#source_sprites</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Layerable.html" title="Zif::Layerable (module)">Layerable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Layerable.html#layer_name-instance_method" title="Zif::Layerable#layer_name (method)">#layer_name</a></span>, <span class='object_link'><a href="Layerable.html#map-instance_method" title="Zif::Layerable#map (method)">#map</a></span>, <span class='object_link'><a href="Layerable.html#should_render-instance_method" title="Zif::Layerable#should_render (method)">#should_render</a></span>, <span class='object_link'><a href="Layerable.html#z-instance_method" title="Zif::Layerable#z (method)">#z</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="RenderTarget.html#bg_color-instance_method" title="Zif::RenderTarget#bg_color (method)">#bg_color</a></span>, <span class='object_link'><a href="RenderTarget.html#height-instance_method" title="Zif::RenderTarget#height (method)">#height</a></span>, <span class='object_link'><a href="RenderTarget.html#labels-instance_method" title="Zif::RenderTarget#labels (method)">#labels</a></span>, <span class='object_link'><a href="RenderTarget.html#name-instance_method" title="Zif::RenderTarget#name (method)">#name</a></span>, <span class='object_link'><a href="RenderTarget.html#primitives-instance_method" title="Zif::RenderTarget#primitives (method)">#primitives</a></span>, <span class='object_link'><a href="RenderTarget.html#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span>, <span class='object_link'><a href="RenderTarget.html#width-instance_method" title="Zif::RenderTarget#width (method)">#width</a></span>, <span class='object_link'><a href="RenderTarget.html#z-instance_method" title="Zif::RenderTarget#z (method)">#z</a></span></p>
+
+
+
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Bitmaskable.html" title="Zif::Bitmaskable (module)">Bitmaskable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Bitmaskable.html#add_at-instance_method" title="Zif::Bitmaskable#add_at (method)">#add_at</a></span>, <span class='object_link'><a href="Bitmaskable.html#exclude_from_serialize-instance_method" title="Zif::Bitmaskable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Bitmaskable.html#recalculate_bitmask-instance_method" title="Zif::Bitmaskable#recalculate_bitmask (method)">#recalculate_bitmask</a></span>, <span class='object_link'><a href="Bitmaskable.html#redraw_at-instance_method" title="Zif::Bitmaskable#redraw_at (method)">#redraw_at</a></span>, <span class='object_link'><a href="Bitmaskable.html#reinitialize_sprites-instance_method" title="Zif::Bitmaskable#reinitialize_sprites (method)">#reinitialize_sprites</a></span>, <span class='object_link'><a href="Bitmaskable.html#remove_at-instance_method" title="Zif::Bitmaskable#remove_at (method)">#remove_at</a></span>, <span class='object_link'><a href="Bitmaskable.html#set_sprites_from_bitmask-instance_method" title="Zif::Bitmaskable#set_sprites_from_bitmask (method)">#set_sprites_from_bitmask</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Tileable.html" title="Zif::Tileable (module)">Tileable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Tileable.html#add_positioned_sprite-instance_method" title="Zif::Tileable#add_positioned_sprite (method)">#add_positioned_sprite</a></span>, <span class='object_link'><a href="Tileable.html#exclude_from_serialize-instance_method" title="Zif::Tileable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Tileable.html#intersecting_sprites-instance_method" title="Zif::Tileable#intersecting_sprites (method)">#intersecting_sprites</a></span>, <span class='object_link'><a href="Tileable.html#reinitialize_sprites-instance_method" title="Zif::Tileable#reinitialize_sprites (method)">#reinitialize_sprites</a></span>, <span class='object_link'><a href="Tileable.html#remove_positioned_sprite-instance_method" title="Zif::Tileable#remove_positioned_sprite (method)">#remove_positioned_sprite</a></span>, <span class='object_link'><a href="Tileable.html#remove_tile-instance_method" title="Zif::Tileable#remove_tile (method)">#remove_tile</a></span>, <span class='object_link'><a href="Tileable.html#tile-instance_method" title="Zif::Tileable#tile (method)">#tile</a></span>, <span class='object_link'><a href="Tileable.html#tile_pos_to_sprite_index-instance_method" title="Zif::Tileable#tile_pos_to_sprite_index (method)">#tile_pos_to_sprite_index</a></span>, <span class='object_link'><a href="Tileable.html#visible_sprites-instance_method" title="Zif::Tileable#visible_sprites (method)">#visible_sprites</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="SimpleLayer.html" title="Zif::SimpleLayer (class)">SimpleLayer</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="SimpleLayer.html#add_positioned_sprite-instance_method" title="Zif::SimpleLayer#add_positioned_sprite (method)">#add_positioned_sprite</a></span>, <span class='object_link'><a href="SimpleLayer.html#initialize-instance_method" title="Zif::SimpleLayer#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="SimpleLayer.html#reinitialize_sprites-instance_method" title="Zif::SimpleLayer#reinitialize_sprites (method)">#reinitialize_sprites</a></span>, <span class='object_link'><a href="SimpleLayer.html#remove_sprite-instance_method" title="Zif::SimpleLayer#remove_sprite (method)">#remove_sprite</a></span>, <span class='object_link'><a href="SimpleLayer.html#rerender-instance_method" title="Zif::SimpleLayer#rerender (method)">#rerender</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Layerable.html" title="Zif::Layerable (module)">Layerable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Layerable.html#clicked%3F-instance_method" title="Zif::Layerable#clicked? (method)">#clicked?</a></span>, <span class='object_link'><a href="Layerable.html#exclude_from_serialize-instance_method" title="Zif::Layerable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Layerable.html#intersecting_sprites-instance_method" title="Zif::Layerable#intersecting_sprites (method)">#intersecting_sprites</a></span>, <span class='object_link'><a href="Layerable.html#position_sprite-instance_method" title="Zif::Layerable#position_sprite (method)">#position_sprite</a></span>, <span class='object_link'><a href="Layerable.html#remove_positioned_sprite-instance_method" title="Zif::Layerable#remove_positioned_sprite (method)">#remove_positioned_sprite</a></span>, <span class='object_link'><a href="Layerable.html#target_layer_name-instance_method" title="Zif::Layerable#target_layer_name (method)">#target_layer_name</a></span>, <span class='object_link'><a href="Layerable.html#visible_sprites-instance_method" title="Zif::Layerable#visible_sprites (method)">#visible_sprites</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="RenderTarget.html#clicked%3F-instance_method" title="Zif::RenderTarget#clicked? (method)">#clicked?</a></span>, <span class='object_link'><a href="RenderTarget.html#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>, <span class='object_link'><a href="RenderTarget.html#cut_containing_sprites-instance_method" title="Zif::RenderTarget#cut_containing_sprites (method)">#cut_containing_sprites</a></span>, <span class='object_link'><a href="RenderTarget.html#exclude_from_serialize-instance_method" title="Zif::RenderTarget#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="RenderTarget.html#full_containing_sprite-instance_method" title="Zif::RenderTarget#full_containing_sprite (method)">#full_containing_sprite</a></span>, <span class='object_link'><a href="RenderTarget.html#initialize-instance_method" title="Zif::RenderTarget#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="RenderTarget.html#project_from-instance_method" title="Zif::RenderTarget#project_from (method)">#project_from</a></span>, <span class='object_link'><a href="RenderTarget.html#project_to-instance_method" title="Zif::RenderTarget#project_to (method)">#project_to</a></span>, <span class='object_link'><a href="RenderTarget.html#redraw-instance_method" title="Zif::RenderTarget#redraw (method)">#redraw</a></span>, <span class='object_link'><a href="RenderTarget.html#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>, <span class='object_link'><a href="RenderTarget.html#relative_point-instance_method" title="Zif::RenderTarget#relative_point (method)">#relative_point</a></span>, <span class='object_link'><a href="RenderTarget.html#resize-instance_method" title="Zif::RenderTarget#resize (method)">#resize</a></span>, <span class='object_link'><a href="RenderTarget.html#set_inactive_buffer_name-instance_method" title="Zif::RenderTarget#set_inactive_buffer_name (method)">#set_inactive_buffer_name</a></span>, <span class='object_link'><a href="RenderTarget.html#switch_buffer-instance_method" title="Zif::RenderTarget#switch_buffer (method)">#switch_buffer</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Serializable.html#exclude_from_serialize-instance_method" title="Zif::Serializable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Serializable.html#inspect-instance_method" title="Zif::Serializable#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="Serializable.html#serialize-instance_method" title="Zif::Serializable#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="Serializable.html#to_s-instance_method" title="Zif::Serializable#to_s (method)">#to_s</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="SimpleLayer.html#initialize-instance_method" title="Zif::SimpleLayer#initialize (method)">Zif::SimpleLayer</a></span></p>
+  
+</div>
+
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Jan  3 16:59:27 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::Game
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Game";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span>
+     &raquo; 
+    <span class="title">Game</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::Game
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Zif::Game</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Traceable.html" title="Zif::Traceable (module)">Traceable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/game.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Orchestrates main tick &amp; active Scene</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="../ZifExample.html" title="ZifExample (class)">ZifExample</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_service-instance_method" title="#action_service (instance method)">#<strong>action_service</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute action_service.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scene-instance_method" title="#scene (instance method)">#<strong>scene</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute scene.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scene_registry-instance_method" title="#scene_registry (instance method)">#<strong>scene_registry</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute scene_registry.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#services-instance_method" title="#services (instance method)">#<strong>services</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute services.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Traceable.html" title="Zif::Traceable (module)">Traceable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Traceable.html#tracer_service_name-instance_method" title="Zif::Traceable#tracer_service_name (method)">#tracer_service_name</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#decorate_exception-instance_method" title="#decorate_exception (instance method)">#<strong>decorate_exception</strong>(e)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Game </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Suggested that you override this and set @scene.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#perform_tick-instance_method" title="#perform_tick (instance method)">#<strong>perform_tick</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Override and call super() if you need to pass a block to #standard_tick or do anything else.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_scene-instance_method" title="#register_scene (instance method)">#<strong>register_scene</strong>(scene_name, scene)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serialize-instance_method" title="#serialize (instance method)">#<strong>serialize</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#standard_tick-instance_method" title="#standard_tick (instance method)">#<strong>standard_tick</strong>(&amp;_block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This should not be overridden.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#switch_scene-instance_method" title="#switch_scene (instance method)">#<strong>switch_scene</strong>(tick_result)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Traceable.html" title="Zif::Traceable (module)">Traceable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Traceable.html#mark-instance_method" title="Zif::Traceable#mark (method)">#mark</a></span>, <span class='object_link'><a href="Traceable.html#mark_and_print-instance_method" title="Zif::Traceable#mark_and_print (method)">#mark_and_print</a></span>, <span class='object_link'><a href="Traceable.html#mark_prefix-instance_method" title="Zif::Traceable#mark_prefix (method)">#mark_prefix</a></span>, <span class='object_link'><a href="Traceable.html#tracer-instance_method" title="Zif::Traceable#tracer (method)">#tracer</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Game (class)">Game</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Suggested that you override this and set @scene</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='gvar'>$services</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Services.html" title="Zif::Services (class)">Services</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Services.html#initialize-instance_method" title="Zif::Services#initialize (method)">new</a></span></span>
+  <span class='ivar'>@services</span> <span class='op'>=</span> <span class='gvar'>$services</span>
+  <span class='ivar'>@services</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='symbol'>:action_service</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActionService.html" title="Zif::ActionService (class)">ActionService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActionService.html#initialize-instance_method" title="Zif::ActionService#initialize (method)">new</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@tracer_service_name</span> <span class='op'>=</span> <span class='symbol'>:tracer</span>
+  <span class='ivar'>@services</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='ivar'>@tracer_service_name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="TickTraceService.html" title="Zif::TickTraceService (class)">TickTraceService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="TickTraceService.html#initialize-instance_method" title="Zif::TickTraceService#initialize (method)">new</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@services</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='symbol'>:sprite_registry</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SpriteRegistry.html" title="Zif::SpriteRegistry (class)">SpriteRegistry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="SpriteRegistry.html#initialize-instance_method" title="Zif::SpriteRegistry#initialize (method)">new</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@services</span><span class='period'>.</span><span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='symbol'>:input_service</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="InputService.html" title="Zif::InputService (class)">InputService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="InputService.html#initialize-instance_method" title="Zif::InputService#initialize (method)">new</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@scene_registry</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@pause_actions</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="action_service=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="action_service-instance_method">
+  
+    #<strong>action_service</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute action_service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_action_service'>action_service</span>
+  <span class='ivar'>@action_service</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="scene=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="scene-instance_method">
+  
+    #<strong>scene</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute scene.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_scene'>scene</span>
+  <span class='ivar'>@scene</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="scene_registry=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="scene_registry-instance_method">
+  
+    #<strong>scene_registry</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute scene_registry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_scene_registry'>scene_registry</span>
+  <span class='ivar'>@scene_registry</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="services=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="services-instance_method">
+  
+    #<strong>services</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute services.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_services'>services</span>
+  <span class='ivar'>@services</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="decorate_exception-instance_method">
+  
+    #<strong>decorate_exception</strong>(e)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_decorate_exception'>decorate_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>120</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Exception: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='int'>118</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n  </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_tick_trace_step'>tick_trace_step</span> <span class='op'>=</span> <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:tracer</span><span class='rbracket'>]</span><span class='op'>&amp;.</span><span class='id identifier rubyid_last_label'>last_label</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_tick_trace_step'>tick_trace_step</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Exception occurred after: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_tick_trace_step'>tick_trace_step</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Exception occured before tracer service was initialized</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>-</span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>118</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inspect-instance_method">
+  
+    #<strong>inspect</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="perform_tick-instance_method">
+  
+    #<strong>perform_tick</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Override and call super() if you need to pass a block to #standard_tick or do anything else</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
+  <span class='id identifier rubyid_standard_tick'>standard_tick</span> <span class='comment'># No block provided usually
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_scene-instance_method">
+  
+    #<strong>register_scene</strong>(scene_name, scene)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_register_scene'>register_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_scene_name'>scene_name</span><span class='comma'>,</span> <span class='id identifier rubyid_scene'>scene</span><span class='rparen'>)</span>
+  <span class='ivar'>@scene_registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_scene_name'>scene_name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_scene'>scene</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="serialize-instance_method">
+  
+    #<strong>serialize</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_serialize'>serialize</span>
+  <span class='lbrace'>{</span>
+    <span class='label'>scene:</span>  <span class='ivar'>@scene</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>tracer:</span> <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:tracer</span><span class='rbracket'>]</span><span class='op'>&amp;.</span><span class='id identifier rubyid_last_label'>last_label</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="standard_tick-instance_method">
+  
+    #<strong>standard_tick</strong>(&amp;_block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This should not be overridden. Override #perform_tick instead</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_standard_tick'>standard_tick</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span><span class='rparen'>)</span>
+  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:tracer</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reset_tick'>reset_tick</span>
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_process_click'>process_click</span>
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: input_service #process_click</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_tick_result'>tick_result</span> <span class='op'>=</span> <span class='ivar'>@scene</span><span class='period'>.</span><span class='id identifier rubyid_perform_tick'>perform_tick</span>
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: Scene #perform_tick complete</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_next_scene'>next_scene</span> <span class='op'>=</span> <span class='id identifier rubyid_switch_scene'>switch_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_next_scene'>next_scene</span>
+    <span class='id identifier rubyid_next_scene'>next_scene</span><span class='period'>.</span><span class='id identifier rubyid_prepare_scene'>prepare_scene</span>
+    <span class='ivar'>@scene</span> <span class='op'>=</span> <span class='id identifier rubyid_next_scene'>next_scene</span>
+  <span class='kw'>else</span>
+    <span class='kw'>yield</span> <span class='id identifier rubyid_tick_result'>tick_result</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: Scene switching handled</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: Action service complete</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:action_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_run_all_actions'>run_all_actions</span>
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: Complete</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:tracer</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_finish'>finish</span>
+<span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='id identifier rubyid_decorate_exception'>decorate_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
+  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:tracer</span><span class='rbracket'>]</span><span class='op'>&amp;.</span><span class='id identifier rubyid_finish'>finish</span>
+  <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_console'>console</span>
+  <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_pause!'>pause!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="switch_scene-instance_method">
+  
+    #<strong>switch_scene</strong>(tick_result)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+105
+106
+107
+108
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 105</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_switch_scene'>switch_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_tick_result'>tick_result</span> <span class='kw'>if</span> <span class='id identifier rubyid_tick_result'>tick_result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Scene.html" title="Zif::Scene (class)">Scene</a></span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_tick_result'>tick_result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>if</span> <span class='id identifier rubyid_tick_result'>tick_result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='ivar'>@scene_registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@scene_registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rbracket'>]</span> <span class='op'>&lt;=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Scene.html" title="Zif::Scene (class)">Scene</a></span></span>
+
+  <span class='ivar'>@scene_registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 138</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Jan  3 16:59:25 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

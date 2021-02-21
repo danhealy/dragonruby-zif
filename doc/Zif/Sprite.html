@@ -1,0 +1,2446 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::Sprite
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Sprite";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span>
+     &raquo; 
+    <span class="title">Sprite</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::Sprite
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Zif::Sprite</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span>, <span class='object_link'><a href="Animatable.html" title="Zif::Animatable (module)">Animatable</a></span>, <span class='object_link'><a href="Assignable.html" title="Zif::Assignable (module)">Assignable</a></span>, <span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/sprites/sprite.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A basic sprite which has assignable and serializable functionality The foundation for most of the Zif library</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="../Avatar.html" title="Avatar (class)">Avatar</a></span>, <span class='object_link'><a href="CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_x-instance_method" title="#logical_x (instance method)">#<strong>logical_x</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_y-instance_method" title="#logical_y (instance method)">#<strong>logical_y</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_mouse_changed-instance_method" title="#on_mouse_changed (instance method)">#<strong>on_mouse_changed</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute on_mouse_changed.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_mouse_down-instance_method" title="#on_mouse_down (instance method)">#<strong>on_mouse_down</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute on_mouse_down.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_mouse_up-instance_method" title="#on_mouse_up (instance method)">#<strong>on_mouse_up</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute on_mouse_up.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_target-instance_method" title="#render_target (instance method)">#<strong>render_target</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If this sprite is a parent <strong>container</strong> for a Render Target, reference it here Not for sprites which are <strong>children</strong> of a Render Target!.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#z-instance_method" title="#z (instance method)">#<strong>z</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap).</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Animatable.html" title="Zif::Animatable (module)">Animatable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Animatable.html#animation_sequences-instance_method" title="Zif::Animatable#animation_sequences (method)">#animation_sequences</a></span>, <span class='object_link'><a href="Animatable.html#cur_animation-instance_method" title="Zif::Animatable#cur_animation (method)">#cur_animation</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Actionable.html#actions-instance_method" title="Zif::Actionable#actions (method)">#actions</a></span>, <span class='object_link'><a href="Actionable.html#dirty-instance_method" title="Zif::Actionable#dirty (method)">#dirty</a></span></p>
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_array_to_hash-class_method" title="rect_array_to_hash (class method)">.<strong>rect_array_to_hash</strong>(arr = [])  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>———————— Some convenience methods.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_array_to_source_hash-class_method" title="rect_array_to_source_hash (class method)">.<strong>rect_array_to_source_hash</strong>(arr = [])  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_hash_to_source_hash-class_method" title="rect_hash_to_source_hash (class method)">.<strong>rect_hash_to_source_hash</strong>(rect = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>…, y: … -&gt; …, source_y: ….</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#absorb_click%3F-instance_method" title="#absorb_click? (instance method)">#<strong>absorb_click?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#center-instance_method" title="#center (instance method)">#<strong>center</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#center_x-instance_method" title="#center_x (instance method)">#<strong>center_x</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#center_y-instance_method" title="#center_y (instance method)">#<strong>center_y</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clicked%3F-instance_method" title="#clicked? (instance method)">#<strong>clicked?</strong>(point, kind = :up)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color-instance_method" title="#color (instance method)">#<strong>color</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dup_and_assign-instance_method" title="#dup_and_assign (instance method)">#<strong>dup_and_assign</strong>(sprite)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hide-instance_method" title="#hide (instance method)">#<strong>hide</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name = Zif.random_name(&#39;sprite&#39;))  &#x21d2; Sprite </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Sprite.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect-instance_method" title="#rect (instance method)">#<strong>rect</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Performance tip: Use the Sprite itself for things like #intersect_rect? rather than creating this array!.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect_hash-instance_method" title="#rect_hash (instance method)">#<strong>rect_hash</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show-instance_method" title="#show (instance method)">#<strong>show</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_as_rect_hash-instance_method" title="#source_as_rect_hash (instance method)">#<strong>source_as_rect_hash</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>If for some reason you want source_ attrs without “source_” Like using RenderTarget#project_from.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_center-instance_method" title="#source_center (instance method)">#<strong>source_center</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_is_set%3F-instance_method" title="#source_is_set? (instance method)">#<strong>source_is_set?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_rect-instance_method" title="#source_rect (instance method)">#<strong>source_rect</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_rect_hash-instance_method" title="#source_rect_hash (instance method)">#<strong>source_rect_hash</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_wh-instance_method" title="#source_wh (instance method)">#<strong>source_wh</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_xy-instance_method" title="#source_xy (instance method)">#<strong>source_xy</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_h-instance_method" title="#to_h (instance method)">#<strong>to_h</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#view_actual_size!-instance_method" title="#view_actual_size! (instance method)">#<strong>view_actual_size!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>You want to use this, unless you&#39;re trying to zoom/pan.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wh-instance_method" title="#wh (instance method)">#<strong>wh</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#xy-instance_method" title="#xy (instance method)">#<strong>xy</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#zoom_factor-instance_method" title="#zoom_factor (instance method)">#<strong>zoom_factor</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Animatable.html" title="Zif::Animatable (module)">Animatable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Animatable.html#new_basic_animation-instance_method" title="Zif::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="Animatable.html#register_animation_sequence-instance_method" title="Zif::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="Animatable.html#run_animation_sequence-instance_method" title="Zif::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="Animatable.html#stop_animating-instance_method" title="Zif::Animatable#stop_animating (method)">#stop_animating</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Actionable.html#bounce_forever_around-instance_method" title="Zif::Actionable#bounce_forever_around (method)">#bounce_forever_around</a></span>, <span class='object_link'><a href="Actionable.html#delayed_action-instance_method" title="Zif::Actionable#delayed_action (method)">#delayed_action</a></span>, <span class='object_link'><a href="Actionable.html#fade_in-instance_method" title="Zif::Actionable#fade_in (method)">#fade_in</a></span>, <span class='object_link'><a href="Actionable.html#fade_out-instance_method" title="Zif::Actionable#fade_out (method)">#fade_out</a></span>, <span class='object_link'><a href="Actionable.html#fade_out_and_in_forever-instance_method" title="Zif::Actionable#fade_out_and_in_forever (method)">#fade_out_and_in_forever</a></span>, <span class='object_link'><a href="Actionable.html#new_action-instance_method" title="Zif::Actionable#new_action (method)">#new_action</a></span>, <span class='object_link'><a href="Actionable.html#perform_actions-instance_method" title="Zif::Actionable#perform_actions (method)">#perform_actions</a></span>, <span class='object_link'><a href="Actionable.html#run-instance_method" title="Zif::Actionable#run (method)">#run</a></span>, <span class='object_link'><a href="Actionable.html#running_actions%3F-instance_method" title="Zif::Actionable#running_actions? (method)">#running_actions?</a></span>, <span class='object_link'><a href="Actionable.html#stop_action-instance_method" title="Zif::Actionable#stop_action (method)">#stop_action</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Serializable.html#exclude_from_serialize-instance_method" title="Zif::Serializable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Serializable.html#inspect-instance_method" title="Zif::Serializable#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="Serializable.html#serialize-instance_method" title="Zif::Serializable#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="Serializable.html#to_s-instance_method" title="Zif::Serializable#to_s (method)">#to_s</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Assignable.html" title="Zif::Assignable (module)">Assignable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Assignable.html#assign-instance_method" title="Zif::Assignable#assign (method)">#assign</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(name = Zif.random_name(&#39;sprite&#39;))  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of Sprite.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='const'>Zif</span><span class='period'>.</span><span class='id identifier rubyid_random_name'>random_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sprite</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='ivar'>@name</span>      <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@logical_x</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@logical_y</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@x</span>         <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@y</span>         <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@z</span>         <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@w</span>         <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@h</span>         <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@a</span>         <span class='op'>=</span> <span class='int'>255</span>
+  <span class='ivar'>@r</span>         <span class='op'>=</span> <span class='int'>255</span>
+  <span class='ivar'>@g</span>         <span class='op'>=</span> <span class='int'>255</span>
+  <span class='ivar'>@b</span>         <span class='op'>=</span> <span class='int'>255</span>
+  <span class='ivar'>@angle</span>     <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="logical_x=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="logical_x-instance_method">
+  
+    #<strong>logical_x</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logical_x'>logical_x</span>
+  <span class='ivar'>@logical_x</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logical_y=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="logical_y-instance_method">
+  
+    #<strong>logical_y</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logical_y'>logical_y</span>
+  <span class='ivar'>@logical_y</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="on_mouse_changed=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="on_mouse_changed-instance_method">
+  
+    #<strong>on_mouse_changed</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute on_mouse_changed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_on_mouse_changed'>on_mouse_changed</span>
+  <span class='ivar'>@on_mouse_changed</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="on_mouse_down=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="on_mouse_down-instance_method">
+  
+    #<strong>on_mouse_down</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute on_mouse_down.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_on_mouse_down'>on_mouse_down</span>
+  <span class='ivar'>@on_mouse_down</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="on_mouse_up=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="on_mouse_up-instance_method">
+  
+    #<strong>on_mouse_up</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute on_mouse_up.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span>
+  <span class='ivar'>@on_mouse_up</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="render_target=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="render_target-instance_method">
+  
+    #<strong>render_target</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If this sprite is a parent <strong>container</strong> for a Render Target, reference it here Not for sprites which are <strong>children</strong> of a Render Target!</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_render_target'>render_target</span>
+  <span class='ivar'>@render_target</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="z=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="z-instance_method">
+  
+    #<strong>z</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Used for unit positioning (tile map addressing, for example - See Zif::LayeredTileMap)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_z'>z</span>
+  <span class='ivar'>@z</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="rect_array_to_hash-class_method">
+  
+    .<strong>rect_array_to_hash</strong>(arr = [])  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <hr>
+
+<p>Some convenience methods</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_hash'>rect_array_to_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_arr'>arr</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='lbrace'>{</span>
+    <span class='label'>x:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>y:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>w:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>h:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_array_to_source_hash-class_method">
+  
+    .<strong>rect_array_to_source_hash</strong>(arr = [])  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_source_hash'>rect_array_to_source_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_arr'>arr</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='lbrace'>{</span>
+    <span class='label'>source_x:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>source_y:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>source_w:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>source_h:</span> <span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_hash_to_source_hash-class_method">
+  
+    .<strong>rect_hash_to_source_hash</strong>(rect = {})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>…, y: … -&gt; …, source_y: …</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rect_hash_to_source_hash'>rect_hash_to_source_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_rect'>rect</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>source_</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>source_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="absorb_click?-instance_method">
+  
+    #<strong>absorb_click?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_absorb_click?'>absorb_click?</span>
+  <span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span> <span class='op'>||</span> <span class='id identifier rubyid_on_mouse_down'>on_mouse_down</span> <span class='op'>||</span> <span class='id identifier rubyid_on_mouse_changed'>on_mouse_changed</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="center-instance_method">
+  
+    #<strong>center</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_center'>center</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_center_x'>center_x</span><span class='comma'>,</span> <span class='id identifier rubyid_center_y'>center_y</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="center_x-instance_method">
+  
+    #<strong>center_x</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_center_x'>center_x</span>
+  <span class='lparen'>(</span><span class='ivar'>@x</span> <span class='op'>+</span> <span class='ivar'>@w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="center_y-instance_method">
+  
+    #<strong>center_y</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113
+114
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 113</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_center_y'>center_y</span>
+  <span class='lparen'>(</span><span class='ivar'>@y</span> <span class='op'>+</span> <span class='ivar'>@h</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clicked?-instance_method">
+  
+    #<strong>clicked?</strong>(point, kind = :up)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='op'>=</span><span class='symbol'>:up</span><span class='rparen'>)</span>
+  <span class='comment'># puts &quot;Sprite:#{@name}: clicked? #{kind} #{kind.class} #{point} -&gt; #{rect} = #{point.inside_rect?(rect)}&quot;
+</span>  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_kind'>kind</span> <span class='op'>==</span> <span class='symbol'>:down</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_inside_rect?'>inside_rect?</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_click_handler'>click_handler</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_kind'>kind</span>
+                  <span class='kw'>when</span> <span class='symbol'>:up</span>
+                    <span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span>
+                  <span class='kw'>when</span> <span class='symbol'>:down</span>
+                    <span class='id identifier rubyid_on_mouse_down'>on_mouse_down</span>
+                  <span class='kw'>when</span> <span class='symbol'>:changed</span>
+                    <span class='id identifier rubyid_on_mouse_changed'>on_mouse_changed</span>
+                  <span class='kw'>end</span>
+
+  <span class='comment'># puts &quot;Sprite:#{@name}: click handler: #{kind} #{click_handler}&quot;
+</span>
+  <span class='id identifier rubyid_click_handler'>click_handler</span><span class='op'>&amp;.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='ivar'>@render_target</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_absorb_click?'>absorb_click?</span>
+
+  <span class='ivar'>@render_target</span><span class='period'>.</span><span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color-instance_method">
+  
+    #<strong>color</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+174
+175
+176
+177
+178
+179
+180
+181</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 174</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span>
+  <span class='lbrace'>{</span>
+    <span class='label'>r:</span> <span class='ivar'>@r</span><span class='comma'>,</span>
+    <span class='label'>g:</span> <span class='ivar'>@g</span><span class='comma'>,</span>
+    <span class='label'>b:</span> <span class='ivar'>@b</span><span class='comma'>,</span>
+    <span class='label'>a:</span> <span class='ivar'>@a</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dup_and_assign-instance_method">
+  
+    #<strong>dup_and_assign</strong>(sprite)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_dup_and_assign'>dup_and_assign</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="hide-instance_method">
+  
+    #<strong>hide</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_hide'>hide</span>
+  <span class='ivar'>@a</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect-instance_method">
+  
+    #<strong>rect</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Performance tip: Use the Sprite itself for things like #intersect_rect? rather than creating this array!</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rect'>rect</span>
+  <span class='lbracket'>[</span><span class='ivar'>@x</span><span class='comma'>,</span> <span class='ivar'>@y</span><span class='comma'>,</span> <span class='ivar'>@w</span><span class='comma'>,</span> <span class='ivar'>@h</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect_hash-instance_method">
+  
+    #<strong>rect_hash</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rect_hash'>rect_hash</span>
+  <span class='const'><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_hash'><span class='object_link'><a href="#rect_array_to_hash-class_method" title="Zif::Sprite.rect_array_to_hash (method)">rect_array_to_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show-instance_method">
+  
+    #<strong>show</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
+  <span class='ivar'>@a</span> <span class='op'>=</span> <span class='int'>255</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_as_rect_hash-instance_method">
+  
+    #<strong>source_as_rect_hash</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>If for some reason you want source_ attrs without “source_” Like using RenderTarget#project_from</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+170
+171
+172</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 170</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_as_rect_hash'>source_as_rect_hash</span>
+  <span class='const'><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_hash'><span class='object_link'><a href="#rect_array_to_hash-class_method" title="Zif::Sprite.rect_array_to_hash (method)">rect_array_to_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_source_rect'>source_rect</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_center-instance_method">
+  
+    #<strong>source_center</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_center'>source_center</span>
+  <span class='lbracket'>[</span><span class='lparen'>(</span><span class='ivar'>@source_x</span> <span class='op'>+</span> <span class='ivar'>@source_w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='ivar'>@source_y</span> <span class='op'>+</span> <span class='ivar'>@source_h</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_is_set?-instance_method">
+  
+    #<strong>source_is_set?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140
+141
+142</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_is_set?'>source_is_set?</span>
+  <span class='op'>!</span><span class='lparen'>(</span><span class='ivar'>@source_x</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='ivar'>@source_y</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='ivar'>@source_w</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='ivar'>@source_h</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_rect-instance_method">
+  
+    #<strong>source_rect</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+152
+153
+154</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 152</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_rect'>source_rect</span>
+  <span class='lbracket'>[</span><span class='ivar'>@source_x</span><span class='comma'>,</span> <span class='ivar'>@source_y</span><span class='comma'>,</span> <span class='ivar'>@source_w</span><span class='comma'>,</span> <span class='ivar'>@source_h</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_rect_hash-instance_method">
+  
+    #<strong>source_rect_hash</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+164
+165
+166</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 164</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_rect_hash'>source_rect_hash</span>
+  <span class='const'><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_source_hash'><span class='object_link'><a href="#rect_array_to_source_hash-class_method" title="Zif::Sprite.rect_array_to_source_hash (method)">rect_array_to_source_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_source_rect'>source_rect</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_wh-instance_method">
+  
+    #<strong>source_wh</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_wh'>source_wh</span>
+  <span class='lbracket'>[</span><span class='ivar'>@source_w</span><span class='comma'>,</span> <span class='ivar'>@source_h</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source_xy-instance_method">
+  
+    #<strong>source_xy</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 144</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source_xy'>source_xy</span>
+  <span class='lbracket'>[</span><span class='ivar'>@source_x</span><span class='comma'>,</span> <span class='ivar'>@source_y</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_h-instance_method">
+  
+    #<strong>to_h</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 183</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='lbrace'>{</span><span class='label'>path:</span> <span class='ivar'>@path</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_source_rect_hash'>source_rect_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_rect_hash'>rect_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_color'>color</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="view_actual_size!-instance_method">
+  
+    #<strong>view_actual_size!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>You want to use this, unless you&#39;re trying to zoom/pan. These attrs need to be set before we can display component sprites.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+133
+134
+135
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 133</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_view_actual_size!'>view_actual_size!</span>
+  <span class='ivar'>@source_x</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@source_y</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@source_w</span> <span class='op'>=</span> <span class='ivar'>@w</span>
+  <span class='ivar'>@source_h</span> <span class='op'>=</span> <span class='ivar'>@h</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wh-instance_method">
+  
+    #<strong>wh</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 105</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wh'>wh</span>
+  <span class='lbracket'>[</span><span class='ivar'>@w</span><span class='comma'>,</span> <span class='ivar'>@h</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="xy-instance_method">
+  
+    #<strong>xy</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_xy'>xy</span>
+  <span class='lbracket'>[</span><span class='ivar'>@x</span><span class='comma'>,</span> <span class='ivar'>@y</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="zoom_factor-instance_method">
+  
+    #<strong>zoom_factor</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+160
+161
+162</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/sprite.rb', line 160</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_zoom_factor'>zoom_factor</span>
+  <span class='lbracket'>[</span><span class='ivar'>@w</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='ivar'>@source_w</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='ivar'>@h</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='ivar'>@source_h</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Jan  3 16:59:26 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>
