@@ -3,7 +3,7 @@ module Zif
   # It zooms these sprites to fit the viewable area of the screen.  It can be zoomed in and out using the scroll wheel.
   # It is responsible for directing the layers to reposition based on camera movements.
   class Camera
-    include Zif::Actionable
+    include Zif::Actions::Actionable
 
     attr_accessor :target_name
 
@@ -180,7 +180,7 @@ module Zif
 
       return if @target_x.zero? && @target_y.zero?
 
-      @actions.delete(@last_camera_movement) if @last_camera_movement
+      stop_action(@last_camera_movement) if @last_camera_movement
 
       # puts "Camera#start_following: Running action #{{pos_x: @pos_x + @target_x, pos_y: @pos_y + @target_y}}"
       @last_camera_movement = new_action(
@@ -191,7 +191,8 @@ module Zif
         duration: @follow_duration,
         easing:   @follow_easing
       ) { @last_follow = sprite.center }
-      run(@last_camera_movement)
+
+      run_action(@last_camera_movement)
     end
 
     def center_screen(around=center)

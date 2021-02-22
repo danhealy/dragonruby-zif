@@ -505,10 +505,10 @@
       <pre class="code"><span class="info file"># File 'app/lib/zif/services/action_service.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_actionable'>register_actionable</span><span class='lparen'>(</span><span class='id identifier rubyid_actionable'>actionable</span><span class='rparen'>)</span>
-  <span class='comment'># if actionable.is_a?(Zif::Actionable)
+  <span class='comment'># if actionable.is_a?(Zif::Actions::Actionable)
 </span>  <span class='comment'>#   puts &quot;Zif::ActionService#register_actionable: registered #{actionable}&quot;
 </span>  <span class='comment'># else
-</span>  <span class='comment'>#   raise &quot;Zif::ActionService#register_actionable: #{actionable} is not a Zif::Actionable&quot;
+</span>  <span class='comment'>#   raise &quot;Zif::ActionService#register_actionable: #{actionable} is not a Zif::Actions::Actionable&quot;
 </span>  <span class='comment'># end
 </span>  <span class='ivar'>@actionables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_actionable'>actionable</span>
 <span class='kw'>end</span></pre>
@@ -634,7 +634,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan  3 16:59:27 2021 by
+  Generated on Sun Feb 21 20:16:25 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

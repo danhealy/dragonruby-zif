@@ -89,7 +89,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span></dd>
+      <dd><span class='object_link'><a href="Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></dd>
   </dl>
   
   
@@ -905,8 +905,8 @@
 
   
   
-  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Actionable.html#actions-instance_method" title="Zif::Actionable#actions (method)">#actions</a></span>, <span class='object_link'><a href="Actionable.html#dirty-instance_method" title="Zif::Actionable#dirty (method)">#dirty</a></span></p>
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Actions/Actionable.html#actions-instance_method" title="Zif::Actions::Actionable#actions (method)">#actions</a></span>, <span class='object_link'><a href="Actions/Actionable.html#dirty-instance_method" title="Zif::Actions::Actionable#dirty (method)">#dirty</a></span></p>
 
 
   
@@ -1431,8 +1431,8 @@
   
   
   
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Actionable.html#bounce_forever_around-instance_method" title="Zif::Actionable#bounce_forever_around (method)">#bounce_forever_around</a></span>, <span class='object_link'><a href="Actionable.html#delayed_action-instance_method" title="Zif::Actionable#delayed_action (method)">#delayed_action</a></span>, <span class='object_link'><a href="Actionable.html#fade_in-instance_method" title="Zif::Actionable#fade_in (method)">#fade_in</a></span>, <span class='object_link'><a href="Actionable.html#fade_out-instance_method" title="Zif::Actionable#fade_out (method)">#fade_out</a></span>, <span class='object_link'><a href="Actionable.html#fade_out_and_in_forever-instance_method" title="Zif::Actionable#fade_out_and_in_forever (method)">#fade_out_and_in_forever</a></span>, <span class='object_link'><a href="Actionable.html#new_action-instance_method" title="Zif::Actionable#new_action (method)">#new_action</a></span>, <span class='object_link'><a href="Actionable.html#perform_actions-instance_method" title="Zif::Actionable#perform_actions (method)">#perform_actions</a></span>, <span class='object_link'><a href="Actionable.html#run-instance_method" title="Zif::Actionable#run (method)">#run</a></span>, <span class='object_link'><a href="Actionable.html#running_actions%3F-instance_method" title="Zif::Actionable#running_actions? (method)">#running_actions?</a></span>, <span class='object_link'><a href="Actionable.html#stop_action-instance_method" title="Zif::Actionable#stop_action (method)">#stop_action</a></span></p>
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Actions/Actionable.html#bounce_forever_around-instance_method" title="Zif::Actions::Actionable#bounce_forever_around (method)">#bounce_forever_around</a></span>, <span class='object_link'><a href="Actions/Actionable.html#delayed_action-instance_method" title="Zif::Actions::Actionable#delayed_action (method)">#delayed_action</a></span>, <span class='object_link'><a href="Actions/Actionable.html#fade_in-instance_method" title="Zif::Actions::Actionable#fade_in (method)">#fade_in</a></span>, <span class='object_link'><a href="Actions/Actionable.html#fade_out-instance_method" title="Zif::Actions::Actionable#fade_out (method)">#fade_out</a></span>, <span class='object_link'><a href="Actions/Actionable.html#fade_out_and_in_forever-instance_method" title="Zif::Actions::Actionable#fade_out_and_in_forever (method)">#fade_out_and_in_forever</a></span>, <span class='object_link'><a href="Actions/Actionable.html#new_action-instance_method" title="Zif::Actions::Actionable#new_action (method)">#new_action</a></span>, <span class='object_link'><a href="Actions/Actionable.html#perform_actions-instance_method" title="Zif::Actions::Actionable#perform_actions (method)">#perform_actions</a></span>, <span class='object_link'><a href="Actions/Actionable.html#run_action-instance_method" title="Zif::Actions::Actionable#run_action (method)">#run_action</a></span>, <span class='object_link'><a href="Actions/Actionable.html#running_actions%3F-instance_method" title="Zif::Actions::Actionable#running_actions? (method)">#running_actions?</a></span>, <span class='object_link'><a href="Actions/Actionable.html#stop_action-instance_method" title="Zif::Actions::Actionable#stop_action (method)">#stop_action</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -2818,7 +2818,6 @@
       <pre class="lines">
 
 
-214
 215
 216
 217
@@ -2827,10 +2826,11 @@
 220
 221
 222
-223</pre>
+223
+224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 215</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center'>center</span><span class='lparen'>(</span><span class='id identifier rubyid_from'>from</span><span class='op'>=</span><span class='id identifier rubyid_pos'>pos</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span>
@@ -2862,7 +2862,6 @@
       <pre class="lines">
 
 
-197
 198
 199
 200
@@ -2873,10 +2872,11 @@
 205
 206
 207
-208</pre>
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center_screen'>center_screen</span><span class='lparen'>(</span><span class='id identifier rubyid_around'>around</span><span class='op'>=</span><span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_center_to'>center_to</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_sub_positions'><span class='object_link'><a href="../Zif.html#sub_positions-class_method" title="Zif.sub_positions (method)">sub_positions</a></span></span><span class='lparen'>(</span>
@@ -3265,12 +3265,12 @@
       <pre class="lines">
 
 
-210
 211
-212</pre>
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pos'>pos</span>
   <span class='lbracket'>[</span><span class='ivar'>@pos_x</span><span class='comma'>,</span> <span class='ivar'>@pos_y</span><span class='rbracket'>]</span>
@@ -3319,7 +3319,6 @@
       <pre class="lines">
 
 
-252
 253
 254
 255
@@ -3327,10 +3326,11 @@
 257
 258
 259
-260</pre>
+260
+261</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 252</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scrolled?'>scrolled?</span><span class='lparen'>(</span><span class='id identifier rubyid__point'>_point</span><span class='comma'>,</span> <span class='id identifier rubyid_direction'>direction</span><span class='rparen'>)</span>
   <span class='comment'># translated_point = translate_pos(point)
@@ -3401,7 +3401,8 @@
 192
 193
 194
-195</pre>
+195
+196</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 155</span>
@@ -3434,7 +3435,7 @@
 
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@target_x</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@target_y</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span>
 
-  <span class='ivar'>@actions</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='ivar'>@last_camera_movement</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@last_camera_movement</span>
+  <span class='id identifier rubyid_stop_action'>stop_action</span><span class='lparen'>(</span><span class='ivar'>@last_camera_movement</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@last_camera_movement</span>
 
   <span class='comment'># puts &quot;Camera#start_following: Running action #{{pos_x: @pos_x + @target_x, pos_y: @pos_y + @target_y}}&quot;
 </span>  <span class='ivar'>@last_camera_movement</span> <span class='op'>=</span> <span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span>
@@ -3445,7 +3446,8 @@
     <span class='label'>duration:</span> <span class='ivar'>@follow_duration</span><span class='comma'>,</span>
     <span class='label'>easing:</span>   <span class='ivar'>@follow_easing</span>
   <span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@last_follow</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_center'>center</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='ivar'>@last_camera_movement</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_run_action'>run_action</span><span class='lparen'>(</span><span class='ivar'>@last_camera_movement</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3478,12 +3480,12 @@
       <pre class="lines">
 
 
-289
 290
-291</pre>
+291
+292</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 289</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_translate_pos'>translate_pos</span><span class='lparen'>(</span><span class='id identifier rubyid_given'>given</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_position_math'><span class='object_link'><a href="../Zif.html#position_math-class_method" title="Zif.position_math (method)">position_math</a></span></span><span class='lparen'>(</span><span class='symbol'>:mult</span><span class='comma'>,</span> <span class='id identifier rubyid_given'>given</span><span class='comma'>,</span> <span class='id identifier rubyid_zoom_factor'>zoom_factor</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_pos'>pos</span><span class='rparen'>)</span>
@@ -3519,12 +3521,12 @@
       <pre class="lines">
 
 
-284
 285
-286</pre>
+286
+287</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 285</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_factor'>zoom_factor</span>
   <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_position_math'><span class='object_link'><a href="../Zif.html#position_math-class_method" title="Zif.position_math (method)">position_math</a></span></span><span class='lparen'>(</span><span class='symbol'>:fdiv</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='ivar'>@cur_w</span><span class='comma'>,</span> <span class='ivar'>@cur_h</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_zoom_unit'>zoom_unit</span><span class='rparen'>)</span>
@@ -3549,13 +3551,13 @@
       <pre class="lines">
 
 
-267
 268
 269
-270</pre>
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 268</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_in'>zoom_in</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='op'>=</span><span class='lparen'>(</span><span class='ivar'>@last_follow</span> <span class='op'>||</span> <span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='ivar'>@zoom_step</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='ivar'>@zoom_step</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
@@ -3581,13 +3583,13 @@
       <pre class="lines">
 
 
-262
 263
 264
-265</pre>
+265
+266</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 262</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 263</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_out'>zoom_out</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='op'>=</span><span class='lparen'>(</span><span class='ivar'>@last_follow</span> <span class='op'>||</span> <span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='ivar'>@zoom_step</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='ivar'>@zoom_step</span> <span class='op'>+</span> <span class='int'>1</span><span class='comma'>,</span> <span class='ivar'>@zoom_steps</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
@@ -3613,7 +3615,6 @@
       <pre class="lines">
 
 
-272
 273
 274
 275
@@ -3621,10 +3622,11 @@
 277
 278
 279
-280</pre>
+280
+281</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 272</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 273</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_to'>zoom_to</span><span class='lparen'>(</span><span class='id identifier rubyid_factor'>factor</span><span class='op'>=</span><span class='float'>1.0</span><span class='comma'>,</span> <span class='id identifier rubyid_point'>point</span><span class='op'>=</span><span class='lparen'>(</span><span class='ivar'>@last_follow</span> <span class='op'>||</span> <span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_base_mult'>base_mult</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_factor'>factor</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='int'>80</span><span class='rparen'>)</span>
@@ -3666,12 +3668,12 @@
       <pre class="lines">
 
 
-244
 245
-246</pre>
+246
+247</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/camera.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_unit'>zoom_unit</span>
   <span class='lbracket'>[</span><span class='ivar'>@native_screen_width</span><span class='comma'>,</span> <span class='ivar'>@native_screen_height</span><span class='rbracket'>]</span>
@@ -3686,7 +3688,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan  3 16:59:26 2021 by
+  Generated on Sun Feb 21 20:16:24 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

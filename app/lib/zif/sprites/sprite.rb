@@ -4,8 +4,8 @@ module Zif
   class Sprite
     include Zif::Assignable
     include Zif::Serializable
-    include Zif::Actionable
-    include Zif::Animatable
+    include Zif::Actions::Actionable
+    include Zif::Actions::Animatable
     include Zif::Clickable
     attr_sprite
 

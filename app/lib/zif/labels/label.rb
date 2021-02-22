@@ -1,7 +1,7 @@
 module Zif
   # A basic label which is aware of it's size and can be truncated
   class Label
-    include Zif::Actionable
+    include Zif::Actions::Actionable
 
     attr_accessor :x, :y, :r, :g, :b, :a
     attr_accessor :text, :max_width, :min_width, :min_height, :size, :align, :full_text

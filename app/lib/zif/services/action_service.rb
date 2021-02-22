@@ -14,10 +14,10 @@ module Zif
     end
 
     def register_actionable(actionable)
-      # if actionable.is_a?(Zif::Actionable)
+      # if actionable.is_a?(Zif::Actions::Actionable)
       #   puts "Zif::ActionService#register_actionable: registered #{actionable}"
       # else
-      #   raise "Zif::ActionService#register_actionable: #{actionable} is not a Zif::Actionable"
+      #   raise "Zif::ActionService#register_actionable: #{actionable} is not a Zif::Actions::Actionable"
       # end
       @actionables << actionable
     end

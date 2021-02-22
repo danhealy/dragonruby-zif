@@ -80,75 +80,18 @@
 
 <ol>
 <li>Create a <code>lib</code> directory inside the <code>app</code> directory, and then copy the <code>app/lib/zif</code> directory into it.</li>
-<li>In your <code>main.rb</code>, require the Zif files in this order, before your code:</li>
+<li>In your <code>main.rb</code>, require the parts of Zif you need.  To require everything:</li>
 </ol>
 
-<pre class="code ruby"><code class="ruby"><span class='comment'># No dependencies
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/zif.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/sprites/serializable.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/services/services.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/services/input_service.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/services/tick_trace_service.rb</span><span class='tstring_end'>&#39;</span></span>
+<pre class="code ruby"><code class="ruby"><span class='comment'># Require all of the Zif library:
+</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/require.rb</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># Expects $services to be services.rb, works with tick_trace_service.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/trace/traceable.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Expects to be included in a Sprite subclass
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/sprites/assignable.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on serializable.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/actions/action.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/scenes/scene.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on serializable.rb, action.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/actions/sequence.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on action.rb, sequence.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/actions/actionable.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on actionable.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/labels/label.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on sequence.rb - expects an Actionable class
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/actions/animatable.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/services/action_service.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on serializable.rb, assignable.rb, actionable.rb, animatable.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/sprites/sprite.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on sprite.rb, zif.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/sprites/render_target.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/sprites/compound_sprite.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on sprite.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/services/sprite_registry.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/panels/nine_panel_edge.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on compound_sprite.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/components/two_stage_button.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/panels/nine_panel.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on scene.rb, render_target.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/scenes/hud.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on actionable.rb, zif.rb, - expects $game to be a game.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/camera.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on compound_sprite.rb, expects to be initialized with a LayeredTileMap-like @map
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/layered_tile_map/layerable.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/layered_tile_map/active_layer.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on render_target.rb, expects to be initialized with a LayeredTileMap-like @map
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/layered_tile_map/simple_layer.rb</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/layered_tile_map/tiled_layer.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on simple_layer.rb, tiled_layer.rb, traceable.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/layered_tile_map/layered_tile_map.rb</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='comment'># Depends on traceable.rb, services.rb, input_service.rb, tick_trace_service.rb, action_service.rb, sprite_registry.rb,
-</span><span class='comment'>#            scene.rb
-</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/game.rb</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>def</span> <span class='id identifier rubyid_tick'><span class='object_link'><a href="top-level-namespace.html#tick-instance_method" title="#tick (method)">tick</a></span></span>
+  <span class='comment'># ....
+</span><span class='kw'>end</span>
 </code></pre>
+
+<p>If you only want to require some parts, please see the <code>require.rb</code> file for more information.</p>
 
 <h1 id="features">Features</h1>
 
@@ -314,7 +257,7 @@ An <code>Action</code> is a transition of a set of attributes over time using an
 <pre class="code ruby"><code class="ruby"><span class='comment'># Run some action sequences on this sprite
 </span><span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_fade_out_and_in_forever'>fade_out_and_in_forever</span><span class='rparen'>)</span> <span class='comment'># fade_out_and_in_forever is an example sequence, check out the source
 </span><span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span>
-  <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Sequence.html" title="Zif::Sequence (class)">Sequence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/Sequence.html#initialize-instance_method" title="Zif::Sequence#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'>Sequence</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='lbracket'>[</span>
       <span class='comment'># Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
 </span>      <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>x:</span> <span class='int'>1000</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span><span class='comma'>,</span> <span class='symbol'>:smooth_start</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_flip_horizontally'>flip_horizontally</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='comma'>,</span>
@@ -552,7 +495,7 @@ Zif::TickTraceService: Slow tick.  59.609ms elapsed &gt;  20.000ms threshold, lo
 </div></div>
 
       <div id="footer">
-  Generated on Sun Jan  3 16:59:25 2021 by
+  Generated on Sun Feb 21 20:16:23 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

@@ -4,31 +4,31 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: Zif::Action
+  Class: Zif::Actions::Action
   
     &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "Zif::Action";
-  relpath = '../';
+  pathId = "Zif::Actions::Action";
+  relpath = '../../';
 </script>
 
 
-  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
 
-  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
 
 
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -36,8 +36,8 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (A)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span>
+    <a href="../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Actions.html" title="Zif::Actions (module)">Actions</a></span></span>
      &raquo; 
     <span class="title">Action</span>
   
@@ -46,7 +46,7 @@
         <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../class_list.html">
+        href="../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -59,7 +59,7 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: Zif::Action
+      <div id="content"><h1>Class: Zif::Actions::Action
   
   
   
@@ -74,7 +74,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Zif::Action</li>
+            <li class="next">Zif::Actions::Action</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></dd>
+      <dd><span class='object_link'><a href="../Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></dd>
   </dl>
   
   
@@ -107,11 +107,19 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Example here</p>
+</div>
+  </div>
+
+
 <p>Inspired by <a href="https://developer.apple.com/documentation/spritekit/skaction">developer.apple.com/documentation/spritekit/skaction</a></p>
 
 <p>and Squirrel Eiserloh&#39;s GDC talk on nonlinear transformations <a href="https://www.youtube.com/watch?v=mr5xkf6zSzk">www.youtube.com/watch?v=mr5xkf6zSzk</a></p>
 
-<p>A transition of a set of attributes over time using an easing function (aka tweening, easing) Meant to be applied to an object using the Actionable mixin</p>
+<p>A transition of a set of attributes over time using an easing function (aka tweening, easing) Meant to be applied to an object using the <span class='object_link'><a href="Actionable.html" title="Zif::Actions::Actionable (module)">Actionable</a></span> mixin</p>
 
 
   </div>
@@ -213,6 +221,8 @@
   
   
     
+      <span class="note title readonly">readonly</span>
+    
     
   
   
@@ -276,7 +286,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Method name of the easing function to apply over the duration, (see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>).</p>
+<p>Method name of the easing function to apply over the duration, (see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>).</p>
 </div></span>
   
 </li>
@@ -285,7 +295,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#finish-instance_method" title="#finish (instance method)">#<strong>finish</strong>  &#x21d2; Hash{Symbol=&gt;} </a>
+      <a href="#finish-instance_method" title="#finish (instance method)">#<strong>finish</strong>  &#x21d2; Hash&lt;Symbol, Object&gt; </a>
     
 
     
@@ -329,7 +339,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Set this to <code>true</code> to override the normal duration and complete this iteration on next tick.</p>
+</div></span>
   
 </li>
 
@@ -382,7 +394,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The rounding strategy for values being adjusted during the action (see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>).</p>
+<p>The rounding strategy for values being adjusted during the action (see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Actions::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>).</p>
 </div></span>
   
 </li>
@@ -409,7 +421,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>The start conditions for the keys referenced in <span class='object_link'><a href="#finish-instance_method" title="Zif::Action#finish (method)">#finish</a></span>.</p>
+<p>The start conditions for the keys referenced in <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span>.</p>
 </div></span>
   
 </li>
@@ -449,7 +461,267 @@
 
   
     <h2>
-      Easing Functions
+      1. Public Interface
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#complete%3F-instance_method" title="#complete? (instance method)">#<strong>complete?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if there are no more <span class='object_link'><a href="#repeat-instance_method" title="Zif::Actions::Action#repeat (method)">#repeat</a></span>s left on this action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#finish_early!-instance_method" title="#finish_early! (instance method)">#<strong>finish_early!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Forces the easing to finish on the next <span class='object_link'><a href="#perform_tick-instance_method" title="Zif::Actions::Action#perform_tick (method)">#perform_tick</a></span>, ignoring duration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; Action </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Action.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iteration_complete%3F-instance_method" title="#iteration_complete? (instance method)">#<strong>iteration_complete?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>True if <span class='object_link'><a href="#progress-instance_method" title="Zif::Actions::Action#progress (method)">#progress</a></span> is 1.0.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#progress-instance_method" title="#progress (instance method)">#<strong>progress</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>0.0 -&gt; 1.0 Percentage of duration passed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_duration-instance_method" title="#reset_duration (instance method)">#<strong>reset_duration</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Resets <span class='object_link'><a href="#started_at-instance_method" title="Zif::Actions::Action#started_at (method)">#started_at</a></span> to the current tick.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_start-instance_method" title="#reset_start (instance method)">#<strong>reset_start</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recalculates the start conditions for the action based on node state.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      2. Private-ish methods
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ease-instance_method" title="#ease (instance method)">#<strong>ease</strong>(start_val, finish_val)  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a value between <code>start_val</code> and <code>finish_val</code> based on function specified by <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#perform_callback-instance_method" title="#perform_callback (instance method)">#<strong>perform_callback</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls <span class='object_link'><a href="#callback-instance_method" title="Zif::Actions::Action#callback (method)">#callback</a></span> with self.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#perform_tick-instance_method" title="#perform_tick (instance method)">#<strong>perform_tick</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Performs one tick&#39;s worth of easing on all attributes specified by <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span> conditions.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      3. Easing Functions
       <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
@@ -582,9 +854,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p><a href="https://www.youtube.com/watch?v=mr5xkf6zSzk">www.youtube.com/watch?v=mr5xkf6zSzk</a>.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -833,239 +1103,6 @@
       
     </ul>
   
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#complete%3F-instance_method" title="#complete? (instance method)">#<strong>complete?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#ease-instance_method" title="#ease (instance method)">#<strong>ease</strong>(start_val, finish_val)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#finish_early!-instance_method" title="#finish_early! (instance method)">#<strong>finish_early!</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; Action </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title constructor">constructor</span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of Action.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#iteration_complete%3F-instance_method" title="#iteration_complete? (instance method)">#<strong>iteration_complete?</strong>  &#x21d2; Boolean </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#perform_callback-instance_method" title="#perform_callback (instance method)">#<strong>perform_callback</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#perform_tick-instance_method" title="#perform_tick (instance method)">#<strong>perform_tick</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#progress-instance_method" title="#progress (instance method)">#<strong>progress</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#reset_duration-instance_method" title="#reset_duration (instance method)">#<strong>reset_duration</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#reset_start-instance_method" title="#reset_start (instance method)">#<strong>reset_start</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
-  
 
 
   
@@ -1076,15 +1113,15 @@
   
   
   
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Serializable.html#exclude_from_serialize-instance_method" title="Zif::Serializable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Serializable.html#inspect-instance_method" title="Zif::Serializable#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="Serializable.html#serialize-instance_method" title="Zif::Serializable#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="Serializable.html#to_s-instance_method" title="Zif::Serializable#to_s (method)">#to_s</a></span></p>
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Serializable.html#exclude_from_serialize-instance_method" title="Zif::Serializable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="../Serializable.html#inspect-instance_method" title="Zif::Serializable#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="../Serializable.html#serialize-instance_method" title="Zif::Serializable#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="../Serializable.html#to_s-instance_method" title="Zif::Serializable#to_s (method)">#to_s</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Action (class)">Action</a></span></tt> 
+    #<strong>initialize</strong>(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Actions::Action (class)">Action</a></span></tt> 
   
 
   
@@ -1093,13 +1130,79 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Important! Each key in the <code>finish</code> hash must map to an accessible attribute on the <code>node</code>.</p>
+
+<p>(<code>:key</code> getter and <code>:key=</code> setter, as you get with an <code>attr_accessor</code>, but could also be defined manually. See <span class='object_link'><a href="../Camera.html#pos_x=-instance_method" title="Zif::Camera#pos_x= (method)">Camera#pos_x=</a></span> for an example of a manually defined Actionable attribute)</p>
+</div>
+  </div>
+
+
 <p>Returns a new instance of Action.</p>
 
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Detailed explaination</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='comment'># dragon is a Zif::Sprite (and therefore a Zif::Actions::Actionable, but any class that includes Actionable
+</span><span class='comment'># can receive an Action like this.  A non-Sprite example is Zif::Camera).
+</span><span class='comment'># The initial x position is being set to 200 here:
+</span><span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>200</span>
+
+<span class='comment'># The ActionService is essential for this.  Every tick, it&#39;s going to check the list of registered Actionable
+</span><span class='comment'># objects for any running Actions.  If it has one, it will tell that Action a tick has passed.  The Action
+</span><span class='comment'># then knows to update the node it was run on, based on the conditions specified by this constructor.
+</span><span class='comment'>#
+</span><span class='comment'># For this example, assume that Zif::ActionService has been set up and is available at:
+</span><span class='comment'>#   $game.services.named(:action_service)
+</span><span class='comment'># Now we need to tell it that our dragon needs to be checked every tick for actions.  This only needs to be
+</span><span class='comment'># done once, it will stay in the list of Actionables to check until removed.
+</span><span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='period'>.</span><span class='id identifier rubyid_named'>named</span><span class='lparen'>(</span><span class='symbol'>:action_service</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_register_actionable'>register_actionable</span><span class='lparen'>(</span><span class='id identifier rubyid_dragon'>dragon</span><span class='rparen'>)</span>
+
+<span class='comment'># Create an action, the plan is to move the dragon to x == 300 over 2 seconds
+</span><span class='comment'># Notice that we don&#39;t have to specify the start conditions (x==200).
+</span><span class='comment'># Action will save the start conditions when created.
+</span><span class='id identifier rubyid_move_to_300_action'>move_to_300_action</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Actions.html" title="Zif::Actions (module)">Actions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Zif::Actions::Action (class)">Action</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_dragon'>dragon</span><span class='comma'>,</span>
+  <span class='lbrace'>{</span><span class='label'>x:</span> <span class='int'>300</span><span class='rbrace'>}</span><span class='comma'>,</span>
+  <span class='label'>duration:</span> <span class='int'>2</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span><span class='comma'>,</span>
+  <span class='label'>easing:</span> <span class='symbol'>:linear</span><span class='comma'>,</span>
+  <span class='label'>rounding:</span> <span class='symbol'>:round</span>
+<span class='rparen'>)</span>
+
+<span class='comment'># A plan is no good without execution.  The dragon is a Zif::Sprite, so it has the methods defined by
+</span><span class='comment'># Zif::Actions::Actionable, including #run_action.  This tells the action it&#39;s starting now (on this tick).
+</span><span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_run_action'>run_action</span><span class='lparen'>(</span><span class='id identifier rubyid_move_to_300_action'>move_to_300_action</span><span class='rparen'>)</span>
+
+<span class='comment'># Now we wait.  Every tick, ActionService will inspect dragon, it will find the running action, and slowly
+</span><span class='comment'># move the dragon to x == 300.  Because the initial condition is x == 200, and the action should run for 2
+</span><span class='comment'># seconds, and the easing function is linear, that means on each tick it needs to move the dragon to:
+</span><span class='comment'>#
+</span><span class='comment'># 200 + (ticks_since_run * (300 - 200)).fdiv(2*60)
+</span><span class='comment'>#
+</span><span class='comment'># So, next tick (ticks_since_run==1) it will be at:
+</span><span class='comment'>#
+</span><span class='comment'># 200 + ((1 * 100) / 120) = 200.833...
+</span><span class='comment'>#
+</span><span class='comment'># We&#39;ve specified :round as the rounding function, so this gets rounded to 201.
+</span><span class='comment'>#
+</span><span class='comment'># After 120 ticks, the dragon will be at x == 300.  The Action recognizes it&#39;s complete and removes itself
+</span><span class='comment'># from the list of running actions on dragon.  If we had passed a block to Zif::Actions::Action.new, that
+</span><span class='comment'># block would execute at this point.</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
 <ul class="param">
   
     <li>
@@ -1107,13 +1210,13 @@
         <span class='name'>node</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Zif::Actionable</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Actionable.html" title="Zif::Actions::Actionable (module)">Zif::Actions::Actionable</a></span></tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>The node the action should be run on</p>
+<p>The node (Actionable object) the action should be run on</p>
 </div>
       
     </li>
@@ -1129,7 +1232,7 @@
       
         &mdash;
         <div class='inline'>
-<p>A hash representing the end state of the node at the end of the action</p>
+<p>A hash representing the end state of the node at the end of the action.</p>
 </div>
       
     </li>
@@ -1160,7 +1263,7 @@
       
         &mdash;
         <div class='inline'>
-<p>(see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>)</p>
+<p>(see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>)</p>
 </div>
       
     </li>
@@ -1178,7 +1281,7 @@
       
         &mdash;
         <div class='inline'>
-<p>(see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>)</p>
+<p>(see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Actions::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>)</p>
 </div>
       
     </li>
@@ -1196,26 +1299,29 @@
       
         &mdash;
         <div class='inline'>
-<p>(see <span class='object_link'><a href="#REPEAT_NAMES-constant" title="Zif::Action::REPEAT_NAMES (constant)">REPEAT_NAMES</a></span> for valid symbols)</p>
+<p>(see <span class='object_link'><a href="#REPEAT_NAMES-constant" title="Zif::Actions::Action::REPEAT_NAMES (constant)">REPEAT_NAMES</a></span> for valid symbols)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Block</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Callback to perform when action completes</p>
 </div>
       
     </li>
   
 </ul>
 
-<p class="tag_title">Raises:</p>
-<ul class="raise">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>ArgumentError</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1223,61 +1329,65 @@
       <pre class="lines">
 
 
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105</pre>
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_finish'>finish</span><span class='comma'>,</span> <span class='label'>duration:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_second'>second</span><span class='comma'>,</span> <span class='label'>easing:</span> <span class='symbol'>:linear</span><span class='comma'>,</span> <span class='label'>rounding:</span> <span class='symbol'>:round</span><span class='comma'>,</span> <span class='label'>repeat:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid node: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node'>node</span><span class='embexpr_end'>}</span><span class='tstring_content'>, expected a Zif::Actionable</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Actionable.html" title="Zif::Actionable (module)">Actionable</a></span></span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Actions.html" title="Zif::Actions (module)">Actions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Actionable.html" title="Zif::Actions::Actionable (module)">Actionable</a></span></span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid node: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node'>node</span><span class='embexpr_end'>}</span><span class='tstring_content'>, expected a Zif::Actions::Actionable</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
 
   <span class='ivar'>@node</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span>
 
-  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_easing'>easing</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid easing function: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_easing'>easing</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;.  Must be in </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_easing'>easing</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid easing function: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_easing'>easing</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;.  Must be in </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 
   <span class='ivar'>@easing</span> <span class='op'>=</span> <span class='id identifier rubyid_easing'>easing</span>
 
-  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_rounding'>rounding</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid rounding function: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rounding'>rounding</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;.  Must be in </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Actions::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_rounding'>rounding</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid rounding function: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rounding'>rounding</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;.  Must be in </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Actions::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 
   <span class='ivar'>@rounding</span> <span class='op'>=</span> <span class='id identifier rubyid_rounding'>rounding</span>
@@ -1295,7 +1405,7 @@
   <span class='ivar'>@finish_early</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='id identifier rubyid_reset_start'>reset_start</span>
 
-  <span class='ivar'>@repeat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#REPEAT_NAMES-constant" title="Zif::Action::REPEAT_NAMES (constant)">REPEAT_NAMES</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_repeat'>repeat</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_repeat'>repeat</span>
+  <span class='ivar'>@repeat</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#REPEAT_NAMES-constant" title="Zif::Actions::Action::REPEAT_NAMES (constant)">REPEAT_NAMES</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_repeat'>repeat</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_repeat'>repeat</span>
   <span class='ivar'>@duration</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_duration'>duration</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span> <span class='comment'># in ticks
 </span>
   <span class='ivar'>@callback</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -1359,12 +1469,12 @@
       <pre class="lines">
 
 
-21
-22
-23</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 23</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback'>callback</span>
   <span class='ivar'>@callback</span>
@@ -1375,11 +1485,11 @@
 </div>
     
       
-      <span id="dirty=-instance_method"></span>
+      <span id=""></span>
       <div class="method_details ">
   <h3 class="signature " id="dirty-instance_method">
   
-    #<strong>dirty</strong>  &#x21d2; <tt>Boolean</tt> 
+    #<strong>dirty</strong>  &#x21d2; <tt>Boolean</tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -1420,12 +1530,12 @@
       <pre class="lines">
 
 
-36
-37
-38</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dirty'>dirty</span>
   <span class='ivar'>@dirty</span>
@@ -1481,12 +1591,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_duration'>duration</span>
   <span class='ivar'>@duration</span>
@@ -1510,7 +1620,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns Method name of the easing function to apply over the duration, (see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>).</p>
+<p>Returns Method name of the easing function to apply over the duration, (see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>).</p>
 
 
   </div>
@@ -1529,7 +1639,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Method name of the easing function to apply over the duration, (see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>)</p>
+<p>Method name of the easing function to apply over the duration, (see <span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span>)</p>
 </div>
       
     </li>
@@ -1542,12 +1652,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_easing'>easing</span>
   <span class='ivar'>@easing</span>
@@ -1562,7 +1672,7 @@
       <div class="method_details ">
   <h3 class="signature " id="finish-instance_method">
   
-    #<strong>finish</strong>  &#x21d2; <tt>Hash{Symbol=&gt;}</tt> 
+    #<strong>finish</strong>  &#x21d2; <tt>Hash&lt;Symbol, Object&gt;</tt> 
   
 
   
@@ -1571,7 +1681,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns Key-value pair of attributes being acted upon, and their final state. The <code>Symbol</code> keys must represent a getter and setter on the node.  These can be traditional attributes defined using <code>attr_accessor</code>, or manually defined e.g. <tt>def x=(new_x)</tt> ..</p>
+<p>Returns Key-value pair of attributes being acted upon, and their final state. The <code>Symbol</code> keys must represent a getter <strong>and</strong> setter on the node.  These can be traditional attributes defined using <code>attr_accessor</code>, or manually defined e.g. <tt>def x=(new_x)</tt> ..</p>
 
 
   </div>
@@ -1584,13 +1694,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Hash{Symbol=&gt;}</tt>)</span>
+        <span class='type'>(<tt>Hash&lt;Symbol, Object&gt;</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>Key-value pair of attributes being acted upon, and their final state. The <code>Symbol</code> keys must represent a getter and setter on the node.  These can be traditional attributes defined using <code>attr_accessor</code>, or manually defined e.g. <tt>def x=(new_x)</tt> ..</p>
+<p>Key-value pair of attributes being acted upon, and their final state. The <code>Symbol</code> keys must represent a getter <strong>and</strong> setter on the node.  These can be traditional attributes defined using <code>attr_accessor</code>, or manually defined e.g. <tt>def x=(new_x)</tt> ..</p>
 </div>
       
     </li>
@@ -1603,12 +1713,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+20
+21
+22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_finish'>finish</span>
   <span class='ivar'>@finish</span>
@@ -1632,6 +1742,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Returns Set this to <code>true</code> to override the normal duration and complete this iteration on next tick.</p>
+
 
   </div>
 </div>
@@ -1647,6 +1759,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>Set this to <code>true</code> to override the normal duration and complete this iteration on next tick</p>
+</div>
+      
     </li>
   
 </ul>
@@ -1657,12 +1774,12 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_finish_early'>finish_early</span>
   <span class='ivar'>@finish_early</span>
@@ -1718,12 +1835,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_repeat'>repeat</span>
   <span class='ivar'>@repeat</span>
@@ -1747,7 +1864,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns The rounding strategy for values being adjusted during the action (see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>).</p>
+<p>Returns The rounding strategy for values being adjusted during the action (see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Actions::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>).</p>
 
 
   </div>
@@ -1766,7 +1883,7 @@
       
         &mdash;
         <div class='inline'>
-<p>The rounding strategy for values being adjusted during the action (see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>)</p>
+<p>The rounding strategy for values being adjusted during the action (see <span class='object_link'><a href="#ROUNDING_FUNCS-constant" title="Zif::Actions::Action::ROUNDING_FUNCS (constant)">ROUNDING_FUNCS</a></span>)</p>
 </div>
       
     </li>
@@ -1779,12 +1896,12 @@
       <pre class="lines">
 
 
-39
-40
-41</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rounding'>rounding</span>
   <span class='ivar'>@rounding</span>
@@ -1808,7 +1925,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns The start conditions for the keys referenced in <span class='object_link'><a href="#finish-instance_method" title="Zif::Action#finish (method)">#finish</a></span>.</p>
+<p>Returns The start conditions for the keys referenced in <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span>.</p>
 
 
   </div>
@@ -1827,7 +1944,7 @@
       
         &mdash;
         <div class='inline'>
-<p>The start conditions for the keys referenced in <span class='object_link'><a href="#finish-instance_method" title="Zif::Action#finish (method)">#finish</a></span></p>
+<p>The start conditions for the keys referenced in <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span></p>
 </div>
       
     </li>
@@ -1840,12 +1957,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
   <span class='ivar'>@start</span>
@@ -1901,12 +2018,12 @@
       <pre class="lines">
 
 
-33
-34
-35</pre>
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started_at'>started_at</span>
   <span class='ivar'>@started_at</span>
@@ -1935,6 +2052,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Returns True if there are no more <span class='object_link'><a href="#repeat-instance_method" title="Zif::Actions::Action#repeat (method)">#repeat</a></span>s left on this action.</p>
+
 
   </div>
 </div>
@@ -1950,6 +2069,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>True if there are no more <span class='object_link'><a href="#repeat-instance_method" title="Zif::Actions::Action#repeat (method)">#repeat</a></span>s left on this action</p>
+</div>
+      
     </li>
   
 </ul>
@@ -1960,13 +2084,13 @@
       <pre class="lines">
 
 
-165
-166
-167
-168</pre>
+198
+199
+200
+201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete?'>complete?</span>
   <span class='comment'># puts &quot;Action#complete?: Action complete! #{self.inspect} #{@node.class}&quot; if @repeat.zero?
@@ -1986,18 +2110,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-195
-196
-197</pre>
+282
+283
+284</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 282</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mix'>mix</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2010,26 +2151,85 @@
       <div class="method_details ">
   <h3 class="signature " id="ease-instance_method">
   
-    #<strong>ease</strong>(start_val, finish_val)  &#x21d2; <tt>Object</tt> 
+    #<strong>ease</strong>(start_val, finish_val)  &#x21d2; <tt>Numeric</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Returns a value between <code>start_val</code> and <code>finish_val</code> based on function specified by <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start_val</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>finish_val</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Returns a value between <code>start_val</code> and <code>finish_val</code> based on function specified by <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-159
-160
-161
-162
-163</pre>
+244
+245
+246
+247
+248</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 244</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='id identifier rubyid_start_val'>start_val</span><span class='comma'>,</span> <span class='id identifier rubyid_finish_val'>finish_val</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_finish_val'>finish_val</span> <span class='op'>-</span> <span class='id identifier rubyid_start_val'>start_val</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='ivar'>@easing</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_start_val'>start_val</span>
@@ -2050,18 +2250,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Forces the easing to finish on the next <span class='object_link'><a href="#perform_tick-instance_method" title="Zif::Actions::Action#perform_tick (method)">#perform_tick</a></span>, ignoring duration</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-151
-152
-153</pre>
+183
+184
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_finish_early!'>finish_early!</span>
   <span class='ivar'>@finish_early</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -2080,18 +2291,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-187
-188
-189</pre>
+272
+273
+274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 272</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_x'>x</span>
@@ -2110,18 +2338,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-179
-180
-181</pre>
+262
+263
+264</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 179</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 262</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_immediate'>immediate</span><span class='lparen'>(</span><span class='id identifier rubyid__x'>_x</span><span class='rparen'>)</span>
   <span class='float'>1.0</span>
@@ -2143,6 +2388,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Returns True if <span class='object_link'><a href="#progress-instance_method" title="Zif::Actions::Action#progress (method)">#progress</a></span> is 1.0.</p>
+
 
   </div>
 </div>
@@ -2158,6 +2405,11 @@
       
       
       
+        &mdash;
+        <div class='inline'>
+<p>True if <span class='object_link'><a href="#progress-instance_method" title="Zif::Actions::Action#progress (method)">#progress</a></span> is 1.0</p>
+</div>
+      
     </li>
   
 </ul>
@@ -2168,12 +2420,12 @@
       <pre class="lines">
 
 
-155
-156
-157</pre>
+193
+194
+195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 193</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_iteration_complete?'>iteration_complete?</span>
   <span class='id identifier rubyid_progress'>progress</span> <span class='op'>==</span> <span class='float'>1.0</span>
@@ -2192,18 +2444,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-183
-184
-185</pre>
+267
+268
+269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 267</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_linear'>linear</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span>
@@ -2222,18 +2491,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-191
-192
-193</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mix'>mix</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_rate'>rate</span><span class='op'>=</span><span class='float'>0.5</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_rate'>rate</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_rate'>rate</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2252,19 +2538,34 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Calls <span class='object_link'><a href="#callback-instance_method" title="Zif::Actions::Action#callback (method)">#callback</a></span> with self</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-170
-171
-172
-173</pre>
+252
+253
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 252</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_callback'>perform_callback</span>
   <span class='comment'># puts &quot;Action#perform_callback: Callback triggered&quot;
@@ -2278,50 +2579,83 @@
       <div class="method_details ">
   <h3 class="signature " id="perform_tick-instance_method">
   
-    #<strong>perform_tick</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>perform_tick</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Performs one tick&#39;s worth of easing on all attributes specified by <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span> conditions. Sets <span class='object_link'><a href="#dirty-instance_method" title="Zif::Actions::Action#dirty (method)">#dirty</a></span> to true if something changed. Calls <span class='object_link'><a href="#callback-instance_method" title="Zif::Actions::Action#callback (method)">#callback</a></span> if finished.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#dirty-instance_method" title="Zif::Actions::Action#dirty (method)">#dirty</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145</pre>
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
   <span class='ivar'>@dirty</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -2360,24 +2694,53 @@
       <div class="method_details ">
   <h3 class="signature " id="progress-instance_method">
   
-    #<strong>progress</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>progress</strong>  &#x21d2; <tt>Float</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns 0.0 -&gt; 1.0 Percentage of duration passed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>0.0 -&gt; 1.0 Percentage of duration passed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-147
-148
-149</pre>
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 188</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progress'>progress</span>
   <span class='ivar'>@finish_early</span> <span class='op'>?</span> <span class='float'>1.0</span> <span class='op'>:</span> <span class='lparen'>(</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>-</span> <span class='ivar'>@started_at</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='ivar'>@duration</span><span class='rparen'>)</span>
@@ -2396,18 +2759,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Resets <span class='object_link'><a href="#started_at-instance_method" title="Zif::Actions::Action#started_at (method)">#started_at</a></span> to the current tick</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-113
-114
-115</pre>
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset_duration'>reset_duration</span>
   <span class='ivar'>@started_at</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>-</span> <span class='int'>1</span>
@@ -2426,20 +2800,31 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Recalculates the start conditions for the action based on node state.  Easing is calculated as difference between start and finish conditions over time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-107
-108
-109
-110
-111</pre>
+171
+172
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset_start'>reset_start</span>
   <span class='ivar'>@finish</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
@@ -2463,7 +2848,13 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p><a href="https://www.youtube.com/watch?v=mr5xkf6zSzk">www.youtube.com/watch?v=mr5xkf6zSzk</a></p>
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
 
 
   </div>
@@ -2477,12 +2868,12 @@
       <pre class="lines">
 
 
-200
-201
-202</pre>
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 287</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start'>smooth_start</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -2501,18 +2892,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-204
-205
-206</pre>
+292
+293
+294</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 292</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start3'>smooth_start3</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -2531,18 +2939,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-208
-209
-210</pre>
+297
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start4'>smooth_start4</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -2561,18 +2986,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-212
-213
-214</pre>
+302
+303
+304</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 212</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start5'>smooth_start5</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -2591,18 +3033,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-232
-233
-234</pre>
+327
+328
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 232</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 327</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step'>smooth_step</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2621,18 +3080,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-236
-237
-238</pre>
+332
+333
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 236</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step3'>smooth_step3</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start3</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop3</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2651,18 +3127,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-240
-241
-242</pre>
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 240</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 337</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step4'>smooth_step4</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start4</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop4</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2681,18 +3174,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-244
-245
-246</pre>
+342
+343
+344</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step5'>smooth_step5</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start5</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop5</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2711,18 +3221,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-216
-217
-218</pre>
+307
+308
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 216</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 307</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop'>smooth_stop</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start'>smooth_start</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2741,18 +3268,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-220
-221
-222</pre>
+312
+313
+314</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop3'>smooth_stop3</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start3'>smooth_start3</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2771,18 +3315,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-224
-225
-226</pre>
+317
+318
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 224</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 317</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop4'>smooth_stop4</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start4'>smooth_start4</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2801,18 +3362,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Meant to be called indirectly via setting <span class='object_link'><a href="#easing-instance_method" title="Zif::Actions::Action#easing (method)">#easing</a></span></p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-228
-229
-230</pre>
+322
+323
+324</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 322</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop5'>smooth_stop5</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start5'>smooth_start5</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2827,7 +3405,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jan  3 16:59:26 2021 by
+  Generated on Sun Feb 21 20:16:24 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>
