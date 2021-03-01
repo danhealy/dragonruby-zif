@@ -1,0 +1,2784 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::Layers::LayerGroup
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Layers::LayerGroup";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span>
+     &raquo; 
+    <span class="title">LayerGroup</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::Layers::LayerGroup
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Zif::Layers::LayerGroup</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../Traceable.html" title="Zif::Traceable (module)">Traceable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/layers/layer_group.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Example</p>
+</div>
+  </div>
+
+
+<p>Designed to be used with <span class='object_link'><a href="Camera.html" title="Zif::Layers::Camera (class)">Camera</a></span>.</p>
+
+<p>Creates a set of overlapping play area layers based on <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> (<span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>) or <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> (<span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span>) and handles redrawing them.</p>
+
+<p>Has a concept of <code>logical</code> position as a multiple of <code>tile</code> width/height, applicable to any <span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span> layers. For example, if your tiles are 16px wide, the 5th tile is at <tt>@logical_x==4</tt> but at <tt>@x==64</tt> on the layer.</p>
+
+<p>Of all things in the Zif library, this is probably the most opinionated - It&#39;s for a 2d game made of rectangular, non-overlapping tiles where the play area is larger than the screen.  As always YMMV</p>
+
+<p>As an example, you can have a “tiles” layer which gets redrawn only at the start of the game, an “interactive objects” layer which gets redrawn whenever objects appear or disappear, and then an “avatar” layer which gets redrawn constantly.  The advantage of using <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>s and <span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span>s here is to keep the positioning consistent across all of the layers.  You can just pass all of the containing sprites to <span class='object_link'><a href="Camera.html" title="Zif::Layers::Camera (class)">Camera</a></span> and it will pan them all in unison.</p>
+
+<p>You setup and configure these layers via <span class='object_link'><a href="#new_simple_layer-instance_method" title="Zif::Layers::LayerGroup#new_simple_layer (method)">#new_simple_layer</a></span>, <span class='object_link'><a href="#new_tiled_layer-instance_method" title="Zif::Layers::LayerGroup#new_tiled_layer (method)">#new_tiled_layer</a></span>, etc.</p>
+
+<p>Performance notes:</p>
+<ul><li>
+<p>The memory requirements for anything based on <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> is the number of layers times the area of each layer.  Consider using <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> if you have a lot of layers with few sprites in them.</p>
+</li><li>
+<p>It is <strong>expensive</strong> to redraw a <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span> (<span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span>) with thousands of sprites. Consider: 1280x720 (screen size) / 16x16 (a small tile) -&gt; 80*45 tiles = 3600 tiles. Of course it&#39;s more expensive to draw every tile every tick (using <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span>), but you will see noticable hiccups if you redraw the render target often.  Try not to redraw <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>s with lots of sprites while action is happening.</p>
+</li><li>
+<p>The takeaway is this: try to organize your layers between things that change often, and things that can be prerendered or need few updates duing play. Then choose between <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> and <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> as appropriate.</p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layers-instance_method" title="#layers (instance method)">#<strong>layers</strong>  &#x21d2; Hash&lt;(Symbol, String), Zif::Layers::Layerable&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>All of the layers in this group, indexed by their name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_height-instance_method" title="#logical_height (instance method)">#<strong>logical_height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Integer multiple of tiles.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_width-instance_method" title="#logical_width (instance method)">#<strong>logical_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Integer multiple of tiles.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Symbol, String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the layer group.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tile_height-instance_method" title="#tile_height (instance method)">#<strong>tile_height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pixel height of each tile.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tile_width-instance_method" title="#tile_width (instance method)">#<strong>tile_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Pixel width of each tile.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#z_index-instance_method" title="#z_index (instance method)">#<strong>z_index</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The current stacking layer index.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="../Traceable.html" title="Zif::Traceable (module)">Traceable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Traceable.html#tracer_service_name-instance_method" title="Zif::Traceable#tracer_service_name (method)">#tracer_service_name</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_layer-instance_method" title="#add_layer (instance method)">#<strong>add_layer</strong>(name, layer)  &#x21d2; Zif::Layers::Layerable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds a layer to the layer group.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#force_refresh-instance_method" title="#force_refresh (instance method)">#<strong>force_refresh</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Iterate through each in <span class='object_link'><a href="#layers-instance_method" title="Zif::Layers::LayerGroup#layers (method)">#layers</a></span>, set <code>should_render</code> to true, rerender, and set it back to what it was Useful for first-time setup of render targets, during init.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name: &#39;map&#39;, tile_width: 64, tile_height: 64, logical_width: 100, logical_height: 100)  &#x21d2; LayerGroup </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of LayerGroup.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">#<strong>inspect</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layer_containing_sprites-instance_method" title="#layer_containing_sprites (instance method)">#<strong>layer_containing_sprites</strong>  &#x21d2; Array&lt;Zif::Sprite&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The containing sprite for each layer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#layer_names-instance_method" title="#layer_names (instance method)">#<strong>layer_names</strong>  &#x21d2; Array&lt;Symbol, String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The names of each registered layer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logical_pos-instance_method" title="#logical_pos (instance method)">#<strong>logical_pos</strong>(x, y)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts pixel x/y to logical x/y (rounded down).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_height-instance_method" title="#max_height (instance method)">#<strong>max_height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><span class='object_link'><a href="#tile_height-instance_method" title="Zif::Layers::LayerGroup#tile_height (method)">#tile_height</a></span> times <span class='object_link'><a href="#logical_height-instance_method" title="Zif::Layers::LayerGroup#logical_height (method)">#logical_height</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_width-instance_method" title="#max_width (instance method)">#<strong>max_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p><span class='object_link'><a href="#tile_width-instance_method" title="Zif::Layers::LayerGroup#tile_width (method)">#tile_width</a></span> times <span class='object_link'><a href="#logical_width-instance_method" title="Zif::Layers::LayerGroup#logical_width (method)">#logical_width</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#natural_rect-instance_method" title="#natural_rect (instance method)">#<strong>natural_rect</strong>(logical_x, logical_y, x_range, y_range)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts a <code>logical</code> rect to a natural one.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_active_bitmasked_tiled_layer-instance_method" title="#new_active_bitmasked_tiled_layer (instance method)">#<strong>new_active_bitmasked_tiled_layer</strong>(name)  &#x21d2; Zif::Layers::ActiveBitmaskedTiledLayer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">ActiveBitmaskedTiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_active_layer-instance_method" title="#new_active_layer (instance method)">#<strong>new_active_layer</strong>(name)  &#x21d2; Zif::Layers::ActiveLayer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_active_tiled_layer-instance_method" title="#new_active_tiled_layer (instance method)">#<strong>new_active_tiled_layer</strong>(name)  &#x21d2; Zif::Layers::ActiveTiledLayer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">ActiveTiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_bitmasked_tiled_layer-instance_method" title="#new_bitmasked_tiled_layer (instance method)">#<strong>new_bitmasked_tiled_layer</strong>(name, render_only_visible: false)  &#x21d2; Zif::Layers::BitmaskedTiledLayer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="BitmaskedTiledLayer.html" title="Zif::Layers::BitmaskedTiledLayer (class)">BitmaskedTiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_simple_layer-instance_method" title="#new_simple_layer (instance method)">#<strong>new_simple_layer</strong>(name, render_only_visible: false, clear_sprites_after_draw: false)  &#x21d2; Zif::Layers::SimpleLayer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_tiled_layer-instance_method" title="#new_tiled_layer (instance method)">#<strong>new_tiled_layer</strong>(name, render_only_visible: false)  &#x21d2; Zif::Layers::TiledLayer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">TiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#refresh-instance_method" title="#refresh (instance method)">#<strong>refresh</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calls <code>#rerender</code> on each in <span class='object_link'><a href="#layers-instance_method" title="Zif::Layers::LayerGroup#layers (method)">#layers</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serialize-instance_method" title="#serialize (instance method)">#<strong>serialize</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Traceable.html" title="Zif::Traceable (module)">Traceable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Traceable.html#mark-instance_method" title="Zif::Traceable#mark (method)">#mark</a></span>, <span class='object_link'><a href="../Traceable.html#mark_and_print-instance_method" title="Zif::Traceable#mark_and_print (method)">#mark_and_print</a></span>, <span class='object_link'><a href="../Traceable.html#mark_prefix-instance_method" title="Zif::Traceable#mark_prefix (method)">#mark_prefix</a></span>, <span class='object_link'><a href="../Traceable.html#tracer-instance_method" title="Zif::Traceable#tracer (method)">#tracer</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(name: &#39;map&#39;, tile_width: 64, tile_height: 64, logical_width: 100, logical_height: 100)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Layers::LayerGroup (class)">LayerGroup</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of LayerGroup.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;map&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#name-instance_method" title="Zif::Layers::LayerGroup#name (method)">#name</a></span> The name of the layer group</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tile_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>64</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#tile_width-instance_method" title="Zif::Layers::LayerGroup#tile_width (method)">#tile_width</a></span> Pixel width of each tile</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tile_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>64</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#tile_height-instance_method" title="Zif::Layers::LayerGroup#tile_height (method)">#tile_height</a></span> Pixel height of each tile</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logical_width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>100</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#logical_width-instance_method" title="Zif::Layers::LayerGroup#logical_width (method)">#logical_width</a></span> Integer multiple of tiles.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logical_height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>100</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#logical_height-instance_method" title="Zif::Layers::LayerGroup#logical_height (method)">#logical_height</a></span> Integer multiple of tiles.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>map</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+               <span class='label'>tile_width:</span> <span class='int'>64</span><span class='comma'>,</span>
+               <span class='label'>tile_height:</span> <span class='int'>64</span><span class='comma'>,</span>
+               <span class='label'>logical_width:</span> <span class='int'>100</span><span class='comma'>,</span>
+               <span class='label'>logical_height:</span> <span class='int'>100</span><span class='rparen'>)</span>
+  <span class='ivar'>@name</span>           <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@tile_width</span>     <span class='op'>=</span> <span class='id identifier rubyid_tile_width'>tile_width</span>
+  <span class='ivar'>@tile_height</span>    <span class='op'>=</span> <span class='id identifier rubyid_tile_height'>tile_height</span>
+  <span class='ivar'>@logical_width</span>  <span class='op'>=</span> <span class='id identifier rubyid_logical_width'>logical_width</span>
+  <span class='ivar'>@logical_height</span> <span class='op'>=</span> <span class='id identifier rubyid_logical_height'>logical_height</span>
+  <span class='ivar'>@z_index</span>        <span class='op'>=</span> <span class='int'>0</span>
+
+  <span class='ivar'>@layers</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+  <span class='ivar'>@tracer_service_name</span> <span class='op'>=</span> <span class='symbol'>:tracer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="layers=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="layers-instance_method">
+  
+    #<strong>layers</strong>  &#x21d2; <tt>Hash&lt;(Symbol, String), <span class='object_link'><a href="Layerable.html" title="Zif::Layers::Layerable (module)">Zif::Layers::Layerable</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns All of the layers in this group, indexed by their name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;(Symbol, String), <span class='object_link'><a href="Layerable.html" title="Zif::Layers::Layerable (module)">Zif::Layers::Layerable</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>All of the layers in this group, indexed by their name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_layers'>layers</span>
+  <span class='ivar'>@layers</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logical_height=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="logical_height-instance_method">
+  
+    #<strong>logical_height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Integer multiple of tiles.  How many tiles high is the whole map?.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Integer multiple of tiles.  How many tiles high is the whole map?</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logical_height'>logical_height</span>
+  <span class='ivar'>@logical_height</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logical_width=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="logical_width-instance_method">
+  
+    #<strong>logical_width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Integer multiple of tiles.  How many tiles wide is the whole map?.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Integer multiple of tiles.  How many tiles wide is the whole map?</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logical_width'>logical_width</span>
+  <span class='ivar'>@logical_width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>Symbol</tt>, <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The name of the layer group.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the layer group</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="tile_height=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tile_height-instance_method">
+  
+    #<strong>tile_height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Pixel height of each tile.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pixel height of each tile</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 44</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tile_height'>tile_height</span>
+  <span class='ivar'>@tile_height</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="tile_width=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tile_width-instance_method">
+  
+    #<strong>tile_width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Pixel width of each tile.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Pixel width of each tile</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tile_width'>tile_width</span>
+  <span class='ivar'>@tile_width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="z_index-instance_method">
+  
+    #<strong>z_index</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The current stacking layer index.  Starts at <code>0</code> and is incremented for every new layer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current stacking layer index.  Starts at <code>0</code> and is incremented for every new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_z_index'>z_index</span>
+  <span class='ivar'>@z_index</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_layer-instance_method">
+  
+    #<strong>add_layer</strong>(name, layer)  &#x21d2; <tt><span class='object_link'><a href="Layerable.html" title="Zif::Layers::Layerable (module)">Zif::Layers::Layerable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds a layer to the layer group.  Registers it in <span class='object_link'><a href="#layers-instance_method" title="Zif::Layers::LayerGroup#layers (method)">#layers</a></span> and increments <span class='object_link'><a href="#z_index-instance_method" title="Zif::Layers::LayerGroup#z_index (method)">#z_index</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Layerable.html" title="Zif::Layers::Layerable (module)">Zif::Layers::Layerable</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='rparen'>)</span>
+  <span class='ivar'>@layers</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_layer'>layer</span>
+  <span class='ivar'>@z_index</span> <span class='op'>+=</span> <span class='int'>1</span>
+  <span class='kw'>return</span> <span class='ivar'>@layers</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="force_refresh-instance_method">
+  
+    #<strong>force_refresh</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Iterate through each in <span class='object_link'><a href="#layers-instance_method" title="Zif::Layers::LayerGroup#layers (method)">#layers</a></span>, set <code>should_render</code> to true, rerender, and set it back to what it was Useful for first-time setup of render targets, during init</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187
+188
+189
+190
+191
+192
+193
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 187</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_force_refresh'>force_refresh</span>
+  <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid__name'>_name</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='op'>|</span>
+    <span class='id identifier rubyid_render_setting'>render_setting</span> <span class='op'>=</span> <span class='id identifier rubyid_layer'>layer</span><span class='period'>.</span><span class='id identifier rubyid_should_render'>should_render</span>
+    <span class='id identifier rubyid_layer'>layer</span><span class='period'>.</span><span class='id identifier rubyid_should_render'>should_render</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id identifier rubyid_layer'>layer</span><span class='period'>.</span><span class='id identifier rubyid_rerender'>rerender</span>
+    <span class='id identifier rubyid_layer'>layer</span><span class='period'>.</span><span class='id identifier rubyid_should_render'>should_render</span> <span class='op'>=</span> <span class='id identifier rubyid_render_setting'>render_setting</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="inspect-instance_method">
+  
+    #<strong>inspect</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+231
+232
+233</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 231</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="layer_containing_sprites-instance_method">
+  
+    #<strong>layer_containing_sprites</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The containing sprite for each layer. For active layers this returns the layer itself For simple layers it returns the render target containing_sprite.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The containing sprite for each layer. For active layers this returns the layer itself For simple layers it returns the render target containing_sprite</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+204
+205
+206</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 204</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_layer_containing_sprites'>layer_containing_sprites</span>
+  <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:containing_sprite</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="layer_names-instance_method">
+  
+    #<strong>layer_names</strong>  &#x21d2; <tt>Array&lt;Symbol, String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The names of each registered layer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol, String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The names of each registered layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 197</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_layer_names'>layer_names</span>
+  <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="logical_pos-instance_method">
+  
+    #<strong>logical_pos</strong>(x, y)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts pixel x/y to logical x/y (rounded down)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>With 16x16 tiles</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_logical_pos'>logical_pos</span><span class='lparen'>(</span><span class='int'>20</span><span class='comma'>,</span> <span class='int'>20</span><span class='rparen'>)</span> <span class='comment'># =&gt; [1, 1]</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The x position to convert to logical</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The y position to convert to logical</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The resulting logical point <tt>[logical_x, logical_y]</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+178
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 178</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logical_pos'>logical_pos</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span>
+    <span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span> <span class='op'>/</span> <span class='ivar'>@tile_width</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_floor'>floor</span><span class='comma'>,</span>
+    <span class='lparen'>(</span><span class='id identifier rubyid_y'>y</span> <span class='op'>/</span> <span class='ivar'>@tile_height</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_floor'>floor</span>
+  <span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_height-instance_method">
+  
+    #<strong>max_height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns <span class='object_link'><a href="#tile_height-instance_method" title="Zif::Layers::LayerGroup#tile_height (method)">#tile_height</a></span> times <span class='object_link'><a href="#logical_height-instance_method" title="Zif::Layers::LayerGroup#logical_height (method)">#logical_height</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#tile_height-instance_method" title="Zif::Layers::LayerGroup#tile_height (method)">#tile_height</a></span> times <span class='object_link'><a href="#logical_height-instance_method" title="Zif::Layers::LayerGroup#logical_height (method)">#logical_height</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 151</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_height'>max_height</span>
+  <span class='ivar'>@tile_height</span> <span class='op'>*</span> <span class='ivar'>@logical_height</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_width-instance_method">
+  
+    #<strong>max_width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns <span class='object_link'><a href="#tile_width-instance_method" title="Zif::Layers::LayerGroup#tile_width (method)">#tile_width</a></span> times <span class='object_link'><a href="#logical_width-instance_method" title="Zif::Layers::LayerGroup#logical_width (method)">#logical_width</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#tile_width-instance_method" title="Zif::Layers::LayerGroup#tile_width (method)">#tile_width</a></span> times <span class='object_link'><a href="#logical_width-instance_method" title="Zif::Layers::LayerGroup#logical_width (method)">#logical_width</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_width'>max_width</span>
+  <span class='ivar'>@tile_width</span> <span class='op'>*</span> <span class='ivar'>@logical_width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="natural_rect-instance_method">
+  
+    #<strong>natural_rect</strong>(logical_x, logical_y, x_range, y_range)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts a <code>logical</code> rect to a natural one</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>With 16x16 tiles</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_natural_rect'>natural_rect</span><span class='lparen'>(</span><span class='int'>10</span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>1</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='comment'># =&gt; [160, 160, 16, 16]</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>logical_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The logical x position to start the rect at</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logical_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The logical y position to start the rect at</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>x_range</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of tiles wide the rect contains</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y_range</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The number of tiles high the rect contains</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The resulting natural rect <tt>[x, y, w, h]</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_natural_rect'>natural_rect</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='comma'>,</span> <span class='id identifier rubyid_x_range'>x_range</span><span class='comma'>,</span> <span class='id identifier rubyid_y_range'>y_range</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span>
+    <span class='id identifier rubyid_logical_x'>logical_x</span> <span class='op'>*</span> <span class='ivar'>@tile_width</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_logical_y'>logical_y</span> <span class='op'>*</span> <span class='ivar'>@tile_width</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_x_range'>x_range</span> <span class='op'>*</span> <span class='ivar'>@tile_width</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_y_range'>y_range</span> <span class='op'>*</span> <span class='ivar'>@tile_width</span>
+  <span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_active_bitmasked_tiled_layer-instance_method">
+  
+    #<strong>new_active_bitmasked_tiled_layer</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">Zif::Layers::ActiveBitmaskedTiledLayer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">ActiveBitmaskedTiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">Zif::Layers::ActiveBitmaskedTiledLayer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 141</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_active_bitmasked_tiled_layer'>new_active_bitmasked_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">ActiveBitmaskedTiledLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_active_layer-instance_method">
+  
+    #<strong>new_active_layer</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">Zif::Layers::ActiveLayer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">Zif::Layers::ActiveLayer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_active_layer'>new_active_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_active_tiled_layer-instance_method">
+  
+    #<strong>new_active_tiled_layer</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">Zif::Layers::ActiveTiledLayer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">ActiveTiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">Zif::Layers::ActiveTiledLayer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_active_tiled_layer'>new_active_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">ActiveTiledLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_bitmasked_tiled_layer-instance_method">
+  
+    #<strong>new_bitmasked_tiled_layer</strong>(name, render_only_visible: false)  &#x21d2; <tt><span class='object_link'><a href="BitmaskedTiledLayer.html" title="Zif::Layers::BitmaskedTiledLayer (class)">Zif::Layers::BitmaskedTiledLayer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="BitmaskedTiledLayer.html" title="Zif::Layers::BitmaskedTiledLayer (class)">BitmaskedTiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the new layer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>render_only_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>When rerendering, should this layer use <code>#visible_sprites</code>?</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BitmaskedTiledLayer.html" title="Zif::Layers::BitmaskedTiledLayer (class)">Zif::Layers::BitmaskedTiledLayer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+131
+132
+133
+134
+135
+136</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 131</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_bitmasked_tiled_layer'>new_bitmasked_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BitmaskedTiledLayer.html" title="Zif::Layers::BitmaskedTiledLayer (class)">BitmaskedTiledLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="SimpleLayer.html#initialize-instance_method" title="Zif::Layers::SimpleLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='id identifier rubyid_render_only_visible'>render_only_visible</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_simple_layer-instance_method">
+  
+    #<strong>new_simple_layer</strong>(name, render_only_visible: false, clear_sprites_after_draw: false)  &#x21d2; <tt><span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">Zif::Layers::SimpleLayer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the layer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>render_only_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>When rerendering, should this layer use <code>#visible_sprites</code>?</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clear_sprites_after_draw</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>When rerendering, should this layer clear the <tt>@sprites</tt> array?</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">Zif::Layers::SimpleLayer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_simple_layer'>new_simple_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>clear_sprites_after_draw:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="SimpleLayer.html#initialize-instance_method" title="Zif::Layers::SimpleLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+      <span class='kw'>self</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+      <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='comma'>,</span>
+      <span class='label'>render_only_visible:</span> <span class='id identifier rubyid_render_only_visible'>render_only_visible</span><span class='comma'>,</span>
+      <span class='label'>clear_sprites_after_draw:</span> <span class='id identifier rubyid_clear_sprites_after_draw'>clear_sprites_after_draw</span>
+    <span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_tiled_layer-instance_method">
+  
+    #<strong>new_tiled_layer</strong>(name, render_only_visible: false)  &#x21d2; <tt><span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">Zif::Layers::TiledLayer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">TiledLayer</a></span> and sends it through <span class='object_link'><a href="#add_layer-instance_method" title="Zif::Layers::LayerGroup#add_layer (method)">#add_layer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the new layer</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>render_only_visible</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>When rerendering, should this layer use <code>#visible_sprites</code>?</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">Zif::Layers::TiledLayer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The new layer</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+113
+114
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 113</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_tiled_layer'>new_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">TiledLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="SimpleLayer.html#initialize-instance_method" title="Zif::Layers::SimpleLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='id identifier rubyid_render_only_visible'>render_only_visible</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="refresh-instance_method">
+  
+    #<strong>refresh</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calls <code>#rerender</code> on each in <span class='object_link'><a href="#layers-instance_method" title="Zif::Layers::LayerGroup#layers (method)">#layers</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+209
+210
+211
+212
+213
+214
+215
+216
+217</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 209</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_refresh'>refresh</span>
+  <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_layer_name'>layer_name</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='op'>|</span>
+    <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#refresh: Rerendering </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_layer_name'>layer_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_layer'>layer</span><span class='period'>.</span><span class='id identifier rubyid_rerender'>rerender</span>
+    <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#refresh: Rerendered </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_layer_name'>layer_name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#refresh: Rerendered all layers</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="serialize-instance_method">
+  
+    #<strong>serialize</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 219</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_serialize'>serialize</span>
+  <span class='lbrace'>{</span>
+    <span class='label'>name:</span>           <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='label'>tile_width:</span>     <span class='id identifier rubyid_tile_width'>tile_width</span><span class='comma'>,</span>
+    <span class='label'>tile_height:</span>    <span class='id identifier rubyid_tile_height'>tile_height</span><span class='comma'>,</span>
+    <span class='label'>logical_width:</span>  <span class='id identifier rubyid_logical_width'>logical_width</span><span class='comma'>,</span>
+    <span class='label'>logical_height:</span> <span class='id identifier rubyid_logical_height'>logical_height</span><span class='comma'>,</span>
+    <span class='label'>z_index:</span>        <span class='id identifier rubyid_z_index'>z_index</span><span class='comma'>,</span>
+    <span class='label'>layers:</span>         <span class='id identifier rubyid_layers'>layers</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+235
+236
+237</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 235</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Feb 28 17:07:56 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

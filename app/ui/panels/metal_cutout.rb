@@ -1,12 +1,12 @@
 module ExampleApp
   # The Kenney UI Space pack included this inset cutout, desgned to partition the metal panel.
   # This is a nine-slice where the left/right/bottom edges are just fill and don't need to be defined.
-  class MetalCutout < Zif::NinePanel
+  class MetalCutout < Zif::UI::NinePanel
     SPRITES_PATH = 'sprites/kenney-uipack-space/danhealy-modified'.freeze
     TOP_WIDTH = 7
     BOTTOM_WIDTH = 6
 
-    def initialize(width, height, name=Zif.random_name('metal_cutout'))
+    def initialize(width, height, name=Zif.unique_name('metal_cutout'))
       super(name)
 
       self.upper_left_corner = Zif::Sprite.new.tap do |s|

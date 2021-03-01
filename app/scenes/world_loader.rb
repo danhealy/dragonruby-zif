@@ -15,7 +15,7 @@ module ExampleApp
       @floor_progress.x = 320
       @floor_progress.y = 340
 
-      @floor_label = FutureLabel.new('Generating Floor...', 0, 1).tap do |l|
+      @floor_label = FutureLabel.new('Generating Floor...', size: 0, alignment: :center).tap do |l|
         l.x = 640
         l.y = 400
         l.r = 255
@@ -32,7 +32,7 @@ module ExampleApp
       )
       @stuff_progress.x = 320
       @stuff_progress.y = 240
-      @stuff_label = FutureLabel.new('Generating Stuff...', 0, 1).tap do |l|
+      @stuff_label = FutureLabel.new('Generating Stuff...', size: 0, alignment: :center).tap do |l|
         l.x = 640
         l.y = 300
         l.r = 255

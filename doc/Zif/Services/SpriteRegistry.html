@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::Services::SpriteRegistry
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Services::SpriteRegistry";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Services.html" title="Zif::Services (module)">Services</a></span></span>
+     &raquo; 
+    <span class="title">SpriteRegistry</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::Services::SpriteRegistry
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Zif::Services::SpriteRegistry</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/services/sprite_registry.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This service is for registering your sprite assets once, and assists in creating new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> instances from the parameters described when registering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Creating 20 copies of a basic sprite</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='symbol'>:dragon_1</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>82</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>66</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_my_dragons'>my_dragons</span> <span class='op'>=</span> <span class='int'>20</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='symbol'>:dragon_1</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='comment'># Every dragon in the above array will have path, w, h, source_w, source_h all set to sensible defaults.</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Creating 20 copies of a customized sprite</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='comment'># Starting from above
+</span><span class='id identifier rubyid_giant_dragon_prototype'>giant_dragon_prototype</span> <span class='op'>=</span> <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='symbol'>:dragon_1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_giant_dragon_prototype'>giant_dragon_prototype</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='id identifier rubyid_giant_dragon_prototype'>giant_dragon_prototype</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>*</span> <span class='int'>10</span>
+<span class='id identifier rubyid_giant_dragon_prototype'>giant_dragon_prototype</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='id identifier rubyid_giant_dragon_prototype'>giant_dragon_prototype</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>*</span> <span class='int'>10</span>
+
+<span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_add_sprite'>add_sprite</span><span class='lparen'>(</span><span class='symbol'>:giant_dragon</span><span class='comma'>,</span> <span class='id identifier rubyid_my_giant_dragon'>my_giant_dragon</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_my_giant_dragons'>my_giant_dragons</span> <span class='op'>=</span> <span class='int'>20</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='symbol'>:giant_dragon</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+
+<span class='comment'># We&#39;ve just added another sprite we can create by name.  :dragon_1 is still there if we want the basic version.</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#registry-instance_method" title="#registry (instance method)">#<strong>registry</strong>  &#x21d2; Hash&lt;(Symbol, String), Zif::Sprite&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The registry of your sprites.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      1. Public Interface
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_sprite-instance_method" title="#add_sprite (instance method)">#<strong>add_sprite</strong>(name, sprite)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add an already created sprite object to the registry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alias_sprite-instance_method" title="#alias_sprite (instance method)">#<strong>alias_sprite</strong>(name, alias_to)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#construct-instance_method" title="#construct (instance method)">#<strong>construct</strong>(name)  &#x21d2; Zif::Sprite, Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new copy of a sprite which has been previously registered, using <code>#dup</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; SpriteRegistry </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>——————.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_autotiles-instance_method" title="#register_autotiles (instance method)">#<strong>register_autotiles</strong>(name, width:, height:, edges: 48, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Some background on autotiling (note the author uses a different numbering scheme - NEWS instead of NESW) <a href="https://gamedevelopment.tutsplus.com/tutorials/cms-25673">gamedevelopment.tutsplus.com/tutorials/cms-25673</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_basic_sprite-instance_method" title="#register_basic_sprite (instance method)">#<strong>register_basic_sprite</strong>(name, width:, height:, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> which by convention is named the same as it&#39;s <code>path</code>, in “app/sprites/&lt;name&gt;.png” You can, of course, modify the prototype after creation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_registry-instance_method" title="#reset_registry (instance method)">#<strong>reset_registry</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Clears <span class='object_link'><a href="#registry-instance_method" title="Zif::Services::SpriteRegistry#registry (method)">#registry</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sprite_registered%3F-instance_method" title="#sprite_registered? (instance method)">#<strong>sprite_registered?</strong>(name)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does the registry have a sprite object with this name?.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      2. Private-ish methods
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#autotile_name_from_bits-instance_method" title="#autotile_name_from_bits (instance method)">#<strong>autotile_name_from_bits</strong>(bits)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Services::SpriteRegistry (class)">SpriteRegistry</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <hr>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='id identifier rubyid_reset_registry'>reset_registry</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="registry-instance_method">
+  
+    #<strong>registry</strong>  &#x21d2; <tt>Hash&lt;(Symbol, String), <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The registry of your sprites.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;(Symbol, String), <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The registry of your sprites</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_registry'>registry</span>
+  <span class='ivar'>@registry</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_sprite-instance_method">
+  
+    #<strong>add_sprite</strong>(name, sprite)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add an already created sprite object to the registry</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of your sprite, used with <span class='object_link'><a href="#construct-instance_method" title="Zif::Services::SpriteRegistry#construct (method)">#construct</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sprite</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span></tt>, <tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The sprite object to register.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_sprite'>add_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
+  <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="alias_sprite-instance_method">
+  
+    #<strong>alias_sprite</strong>(name, alias_to)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of an existing entry in the registry</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alias_to</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Another name to use for this sprite, with <span class='object_link'><a href="#construct-instance_method" title="Zif::Services::SpriteRegistry#construct (method)">#construct</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 52</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_alias_sprite'>alias_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_alias_to'>alias_to</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SpriteRegistry: No sprite named </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> in the registry</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+
+  <span class='comment'># puts &quot;SpriteRegistry#alias_sprite: #{alias_to} is now an alias for #{name}&quot;
+</span>
+  <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_alias_to'>alias_to</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="autotile_name_from_bits-instance_method">
+  
+    #<strong>autotile_name_from_bits</strong>(bits)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 200</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_autotile_name_from_bits'>autotile_name_from_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_north</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_east</span><span class='tstring_end'>&#39;</span></span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_south</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_west</span><span class='tstring_end'>&#39;</span></span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>8</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_ne</span><span class='tstring_end'>&#39;</span></span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>16</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_se</span><span class='tstring_end'>&#39;</span></span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>32</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_sw</span><span class='tstring_end'>&#39;</span></span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>64</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+  <span class='id identifier rubyid_direction_name'>direction_name</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_nw</span><span class='tstring_end'>&#39;</span></span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_bits'>bits</span> <span class='op'>&amp;</span> <span class='int'>128</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+
+  <span class='id identifier rubyid_direction_name'>direction_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="construct-instance_method">
+  
+    #<strong>construct</strong>(name)  &#x21d2; <tt><span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span></tt>, <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new copy of a sprite which has been previously registered, using <code>#dup</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of an existing entry in the registry</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span></tt>, <tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The retrieved sprite</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+189
+190
+191
+192
+193
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 189</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SpriteRegistry: No sprite named </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> in the registry</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid sprite in registry: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:dup</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@registry</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_autotiles-instance_method">
+  
+    #<strong>register_autotiles</strong>(name, width:, height:, edges: 48, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Some background on autotiling (note the author uses a different numbering scheme - NEWS instead of NESW) <a href="https://gamedevelopment.tutsplus.com/tutorials/cms-25673">gamedevelopment.tutsplus.com/tutorials/cms-25673</a></p>
+
+<p>This method will automatically register all of the tiles for autotiling with BitmaskedTiledLayer. It&#39;ll register every possible direction, aliasing the ones that don&#39;t actually exist to the ones that do, depending on the number of edges specified (16 for cardinal directions only, 48 for inside corners, or 256 for every possibility). This expects that the actual filenames are using cardinal directions &amp; diagonal directions, separated by underscores, in the following order:</p>
+
+<p>_north _east _south _west _ne _se _sw _nw</p>
+
+<p>It will also alias these to the raw bitmask value.</p>
+
+<p>Let&#39;s work through an example so this is clearer.  You are using a 48-tile set, so you have two different versions of the tile that has an adjacent tile to the north and east, either the corner is cut or not. The one where the corner is not cut - the only adjacent tiles are north, northeast and east - looks like |_ You need to have the file for this at “sprites/name_north_east_ne.png” From that one file, it will generate the following aliases:</p>
+<ul><li>
+<p>name_north_east_ne (the actual sprite)</p>
+</li><li>
+<p>All of the corner cases that don&#39;t actually exist because this is just the 48-set and not the full 256 name_north_east_ne_se, name_north_east_ne_sw, name_north_east_ne_nw, name_north_east_ne_se_sw, …</p>
+</li><li>
+<p>Both of the above, but using the raw bitmask integer instead of the cardinal directions: 1+2+16= name_19, 1+2+16+32= name_51, …</p>
+</li></ul>
+
+<p>rubocop:disable Metrics/PerceivedComplexity</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The prefix name of your autotiles, used with <span class='object_link'><a href="#construct-instance_method" title="Zif::Services::SpriteRegistry#construct (method)">#construct</a></span>, and the relative <code>path</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The width of a tile.  Used for <code>w</code> and <code>source_w</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The height of a tile.  Used for <code>h</code> and <code>source_h</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>edges</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>48</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The type of autotiling you are doing, must be <code>16</code>, <code>48</code> or <code>256</code> 16 for cardinal directions only 48 for inside corners 256 for every possibility</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Passed to each <span class='object_link'><a href="#register_basic_sprite-instance_method" title="Zif::Services::SpriteRegistry#register_basic_sprite (method)">#register_basic_sprite</a></span> constructor to set <tt>@on_mouse_down</tt> on each sprite.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_register_autotiles'>register_autotiles</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>width:</span><span class='comma'>,</span> <span class='label'>height:</span><span class='comma'>,</span> <span class='label'>edges:</span> <span class='int'>48</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='comment'># No edges:
+</span>  <span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='id identifier rubyid_height'>height</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_alias_sprite'>alias_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_0</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_aliases_to_create'>aliases_to_create</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_upto'>upto</span> <span class='int'>255</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='id identifier rubyid_north'>north</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_east'>east</span>  <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_south'>south</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_west'>west</span>  <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>8</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_ne'>ne</span>    <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>16</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_se'>se</span>    <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>32</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_sw'>sw</span>    <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>64</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+    <span class='id identifier rubyid_nw'>nw</span>    <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>128</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+
+    <span class='id identifier rubyid_cur_tile_name'>cur_tile_name</span>   <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_autotile_name_from_bits'>autotile_name_from_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+    <span class='id identifier rubyid_actual_i'>actual_i</span>        <span class='op'>=</span> <span class='kw'>nil</span>
+
+    <span class='kw'>case</span> <span class='id identifier rubyid_edges'>edges</span>
+    <span class='kw'>when</span> <span class='int'>16</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>&amp;</span> <span class='int'>31</span>
+    <span class='kw'>when</span> <span class='int'>48</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>-=</span> <span class='int'>16</span>  <span class='kw'>if</span> <span class='id identifier rubyid_ne'>ne</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_north'>north</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_east'>east</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>-=</span> <span class='int'>32</span>  <span class='kw'>if</span> <span class='id identifier rubyid_se'>se</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_south'>south</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_east'>east</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>-=</span> <span class='int'>64</span>  <span class='kw'>if</span> <span class='id identifier rubyid_sw'>sw</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_south'>south</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_west'>west</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>-=</span> <span class='int'>128</span> <span class='kw'>if</span> <span class='id identifier rubyid_nw'>nw</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_north'>north</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_west'>west</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_actual_tile_name'>actual_tile_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_autotile_name_from_bits'>autotile_name_from_bits</span><span class='lparen'>(</span><span class='id identifier rubyid_actual_i'>actual_i</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+    <span class='comment'># puts &quot;#{i} -&gt; #{actual_i}: #{cur_tile_name} -&gt; #{actual_tile_name}&quot;
+</span>
+    <span class='id identifier rubyid_bits_alias'>bits_alias</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_actual_i'>actual_i</span> <span class='op'>==</span> <span class='id identifier rubyid_i'>i</span>
+      <span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_cur_tile_name'>cur_tile_name</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='id identifier rubyid_height'>height</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_alias_sprite'>alias_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_cur_tile_name'>cur_tile_name</span><span class='comma'>,</span> <span class='id identifier rubyid_bits_alias'>bits_alias</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_aliases_to_create'>aliases_to_create</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_cur_tile_name'>cur_tile_name</span><span class='comma'>,</span> <span class='id identifier rubyid_bits_alias'>bits_alias</span><span class='comma'>,</span> <span class='id identifier rubyid_actual_tile_name'>actual_tile_name</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_aliases_to_create'>aliases_to_create</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='lparen'>(</span><span class='id identifier rubyid_cur_tile_name'>cur_tile_name</span><span class='comma'>,</span> <span class='id identifier rubyid_bits_alias'>bits_alias</span><span class='comma'>,</span> <span class='id identifier rubyid_alias_tile_from'>alias_tile_from</span><span class='rparen'>)</span><span class='op'>|</span>
+    <span class='id identifier rubyid_alias_sprite'>alias_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_alias_tile_from'>alias_tile_from</span><span class='comma'>,</span> <span class='id identifier rubyid_cur_tile_name'>cur_tile_name</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_alias_sprite'>alias_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_alias_tile_from'>alias_tile_from</span><span class='comma'>,</span> <span class='id identifier rubyid_bits_alias'>bits_alias</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_basic_sprite-instance_method">
+  
+    #<strong>register_basic_sprite</strong>(name, width:, height:, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> which by convention is named the same as it&#39;s <code>path</code>, in “app/sprites/&lt;name&gt;.png” You can, of course, modify the prototype after creation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Registering a basic sprite in some nested location within app/sprites</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='comment'># The sprite image is at &quot;app/sprites/assets/from_dragonrubygtk/the_ones_i_like_the_best/dragon_1.png&quot;
+</span><span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>assets/from_dragonrubygtk/the_ones_i_like_the_best/dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>width:</span> <span class='int'>82</span><span class='comma'>,</span>
+  <span class='label'>height:</span> <span class='int'>66</span>
+ <span class='rparen'>)</span>
+<span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_alias_sprite'>alias_sprite</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>assets/from_dragonrubygtk/the_ones_i_like_the_best/dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='symbol'>:dragon_1</span>
+<span class='rparen'>)</span>
+<span class='comment'># Now you can construct(:dragon_1) but it still has the very long path</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of your sprite, used with <span class='object_link'><a href="#construct-instance_method" title="Zif::Services::SpriteRegistry#construct (method)">#construct</a></span>, and the relative <code>path</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The width of the sprite.  Used for <code>w</code> and <code>source_w</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The height of the sprite.  Used for <code>h</code> and <code>source_h</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>width:</span><span class='comma'>,</span> <span class='label'>height:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_sprite'>sprite</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span>
+    <span class='lbrace'>{</span>
+      <span class='label'>w:</span>        <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span>
+      <span class='label'>h:</span>        <span class='id identifier rubyid_height'>height</span><span class='comma'>,</span>
+      <span class='label'>path:</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>.png</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='label'>angle:</span>    <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>a:</span>        <span class='int'>255</span><span class='comma'>,</span>
+      <span class='label'>r:</span>        <span class='int'>255</span><span class='comma'>,</span>
+      <span class='label'>g:</span>        <span class='int'>255</span><span class='comma'>,</span>
+      <span class='label'>b:</span>        <span class='int'>255</span><span class='comma'>,</span>
+      <span class='label'>source_x:</span> <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>source_y:</span> <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>source_w:</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span>
+      <span class='label'>source_h:</span> <span class='id identifier rubyid_height'>height</span>
+    <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='id identifier rubyid_add_sprite'>add_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset_registry-instance_method">
+  
+    #<strong>reset_registry</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Clears <span class='object_link'><a href="#registry-instance_method" title="Zif::Services::SpriteRegistry#registry (method)">#registry</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reset_registry'>reset_registry</span>
+  <span class='ivar'>@registry</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sprite_registered?-instance_method">
+  
+    #<strong>sprite_registered?</strong>(name)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Does the registry have a sprite object with this name?.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the sprite to check for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Does the registry have a sprite object with this name?</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/sprite_registry.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sprite_registered?'>sprite_registered?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='ivar'>@registry</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Feb 28 17:07:57 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

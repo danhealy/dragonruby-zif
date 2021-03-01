@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::Layers::ActiveTiledLayer
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Layers::ActiveTiledLayer";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span>
+     &raquo; 
+    <span class="title">ActiveTiledLayer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::Layers::ActiveTiledLayer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span></li>
+          
+            <li class="next">Zif::Layers::ActiveTiledLayer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/layers/active_tiled_layer.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Designed to be used with <span class='object_link'><a href="LayerGroup.html" title="Zif::Layers::LayerGroup (class)">LayerGroup</a></span>. A layer consisting of an initially empty 2D array of sprites Overrides to <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> which understand this 2D array <span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span>, built on top of a <span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">TiledLayer</a></span></li>
+    
+      <li><span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+
+
+
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="Layerable.html" title="Zif::Layers::Layerable (module)">Layerable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Layerable.html#layer_name-instance_method" title="Zif::Layers::Layerable#layer_name (method)">#layer_name</a></span>, <span class='object_link'><a href="Layerable.html#map-instance_method" title="Zif::Layers::Layerable#map (method)">#map</a></span>, <span class='object_link'><a href="Layerable.html#should_render-instance_method" title="Zif::Layers::Layerable#should_render (method)">#should_render</a></span>, <span class='object_link'><a href="Layerable.html#z_index-instance_method" title="Zif::Layers::Layerable#z_index (method)">#z_index</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../CompoundSprite.html#labels-instance_method" title="Zif::CompoundSprite#labels (method)">#labels</a></span>, <span class='object_link'><a href="../CompoundSprite.html#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprite.html#a-instance_method" title="Zif::Sprite#a (method)">#a</a></span>, <span class='object_link'><a href="../Sprite.html#angle-instance_method" title="Zif::Sprite#angle (method)">#angle</a></span>, <span class='object_link'><a href="../Sprite.html#b-instance_method" title="Zif::Sprite#b (method)">#b</a></span>, <span class='object_link'><a href="../Sprite.html#g-instance_method" title="Zif::Sprite#g (method)">#g</a></span>, <span class='object_link'><a href="../Sprite.html#h-instance_method" title="Zif::Sprite#h (method)">#h</a></span>, <span class='object_link'><a href="../Sprite.html#logical_x-instance_method" title="Zif::Sprite#logical_x (method)">#logical_x</a></span>, <span class='object_link'><a href="../Sprite.html#logical_y-instance_method" title="Zif::Sprite#logical_y (method)">#logical_y</a></span>, <span class='object_link'><a href="../Sprite.html#name-instance_method" title="Zif::Sprite#name (method)">#name</a></span>, <span class='object_link'><a href="../Sprite.html#path-instance_method" title="Zif::Sprite#path (method)">#path</a></span>, <span class='object_link'><a href="../Sprite.html#r-instance_method" title="Zif::Sprite#r (method)">#r</a></span>, <span class='object_link'><a href="../Sprite.html#render_target-instance_method" title="Zif::Sprite#render_target (method)">#render_target</a></span>, <span class='object_link'><a href="../Sprite.html#source_h-instance_method" title="Zif::Sprite#source_h (method)">#source_h</a></span>, <span class='object_link'><a href="../Sprite.html#source_w-instance_method" title="Zif::Sprite#source_w (method)">#source_w</a></span>, <span class='object_link'><a href="../Sprite.html#source_x-instance_method" title="Zif::Sprite#source_x (method)">#source_x</a></span>, <span class='object_link'><a href="../Sprite.html#source_y-instance_method" title="Zif::Sprite#source_y (method)">#source_y</a></span>, <span class='object_link'><a href="../Sprite.html#w-instance_method" title="Zif::Sprite#w (method)">#w</a></span>, <span class='object_link'><a href="../Sprite.html#x-instance_method" title="Zif::Sprite#x (method)">#x</a></span>, <span class='object_link'><a href="../Sprite.html#y-instance_method" title="Zif::Sprite#y (method)">#y</a></span>, <span class='object_link'><a href="../Sprite.html#z_index-instance_method" title="Zif::Sprite#z_index (method)">#z_index</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="../Clickable.html" title="Zif::Clickable (module)">Clickable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Clickable.html#on_mouse_changed-instance_method" title="Zif::Clickable#on_mouse_changed (method)">#on_mouse_changed</a></span>, <span class='object_link'><a href="../Clickable.html#on_mouse_down-instance_method" title="Zif::Clickable#on_mouse_down (method)">#on_mouse_down</a></span>, <span class='object_link'><a href="../Clickable.html#on_mouse_up-instance_method" title="Zif::Clickable#on_mouse_up (method)">#on_mouse_up</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="../Actions/Animatable.html" title="Zif::Actions::Animatable (module)">Actions::Animatable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#animation_sequences-instance_method" title="Zif::Actions::Animatable#animation_sequences (method)">#animation_sequences</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#cur_animation-instance_method" title="Zif::Actions::Animatable#cur_animation (method)">#cur_animation</a></span></p>
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="../Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Actionable.html#actions-instance_method" title="Zif::Actions::Actionable#actions (method)">#actions</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#dirty-instance_method" title="Zif::Actions::Actionable#dirty (method)">#dirty</a></span></p>
+
+
+
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Tileable.html#add_positioned_sprite-instance_method" title="Zif::Layers::Tileable#add_positioned_sprite (method)">#add_positioned_sprite</a></span>, <span class='object_link'><a href="Tileable.html#exclude_from_serialize-instance_method" title="Zif::Layers::Tileable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Tileable.html#intersecting_sprites-instance_method" title="Zif::Layers::Tileable#intersecting_sprites (method)">#intersecting_sprites</a></span>, <span class='object_link'><a href="Tileable.html#reinitialize_sprites-instance_method" title="Zif::Layers::Tileable#reinitialize_sprites (method)">#reinitialize_sprites</a></span>, <span class='object_link'><a href="Tileable.html#remove_positioned_sprite-instance_method" title="Zif::Layers::Tileable#remove_positioned_sprite (method)">#remove_positioned_sprite</a></span>, <span class='object_link'><a href="Tileable.html#remove_tile-instance_method" title="Zif::Layers::Tileable#remove_tile (method)">#remove_tile</a></span>, <span class='object_link'><a href="Tileable.html#tile-instance_method" title="Zif::Layers::Tileable#tile (method)">#tile</a></span>, <span class='object_link'><a href="Tileable.html#tile_pos_to_sprite_index-instance_method" title="Zif::Layers::Tileable#tile_pos_to_sprite_index (method)">#tile_pos_to_sprite_index</a></span>, <span class='object_link'><a href="Tileable.html#visible_sprites-instance_method" title="Zif::Layers::Tileable#visible_sprites (method)">#visible_sprites</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ActiveLayer.html#add_positioned_sprite-instance_method" title="Zif::Layers::ActiveLayer#add_positioned_sprite (method)">#add_positioned_sprite</a></span>, <span class='object_link'><a href="ActiveLayer.html#containing_sprite-instance_method" title="Zif::Layers::ActiveLayer#containing_sprite (method)">#containing_sprite</a></span>, <span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="ActiveLayer.html#reinitialize_sprites-instance_method" title="Zif::Layers::ActiveLayer#reinitialize_sprites (method)">#reinitialize_sprites</a></span>, <span class='object_link'><a href="ActiveLayer.html#remove_sprite-instance_method" title="Zif::Layers::ActiveLayer#remove_sprite (method)">#remove_sprite</a></span>, <span class='object_link'><a href="ActiveLayer.html#rerender-instance_method" title="Zif::Layers::ActiveLayer#rerender (method)">#rerender</a></span>, <span class='object_link'><a href="ActiveLayer.html#source_sprites-instance_method" title="Zif::Layers::ActiveLayer#source_sprites (method)">#source_sprites</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Layerable.html" title="Zif::Layers::Layerable (module)">Layerable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Layerable.html#clicked%3F-instance_method" title="Zif::Layers::Layerable#clicked? (method)">#clicked?</a></span>, <span class='object_link'><a href="Layerable.html#exclude_from_serialize-instance_method" title="Zif::Layers::Layerable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="Layerable.html#intersecting_sprites-instance_method" title="Zif::Layers::Layerable#intersecting_sprites (method)">#intersecting_sprites</a></span>, <span class='object_link'><a href="Layerable.html#position_sprite-instance_method" title="Zif::Layers::Layerable#position_sprite (method)">#position_sprite</a></span>, <span class='object_link'><a href="Layerable.html#remove_positioned_sprite-instance_method" title="Zif::Layers::Layerable#remove_positioned_sprite (method)">#remove_positioned_sprite</a></span>, <span class='object_link'><a href="Layerable.html#target_layer_name-instance_method" title="Zif::Layers::Layerable#target_layer_name (method)">#target_layer_name</a></span>, <span class='object_link'><a href="Layerable.html#visible_sprites-instance_method" title="Zif::Layers::Layerable#visible_sprites (method)">#visible_sprites</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../CompoundSprite.html#draw_override-instance_method" title="Zif::CompoundSprite#draw_override (method)">#draw_override</a></span>, <span class='object_link'><a href="../CompoundSprite.html#initialize-instance_method" title="Zif::CompoundSprite#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../CompoundSprite.html#source_rect-instance_method" title="Zif::CompoundSprite#source_rect (method)">#source_rect</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprite.html#center-instance_method" title="Zif::Sprite#center (method)">#center</a></span>, <span class='object_link'><a href="../Sprite.html#center_x-instance_method" title="Zif::Sprite#center_x (method)">#center_x</a></span>, <span class='object_link'><a href="../Sprite.html#center_y-instance_method" title="Zif::Sprite#center_y (method)">#center_y</a></span>, <span class='object_link'><a href="../Sprite.html#clicked%3F-instance_method" title="Zif::Sprite#clicked? (method)">#clicked?</a></span>, <span class='object_link'><a href="../Sprite.html#color-instance_method" title="Zif::Sprite#color (method)">#color</a></span>, <span class='object_link'><a href="../Sprite.html#dup_and_assign-instance_method" title="Zif::Sprite#dup_and_assign (method)">#dup_and_assign</a></span>, <span class='object_link'><a href="../Sprite.html#hide-instance_method" title="Zif::Sprite#hide (method)">#hide</a></span>, <span class='object_link'><a href="../Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Sprite.html#rect-instance_method" title="Zif::Sprite#rect (method)">#rect</a></span>, <span class='object_link'><a href="../Sprite.html#rect_array_to_hash-class_method" title="Zif::Sprite.rect_array_to_hash (method)">rect_array_to_hash</a></span>, <span class='object_link'><a href="../Sprite.html#rect_array_to_source_hash-class_method" title="Zif::Sprite.rect_array_to_source_hash (method)">rect_array_to_source_hash</a></span>, <span class='object_link'><a href="../Sprite.html#rect_hash-instance_method" title="Zif::Sprite#rect_hash (method)">#rect_hash</a></span>, <span class='object_link'><a href="../Sprite.html#rect_hash_to_source_hash-class_method" title="Zif::Sprite.rect_hash_to_source_hash (method)">rect_hash_to_source_hash</a></span>, <span class='object_link'><a href="../Sprite.html#show-instance_method" title="Zif::Sprite#show (method)">#show</a></span>, <span class='object_link'><a href="../Sprite.html#source_as_rect_hash-instance_method" title="Zif::Sprite#source_as_rect_hash (method)">#source_as_rect_hash</a></span>, <span class='object_link'><a href="../Sprite.html#source_center-instance_method" title="Zif::Sprite#source_center (method)">#source_center</a></span>, <span class='object_link'><a href="../Sprite.html#source_is_set%3F-instance_method" title="Zif::Sprite#source_is_set? (method)">#source_is_set?</a></span>, <span class='object_link'><a href="../Sprite.html#source_rect-instance_method" title="Zif::Sprite#source_rect (method)">#source_rect</a></span>, <span class='object_link'><a href="../Sprite.html#source_rect_hash-instance_method" title="Zif::Sprite#source_rect_hash (method)">#source_rect_hash</a></span>, <span class='object_link'><a href="../Sprite.html#source_wh-instance_method" title="Zif::Sprite#source_wh (method)">#source_wh</a></span>, <span class='object_link'><a href="../Sprite.html#source_xy-instance_method" title="Zif::Sprite#source_xy (method)">#source_xy</a></span>, <span class='object_link'><a href="../Sprite.html#to_h-instance_method" title="Zif::Sprite#to_h (method)">#to_h</a></span>, <span class='object_link'><a href="../Sprite.html#view_actual_size!-instance_method" title="Zif::Sprite#view_actual_size! (method)">#view_actual_size!</a></span>, <span class='object_link'><a href="../Sprite.html#wh-instance_method" title="Zif::Sprite#wh (method)">#wh</a></span>, <span class='object_link'><a href="../Sprite.html#xy-instance_method" title="Zif::Sprite#xy (method)">#xy</a></span>, <span class='object_link'><a href="../Sprite.html#zoom_factor-instance_method" title="Zif::Sprite#zoom_factor (method)">#zoom_factor</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Clickable.html" title="Zif::Clickable (module)">Clickable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Clickable.html#absorb_click%3F-instance_method" title="Zif::Clickable#absorb_click? (method)">#absorb_click?</a></span>, <span class='object_link'><a href="../Clickable.html#clicked%3F-instance_method" title="Zif::Clickable#clicked? (method)">#clicked?</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Actions/Animatable.html" title="Zif::Actions::Animatable (module)">Actions::Animatable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Actionable.html#bounce_forever_around-instance_method" title="Zif::Actions::Actionable#bounce_forever_around (method)">#bounce_forever_around</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#delayed_action-instance_method" title="Zif::Actions::Actionable#delayed_action (method)">#delayed_action</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#fade_in-instance_method" title="Zif::Actions::Actionable#fade_in (method)">#fade_in</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#fade_out-instance_method" title="Zif::Actions::Actionable#fade_out (method)">#fade_out</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#fade_out_and_in_forever-instance_method" title="Zif::Actions::Actionable#fade_out_and_in_forever (method)">#fade_out_and_in_forever</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#new_action-instance_method" title="Zif::Actions::Actionable#new_action (method)">#new_action</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#perform_actions-instance_method" title="Zif::Actions::Actionable#perform_actions (method)">#perform_actions</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#run_action-instance_method" title="Zif::Actions::Actionable#run_action (method)">#run_action</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#running_actions%3F-instance_method" title="Zif::Actions::Actionable#running_actions? (method)">#running_actions?</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#stop_action-instance_method" title="Zif::Actions::Actionable#stop_action (method)">#stop_action</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Serializable.html#exclude_from_serialize-instance_method" title="Zif::Serializable#exclude_from_serialize (method)">#exclude_from_serialize</a></span>, <span class='object_link'><a href="../Serializable.html#inspect-instance_method" title="Zif::Serializable#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="../Serializable.html#serialize-instance_method" title="Zif::Serializable#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="../Serializable.html#to_s-instance_method" title="Zif::Serializable#to_s (method)">#to_s</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Assignable.html" title="Zif::Assignable (module)">Assignable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Assignable.html#assign-instance_method" title="Zif::Assignable#assign (method)">#assign</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">Zif::Layers::ActiveLayer</a></span></p>
+  
+</div>
+
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Feb 28 17:07:57 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

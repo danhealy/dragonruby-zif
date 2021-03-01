@@ -73,7 +73,7 @@ end
 
 You can give Sprites a `name` - this is used directly by `Zif::SpriteRegistry`, etc.
 
-A `Zif::Sprite` has attribtues for `logical_x/y`.  These can be used to assign a position to the sprite independent of the pixel size.  For example, `Zif::TiledLayer` uses these attributes to position a tile relative to other tiles, independently of tile pixel size.
+A `Zif::Sprite` has attribtues for `logical_x/y`.  These can be used to assign a position to the sprite independent of the pixel size.  For example, `Zif::Layers::TiledLayer` uses these attributes to position a tile relative to other tiles, independently of tile pixel size.
 
 It has a `z` attribute, `on_mouse_[down/changed/up]` attributes, and it implements `#clicked?` - These are used by the `Zif::InputService`.
 
@@ -287,19 +287,19 @@ a_new_tile = Zif::Sprite.new....
 $gtk.args.outputs.static_sprites << @camera.layers
 ```
 
-### Zif::SimpleLayer
+### Zif::Layers::SimpleLayer
 
 Designed to be used with `Zif::LayeredTileMap`, this is an extension of `RenderTarget` where `source_sprites` is a simple flat array.  Uses natural x/y positioning, and `visible_sprites` is a simple `select` of sprites which `intersect_rect?`.
 
 Defines the `#redraw_from_buffer` method described above.
 
-### Zif::ActiveLayer
+### Zif::Layers::ActiveLayer
 Acts like `SimpleLayer` but is implemented using `CompoundSprite` instead of `RenderTarget`.  The `source_sprites` will be drawn on **every** tick, so use this for layers which have low sprite counts but which need to be redrawn frequently (like the player character).
 
-### Zif::TiledLayer
+### Zif::Layers::TiledLayer
 A subclass of `SimpleLayer`, this redefines `source_sprites` as a 2-dimensional array, indexed by logical (tile) position.
 
-### Zif::BitmaskedTiledLayer
+### Zif::Layers::BitmaskedTiledLayer
 A TiledLayer where the sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.  This class expects that you've registered your autotile images using a `SpriteRegistry` available at `$services[:sprite_registry]`.  See `Zif::SpriteRegistry#register_autotiles`
 
 ### Zif::Camera
@@ -334,7 +334,7 @@ On each tick, `#process_click` should be run, which will detect clicks and pass 
 
 `Zif::RenderTarget` also defines `#clicked?`, and passes clicks down to the component `@sprites` and `@primitives` of the render target.
 
-`Zif::SimpleLayer` defines `#clicked?` and uses its `#visible_sprites` method to decide which component `@source_sprites` need to be checked for clicks.
+`Zif::Layers::SimpleLayer` defines `#clicked?` and uses its `#visible_sprites` method to decide which component `@source_sprites` need to be checked for clicks.
 
 `#register_scrollable`, is analogous to `#register_clickable` but for the scroll wheel. `#scrolled?` is expected to be defined, and it receives the mouse point and the direction of scrolling as arguments.  Only `Zif::Camera` defines `#scrolled?` out of the box.
 
@@ -346,7 +346,7 @@ This service allows you to register prototypes of assets as `Zif::Sprites`.
 
 The following code will create a `Zif::Sprite` with w/h of 82px and 66px, referencing a `path` of `sprites/dragon_1.png`.  The second line demonstrates getting a fresh `Zif::Sprite` copy with these settings.
 ```ruby
-$services[:sprite_registry].register_basic_sprite("dragon_1", 82, 66)
+$services[:sprite_registry].register_basic_sprite("dragon_1", width: 82, height: 66)
 @dragon = $services[:sprite_registry].construct("dragon_1")
 ```
 
@@ -354,7 +354,7 @@ $services[:sprite_registry].register_basic_sprite("dragon_1", 82, 66)
 
 You can setup an alias for a registered sprite by using `#alias_sprite`
 
-You can automatically register images used for autotiling / `Zif::BitmaskedTiledLayer` using the `#register_autotiles` method.  See the comments at `Zif::BitmaskedTiledLayer` and `Zif::SpriteRegistry#register_autotiles`.
+You can automatically register images used for autotiling / `Zif::Layers::BitmaskedTiledLayer` using the `#register_autotiles` method.  See the comments at `Zif::Layers::BitmaskedTiledLayer` and `Zif::SpriteRegistry#register_autotiles`.
 
 ### Zif::TickTraceService
 Generally, you want your game to run at a full 60fps.  If your tick takes longer than 16.6ms, you'll drop below that number.  The TickTrace service is designed to report when a tick has taken longer than a threshold (20ms by default), and hopefully narrow down the slowest section of code. `#reset_tick` must be called at the beginning of a tick, and then `#finish` at the end.  If you use `Zif::Game`, this is done for you, all you need to do is `include Traceable` in any class you want to mark, set the `@tracer_service_name` ivar to `:tracer`, and then `mark('a section of code')`.  Since backtraces are not supplied in DRGTK, the best it can do is tell you the name of the class it was invoked in.  By convention, you should include the name of the method which calls `#mark`:  `mark('#my_method: a section of code')`

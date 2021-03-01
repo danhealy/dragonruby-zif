@@ -2,7 +2,7 @@ module ExampleApp
   # The Kenney UI Space pack contains these metal panels which have a colorful tab in the upper left.
   # This is a bit more complex than a normal nine-slice, since the top edge will actually have 3 parts
   # So we are using NinePanelEdge for this, and regular sprites for the other 8 sections.
-  class MetalPanel < Zif::NinePanel
+  class MetalPanel < Zif::UI::NinePanel
     attr_accessor :upper_edge_panel, :header
 
     SPRITES_PATH = 'sprites/kenney-uipack-space/danhealy-modified'.freeze
@@ -12,10 +12,10 @@ module ExampleApp
     SMALL_CORNER = 16
     TRANSITION_WIDTH = 12
 
-    def initialize(width, height, label=nil, color=:blue, name=Zif.random_name('metal_panel'))
+    def initialize(width, height, label=nil, color=:blue, name=Zif.unique_name('metal_panel'))
       super(name)
 
-      @upper_edge_panel = Zif::NinePanelEdge.new
+      @upper_edge_panel = Zif::UI::NinePanelEdge.new
       @upper_edge_panel.left_edge_height  = BIG_CORNER
       @upper_edge_panel.transition_height = BIG_CORNER
       @upper_edge_panel.transition_width  = TRANSITION_WIDTH
@@ -86,7 +86,7 @@ module ExampleApp
       end
 
       if label
-        @header = FutureLabel.new(label, -1, 0)
+        @header = FutureLabel.new(label, size: -1, alignment: :left)
         @header.x = 10
         @labels << @header
       end

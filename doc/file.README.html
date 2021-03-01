@@ -148,7 +148,7 @@
 
 <p>You can give Sprites a <code>name</code> - this is used directly by <code>Zif::SpriteRegistry</code>, etc.</p>
 
-<p>A <code>Zif::Sprite</code> has attribtues for <code>logical_x/y</code>.  These can be used to assign a position to the sprite independent of the pixel size.  For example, <code>Zif::TiledLayer</code> uses these attributes to position a tile relative to other tiles, independently of tile pixel size.</p>
+<p>A <code>Zif::Sprite</code> has attribtues for <code>logical_x/y</code>.  These can be used to assign a position to the sprite independent of the pixel size.  For example, <code>Zif::Layers::TiledLayer</code> uses these attributes to position a tile relative to other tiles, independently of tile pixel size.</p>
 
 <p>It has a <code>z</code> attribute, <code>on_mouse_[down/changed/up]</code> attributes, and it implements <code>#clicked?</code> - These are used by the <code>Zif::InputService</code>.</p>
 
@@ -388,21 +388,21 @@ a_new_tile = Zif::Sprite.new....
 $gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
 </code></pre>
 
-<h3 id="zif-simplelayer">Zif::SimpleLayer</h3>
+<h3 id="zif-layers-simplelayer">Zif::Layers::SimpleLayer</h3>
 
 <p>Designed to be used with <code>Zif::LayeredTileMap</code>, this is an extension of <code>RenderTarget</code> where <code>source_sprites</code> is a simple flat array.  Uses natural x/y positioning, and <code>visible_sprites</code> is a simple <code>select</code> of sprites which <code>intersect_rect?</code>.</p>
 
 <p>Defines the <code>#redraw_from_buffer</code> method described above.</p>
 
-<h3 id="zif-activelayer">Zif::ActiveLayer</h3>
+<h3 id="zif-layers-activelayer">Zif::Layers::ActiveLayer</h3>
 
 <p>Acts like <code>SimpleLayer</code> but is implemented using <code>CompoundSprite</code> instead of <code>RenderTarget</code>.  The <code>source_sprites</code> will be drawn on <strong>every</strong> tick, so use this for layers which have low sprite counts but which need to be redrawn frequently (like the player character).</p>
 
-<h3 id="zif-tiledlayer">Zif::TiledLayer</h3>
+<h3 id="zif-layers-tiledlayer">Zif::Layers::TiledLayer</h3>
 
 <p>A subclass of <code>SimpleLayer</code>, this redefines <code>source_sprites</code> as a 2-dimensional array, indexed by logical (tile) position.</p>
 
-<h3 id="zif-bitmaskedtiledlayer">Zif::BitmaskedTiledLayer</h3>
+<h3 id="zif-layers-bitmaskedtiledlayer">Zif::Layers::BitmaskedTiledLayer</h3>
 
 <p>A TiledLayer where the sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.  This class expects that you&#39;ve registered your autotile images using a <code>SpriteRegistry</code> available at <code>$services[:sprite_registry]</code>.  See <code>Zif::SpriteRegistry#register_autotiles</code></p>
 
@@ -443,7 +443,7 @@ $gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
 
 <p><code>Zif::RenderTarget</code> also defines <code>#clicked?</code>, and passes clicks down to the component <code>@sprites</code> and <code>@primitives</code> of the render target.</p>
 
-<p><code>Zif::SimpleLayer</code> defines <code>#clicked?</code> and uses its <code>#visible_sprites</code> method to decide which component <code>@source_sprites</code> need to be checked for clicks.</p>
+<p><code>Zif::Layers::SimpleLayer</code> defines <code>#clicked?</code> and uses its <code>#visible_sprites</code> method to decide which component <code>@source_sprites</code> need to be checked for clicks.</p>
 
 <p><code>#register_scrollable</code>, is analogous to <code>#register_clickable</code> but for the scroll wheel. <code>#scrolled?</code> is expected to be defined, and it receives the mouse point and the direction of scrolling as arguments.  Only <code>Zif::Camera</code> defines <code>#scrolled?</code> out of the box.</p>
 
@@ -455,7 +455,7 @@ $gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
 
 <p>The following code will create a <code>Zif::Sprite</code> with w/h of 82px and 66px, referencing a <code>path</code> of <code>sprites/dragon_1.png</code>.  The second line demonstrates getting a fresh <code>Zif::Sprite</code> copy with these settings.</p>
 
-<pre class="code ruby"><code class="ruby"><span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>82</span><span class='comma'>,</span> <span class='int'>66</span><span class='rparen'>)</span>
+<pre class="code ruby"><code class="ruby"><span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>82</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>66</span><span class='rparen'>)</span>
 <span class='ivar'>@dragon</span> <span class='op'>=</span> <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 </code></pre>
 
@@ -463,7 +463,7 @@ $gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
 
 <p>You can setup an alias for a registered sprite by using <code>#alias_sprite</code></p>
 
-<p>You can automatically register images used for autotiling / <code>Zif::BitmaskedTiledLayer</code> using the <code>#register_autotiles</code> method.  See the comments at <code>Zif::BitmaskedTiledLayer</code> and <code>Zif::SpriteRegistry#register_autotiles</code>.</p>
+<p>You can automatically register images used for autotiling / <code>Zif::Layers::BitmaskedTiledLayer</code> using the <code>#register_autotiles</code> method.  See the comments at <code>Zif::Layers::BitmaskedTiledLayer</code> and <code>Zif::SpriteRegistry#register_autotiles</code>.</p>
 
 <h3 id="zif-ticktraceservice">Zif::TickTraceService</h3>
 
@@ -495,7 +495,7 @@ Zif::TickTraceService: Slow tick.  59.609ms elapsed &gt;  20.000ms threshold, lo
 </div></div>
 
       <div id="footer">
-  Generated on Sun Feb 21 20:16:23 2021 by
+  Generated on Sun Feb 28 17:07:54 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

@@ -5,10 +5,10 @@ module ExampleApp
       super()
       @services[:tracer].measure_averages = true
       1.upto 4 do |i|
-        @services[:sprite_registry].register_basic_sprite("dragon_#{i}", 82, 66)
+        @services[:sprite_registry].register_basic_sprite("dragon_#{i}", width: 82, height: 66)
       end
-      @services[:sprite_registry].register_basic_sprite(:transparent_gray_32, 32, 32)
-      @services[:sprite_registry].register_basic_sprite(:white_1, 64, 64)
+      @services[:sprite_registry].register_basic_sprite(:transparent_gray_32, width: 32, height: 32)
+      @services[:sprite_registry].register_basic_sprite(:white_1, width: 64, height: 64)
 
       register_scene(:ui_sample, UISample)
       register_scene(:load_world, WorldLoader)

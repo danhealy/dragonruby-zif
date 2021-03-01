@@ -1,7 +1,8 @@
 module ExampleApp
   # Settings for the Kenney Future font
-  class FutureLabel < Zif::Label
+  class FutureLabel < Zif::UI::Label
     include Zif::Serializable
+
     FONT = 'sprites/kenney-uipack-space/Fonts/kenvector_future.ttf'.freeze
 
     COLOR = {
@@ -11,12 +12,8 @@ module ExampleApp
       a: 255
     }.freeze
 
-    def font
-      FONT
-    end
-
-    def default_color
-      COLOR
+    def initialize(text, size: -1, alignment: :left, r: COLOR[:r], g: COLOR[:g], b: COLOR[:b], a: COLOR[:a])
+      super(text, size: size, alignment: alignment, font: FONT, r: r, g: g, b: b, a: a)
     end
   end
 end

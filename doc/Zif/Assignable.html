@@ -76,14 +76,14 @@
   
   <dl>
     <dt>Included in:</dt>
-    <dd><span class='object_link'><a href="NinePanelEdge.html" title="Zif::NinePanelEdge (class)">NinePanelEdge</a></span>, <span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></dd>
+    <dd><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></dd>
   </dl>
   
 
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/sprites/assignable.rb</dd>
+    <dd>app/lib/zif/assignable.rb</dd>
   </dl>
   
 </div>
@@ -91,7 +91,9 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Expects to be included in classes which are sprites (using attr_sprite, or a subclass of Zif::Sprite for example) A mixin to allow assignment of sprite ivars using a hash rubocop:disable Metrics/PerceivedComplexity</p>
+<p>Expects to be included in classes which are sprites (using attr_sprite) Already included in <span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span> and any subclasses you make.</p>
+
+<p>A mixin to allow assignment of sprite ivars using a hash</p>
 
 
   </div>
@@ -131,7 +133,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Mass assignment of attributes for Sprite-like objects.</p>
+</div></span>
   
 </li>
 
@@ -154,19 +158,61 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Mass assignment of attributes for Sprite-like objects.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sprite</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representing a sprite&#39;s attributes to assign</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The object this was called on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-6
-7
-8
-9
-10
-11
-12
 13
 14
 15
@@ -188,37 +234,46 @@
 31
 32
 33
-34</pre>
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprites/assignable.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/assignable.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
-  <span class='ivar'>@name</span>          <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>          <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
-  <span class='ivar'>@logical_x</span>     <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_x</span><span class='rbracket'>]</span>     <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_x</span><span class='rbracket'>]</span>
-  <span class='ivar'>@logical_y</span>     <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_y</span><span class='rbracket'>]</span>     <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_y</span><span class='rbracket'>]</span>
-  <span class='ivar'>@render_target</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:render_target</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:render_target</span><span class='rbracket'>]</span>
-  <span class='ivar'>@x</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:x</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:x</span><span class='rbracket'>]</span>
-  <span class='ivar'>@y</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:y</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:y</span><span class='rbracket'>]</span>
-  <span class='ivar'>@z</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:z</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:z</span><span class='rbracket'>]</span>
-  <span class='ivar'>@w</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:w</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:w</span><span class='rbracket'>]</span>
-  <span class='ivar'>@h</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:h</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:h</span><span class='rbracket'>]</span>
-  <span class='ivar'>@path</span>          <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span>          <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span>
-  <span class='ivar'>@angle</span>         <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:angle</span><span class='rbracket'>]</span>         <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:angle</span><span class='rbracket'>]</span>
-  <span class='ivar'>@a</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span>
-  <span class='ivar'>@r</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:r</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:r</span><span class='rbracket'>]</span>
-  <span class='ivar'>@g</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span>
-  <span class='ivar'>@b</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span>
-  <span class='ivar'>@tile_x</span>        <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_x</span><span class='rbracket'>]</span>        <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_x</span><span class='rbracket'>]</span>
-  <span class='ivar'>@tile_y</span>        <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_y</span><span class='rbracket'>]</span>        <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_y</span><span class='rbracket'>]</span>
-  <span class='ivar'>@tile_w</span>        <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_w</span><span class='rbracket'>]</span>        <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_w</span><span class='rbracket'>]</span>
-  <span class='ivar'>@tile_h</span>        <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_h</span><span class='rbracket'>]</span>        <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_h</span><span class='rbracket'>]</span>
-  <span class='ivar'>@source_x</span>      <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_x</span><span class='rbracket'>]</span>      <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_x</span><span class='rbracket'>]</span>
-  <span class='ivar'>@source_y</span>      <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_y</span><span class='rbracket'>]</span>      <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_y</span><span class='rbracket'>]</span>
-  <span class='ivar'>@source_w</span>      <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_w</span><span class='rbracket'>]</span>      <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_w</span><span class='rbracket'>]</span>
-  <span class='ivar'>@source_h</span>      <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_h</span><span class='rbracket'>]</span>      <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_h</span><span class='rbracket'>]</span>
-  <span class='ivar'>@on_mouse_down</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_down</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_down</span><span class='rbracket'>]</span>
-  <span class='ivar'>@on_mouse_up</span>   <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_up</span><span class='rbracket'>]</span>   <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_up</span><span class='rbracket'>]</span>
+  <span class='ivar'>@name</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>              <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
+  <span class='ivar'>@logical_x</span>        <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_x</span><span class='rbracket'>]</span>         <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_x</span><span class='rbracket'>]</span>
+  <span class='ivar'>@logical_y</span>        <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_y</span><span class='rbracket'>]</span>         <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:logical_y</span><span class='rbracket'>]</span>
+  <span class='ivar'>@render_target</span>    <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:render_target</span><span class='rbracket'>]</span>     <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:render_target</span><span class='rbracket'>]</span>
+  <span class='ivar'>@x</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:x</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:x</span><span class='rbracket'>]</span>
+  <span class='ivar'>@y</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:y</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:y</span><span class='rbracket'>]</span>
+  <span class='ivar'>@z</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:z</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:z</span><span class='rbracket'>]</span>
+  <span class='ivar'>@w</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:w</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:w</span><span class='rbracket'>]</span>
+  <span class='ivar'>@h</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:h</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:h</span><span class='rbracket'>]</span>
+  <span class='ivar'>@path</span>             <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span>              <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span>
+  <span class='ivar'>@angle</span>            <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:angle</span><span class='rbracket'>]</span>             <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:angle</span><span class='rbracket'>]</span>
+  <span class='ivar'>@a</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span>
+  <span class='ivar'>@r</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:r</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:r</span><span class='rbracket'>]</span>
+  <span class='ivar'>@g</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span>
+  <span class='ivar'>@b</span>                <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span>                 <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span>
+  <span class='ivar'>@tile_x</span>           <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_x</span><span class='rbracket'>]</span>            <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_x</span><span class='rbracket'>]</span>
+  <span class='ivar'>@tile_y</span>           <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_y</span><span class='rbracket'>]</span>            <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_y</span><span class='rbracket'>]</span>
+  <span class='ivar'>@tile_w</span>           <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_w</span><span class='rbracket'>]</span>            <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_w</span><span class='rbracket'>]</span>
+  <span class='ivar'>@tile_h</span>           <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_h</span><span class='rbracket'>]</span>            <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:tile_h</span><span class='rbracket'>]</span>
+  <span class='ivar'>@source_x</span>         <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_x</span><span class='rbracket'>]</span>          <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_x</span><span class='rbracket'>]</span>
+  <span class='ivar'>@source_y</span>         <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_y</span><span class='rbracket'>]</span>          <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_y</span><span class='rbracket'>]</span>
+  <span class='ivar'>@source_w</span>         <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_w</span><span class='rbracket'>]</span>          <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_w</span><span class='rbracket'>]</span>
+  <span class='ivar'>@source_h</span>         <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_h</span><span class='rbracket'>]</span>          <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:source_h</span><span class='rbracket'>]</span>
+  <span class='ivar'>@on_mouse_down</span>    <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_down</span><span class='rbracket'>]</span>     <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_down</span><span class='rbracket'>]</span>
+  <span class='ivar'>@on_mouse_changed</span> <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_changed</span><span class='rbracket'>]</span>  <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_changed</span><span class='rbracket'>]</span>
+  <span class='ivar'>@on_mouse_up</span>      <span class='op'>=</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_up</span><span class='rbracket'>]</span>       <span class='kw'>if</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='lbracket'>[</span><span class='symbol'>:on_mouse_up</span><span class='rbracket'>]</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -232,7 +287,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 21 20:16:23 2021 by
+  Generated on Sun Feb 28 17:07:54 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

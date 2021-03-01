@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::UI::Label
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::UI::Label";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../UI.html" title="Zif::UI (module)">UI</a></span></span>
+     &raquo; 
+    <span class="title">Label</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::UI::Label
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Zif::UI::Label</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/ui/label.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A basic label which is aware of it&#39;s size and can be truncated</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="../../ExampleApp/FutureLabel.html" title="ExampleApp::FutureLabel (class)">ExampleApp::FutureLabel</a></span></p>
+</div>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ALIGNMENT-constant" class="">ALIGNMENT =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>left:</span>   <span class='int'>0</span><span class='comma'>,</span>
+  <span class='label'>center:</span> <span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>right:</span>  <span class='int'>2</span>
+<span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#a-instance_method" title="#a (instance method)">#<strong>a</strong>  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Alpha channel (Transparency) (<code>0-255</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#b-instance_method" title="#b (instance method)">#<strong>b</strong>  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Blue color (<code>0-255</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ellipsis-instance_method" title="#ellipsis (instance method)">#<strong>ellipsis</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A character to use to indicate the text has been truncated.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#font-instance_method" title="#font (instance method)">#<strong>font</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Path to the font file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#full_text-instance_method" title="#full_text (instance method)">#<strong>full_text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The complete text of the label before truncation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#g-instance_method" title="#g (instance method)">#<strong>g</strong>  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Green color (<code>0-255</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_width-instance_method" title="#max_width (instance method)">#<strong>max_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The maximum width of the full text.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_height-instance_method" title="#min_height (instance method)">#<strong>min_height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The minimum height of the text truncated down to just the ellipsis.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_width-instance_method" title="#min_width (instance method)">#<strong>min_width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The minimum width of the text truncated down to just the ellipsis.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#r-instance_method" title="#r (instance method)">#<strong>r</strong>  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Red color (<code>0-255</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size-instance_method" title="#size (instance method)">#<strong>size</strong>  &#x21d2; Integer </a>
+    
+
+    
+      (also: #size_enum)
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The size value to render the text at.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The current visible text of the label.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#x-instance_method" title="#x (instance method)">#<strong>x</strong>  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>X axis position.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#y-instance_method" title="#y (instance method)">#<strong>y</strong>  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Y axis position.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  <h3 class="inherited">Attributes included from <span class='object_link'><a href="../Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Actionable.html#actions-instance_method" title="Zif::Actions::Actionable#actions (method)">#actions</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#dirty-instance_method" title="Zif::Actions::Actionable#dirty (method)">#dirty</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#align-instance_method" title="#align (instance method)">#<strong>align</strong>  &#x21d2; Integer </a>
+    
+
+    
+      (also: #alignment_enum)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The integer value for the specified alignment.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#align=-instance_method" title="#align= (instance method)">#<strong>align=</strong>(new_alignment)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set alignment using either symbol names or the enum integer values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#full_size_rect-instance_method" title="#full_size_rect (instance method)">#<strong>full_size_rect</strong>  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>4-element array [<code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>] of the full sized text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(text, size: -1,, alignment: :left, font: &quot;font.tff&quot;, ellipsis: &quot;…&quot;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; Label </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Label.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primitive_marker-instance_method" title="#primitive_marker (instance method)">#<strong>primitive_marker</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recalculate_minimums-instance_method" title="#recalculate_minimums (instance method)">#<strong>recalculate_minimums</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recalculate <span class='object_link'><a href="#min_width-instance_method" title="Zif::UI::Label#min_width (method)">#min_width</a></span> <span class='object_link'><a href="#max_width-instance_method" title="Zif::UI::Label#max_width (method)">#max_width</a></span> <span class='object_link'><a href="#min_height-instance_method" title="Zif::UI::Label#min_height (method)">#min_height</a></span> You should invoke this if the text is changing &amp; you care about truncation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recenter_in-instance_method" title="#recenter_in (instance method)">#<strong>recenter_in</strong>(w, h, offset: 0)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reposition <span class='object_link'><a href="#x-instance_method" title="Zif::UI::Label#x (method)">#x</a></span> and <span class='object_link'><a href="#y-instance_method" title="Zif::UI::Label#y (method)">#y</a></span> to center the text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rect-instance_method" title="#rect (instance method)">#<strong>rect</strong>  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>4-element array [<code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>] of the current text.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#retruncate-instance_method" title="#retruncate (instance method)">#<strong>retruncate</strong>(width)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recalculate minimums and then truncate.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#truncate-instance_method" title="#truncate (instance method)">#<strong>truncate</strong>(width)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determine the largest possible portion of the text we can display End the text with an ellispsis if truncation occurs.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Actions/Actionable.html" title="Zif::Actions::Actionable (module)">Actions::Actionable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Actionable.html#bounce_forever_around-instance_method" title="Zif::Actions::Actionable#bounce_forever_around (method)">#bounce_forever_around</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#delayed_action-instance_method" title="Zif::Actions::Actionable#delayed_action (method)">#delayed_action</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#fade_in-instance_method" title="Zif::Actions::Actionable#fade_in (method)">#fade_in</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#fade_out-instance_method" title="Zif::Actions::Actionable#fade_out (method)">#fade_out</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#fade_out_and_in_forever-instance_method" title="Zif::Actions::Actionable#fade_out_and_in_forever (method)">#fade_out_and_in_forever</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#new_action-instance_method" title="Zif::Actions::Actionable#new_action (method)">#new_action</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#perform_actions-instance_method" title="Zif::Actions::Actionable#perform_actions (method)">#perform_actions</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#run_action-instance_method" title="Zif::Actions::Actionable#run_action (method)">#run_action</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#running_actions%3F-instance_method" title="Zif::Actions::Actionable#running_actions? (method)">#running_actions?</a></span>, <span class='object_link'><a href="../Actions/Actionable.html#stop_action-instance_method" title="Zif::Actions::Actionable#stop_action (method)">#stop_action</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(text, size: -1,, alignment: :left, font: &quot;font.tff&quot;, ellipsis: &quot;…&quot;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::UI::Label (class)">Label</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of Label.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#full_text-instance_method" title="Zif::UI::Label#full_text (method)">#full_text</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>-1,</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#size-instance_method" title="Zif::UI::Label#size (method)">#size</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alignment</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:left</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#align-instance_method" title="Zif::UI::Label#align (method)">#align</a></span> <code>:left</code>, <code>:center</code>, <code>:right</code> or <code>0</code>, <code>1</code>, <code>2</code>. See <span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>font</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;font.tff&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#font-instance_method" title="Zif::UI::Label#font (method)">#font</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ellipsis</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;…&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#ellipsis-instance_method" title="Zif::UI::Label#ellipsis (method)">#ellipsis</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>r</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>51</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#r-instance_method" title="Zif::UI::Label#r (method)">#r</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>g</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>51</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#g-instance_method" title="Zif::UI::Label#g (method)">#g</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>b</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>51</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#b-instance_method" title="Zif::UI::Label#b (method)">#b</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>a</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>255</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#a-instance_method" title="Zif::UI::Label#a (method)">#a</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>size:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span> <span class='label'>alignment:</span> <span class='symbol'>:left</span><span class='comma'>,</span> <span class='label'>font:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>font.tff</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>ellipsis:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>…</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>r:</span> <span class='int'>51</span><span class='comma'>,</span> <span class='label'>g:</span> <span class='int'>51</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='int'>51</span><span class='comma'>,</span> <span class='label'>a:</span> <span class='int'>255</span><span class='rparen'>)</span>
+  <span class='ivar'>@text</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
+  <span class='ivar'>@full_text</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
+  <span class='ivar'>@size</span> <span class='op'>=</span> <span class='id identifier rubyid_size'>size</span>
+  <span class='ivar'>@alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='rparen'>)</span>
+  <span class='ivar'>@ellipsis</span> <span class='op'>=</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
+  <span class='ivar'>@font</span> <span class='op'>=</span> <span class='id identifier rubyid_font'>font</span>
+  <span class='ivar'>@r</span> <span class='op'>=</span> <span class='id identifier rubyid_r'>r</span>
+  <span class='ivar'>@g</span> <span class='op'>=</span> <span class='id identifier rubyid_g'>g</span>
+  <span class='ivar'>@b</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
+  <span class='ivar'>@a</span> <span class='op'>=</span> <span class='id identifier rubyid_a'>a</span>
+  <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="a=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="a-instance_method">
+  
+    #<strong>a</strong>  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Alpha channel (Transparency) (<code>0-255</code>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Alpha channel (Transparency) (<code>0-255</code>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_a'>a</span>
+  <span class='ivar'>@a</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="b=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="b-instance_method">
+  
+    #<strong>b</strong>  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Blue color (<code>0-255</code>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Blue color (<code>0-255</code>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_b'>b</span>
+  <span class='ivar'>@b</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ellipsis=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ellipsis-instance_method">
+  
+    #<strong>ellipsis</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns A character to use to indicate the text has been truncated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A character to use to indicate the text has been truncated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
+  <span class='ivar'>@ellipsis</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="font=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="font-instance_method">
+  
+    #<strong>font</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Path to the font file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the font file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_font'>font</span>
+  <span class='ivar'>@font</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="full_text=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="full_text-instance_method">
+  
+    #<strong>full_text</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The complete text of the label before truncation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The complete text of the label before truncation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_full_text'>full_text</span>
+  <span class='ivar'>@full_text</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="g=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="g-instance_method">
+  
+    #<strong>g</strong>  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Green color (<code>0-255</code>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Green color (<code>0-255</code>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_g'>g</span>
+  <span class='ivar'>@g</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="max_width-instance_method">
+  
+    #<strong>max_width</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The maximum width of the full text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The maximum width of the full text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_width'>max_width</span>
+  <span class='ivar'>@max_width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="min_height-instance_method">
+  
+    #<strong>min_height</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The minimum height of the text truncated down to just the ellipsis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The minimum height of the text truncated down to just the ellipsis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_min_height'>min_height</span>
+  <span class='ivar'>@min_height</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="min_width-instance_method">
+  
+    #<strong>min_width</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The minimum width of the text truncated down to just the ellipsis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The minimum width of the text truncated down to just the ellipsis</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_min_width'>min_width</span>
+  <span class='ivar'>@min_width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="r=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="r-instance_method">
+  
+    #<strong>r</strong>  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Red color (<code>0-255</code>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Red color (<code>0-255</code>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_r'>r</span>
+  <span class='ivar'>@r</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="size=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="size-instance_method">
+  
+    #<strong>size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='size_enum-instance_method'>size_enum</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The size value to render the text at.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The size value to render the text at</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span>
+  <span class='ivar'>@size</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="text-instance_method">
+  
+    #<strong>text</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The current visible text of the label.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current visible text of the label</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_text'>text</span>
+  <span class='ivar'>@text</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="x=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="x-instance_method">
+  
+    #<strong>x</strong>  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns X axis position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>X axis position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_x'>x</span>
+  <span class='ivar'>@x</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="y=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="y-instance_method">
+  
+    #<strong>y</strong>  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Y axis position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Y axis position</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_y'>y</span>
+  <span class='ivar'>@y</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="align-instance_method">
+  
+    #<strong>align</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='alignment_enum-instance_method'>alignment_enum</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The integer value for the specified alignment.  See <span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>This always returns an integer, even if you set it using a symbol</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_mylabel'>mylabel</span><span class='period'>.</span><span class='id identifier rubyid_align'>align</span> <span class='op'>=</span> <span class='symbol'>:center</span> <span class='comment'># =&gt; 1
+</span><span class='id identifier rubyid_mylabel'>mylabel</span><span class='period'>.</span><span class='id identifier rubyid_align'>align</span>           <span class='comment'># =&gt; 1</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The integer value for the specified alignment.  See <span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_align'>align</span>
+  <span class='ivar'>@alignment</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="align=-instance_method">
+  
+    #<strong>align=</strong>(new_alignment)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set alignment using either symbol names or the enum integer values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_alignment</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#align-instance_method" title="Zif::UI::Label#align (method)">#align</a></span> <code>:left</code>, <code>:center</code>, <code>:right</code> or <code>0</code>, <code>1</code>, <code>2</code>. See <span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The integer value for the specified alignment</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_align='>align=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
+  <span class='ivar'>@alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="full_size_rect-instance_method">
+  
+    #<strong>full_size_rect</strong>  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns 4-element array [<code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>] of the full sized text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>4-element array [<code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>] of the full sized text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_full_size_rect'>full_size_rect</span>
+  <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@full_text</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:round</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="primitive_marker-instance_method">
+  
+    #<strong>primitive_marker</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 138</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_primitive_marker'>primitive_marker</span>
+  <span class='symbol'>:label</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="recalculate_minimums-instance_method">
+  
+    #<strong>recalculate_minimums</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Recalculate <span class='object_link'><a href="#min_width-instance_method" title="Zif::UI::Label#min_width (method)">#min_width</a></span> <span class='object_link'><a href="#max_width-instance_method" title="Zif::UI::Label#max_width (method)">#max_width</a></span> <span class='object_link'><a href="#min_height-instance_method" title="Zif::UI::Label#min_height (method)">#min_height</a></span> You should invoke this if the text is changing &amp; you care about truncation</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
+  <span class='ivar'>@min_width</span><span class='comma'>,</span> <span class='ivar'>@min_height</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@ellipsis</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span>
+  <span class='ivar'>@max_width</span><span class='comma'>,</span> <span class='op'>=</span> <span class='id identifier rubyid_full_size_rect'>full_size_rect</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="recenter_in-instance_method">
+  
+    #<strong>recenter_in</strong>(w, h, offset: 0)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reposition <span class='object_link'><a href="#x-instance_method" title="Zif::UI::Label#x (method)">#x</a></span> and <span class='object_link'><a href="#y-instance_method" title="Zif::UI::Label#y (method)">#y</a></span> to center the text</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>w</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>h</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Height</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Y-Offset</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_recenter_in'>recenter_in</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='label'>offset:</span> <span class='int'>0</span><span class='rparen'>)</span>
+  <span class='ivar'>@x</span> <span class='op'>=</span> <span class='id identifier rubyid_w'>w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
+  <span class='ivar'>@y</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span> <span class='op'>+</span> <span class='id identifier rubyid_min_height'>min_height</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_offset'>offset</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rect-instance_method">
+  
+    #<strong>rect</strong>  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns 4-element array [<code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>] of the current text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>4-element array [<code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>] of the current text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rect'>rect</span>
+  <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@text</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:round</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="retruncate-instance_method">
+  
+    #<strong>retruncate</strong>(width)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Recalculate minimums and then truncate</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_retruncate'>retruncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
+  <span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="truncate-instance_method">
+  
+    #<strong>truncate</strong>(width)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determine the largest possible portion of the text we can display End the text with an ellispsis if truncation occurs</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The allowable width of the text, will be truncated until it fits</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='ivar'>@max_width</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_width'>width</span>
+    <span class='ivar'>@text</span> <span class='op'>=</span> <span class='ivar'>@full_text</span>
+    <span class='kw'>return</span>
+  <span class='kw'>end</span>
+
+  <span class='lparen'>(</span><span class='ivar'>@full_text</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_downto'>downto</span> <span class='int'>0</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='id identifier rubyid_truncated'>truncated</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@full_text</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='ivar'>@ellipsis</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_cur_width'>cur_width</span><span class='comma'>,</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='id identifier rubyid_truncated'>truncated</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_cur_width'>cur_width</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_width'>width</span>
+      <span class='ivar'>@text</span> <span class='op'>=</span> <span class='id identifier rubyid_truncated'>truncated</span>
+      <span class='kw'>return</span> <span class='comment'># rubocop:disable Lint/NonLocalExitFromIterator
+</span>    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Feb 28 17:07:55 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

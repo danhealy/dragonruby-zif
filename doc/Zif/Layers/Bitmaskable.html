@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Zif::Layers::Bitmaskable
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::Layers::Bitmaskable";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span>
+     &raquo; 
+    <span class="title">Bitmaskable</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Zif::Layers::Bitmaskable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">ActiveBitmaskedTiledLayer</a></span>, <span class='object_link'><a href="BitmaskedTiledLayer.html" title="Zif::Layers::BitmaskedTiledLayer (class)">BitmaskedTiledLayer</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/layers/bitmaskable.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A mixin to extend <span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span> functionality. Sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling. This is a bit opinionated!  Here is how the bitmask is calculated:</p>
+
+<p><code>-----</code>—-<code>-----</code> | 128 | 1  |  16 | <code>-----</code>—-<code>-----</code> |  8  | &lt;&gt; |  2  | <code>-----</code>—-<code>-----</code> |  64 | 4  |  32 | <code>-----</code>—-<code>-----</code></p>
+
+<p>(Cardinal directions clockwise, then diagonal directions clockwise)</p>
+
+<p>So if a tile has a neighbor to the north, east and northeast, it&#39;ll try to load the sprite “mytiles_19” – 1+2+16 from the SpriteRegistry.  See the SpriteRegistry for more info on filenames and aliasing.</p>
+
+<p>Some background (note the author uses a different numbering scheme): <a href="https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673">gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts–cms-25673</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bitmask_data-instance_method" title="#bitmask_data (instance method)">#<strong>bitmask_data</strong>  &#x21d2; Array&lt;Array&lt;Integer&gt;&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A 2-dimensional array of bitmasked integers calculated from <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span> This array is the size of your map&#39;s logical height, containing arrays the size of the logical width.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bitmasked_sprite_name_prefix-instance_method" title="#bitmasked_sprite_name_prefix (instance method)">#<strong>bitmasked_sprite_name_prefix</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The prefix to use when referencing image paths.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#presence_data-instance_method" title="#presence_data (instance method)">#<strong>presence_data</strong>  &#x21d2; Array&lt;Array&lt;Boolean&gt;&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A 2-dimensional array of <code>true</code> and <code>false</code> values This array is the size of your map&#39;s logical height, containing arrays the size of the logical width.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      1. Public Interface
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_at-instance_method" title="#add_at (instance method)">#<strong>add_at</strong>(x, y)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add presence at this logical position, then redraw.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recalculate_bitmask-instance_method" title="#recalculate_bitmask (instance method)">#<strong>recalculate_bitmask</strong>(from_x: 0, from_y: 0, to_x: @map.logical_width - 1, to_y: @map.logical_height - 1)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This will recalculte the <span class='object_link'><a href="#bitmask_data-instance_method" title="Zif::Layers::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span> for a rectangle of logical positions, from <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#redraw_at-instance_method" title="#redraw_at (instance method)">#<strong>redraw_at</strong>(x, y)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recalculates bitmask and sets sprites for the specified location and the 9 tiles surrounding it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reinitialize_sprites-instance_method" title="#reinitialize_sprites (instance method)">#<strong>reinitialize_sprites</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Overrides <span class='object_link'><a href="Tileable.html#reinitialize_sprites-instance_method" title="Zif::Layers::Tileable#reinitialize_sprites (method)">Tileable#reinitialize_sprites</a></span> Clears <tt>@sprites</tt> and resets <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span> and <span class='object_link'><a href="#bitmask_data-instance_method" title="Zif::Layers::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_at-instance_method" title="#remove_at (instance method)">#<strong>remove_at</strong>(x, y)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Remove the tile / presence at this logical position, then redraw.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_sprites_from_bitmask-instance_method" title="#set_sprites_from_bitmask (instance method)">#<strong>set_sprites_from_bitmask</strong>(from_x: 0, from_y: 0, to_x: @map.logical_width - 1, to_y: @map.logical_height - 1)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This will reset the tiles for a rectangle, based on the <span class='object_link'><a href="#bitmask_data-instance_method" title="Zif::Layers::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      2. Private-ish methods
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exclude_from_serialize-instance_method" title="#exclude_from_serialize (instance method)">#<strong>exclude_from_serialize</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="bitmask_data-instance_method">
+  
+    #<strong>bitmask_data</strong>  &#x21d2; <tt>Array&lt;Array&lt;Integer&gt;&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns A 2-dimensional array of bitmasked integers calculated from <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span> This array is the size of your map&#39;s logical height, containing arrays the size of the logical width.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Array&lt;Integer&gt;&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A 2-dimensional array of bitmasked integers calculated from <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span> This array is the size of your map&#39;s logical height, containing arrays the size of the logical width.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bitmask_data'>bitmask_data</span>
+  <span class='ivar'>@bitmask_data</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="bitmasked_sprite_name_prefix=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="bitmasked_sprite_name_prefix-instance_method">
+  
+    #<strong>bitmasked_sprite_name_prefix</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The prefix to use when referencing image paths.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The prefix to use when referencing image paths</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bitmasked_sprite_name_prefix'>bitmasked_sprite_name_prefix</span>
+  <span class='ivar'>@bitmasked_sprite_name_prefix</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="presence_data=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="presence_data-instance_method">
+  
+    #<strong>presence_data</strong>  &#x21d2; <tt>Array&lt;Array&lt;Boolean&gt;&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns A 2-dimensional array of <code>true</code> and <code>false</code> values This array is the size of your map&#39;s logical height, containing arrays the size of the logical width.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Array&lt;Boolean&gt;&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A 2-dimensional array of <code>true</code> and <code>false</code> values This array is the size of your map&#39;s logical height, containing arrays the size of the logical width.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_presence_data'>presence_data</span>
+  <span class='ivar'>@presence_data</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_at-instance_method">
+  
+    #<strong>add_at</strong>(x, y)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add presence at this logical position, then redraw</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>logical_x position to add</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>logical_y position to add</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_at'>add_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+  <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_y'>y</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_redraw_at'>redraw_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exclude_from_serialize-instance_method">
+  
+    #<strong>exclude_from_serialize</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exclude_from_serialize'>exclude_from_serialize</span>
+  <span class='qwords_beg'>%w[</span><span class='tstring_content'>presence_data</span><span class='words_sep'> </span><span class='tstring_content'>bitmask_data</span><span class='words_sep'> </span><span class='tstring_content'>sprites</span><span class='words_sep'> </span><span class='tstring_content'>primitives</span><span class='tstring_end'>]</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="recalculate_bitmask-instance_method">
+  
+    #<strong>recalculate_bitmask</strong>(from_x: 0, from_y: 0, to_x: @map.logical_width - 1, to_y: @map.logical_height - 1)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This will recalculte the <span class='object_link'><a href="#bitmask_data-instance_method" title="Zif::Layers::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span> for a rectangle of logical positions, from <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Lower left logical X position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Lower left logical Y position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>@map.logical_width - 1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Upper right logical X position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>@map.logical_height - 1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Upper right logical Y position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_recalculate_bitmask'>recalculate_bitmask</span><span class='lparen'>(</span><span class='label'>from_x:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>from_y:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>to_x:</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>to_y:</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_from_x'>from_x</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_from_x'>from_x</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+  <span class='id identifier rubyid_from_y'>from_y</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_from_y'>from_y</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+  <span class='id identifier rubyid_to_x'>to_x</span>   <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_to_x'>to_x</span><span class='comma'>,</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+  <span class='id identifier rubyid_to_y'>to_y</span>   <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_to_y'>to_y</span><span class='comma'>,</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+
+  <span class='lparen'>(</span><span class='id identifier rubyid_from_y'>from_y</span><span class='op'>..</span><span class='id identifier rubyid_to_y'>to_y</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='lparen'>(</span><span class='id identifier rubyid_from_x'>from_x</span><span class='op'>..</span><span class='id identifier rubyid_to_x'>to_x</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_j'>j</span><span class='op'>|</span>
+      <span class='ivar'>@bitmask_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+      <span class='kw'>next</span> <span class='kw'>unless</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span><span class='rbracket'>]</span>
+
+      <span class='id identifier rubyid_map_north'>map_north</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span>
+      <span class='id identifier rubyid_map_south'>map_south</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+
+      <span class='id identifier rubyid_map_east'>map_east</span>  <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_j'>j</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span>
+      <span class='id identifier rubyid_map_west'>map_west</span>  <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_j'>j</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
+
+      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># The presence of a bit in the bitmask indicates the presence of a tile relative to this one
+</span>      <span class='comment'># Edges
+</span>      <span class='comment'># Edges - North
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>1</span> <span class='kw'>if</span> <span class='id identifier rubyid_map_north'>map_north</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span><span class='rbracket'>]</span>
+      <span class='comment'># Edges - East
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>2</span> <span class='kw'>if</span> <span class='id identifier rubyid_map_east'>map_east</span>  <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span> <span class='op'>+</span> <span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='comment'># Edges - South
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>4</span> <span class='kw'>if</span> <span class='id identifier rubyid_map_south'>map_south</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span><span class='rbracket'>]</span>
+      <span class='comment'># Edges - West
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>8</span> <span class='kw'>if</span> <span class='id identifier rubyid_map_west'>map_west</span>  <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span>
+
+      <span class='comment'># Corners
+</span>      <span class='comment'># Corners - NE
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>16</span>  <span class='kw'>if</span> <span class='id identifier rubyid_map_north'>map_north</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_map_east'>map_east</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span> <span class='op'>+</span> <span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='comment'># Corners - SE
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>32</span>  <span class='kw'>if</span> <span class='id identifier rubyid_map_south'>map_south</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_map_east'>map_east</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span> <span class='op'>+</span> <span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='comment'># Corners - SW
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>64</span>  <span class='kw'>if</span> <span class='id identifier rubyid_map_south'>map_south</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_map_west'>map_west</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='comment'># Corners - NW
+</span>      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>+=</span> <span class='int'>128</span> <span class='kw'>if</span> <span class='id identifier rubyid_map_north'>map_north</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_map_west'>map_west</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span>
+
+      <span class='ivar'>@bitmask_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_bitmask'>bitmask</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="redraw_at-instance_method">
+  
+    #<strong>redraw_at</strong>(x, y)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Recalculates bitmask and sets sprites for the specified location and the 9 tiles surrounding it</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Logical X location</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Logical Y location</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_redraw_at'>redraw_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_recalculate_bitmask'>recalculate_bitmask</span><span class='lparen'>(</span><span class='label'>from_x:</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>from_y:</span> <span class='id identifier rubyid_y'>y</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>to_x:</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>to_y:</span> <span class='id identifier rubyid_y'>y</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_set_sprites_from_bitmask'>set_sprites_from_bitmask</span><span class='lparen'>(</span><span class='label'>from_x:</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>from_y:</span> <span class='id identifier rubyid_y'>y</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>to_x:</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>to_y:</span> <span class='id identifier rubyid_y'>y</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reinitialize_sprites-instance_method">
+  
+    #<strong>reinitialize_sprites</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Overrides <span class='object_link'><a href="Tileable.html#reinitialize_sprites-instance_method" title="Zif::Layers::Tileable#reinitialize_sprites (method)">Tileable#reinitialize_sprites</a></span> Clears <tt>@sprites</tt> and resets <span class='object_link'><a href="#presence_data-instance_method" title="Zif::Layers::Bitmaskable#presence_data (method)">#presence_data</a></span> and <span class='object_link'><a href="#bitmask_data-instance_method" title="Zif::Layers::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reinitialize_sprites'>reinitialize_sprites</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@presence_data</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@bitmask_data</span>  <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_at-instance_method">
+  
+    #<strong>remove_at</strong>(x, y)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Remove the tile / presence at this logical position, then redraw</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>logical_x position to remove</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>logical_y position to remove</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_at'>remove_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+  <span class='ivar'>@presence_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_y'>y</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_remove_tile'>remove_tile</span><span class='lparen'>(</span><span class='id identifier rubyid_y'>y</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_redraw_at'>redraw_at</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_sprites_from_bitmask-instance_method">
+  
+    #<strong>set_sprites_from_bitmask</strong>(from_x: 0, from_y: 0, to_x: @map.logical_width - 1, to_y: @map.logical_height - 1)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This will reset the tiles for a rectangle, based on the <span class='object_link'><a href="#bitmask_data-instance_method" title="Zif::Layers::Bitmaskable#bitmask_data (method)">#bitmask_data</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Lower left logical X position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>from_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Lower left logical Y position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>@map.logical_width - 1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Upper right logical X position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to_y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>@map.logical_height - 1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Upper right logical Y position of the rectangle to update</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/bitmaskable.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_sprites_from_bitmask'>set_sprites_from_bitmask</span><span class='lparen'>(</span><span class='label'>from_x:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>from_y:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>to_x:</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>to_y:</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>BitmaskedTiledLayer: Please set @bitmasked_sprite_name_prefix</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>unless</span> <span class='ivar'>@bitmasked_sprite_name_prefix</span>
+
+  <span class='id identifier rubyid_from_x'>from_x</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_from_x'>from_x</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+  <span class='id identifier rubyid_from_y'>from_y</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_from_y'>from_y</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+  <span class='id identifier rubyid_to_x'>to_x</span>   <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_to_x'>to_x</span><span class='comma'>,</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+  <span class='id identifier rubyid_to_y'>to_y</span>   <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_to_y'>to_y</span><span class='comma'>,</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_height'>logical_height</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
+
+  <span class='lparen'>(</span><span class='id identifier rubyid_from_y'>from_y</span><span class='op'>..</span><span class='id identifier rubyid_to_y'>to_y</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='lparen'>(</span><span class='id identifier rubyid_from_x'>from_x</span><span class='op'>..</span><span class='id identifier rubyid_to_x'>to_x</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_j'>j</span><span class='op'>|</span>
+      <span class='id identifier rubyid_remove_tile'>remove_tile</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_j'>j</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_bitmask'>bitmask</span> <span class='op'>=</span> <span class='ivar'>@bitmask_data</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_j'>j</span><span class='rbracket'>]</span>
+      <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_bitmask'>bitmask</span>
+
+      <span class='id identifier rubyid_full_name'>full_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@bitmasked_sprite_name_prefix</span><span class='embexpr_end'>}</span><span class='tstring_content'>_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_bitmask'>bitmask</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='id identifier rubyid_sprite'>sprite</span> <span class='op'>=</span> <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='id identifier rubyid_full_name'>full_name</span><span class='rparen'>)</span>
+
+      <span class='id identifier rubyid_add_positioned_sprite'>add_positioned_sprite</span><span class='lparen'>(</span><span class='label'>sprite:</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='comma'>,</span> <span class='label'>logical_x:</span> <span class='id identifier rubyid_j'>j</span><span class='comma'>,</span> <span class='label'>logical_y:</span> <span class='id identifier rubyid_i'>i</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sun Feb 28 17:07:54 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 module ExampleApp
   # The Kenney UI Space pack has transparent panels with optional cut corners.
   # This is a normal nine slice where each corner has two options.
-  class GlassPanel < Zif::NinePanel
+  class GlassPanel < Zif::UI::NinePanel
     SPRITES_PATH = 'sprites/kenney-uipack-space/danhealy-modified'.freeze
     CUT_CORNER   = "#{SPRITES_PATH}/glass_cut_corner.png".freeze
     ROUND_CORNER = "#{SPRITES_PATH}/glass_round_corner.png".freeze
@@ -9,7 +9,7 @@ module ExampleApp
 
     attr_accessor :cuts
 
-    def initialize(width, height, cut_corners=[false, false, false, false], name=Zif.random_name('glass_panel'))
+    def initialize(width, height, cut_corners=[false, false, false, false], name=Zif.unique_name('glass_panel'))
       super(name)
 
       self.upper_left_corner = Zif::Sprite.new.tap do |s|

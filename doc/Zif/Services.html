@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: Zif::Services
+  Module: Zif::Services
   
     &mdash; Documentation by YARD 0.9.26
   
@@ -59,28 +59,12 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Class: Zif::Services
+      <div id="content"><h1>Module: Zif::Services
   
   
   
 </h1>
 <div class="box_info">
-  
-  <dl>
-    <dt>Inherits:</dt>
-    <dd>
-      <span class="inheritName">Object</span>
-      
-        <ul class="fullTree">
-          <li>Object</li>
-          
-            <li class="next">Zif::Services</li>
-          
-        </ul>
-        <a href="#" class="inheritanceTree">show all</a>
-      
-    </dd>
-  </dl>
   
 
   
@@ -94,411 +78,36 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/services/services.rb</dd>
+    <dd>app/lib/zif/services/input_service.rb<span class="defines">,<br />
+  app/lib/zif/services/service_group.rb,<br /> app/lib/zif/services/action_service.rb,<br /> app/lib/zif/services/sprite_registry.rb,<br /> app/lib/zif/services/tick_trace_service.rb</span>
+</dd>
   </dl>
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    
-<p>Designed for global functionality You could initialize as $services, or if you are using $game you can set it as an ivar: $game.services Example: $<a href=":tracer">game.services</a>.mark(“Hello”)</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-
-
-
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#services-instance_method" title="#services (instance method)">#<strong>services</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
+<h2>Defined Under Namespace</h2>
+<p class="children">
   
     
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Services/ActionService.html" title="Zif::Services::ActionService (class)">ActionService</a></span>, <span class='object_link'><a href="Services/InputService.html" title="Zif::Services::InputService (class)">InputService</a></span>, <span class='object_link'><a href="Services/ServiceGroup.html" title="Zif::Services::ServiceGroup (class)">ServiceGroup</a></span>, <span class='object_link'><a href="Services/SpriteRegistry.html" title="Zif::Services::SpriteRegistry (class)">SpriteRegistry</a></span>, <span class='object_link'><a href="Services/TickTraceService.html" title="Zif::Services::TickTraceService (class)">TickTraceService</a></span>
     
   
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute services.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
+</p>
 
 
 
 
-  
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(name)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#[]=-instance_method" title="#[]= (instance method)">#<strong>[]=</strong>(name, new_service)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Services </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title constructor">constructor</span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of Services.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#named-instance_method" title="#named (instance method)">#<strong>named</strong>(name)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#register-instance_method" title="#register (instance method)">#<strong>register</strong>(name, new_service)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-<div id="constructor_details" class="method_details_list">
-  <h2>Constructor Details</h2>
-  
-    <div class="method_details first">
-  <h3 class="signature first" id="initialize-instance_method">
-  
-    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Services (class)">Services</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns a new instance of Services.</p>
 
 
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
 
 
-8
-9
-10</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/services.rb', line 8</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
-  <span class='ivar'>@services</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-  
-</div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id="services=-instance_method"></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="services-instance_method">
-  
-    #<strong>services</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute services.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-7
-8
-9</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/services.rb', line 7</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_services'>services</span>
-  <span class='ivar'>@services</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="[]-instance_method">
-  
-    #<strong>[]</strong>(name)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-12
-13
-14</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/services.rb', line 12</span>
-
-<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
-  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="[]=-instance_method">
-  
-    #<strong>[]=</strong>(name, new_service)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-20
-21
-22</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/services.rb', line 20</span>
-
-<span class='kw'>def</span> <span class='op'>[]=</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_new_service'>new_service</span><span class='rparen'>)</span>
-  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_service'>new_service</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="named-instance_method">
-  
-    #<strong>named</strong>(name)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-16
-17
-18</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/services.rb', line 16</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_named'>named</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
-  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="register-instance_method">
-  
-    #<strong>register</strong>(name, new_service)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-24
-25
-26</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/services.rb', line 24</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_new_service'>new_service</span><span class='rparen'>)</span>
-  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_service'>new_service</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 21 20:16:25 2021 by
+  Generated on Sun Feb 28 17:07:54 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

@@ -1,7 +1,7 @@
 module ExampleApp
   # Demonstrating usage of a CompoundSprite with actions
-  # rubocop:disable Metrics/MethodLength
   class CompoundSpriteTest < ZifExampleScene
+    # rubocop:disable Metrics/MethodLength
     include Zif::Traceable
 
     attr_accessor :compound_sprite
@@ -107,7 +107,7 @@ module ExampleApp
         @compound_sprite.sprites << pixie
       end
 
-      dragon_label = Zif::Label.new('A Thunder of Dragons', 0, 1).tap do |label|
+      dragon_label = Zif::UI::Label.new('A Thunder of Dragons', size: 0, alignment: :center).tap do |label|
         label.x = 50
         label.y = 0
         label.r = 255
@@ -208,6 +208,6 @@ module ExampleApp
         end
       )
     end
+    # rubocop:enable Metrics/MethodLength
   end
-  # rubocop:enable Metrics/MethodLength
 end

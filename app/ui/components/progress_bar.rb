@@ -24,7 +24,7 @@ module ExampleApp
 
     # Width and Height assume horizontal orientation, naming is inverted for vertical
     # TODO: :vertical not yet supported.. pull requests welcome.
-    def initialize(name=Zif.random_name('progress_bar'), width=100, progress=0.0, color=:blue, orientation=:horizontal)
+    def initialize(name=Zif.unique_name('progress_bar'), width=100, progress=0.0, color=:blue, orientation=:horizontal)
       super(name)
 
       @progress = [[progress, 1.0].min, 0.0].max

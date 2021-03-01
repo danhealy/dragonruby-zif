@@ -6,7 +6,6 @@ module Zif
     #
     # A transition of a set of attributes over time using an easing function (aka tweening, easing)
     # Meant to be applied to an object using the {Zif::Actions::Actionable} mixin
-    # @todo Example here
     class Action
       include Zif::Serializable
 
@@ -61,13 +60,12 @@ module Zif
 
       ROUNDING_FUNCS = %i[ceil floor round none].freeze
 
-
       # ------------------
       # @!group 1. Public Interface
 
       # @example Detailed explaination
       #   # dragon is a Zif::Sprite (and therefore a Zif::Actions::Actionable, but any class that includes Actionable
-      #   # can receive an Action like this.  A non-Sprite example is Zif::Camera).
+      #   # can receive an Action like this.  A non-Sprite example is Zif::Layers::Camera).
       #   # The initial x position is being set to 200 here:
       #   dragon.x = 200
       #
@@ -75,7 +73,7 @@ module Zif
       #   # objects for any running Actions.  If it has one, it will tell that Action a tick has passed.  The Action
       #   # then knows to update the node it was run on, based on the conditions specified by this constructor.
       #   #
-      #   # For this example, assume that Zif::ActionService has been set up and is available at:
+      #   # For this example, assume that Zif::Services::ActionService has been set up and is available at:
       #   #   $game.services.named(:action_service)
       #   # Now we need to tell it that our dragon needs to be checked every tick for actions.  This only needs to be
       #   # done once, it will stay in the list of Actionables to check until removed.
@@ -119,7 +117,7 @@ module Zif
       #   Important! Each key in the +finish+ hash must map to an accessible attribute on the +node+.
       #
       #   (+:key+ getter and +:key=+ setter, as you get with an +attr_accessor+, but could also be defined manually.
-      #   See {Zif::Camera#pos_x=} for an example of a manually defined Actionable attribute)
+      #   See {Zif::Layers::Camera#pos_x=} for an example of a manually defined Actionable attribute)
       # @param [Numeric] duration
       # @param [Symbol] easing (see {Action::EASING_FUNCS})
       # @param [Symbol] rounding (see {Action::ROUNDING_FUNCS})

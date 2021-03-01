@@ -11,7 +11,7 @@ module ExampleApp
 
       mark('#initialize: Begin')
 
-      @map = Zif::LayeredTileMap.new('double_buffered_test', 64, 64, 20, 12)
+      @map = Zif::Layers::LayerGroup.new(name: 'double_buffered_test', logical_width: 20, logical_height: 12)
       @map.new_simple_layer(:fully_rerender)
       @map.new_simple_layer(:double_buffered_rerender)
 

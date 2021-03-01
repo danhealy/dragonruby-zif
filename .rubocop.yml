@@ -7,8 +7,8 @@ AllCops:
     - 'app/tests.rb'
     - 'app/repl.rb'
 
-Layout/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
+Naming/MethodParameterName:
+  Enabled: false
 
 Metrics/ParameterLists:
   Enabled: false
@@ -48,18 +48,6 @@ Style/IfInsideElse:
 Style/FormatString:
   EnforcedStyle: percent
 
-Layout/SpaceInsideArrayLiteralBrackets:
-  Enabled: false
-
-Layout/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
-Layout/FirstHashElementIndentation:
-  EnforcedStyle: consistent
-
-Naming/MethodParameterName:
-  Enabled: false
-
 Style/GlobalVars:
   Enabled: false
 
@@ -69,5 +57,22 @@ Style/RandomWithOffset:
 Style/FormatStringToken:
   Enabled: false
 
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+# Ignoring comment lines due to YARD
+Layout/LineLength:
+  Max: 120
+  IgnoredPatterns: ['^ *# ']
+
 Layout/HashAlignment:
   EnforcedColonStyle: table
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent

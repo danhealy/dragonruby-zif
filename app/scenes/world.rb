@@ -1,5 +1,5 @@
 module ExampleApp
-  # An example which uses Zif::LayeredTileMap and Zif::Camera
+  # An example which uses {Zif::Layers::LayerGroup} and {Zif::Layers::Camera}
   class World < ZifExampleScene
     attr_accessor :map, :camera, :avatar, :last_rendered_camera
 
@@ -10,7 +10,7 @@ module ExampleApp
       super
       @next_scene = :load_double_buffer_render_test
       mark('#initialize: Begin')
-      @map = Zif::LayeredTileMap.new('map', 64, 64, 50, 50)
+      @map = Zif::Layers::LayerGroup.new(logical_width: 50, logical_height: 50)
       @map.new_tiled_layer(:tiles)
       @map.new_active_layer(:avatar)
       mark('#initialize: Map + layers created')
@@ -84,7 +84,7 @@ module ExampleApp
                          # TODO: Add some stuff
                        end
 
-            @map.layers[kind].add_positioned_sprite(x, actual_y, cur_tile) if cur_tile
+            @map.layers[kind].add_positioned_sprite(sprite: cur_tile, logical_x: x, logical_y: actual_y) if cur_tile
 
             # Allow this to execute for 8ms (half a tick at 60fps).
             return if (Time.now - start_t) >= 0.008 # rubocop:disable Lint/NonLocalExitFromIterator
@@ -103,13 +103,12 @@ module ExampleApp
 
     def finish_initialization
       puts 'World#finish_initialization: Begin'
-      @camera = Zif::Camera.new(
-        @map.target_name,
-        @map.layer_containing_sprites,
-        Zif::Camera::DEFAULT_SCREEN_WIDTH,
-        Zif::Camera::DEFAULT_SCREEN_HEIGHT,
-        0,
-        400
+      @camera = Zif::Layers::Camera.new(
+        layer_sprites:    @map.layer_containing_sprites,
+        starting_width:   Zif::Layers::Camera::DEFAULT_SCREEN_WIDTH,
+        starting_height:  Zif::Layers::Camera::DEFAULT_SCREEN_HEIGHT,
+        initial_x:        0,
+        initial_y:        400
       )
 
       @map.layers[:tiles].should_render = true

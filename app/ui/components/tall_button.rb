@@ -1,6 +1,6 @@
 module ExampleApp
   # A two-stage button, sized for all of the tall buttons in the Kenny UI pack.
-  class TallButton < Zif::TwoStageButton
+  class TallButton < Zif::UI::TwoStageButton
     include Zif::Serializable
 
     SPRITES_PATH = 'sprites/kenney-uipack-fixed/danhealy-modified'.freeze
@@ -10,7 +10,7 @@ module ExampleApp
     PRESSED_HEIGHT = 45
     NORMAL_HEIGHT = 49
 
-    def initialize(name=Zif.random_name('tall_button'), width=100, color=:blue, label_text=nil, label_size=-1, &block)
+    def initialize(name=Zif.unique_name('tall_button'), width=100, color=:blue, label_text=nil, label_size=-1, &block)
       super(name, &block)
 
       @h = NORMAL_HEIGHT
@@ -64,7 +64,7 @@ module ExampleApp
       @pressed = [@pressed_left, @pressed_center, @pressed_right]
 
       if label_text
-        @labels << FutureLabel.new(label_text, label_size, 1)
+        @labels << FutureLabel.new(label_text, size: label_size, alignment: :center)
         recenter_label
         retruncate_label
       end
