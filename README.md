@@ -2,8 +2,10 @@
 
 Zif is a collection of features commonly required in 2D games.  The name is a reference to [Zero Insertion Force connectors used on the original Nintendo](https://console5.com/wiki/Improving_NES-001_Reliability) - You can drop it in your project and it should just work.  Everything is namespaced to `Zif` so any existing classes or namespaces you have should be preserved.
 
+This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class level documentation - e.g. {Zif::Sprite}.
+
 ## Example App
-This repo is an example app - the `Zif` library is entirely contained within the `app/lib` directory.
+This repo is an example app showcasing the major features - the `Zif` library itself is entirely contained within the `app/lib` directory.
 
 ![](full_demo.gif)
 
@@ -14,7 +16,11 @@ This repo is an example app - the `Zif` library is entirely contained within the
 4. Run using `./dragonruby dragonruby-zif/`
 
 ## Installation in your app:
-1. Create a `lib` directory inside the `app` directory, and then copy the `app/lib/zif` directory into it.
+
+App dependencies in DRGTK currently have to be managed manually, by copying the source into your project.
+
+0. Download a copy of Zif somewhere: `git clone https://github.com/danhealy/dragonruby-zif.git`.
+1. Create a `lib` directory inside your project's `app` directory, and then copy Zif's `app/lib/zif` directory into it.
 2. In your `main.rb`, require the parts of Zif you need.  To require everything:
 
 ```ruby
@@ -28,175 +34,121 @@ end
 
 If you only want to require some parts, please see the `require.rb` file for more information.
 
-# Features
-## Module
-### Zif
-The `Zif` module itself has a collection of frequently used helpers, like `Zif.sub_positions` for subtracting one array with two elements (e.g. `[x, y]`) from another.
-- `.boomerang(i, max)`: returns `i` if it's under `max`, or `max - (i - max)` otherwise, clamped to `0`
-- `.add_positions(a, b)` adds two 2-element arrays together.  `[10, 20] + [3, 4] = [13, 24]`
-- `.sub_positions(a, b)` subtracts two 2-element arrays together.  `[10, 20] + [3, 4] = [7, 16]`
-- `.position_math(op, a, b)` arbitrary operation on two 2-element arrays. Will `send` `op` to `a` elements with `b` elements as arguments.  `.position_math(:plus, a, b)` is equivalent to `.add_positions(a, b)`
-- `.relative_rand(x)` returns a random integer around `0` to a magnitude of `x/2`.
-- `.rand_rgb(base, max)` returns a random 3-element array of integers of at least `base` and at most `max`
-- `.hsv_to_rgb(h, s, v)` expects hues 0-359, saturation and value 0-100 and returns a 3-element array of integers representing the red, green and blue values.
-- `.distance(x1, y1, x2, y2)` implements the distance formula.
-- `.radian_angle_between_points(x1, y1, x2, y2)`
-- `.roll(given_dice)` expects `given_dice` to be a hash `{dice: X, sides: Y, modifier: Z}`.  Rolls `X` dice of `Y` sides each and adds `Z` to the total.
-- `.roll_raw(die, sides)` rolls `die` dice of `sides` sides and returns the total.
+# Motivation
 
-Some methods will expect array arguments and others expect individual elements (`add_positions` vs `distance`), remember that you can splat arrays:  `.distance(*a, *b)` works if `a` and `b` are 2-element arrays.
+  DragonRuby GTK provides the basic functionality you need to program a game.  It has the concept of the `tick` loop, lets you render sprites to the screen by sending basic value objects to `outputs`, and so on.
 
+  There is a set of data and behavior that all sprites in your game share - they all have a position, they all have width and height, they all reference a path to some image, etc.  Maybe you are working on a puzzle game - your puzzle pieces are sprites, but they share some additional behavior and data - which piece it is, how pieces can move.  Why not leverage this similarity by formalizing the shared concepts in your game?  You may want to consider using object-oriented design to encapsulate the distinct concepts in your code.  After all, the Ruby programming language has a strong focus on supporting object-oriented programming techniques.
 
-## Mixins
-These modules are designed to be included in another class.
-- **`Zif::Serializable`**: Works with any class.  Automatically defines `#serialize` `#to_s` and `#inspect` based on the instance variables defined on the class. As you will encounter using DRGTK, if these methods are defined, DRGTK will use them to automatically print info to the console when exceptions occur.
-- **`Zif::Actionable`**:  Works with any class.  Defines the required attributes & methods to allow this class to be used with the `ActionService`, namely `#run`, `#new_action`, `#stop_action` etc
-- **`Zif::Assignable`**: Works with classes which implement sprite attributes (`Zif::Sprite` or any class with `attr_sprite`).  Allows you to `#assign` sprite attributes to the object with a hash, e.g. `obj.assign({x: 10, y: 10, w: 32...`
-- **`Zif::Animatable`**: Works with classes which implement `#path` and `#path=`.  Helpers for generating `Sequence`s which change the `path` over time (animations).
-- **`Zif::Traceable`**: Works with any class but expects `$services`.  Allows you to set a variable `@tracer_service_name` to the registered name of the `Zif::TickTraceService`, and afterwards you can simply use `#mark` to mark a section of code in this class for performance tracing.
+  Zif aims to provide a framework for the shared concepts you might have in any game, as they relate to using the DragonRuby GTK.  The foundation of Zif is the {Zif::Sprite} class, which defines the attributes a Sprite needs to have to work with DRGTK, and builds on that to provide some functionality not given to you directly by DRGTK.  For example, maybe you want know the center point of your sprite?  If you are only using the value objects expected by DRGTK, you defined it using `x` and `y` coordinates with some `width` and `height`, and that's all it knows.  If you define the same sprite using {Zif::Sprite}, you can use {Zif::Sprite#center}.  This becomes more powerful as you build upon it.  You could make a `PuzzlePiece` class which inherits from {Zif::Sprite}, and now it can also find it's `#center` without any additional effort.
 
-## Basic Classes
+  The major categories of concepts the Zif framework introduces are:
+  - Basic wrappers around DRGTK concepts like {Zif::Sprite}, {Zif::RenderTarget}
+  - {Zif::Actions}, things which should change over time, possibly using using an easing function
+  - {Zif::Layers}, ways of organizing large sets of sprites, moving them in unison, and optimizing performance
+  - {Zif::UI} components like labels, buttons and scalable windows
+  - The {Zif::Game} and {Zif::Scene} classes which organize the game lifecycle
+  - {Zif::Services} which support your game by keeping track of {Zif::Actions}, inputs, your image assets, and performance
 
-### Zif::Sprite
-This class is the basis for most of the framework.  It's a class which uses [`attr_sprite`](https://github.com/DragonRuby/dragonruby-game-toolkit-contrib/blob/master/dragon/attr_sprite.rb) and defines some basic helper methods: `#xy` returns an array `[@x, @y]`, and so on.  Includes all the mixins described above.
+  Finally, Zif has been designed to work as a whole, or by only bringing in the parts you need.  There is some level of dependency relationships between these concepts ({Zif::RenderTarget} doesn't work without {Zif::Sprite}, for example), but an effort was made to document this precisely, so you should be able to pick and choose only the concepts you want to use.
+
+# Feature Overview
+
+## Basic Features
+
+### {Zif::Sprite}
+This class is the basis for most of the framework.  It's a basic sprite (using DRGTK's [attr_sprite](http://docs.dragonruby.org/#----attr_sprite.rb) ), which combines actions / animations, click handling, mass assignment and more.
 
 **Example usage**:
 ```ruby
-@dragon = Zif::Sprite.new.tap do |s|
+dragon = Zif::Sprite.new.tap do |s|
   s.x = 300
   s.y = 300
-  s.w = 100
-  s.h = 80
-  s.path = "sprites/dragon_0.png"
+  s.w = 82
+  s.h = 66
+  s.path = "sprites/dragon_1.png"
 end
+$gtk.args.outputs.sprites << dragon
 ```
 
-You can give Sprites a `name` - this is used directly by `Zif::SpriteRegistry`, etc.
+See the documentation of {Zif::Sprite} for details.
 
-A `Zif::Sprite` has attribtues for `logical_x/y`.  These can be used to assign a position to the sprite independent of the pixel size.  For example, `Zif::Layers::TiledLayer` uses these attributes to position a tile relative to other tiles, independently of tile pixel size.
+See the {ExampleApp::UISample} scene for a working example.
 
-It has a `z` attribute, `on_mouse_[down/changed/up]` attributes, and it implements `#clicked?` - These are used by the `Zif::InputService`.
-
-To support `Zif::RenderTarget`, a `render_target` attribute is set on a Sprite which is a "containing sprite" for a render target (meaning the `path` is assigned to a `RenderTarget` name).
-
-### Zif::CompoundSprite
+### {Zif::CompoundSprite}
 This class acts like a (inherits from) `Sprite` but can itself accept a list of `@sprites` and `@labels`, like `$gtk.args.outputs`.  Sprites and labels added to these arrays will be drawn using the `CompoundSprite#draw_override` method, which is checked by DragonRuby GTK during the draw cycle.
 
-The `CompoundSprite` itself is not drawn directly, per se (`@path` is ignored), but has `x`/`y`/`w`/`h`/`source_x`/`source_y`/`source_w`/`source_h` values which act as modifiers to the `@sprites` it is drawing.
-A sprite which has been added to a `CompoundSprite`'s `@sprites` array will be drawn in the following way:
-- The `CompoundSprite`'s `x`/`y`/`w`/`h` act as a viewable rectangle on the main screen and are absolute values compared to the game resolution.  Sprites which would be drawn completely outside of this rect will be ignored.  **Important!** This is unlike Render Targets or regular sprites, which cut off the image cleanly at these boundaries.  The `CompoundSprite` is a virtual effect which can't slice a sprite in half.  Therefore, the entire sprite is rendered if even a portion is visible in the viewable rect.
-- The `CompoundSprite`'s `source_x`/`source_y`/`source_w`/`source_h` act like these attributes would if displaying a normal image instead of a collection of sprites.  They are relative values of the `@sprites` it is drawing.
-  - `source_x`/`source_y` reposition the origin of the viewport into the `@sprites` array.  E.g. If you have a sprite @ 0x/0y with 10w/10h it will not be drawn if the `CompoundSprite`'s `source_x`/`source_y` exceeds 10/10
-  - `source_w`/`source_h` describe the extent of the viewport into the `@sprites` array.  E.g. If the `CompoundSprite` has `0x`/`0y`/`20w`/`20h`/`0 source_x`/`0 source_y`/`10 source_w`/`10 source_h`, the example `0x`/`0y`/`10w`/`10h` sprite will be displayed twice as large as normal.
-  - **Important!** As above, unlike a normal sprite, changing the `source_x`/`source_y`/`source_w`/`source_h` will not cause sprites drawn this way to be sliced in any way.  It will simply zoom and pan the complete sprites, and possibly ignore them if they exceed the extent of the viewable rectangle or the source viewport.
+**Example usage**:
+```ruby
+alduin = Zif::Sprite.new.tap do |s|
+  s.x = 0
+  s.y = 100
+  s.w = 82
+  s.h = 66
+  s.path = "sprites/dragon_1.png"
+end
 
-You can use `CompoundSprite` to draw several sprites which need to move together or relative to each other.  You can move the entire collection by changing the `CompoundSprite`'s `x` and `y` values, or you can move the component sprites relative to each other individually.
+bahamut = Zif::Sprite.new.tap do |s|
+  s.x = 200
+  s.y = 0
+  s.w = 82
+  s.h = 66
+  s.flip_horizontally = true
+  s.path = "sprites/dragon_1.png"
+end
 
-This class is the basis for `ActiveLayer` and many of the UI elements (TwoStageButton, ProgressBar, NinePanel, etc).
+# Now we have 2 dragons facing each other, but we are not adding these to args.outputs.sprites individually.
+# They are on a battlefield and can be moved in unison!
+battlefield = Zif::CompoundSprite.new.tap do |cs|
+  cs.sprites = [alduin, bahamut]
+  cs.x = 130 # This causes bahamut to appear at x == 330 on screen
+  cs.y = 20  # This causes alduin to appear at y == 120 on screen
+  cs.w = 300 # To show everything, should be at least as wide as the farthest x value + width (200+82)
+  cs.h = 200 # To show everything, should be at least as high as the largest y value + height (100+66)
+  # No path is defined, CompoundSprite is for organization only and does not display directly.
+end
 
+# Add the battlefield to outputs.
+$gtk.args.outputs.sprites << battlefield
+```
 
-### Zif::RenderTarget
+See the documentation of {Zif::CompoundSprite} for details.
 
-A render target is a way to programmatically create a sprite.  It acts just like `$gtk.args.outputs` in that it accepts an array of `sprites` and other `primitives`.  It gets rendered on the tick where its `width` and `height` are defined (allocated).  To display it, you need to create a sprite and reference the name of the render target as the `path`.
+See the {ExampleApp::CompoundSpriteTest} scene for a working example.
+
+### {Zif::RenderTarget}
+
+A render target in DRGTK is a way to programmatically create a static image out of sprites.  It acts just like `$gtk.args.outputs` in that it accepts an array of `sprites` and other `primitives`.  It gets rendered into memory at the end of the tick where it is referenced out of `$gtk.args.outputs[...]`, based on its contents.  To display the result, you need to send `$gtk.args.outputs` a sprite which references the name of the render target as its `path`.
 
 Render targets are great for increasing the performance of your game by rendering a large collection of sprites once, and then just reusing that render later. It's also good for displaying the same image composed of many sprites multiple times (think minimap or mirrors).
 
-This class handles this for you: it accepts `sprites` `labels` and `primitives` arrays.  You can force it to `#redraw`.  It produces a `#containing_sprite` (a `Zif::Sprite`) which references itself as the `path` and sets the `source_*` attributes to match the `width` and `height`. You can use `#project_to` and `#project_from` to control panning and zooming of the containing sprite.  It can be used with the `InputService` as it responds to `#clicked?` - and passes the click down to the component sprites and primitives.
+The Zif class {Zif::RenderTarget} wraps this functionality.  It holds references to the {Zif::RenderTarget#sprites} and all of the configuration options necessary to invoke this concept in DragonRuby GTK.  It also includes a {Zif::Sprite} referencing the created image in {Zif::RenderTarget#containing_sprite}.
 
 **Example usage**:
 ```ruby
-paint_canvas = Zif::RenderTarget.new(:my_paint_canvas, :white, 1000, 500)
+paint_canvas = Zif::RenderTarget.new(:my_paint_canvas, bg_color: :white, width: 1000, height: 500)
 paint_canvas.sprites << @all_current_brushstrokes
 paint_canvas.redraw
 $gtk.args.outputs.static_sprites << paint_canvas.containing_sprite
-```
 
-Although an already rendered RenderTarget is cheap to display, one drawback of using RenderTargets is that they take a little longer to process in the first place, compared to simply drawing sprites the normal way.  This can become an issue if you need to frequently update the RenderTarget due to changes on the source sprites.  Say you have a large tile map you pregenerate as a RenderTarget when the game loads.  If you need to change a single tile, like if that tile represents a door and the door opens, normally you would need to regenerate the entire RenderTarget using all of the source sprites.
+# Some time later, you can add new brush strokes and delete a rectangle:
 
-A technique the DragonRuby community (specifically Islacrusez, oeloeloel) has identified to overcome this performance issue is to build another RenderTarget using the previously rendered one, plus whatever sprites are changing.  See [this example implementation of this technique](https://github.com/oeloeloel/persistent-outputs).
-
-There are two downsides to this technique:
-- It's inherently an additive process, so erasing data is tricky.  Zif has chosen a simple approach where you may delete a single rectangle per redraw.
-- Although `Zif::RenderTarget` keeps track of a single `@containing_sprite` which references it's `@name` (path), you are allowed to reuse that path in any number of other sprites this class might not know about.
-
-This technique is built into `Zif::RenderTarget` using the `#redraw_from_buffer` method.  This method accepts three arguments:
-- An array of sprites to be added to the new render target
-- An optional `[x, y, width, height]` 4-element array rectangle to be used to remove data from the old render target (if you need to delete something, mitigating the first issue above.
-- An optional array of sprites *besides the containing_sprite* which reference this RenderTarget's `@name` and therefore need to have their `@path` changed, mitigating the second issue above.
-
-See the `DoubleBufferRenderTest` scene in the example app for a working example.
-
-**Example usage**:
-```ruby
-# building on previous example
-
-minimap = # ... a sprite referencing the RenderTarget
-new_brushstroke = # ... a new Sprite
+minimap = # ... a different sprite referencing the RenderTarget as path
+new_brushstroke = # ... a new Sprite to add to the render
 erase_rect = [200, 200, 10, 10] # Let's say you erased something, too
-
 paint_canvas.redraw_from_buffer([new_brushstroke], erase_rect, [minimap])
 ```
 
-### Zif::Action
-Inspried by [SpriteKit's Actions](https://developer.apple.com/documentation/spritekit/skaction) and [Squirrel Eiserloh's GDC talk on nonlinear transformations](https://www.youtube.com/watch?v=mr5xkf6zSzk).
-An `Action` is a transition of a set of attributes over time using an easing function (aka tweening, easing).  On `#initialize` you define:
-- an object to perform the action on (generally done for you via `#new_action` on `Zif::Actionable`)
-- a `finish` state which is a hash of attributes and their desired final values
-- a `duration` in ticks
-- the `easing` function to use (see `Zif::Action::EASING_FUNCS`)
-- the rounding function to use (`Zif::Action::ROUNDING_FUNCS`)
-- the number of times to repeat the action, either an integer value or `:forever`
-- Finally, it accepts a block to be used as a callback when the action finishes.
+See the documentation of {Zif::CompoundSprite} for details.
 
-An `Actionable` can have several `Action`s running simultaneously.
+See the {ExampleApp::DoubleBufferRenderTest} scene for a working example.
+
+### {Zif::Game}
+This is designed to be the base class for your game.  It's mainly responsible for Scene switching and yielding to {Zif::Scene#perform_tick} as described below, but also it automatically registers all the {Zif::Services} and provides standard functionality around this, including exception handling.
 
 **Example usage:**
 ```ruby
-# @dragon is a Zif::Sprite and therefore an Actionable
-# Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
-@dragon.run(@dragon.new_action({x: 1000}, 1.seconds, :smooth_start) { @dragon.flip_horizontally = true })
-```
-
-### Zif::Sequence
-A `Sequence` is a series of `Actions` to be run in order.
-
-**Example usage:**
-
-```ruby
-# Run some action sequences on this sprite
-@dragon.run(@dragon.fade_out_and_in_forever) # fade_out_and_in_forever is an example sequence, check out the source
-@dragon.run(
-  Zif::Sequence.new(
-    [
-      # Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
-      @dragon.new_action({x: 1000}, 1.seconds, :smooth_start) { @dragon.flip_horizontally = true },
-      # Move from the new position (1000x) back to the start 600x over 2 seconds, stopping slowly, then flip again
-      @dragon.new_action({x: 600}, 2.seconds, :smooth_stop) { @dragon.flip_horizontally = false }
-    ],
-    :forever
-  )
-)
-
-# Register the flying animation by name.
-# Tell it to use the 4 images 1 through 4, then reverse back to 1.
-# Hold each image for 4 ticks.
-@dragon.new_basic_animation(
-  :fly,
-  [1,2,3,4,3,2].map { |i| ["dragon_#{i}", 4] }
-)
-
-@dragon.run_animation_sequence(:fly)
-```
-![](dragon_actions.gif)
-
-### Zif::Scene
-A `Scene` is a full-screen view of your game.  The concept in `Zif::Game` is to show one `Scene` at a time. So each `Scene` in your game should be a subclass of `Zif::Scene` which overrides `#perform_tick`. Using the structure in `Zif::Game`, `#perform_tick` comes after input handling and before updating `Actionable`s. So your subclass should use `#perform_tick` to add/remove clickables/`Actionable`s, and respond to any detected input. Switching scenes is handled in `Zif::Game`, based on the return value of `#perform_tick`.  You can optionally define `#prepare_scene` - a method invoked prior to the first tick it is the active scene, and `#unload_scene` which is invoked after the Scene has been switched.
-
-### Zif::Game
-This is designed to be the base class for your game.  It's mainly responsible for Scene switching and yielding to `Scene#perform_tick` as described above, but also it automatically registers all the `Zif` services and provides standard functionality around this, including exception handling.
-
-**Example usage:** in `main.rb`
-```ruby
+# =-=-=- In your app/my_game.rb -=-=-=
 class MyGame < Zif::Game
   def initialize
     super()
@@ -206,179 +158,371 @@ class MyGame < Zif::Game
   end
 end
 
+# =-=-=- In your app/main.rb -=-=-=
+# Require all of the Zif library:
+require 'app/lib/zif/require.rb'
+require 'my_game.rb'
 def tick(args)
-  if args.tick_count == 2 # Some things can't be initialized in DR on the first tick.
+  if args.tick_count == 2
     $game = MyGame.new
     $game.scene.prepare_scene # if needed on first scene
   end
-
   $game&.perform_tick
 end
 ```
 
-## Classes for 2D Scrolling Games
-If your game's play area extends beyond the screen resolution, you likely want some way of managing this!  These classes are designed for this use case.
+See the documentation of {Zif::Game} for details.
 
-### Zif::LayeredTileMap
+See {ExampleApp::ZifExample} for a working example.
 
-Creates a set of overlapping play area layers and handles redrawing them.
+### {Zif::Scene}
 
-Has a concept of "logical" position as a multiple of "tile" width/height. (For example, if your tiles are `16px` wide, the 4th tile is at `@logical_x==4` but `@x==64`)
+A `Scene` is a full-screen view of your game.  The concept in {Zif::Game} is to show one `Scene` at a time.  So each `Scene` in your game should be a subclass of {Zif::Scene} which overrides {Zif::Scene#perform_tick}.  Using the structure in {Zif::Game}, `#perform_tick` comes after input handling and before updating {Zif::Actions::Actionable}s.  So your subclass should use `#perform_tick` to add/remove {Zif::Clickable}s/{Zif::Actions::Actionable}s, and respond to any detected input.  Switching scenes is handled in {Zif::Game}, based on the return value of `#perform_tick`.  You can optionally define {Zif::Scene#prepare_scene} - a method invoked prior to the first tick it becomes the active scene, and {Zif::Scene#unload_scene} which is invoked after the Scene has been switched out.
 
-As an example, you can have a "tiles" layer which gets redrawn only at the start of the game, an "interactive
-objects" layer which gets redrawn whenever objects appear or disappear, and then an "avatar" layer which gets
-redrawn every time the avatar moves.  The advantage of using RenderTargets here is to keep the positioning
-consistent across all of the layers.  You can just pass all of the RT containing sprites to `Zif::Camera` and it will
-pan them all in unison.
+**Example usage:**
+```ruby
+class OpeningScene < Zif::Scene
+  def initialize
+    # If OpeningScene is registered by symbol using Zif::Game#register_scene, this initialize will happen each
+    # time the game switches to this scene.  Otherwise you could instantiate this scene somewhere and simply
+    # return it from another scene's #perform_tick
+    @dragon = Zif::Sprite.new # ....
+    @hello = Zif::UI::Label.new("Hello World!").tap do |label|
+      label.x = 100
+      label.y = 100
+    end
+    @current_scene_tick_count = 0
+  end
 
-You setup and configure these layers via `#new_simple_layer` and `#new_tiled_layer`.
+  def prepare_scene
+    # You probably want to remove the things registered with the services when scenes change
+    # You can remove items explicitly using #remove_.., but #reset_.. will clear everything
+    # You can also do this when a scene is being changed away from, using the #unload_scene method.
+    $game.services[:action_service].reset_actionables
+    $game.services[:input_service].reset
+    $gtk.args.outputs.static_sprites.clear
+    $gtk.args.outputs.static_labels.clear
 
-Performance notes:
- - Since the memory requirements here are based on the number of layers * area of each layer, consider other
-   approaches if you have a lot of layers with few sprites in them (maybe use sprites directly but with more math to
-   keep positions in sync)
- - It is *expensive* to redraw a RT with thousands of sprites.  Consider - 1280x720 / 16x16 -> 80*45 = 3600 tiles.
-   Of course it's more expensive to draw these every tick (not using render_target), but you will see noticable
-   hiccups if you do this often.  Try not to redraw RTs with lots of sprites while action is happening.
-  - You can use the RenderTarget's `#redraw_from_buffer` strategy indirectly by setting the `@rerender_rect` attribute.  If this attribute is set when the layer is redrawn, it'll remove that rect from the last rendered version of the layer and redraw any sprites which intersect that rect.
+    # Now you can use this to do one-time setup code.
+    $game.services[:action_service].register_actionable(@dragon)
+    $game.services[:input_service].register_clickable(@dragon)
+
+    # Best practice is to use static outputs, this gives you a lot more performance and there is no need to append
+    # to the array inside #perform_tick.
+    # The only downside is that you have to manage this list manually.  You can remove sprites at any time in
+    # #perform_tick.
+    $gtk.args.outputs.static_sprites << @dragon
+    $gtk.args.outputs.static_labels << @hello
+  end
+
+  def perform_tick
+    @current_scene_tick_count += 1
+    @hello.text = "Hello World! #{@current_scene_tick_count}"
+
+    # Tell Zif::Game to attempt to switch to the scene registered with the name :rainbow_road after some time
+    return :rainbow_road if @current_scene_tick_count > 200
+  end
+end
+```
+
+See the documentation of {Zif::Scene} for details.
+
+See {ExampleApp::ZifExampleScene} for a working example - this scene class is shared amongst the example app, so it's designed around the auto-advancing scene behavior.
+
+## {Zif::Actions} (aka tweening, easing)
+Inspried by [SpriteKit's Actions](https://developer.apple.com/documentation/spritekit/skaction) and [Squirrel Eiserloh's GDC talk on nonlinear transformations](https://www.youtube.com/watch?v=mr5xkf6zSzk).
+
+### {Zif::Actions::Action} & {Zif::Actions::Actionable}
+
+An Action is a transition of a set of attributes over time using an easing function (aka tweening, easing).
+
+Your objects can accept Actions by mixing in {Zif::Actions::Actionable} and calling the {Zif::Actions::Actionable#run_action} method.  You can specify the number of times the Action should be repeated, and set a callback for when the Action is finished.
+
+An Actionable can have several Actions running simultaneously, and they can be started and stopped manually.
+
+**Example usage:**
+```ruby
+# @dragon is a Zif::Sprite and therefore an Actionable, and already registered with the ActionService.
+# Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
+# Note that starting position is just taken from the current state of @dragon rather than specified.
+@dragon.run(
+  @dragon.new_action({x: 1000}, duration: 1.seconds, easing: :smooth_start) do
+    @dragon.flip_horizontally = true
+  end
+)
+```
+
+See the documentation of {Zif::Actions::Action}, {Zif::Actions::Actionable}, and {Zif::Services::ActionService} for details.
+
+Take a look at the code for `@dragon` inside {ExampleApp::UISample} for a simple working example.
+
+More complicated examples can be seen in {ExampleApp::World} - The dragon is using Actions to move across the map, and the map itself is panning to track the dragon using Actions.
+
+### {Zif::Actions::Sequence}
+A Sequence is a series of {Zif::Actions::Action} to be run in order.  Behaves like an Action, you run it using the same {Zif::Actions::Actionable#run_action} method.  You can specify the number of times the sequence should be repeated, and set a callback for when the sequence is finished.
+
+**Example usage:**
+```ruby
+@dragon.run(
+  Zif::Sequence.new(
+    [
+      # Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
+      @dragon.new_action({x: 1000}, duration: 1.seconds, easing: :smooth_start) { @dragon.flip_horizontally = true },
+      # Move from the new position (1000x) back to the start 600x over 2 seconds, stopping slowly, then flip again
+      @dragon.new_action({x: 600}, duration: 2.seconds, easing: :smooth_stop) { @dragon.flip_horizontally = false }
+    ],
+    repeat: :forever
+  )
+)
+```
+
+See the documentation of {Zif::Actions::Sequence} for details.
+
+Again, take a look at the code for `@dragon` inside {ExampleApp::UISample} for a simple working example.
+
+### {Zif::Actions::Animatable}
+
+Animatable is a mixin to assist with sprite animations.  Under the hood, these are implemented as {Zif::Actions::Sequence}s which modify the `path` over time, and they are registered using a name.
+
+**Example usage:**
+```ruby
+# Register the animation for a flying Dragon.
+ @dragon.new_basic_animation(
+   named: :fly,
+   paths_and_durations: [
+     #   +-- path for this frame
+     #   |        +-- duration for this frame
+     #   v        v
+     ["dragon_1", 4], # This animation has 4 separate images, we go from 1 to 4 and then back to 1
+     ["dragon_2", 4], # Hold each frame for 4 ticks
+     ["dragon_3", 4], # The actual image exists at: app/sprites/dragon_3.png
+     ["dragon_4", 4], # Frames 1 and 4 aren't duplicated in the sequence, so it's a fluid motion
+     ["dragon_3", 4],
+     ["dragon_2", 4]  # By default this repeats forever, which takes it back to 1
+   ]
+ )
+
+ # We don't have to register this sequence manually using #register_animation_sequence, the #new_basic_animation
+ # method takes care of that for us.
+
+ # So now we can run this animation:
+ @dragon.run_animation_sequence(:fly)
+```
+![](dragon_actions.gif)
+
+See the documentation of {Zif::Actions::Animatable} for details.
+
+## {Zif::Layers}
+
+If your game's play area extends beyond the screen resolution, you likely want some way of managing this!  {Zif::Layers} are designed for this use case.  They provide several different strategies for performantly rendering large numbers of sprites, organizing them by a Z-index, and moving them in unison via the {Zif::Layers::Camera} class.
+
+### {Zif::Layers::LayerGroup}
+
+Creates a set of overlapping play area layers based on {Zif::Layers::SimpleLayer} ({Zif::RenderTarget}) or {Zif::Layers::ActiveLayer} ({Zif::CompoundSprite}) and handles redrawing them.
+
+Has a concept of `logical` position as a multiple of `tile` width/height, applicable to any {Zif::Layers::Tileable} layers. For example, if your tiles are `16px` wide, the 5th tile is at `@logical_x==4` but at `@x==64` on the layer.
 
 **Example usage**:
 ```ruby
-map_layer_render_target_prefix = "map"
-tile_width_and_height = 64 # pixels
-map_width_and_height_in_tiles = 100 # 64 * 100 = 6400x6400 pixels
+tile_width_and_height         = 64  # Each tile is 64x64 pixels
+map_width_and_height_in_tiles = 100 # 64 * 100 = 6400x6400 pixels, 10000 tiles total
 
-@map = Zif::LayeredTileMap.new(
-  map_layer_render_target_prefix,
-  tile_width_and_height,
-  tile_width_and_height,
-  map_width_and_height_in_tiles,
-  map_width_and_height_in_tiles
+@map = Zif::Layers::LayerGroup.new(
+  tile_width:     tile_width_and_height,
+  tile_height:    tile_width_and_height,
+  logical_width:  map_width_and_height_in_tiles,
+  logical_height: map_width_and_height_in_tiles
 )
-@map.new_tiled_layer(:tiles)
-@map.new_simple_layer(:avatar)
-@map.force_refresh # Force it to set up the render targets for the first time
 
-# The should_render attribute will be checked each tick to decide if the RT should render
-@map.layers[:avatar].should_render = true
+# This example is only using Zif::Layers::ActiveLayer because they are easier to set up,
+# and it is a good place to start in terms of performance.
+@map.new_active_tiled_layer(:tiles)
+@map.new_active_layer(:avatar)
+
 @map.layers[:avatar].source_sprites = [@dragon]
 
-# ----
-# Add a bunch of tiles over a few ticks
+# Add a bunch of tiles
 a_new_tile = Zif::Sprite.new....
-@map.add_positioned_sprite(x, y, a_new_tile)
-# ----
+@map.layers[:tiles].add_positioned_sprite(sprite: a_new_tile, logical_x: x, logical_y: y)
 
-# When all the tiles have been added
-@map.layers[:tiles].should_render = true
-
-@camera = Zif::Camera.new(
-  @map.target_name,
-  @map.layer_containing_sprites,
-  Zif::Camera::DEFAULT_SCREEN_WIDTH,
-  Zif::Camera::DEFAULT_SCREEN_HEIGHT,
-  1800,
-  1200
+# Set up a camera
+@camera = Zif::Layers::Camera.new(
+  layer_sprites: @map.layer_containing_sprites,
+  initial_x: 1800,
+  initial_y: 1200
 )
 
-@map.refresh
-@map.layers[:tiles].should_render = false # Really just want to render the tiles once.
-
 $gtk.args.outputs.static_sprites << @camera.layers
+
+# All set!  You can move your sprites (like @dragon) around.  You can control the Camera using actions.
+# Most or all of the above code could be placed in a Zif::Scene#prepare_scene method.
 ```
+See the documentation of {Zif::Layers::LayerGroup} for details.
 
-### Zif::Layers::SimpleLayer
+See {ExampleApp::World} for a working example.
 
-Designed to be used with `Zif::LayeredTileMap`, this is an extension of `RenderTarget` where `source_sprites` is a simple flat array.  Uses natural x/y positioning, and `visible_sprites` is a simple `select` of sprites which `intersect_rect?`.
+### {Zif::Layers::SimpleLayer}
+This layer is based on {Zif::RenderTarget} and therefore the component sprites will not be rendered until {Zif::RenderTarget#redraw} or {Zif::RenderTarget#redraw_from_buffer} is called - typically via {Zif::Layers::SimpleLayer#rerender}.
 
-Defines the `#redraw_from_buffer` method described above.
+See the documentation of {Zif::Layers::SimpleLayer} for details.
 
-### Zif::Layers::ActiveLayer
-Acts like `SimpleLayer` but is implemented using `CompoundSprite` instead of `RenderTarget`.  The `source_sprites` will be drawn on **every** tick, so use this for layers which have low sprite counts but which need to be redrawn frequently (like the player character).
+### {Zif::Layers::ActiveLayer}
+In contrast to {Zif::Layers::SimpleLayer}, {Zif::Layers::ActiveLayer} is built on {Zif::CompoundSprite} and therefore must rerender every sprite on every tick.  This is balanced by not incurring a performance / memory penalty by rendering a sprite the size of the entire {Zif::Layers::LayerGroup} width times height.
 
-### Zif::Layers::TiledLayer
-A subclass of `SimpleLayer`, this redefines `source_sprites` as a 2-dimensional array, indexed by logical (tile) position.
+See the documentation of {Zif::Layers::ActiveLayer} for details.
 
-### Zif::Layers::BitmaskedTiledLayer
-A TiledLayer where the sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.  This class expects that you've registered your autotile images using a `SpriteRegistry` available at `$services[:sprite_registry]`.  See `Zif::SpriteRegistry#register_autotiles`
+### Deciding between {Zif::Layers::SimpleLayer} & {Zif::Layers::ActiveLayer}
+This depends on your application.  In general, try organizing your layers into those that don't change at all, or only change when action (like camera movement) isn't happening, and put those sprites into a {Zif::Layers::SimpleLayer}.  Then take all of the sprites which do need to change often, or are necessary for action, and put those in {Zif::Layers::ActiveLayer}s.
 
-### Zif::Camera
-Designed to work with `Zif::LayeredTileMap`, the Camera is initialized with a set of layer sprites, typically these are the `containing_sprite`s of large render targets. It zooms these sprites to fit the viewable area of the screen. It is responsible for directing the layers to reposition based on camera movements.
+You can use either {Zif::Layers::SimpleLayer} or {Zif::Layers::ActiveLayer} directly when the sprites contained don't need to snap to the tile grid set up in the {Zif::Layers::LayerGroup}.
 
-The Camera is an example of an `Actionable` class which isn't a `Sprite`.  It defines `#pos_x` and `#pos_x=` methods to act like a single accessor for each layer's `source_x` values.  In this way, we can ease the panning of all the layers by creating an `Action` for a final `pos_x` value.
+### {Zif::Layers::Tileable}
+The Tileable mixin provides functionality to Layers to support a grid organization.  The two classes based on the Tileable mixin are {Zif::Layers::TiledLayer} and {Zif::Layers::ActiveTiledLayer}.
 
-**Example usage:** (also see usage under `Zif::LayeredTileMap`)
+If your sprites need to snap to a grid, you should use one of these.  See the section above for tips on choosing one or the other.
+
+See the documentation for details: {Zif::Layers::Tileable}, {Zif::Layers::TiledLayer}, {Zif::Layers::ActiveTiledLayer}
+
+### {Zif::Layers::Bitmaskable}
+A layer which extends Tileable, where the sprites are chosen automatically via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.
+
+A detailed explanation of this technique is described in the class documentation for {Zif::Layers::Bitmaskable} and at this resource:
+https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673
+
+This mixin is included in {Zif::Layers::BitmaskedTiledLayer} and {Zif::Layers::ActiveBitmaskedTiledLayer}.
+
+### {Zif::Layers::Camera}
+The Camera is given a set of sprites, typically the containing sprites for a set of {Zif::Layers::Layerable}s via {Zif::Layers::LayerGroup#layer_containing_sprites}.
+
+It is responsible for directing the layers to reposition based on camera movements.  Specifically, it alters each layer's `source_x` and `source_y` values for panning.
+
+This class includes {Zif::Actions::Actionable}, so you can pan the camera using a {Zif::Actions::Action}.
+
+It has the capability of issuing camera movements based on following a particular sprite on a layer (like a player character).
+
+It also has the capability of zooming in and out, by controlling each layer's `source_w` and `source_h`. It can be registered as a scrollable with {Zif::Services::InputService}.
+
+**Example usage:**
 ```ruby
-@camera.start_following(@dragon) if @dragon.walking
+# Using the setup example from Zif::Layers::LayerGroup
+# Assumes @camera has been registered as an actionable
+@camera.start_following(@dragon)
 ```
 
-This implements `#scrolled?` and interprets it as a directive to zoom the layer sprites.  A zoom factor of `1.0` indicates the native screen size, you can retrieve this with `#zoom_unit`.  Min and max zoom factor are controlled by `@max_zoom_in`/`@max_zoom_out`.  By default, it will center the zoom at the last followed location `@last_follow` or the center of the screen.
+See the documentation for details: {Zif::Layers::Camera}
 
-`#translate_pos(given)` translates a point in the window with the corresponding point on the map layers, by considering the zoom factor and current viewport.
+A working example is available in {ExampleApp::World}.
 
-**TODO:** Camera could be extended to support parallax effects...
+## {Zif::UI}
+Simple UI components. Examples for these classes exist in {ExampleApp::UISample}.
 
-## Panels, Components, Labels
-These are classes which help create UI elements.  TODO: More documentation.
+### {Zif::UI::Label}
+A wrapper for the `label` DRGTK primitive: displaying text using a font, size, alignment, color. Includes {Zif::Actions::Actionable}!  Supports text truncation by calculating it's own width.
 
-## Services
-Services are game features which can be accessed from any context within your game.  If you use `Zif::Game`, each service will be registered in the `Game`'s ivar `@services` by a symbol, e.g. `@services.register(:action_service, Zif::ActionService.new)` is run during initialization and thereafter you can access the `ActionService` by `game.services[:action_service]`.  Additionally by convention, both `$game` and `$services` are available as global variables.
+See the documentation for details: {Zif::UI::Label}
 
-### Zif::ActionService
-Register your sprite as something to check for running `Action`s by using `#register_actionable`.  Call `#run_all_actions` once per tick (handled by `Zif::Game` automatically), which will invoke `#perform_actions` on each registered `@actionable`.
+### {Zif::UI::TwoStageButton}
+This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.
 
-### Zif::InputService
-On each tick, `#process_click` should be run, which will detect clicks and pass them on to each sprite which has been registered via `#register_clickable`.  It expects each clickable object to define a `#clicked?(point, kind)` method.  If the sprite decides it has been clicked, it should return itself from this method.  Clicks are passed through to sprites based on their `z` value - if this value is nil, the service considers it to be at the bottom.  If the argument `absorb_click` is true, it directs the service to stop bubbling the click through any other clickables lower in the `z` order.
+This is implemented using {Zif::CompoundSprite}, so it is a {Zif::Clickable}, and by default it has already set up the click handlers to handle switching states based on clicks.  You can pass a block to the constructor, this will be executed if the button is clicked and the mouse click goes up within the rectangle of the button. (You can click down on the button, move the mouse outside, and let go - it will not trigger the callback in this case.)
 
-`Zif::Sprite` defines `#clicked?` and a set of ivars which are expected to contain callback lambdas: `@on_mouse_down, @on_mouse_up, @on_mouse_changed`.  These callbacks will receive as arguments the `sprite` itself and the location of the mouse in `point`.  If it can't handle the click but it knows it is the `containing_sprite` for a `Zif::RenderTarget`, it passes the click through.
+See the documentation for details: {Zif::UI::TwoStageButton}
 
-`Zif::RenderTarget` also defines `#clicked?`, and passes clicks down to the component `@sprites` and `@primitives` of the render target.
+### {Zif::UI::NinePanel}
+Nine-slice sprites, built on {Zif::CompoundSprite}: https://en.wikipedia.org/wiki/9-slice_scaling
 
-`Zif::Layers::SimpleLayer` defines `#clicked?` and uses its `#visible_sprites` method to decide which component `@source_sprites` need to be checked for clicks.
+Because the implementation of this partially depends on the visual assets you are using, this is an **abstract** class.  You are expected to subclass this to:
+- override `#initialize` with `super` to set the `@corners`, `@edges` and `@fill` with sprites
+- override `#resize_width` and `#resize_height` to manage resizing the above sprites in a sensible way
 
-`#register_scrollable`, is analogous to `#register_clickable` but for the scroll wheel. `#scrolled?` is expected to be defined, and it receives the mouse point and the direction of scrolling as arguments.  Only `Zif::Camera` defines `#scrolled?` out of the box.
+Ideally, these corners and edges would be {Zif::Sprite}s and therefore {Zif::Clickable}s - you could use this to implement click & drag, or drag-to-resize using the resize methods.
 
+## {Zif::Services} & {Zif::Services::ServiceGroup}
+Services are game utilities which can be accessed from any context within your app.
 
-### Zif::SpriteRegistry
-This service allows you to register prototypes of assets as `Zif::Sprites`.
+If you use {Zif::Game}, every Zif service will be set up for you using {Zif::Services::ServiceGroup}, and registered in the `Game`'s instance variable `@services` named by a symbol.  For example, you will be able to access the {Zif::Services::ActionService} by `$game.services[:action_service]`.  This is because {Zif::Game} runs `@services.register(:action_service, Zif::ActionService.new)` during initialization, and by convention, both `$game` and `$services` are available as global variables.
+
+### {Zif::Services::ActionService}
+See {Zif::Actions} above for more information on Actions.
+
+Each tick, checks sprites which have been registered for running actions.
+
+If you are using {Zif::Game}, this service is registered as `:action_service`.  All you need to do is register any object which needs to be checked for running `Action`s by using {Zif::Services::ActionService#register_actionable}.
+
+If you are not using {Zif::Game}, ensure you are calling {Zif::Services::ActionService#run_all_actions} once per tick.
+
+See documentation for details: {Zif::Services::ActionService}
+
+### {Zif::Services::InputService}
+Keeps track of sprites and other objects interested in responding to clicks and scroll events, and passes the events over to them when they occur.
+
+If you are using {Zif::Game}, this service is registered as `:input_service`.  All you need to do is register any sprite which needs  to respond to clicks or scrolls using {Zif::Services::InputService#register_clickable} and `#register_scrollable`.
+
+Clickable sprites should mixin {Zif::Clickable} or be compatible by defining a `#clicked?` method and `@on_mouse_up` instance variable callbacks.  All {Zif::Sprite}s follow this convention.
+
+Scrollable objects should define `#scrolled?`.  {Zif::Layers::Camera} uses this.
+
+See the documentation for details: {Zif::Services::InputService}, {Zif::Clickable}.  {Zif::Layers} handle clicks in a hierarchical way, see documentation for info.
+
+There are many working clickable examples in the {ExampleApp}.
+
+### {Zif::Services::SpriteRegistry}
+This service is for registering your sprite assets once, and assists in creating new {Zif::Sprite} instances from the parameters described when registering.
 
 **Example usage:**
 
-The following code will create a `Zif::Sprite` with w/h of 82px and 66px, referencing a `path` of `sprites/dragon_1.png`.  The second line demonstrates getting a fresh `Zif::Sprite` copy with these settings.
+The following code will create a {Zif::Sprite} with width and height of 82px and 66px, referencing a `path` of `sprites/dragon_1.png`.  The second line demonstrates getting a fresh {Zif::Sprite} copy with these settings.
 ```ruby
 $services[:sprite_registry].register_basic_sprite("dragon_1", width: 82, height: 66)
 @dragon = $services[:sprite_registry].construct("dragon_1")
 ```
 
-`#register_basic_sprite` accepts a block: this is a convenience, it sets the block to the constructed `Sprite`'s `@on_mouse_up` callback.
+The autotiling feature of {Zif::Layers::Bitmaskable} is designed around having the tile assets registered in this service.
 
-You can setup an alias for a registered sprite by using `#alias_sprite`
+See the documentation for details: {Zif::Services::SpriteRegistry}
 
-You can automatically register images used for autotiling / `Zif::Layers::BitmaskedTiledLayer` using the `#register_autotiles` method.  See the comments at `Zif::Layers::BitmaskedTiledLayer` and `Zif::SpriteRegistry#register_autotiles`.
+### {Zif::Services::TickTraceService} and {Zif::Traceable}
+Generally, you want your game to run at a full 60fps.  If your tick takes longer than 16.6ms, you'll drop below that number.  This service is designed to report when a tick has taken longer than a threshold (20ms by default), and hopefully narrow down the slowest section of code. {Zif::Services::TickTraceService#reset_tick} must be called at the beginning of a tick, and then `#finish` at the end.  If you use {Zif::Game}, this is done for you.
 
-### Zif::TickTraceService
-Generally, you want your game to run at a full 60fps.  If your tick takes longer than 16.6ms, you'll drop below that number.  The TickTrace service is designed to report when a tick has taken longer than a threshold (20ms by default), and hopefully narrow down the slowest section of code. `#reset_tick` must be called at the beginning of a tick, and then `#finish` at the end.  If you use `Zif::Game`, this is done for you, all you need to do is `include Traceable` in any class you want to mark, set the `@tracer_service_name` ivar to `:tracer`, and then `mark('a section of code')`.  Since backtraces are not supplied in DRGTK, the best it can do is tell you the name of the class it was invoked in.  By convention, you should include the name of the method which calls `#mark`:  `mark('#my_method: a section of code')`
+The {Zif::Traceable} mixin helps you use this service from an object, all you need to do is `include Zif::Traceable` in any class you want to mark, set the `@tracer_service_name` ivar to `:tracer`, and then `mark('a section of code')`.  By convention, you should include the name of the method which calls `#mark`:  `mark('#my_method: a section of code')`
 
-`#mark_and_print` is also available, if you want to print to the console when you mark the section.
+{Zif::Traceable#mark_and_print} is also available, if you want to print to the console when you mark the section.
 
 **Example output:**
 
-You should see some output like this when running the `World` example scene.  The first tick which renders the tile layer actually takes a long time.
+The {ExampleApp::UISample} scene includes a little button to simulate a slow tick (it sleeps for half a second).  This is the console output from clicking that button.
 ```
+ExampleApp::UISample: delay_button: Button was clicked - demonstrating Tick Trace service
+ExampleApp::UISample: delay_button: Woke up from 500ms second nap
 ================================================================================
-Zif::TickTraceService: Slow tick.  59.609ms elapsed >  20.000ms threshold, longest step 'Zif::LayeredTileMap: #refresh: Rerendering tiles at [1800, 1200, 1280, 720]'  29.817ms:
+Zif::Services::TickTraceService: Slow tick. 504.920ms elapsed >  20.000ms threshold, longest step 'ExampleApp::UISample: delay_button: Woke up from 500ms second nap' 503.468ms:
        mark     delta label
-    0.010ms   0.010ms ZifExample: #standard_tick: begin
-    0.059ms   0.049ms ZifExample: #standard_tick: Scene #perform_tick complete
-   29.876ms  29.817ms Zif::LayeredTileMap: #refresh: Rerendering tiles at [1800, 1200, 1280, 720]
-   59.079ms  29.203ms Zif::LayeredTileMap: #refresh: Rerendered tiles
-   59.098ms   0.019ms Zif::LayeredTileMap: #refresh: Rerendering stuff at [1800, 1200, 1280, 720]
-   59.484ms   0.386ms Zif::LayeredTileMap: #refresh: Rerendered stuff
-   59.496ms   0.012ms Zif::LayeredTileMap: #refresh: Rerendering avatar at [1800, 1200, 1280, 720]
-   59.517ms   0.021ms Zif::LayeredTileMap: #refresh: Rerendered avatar
-   59.528ms   0.011ms Zif::LayeredTileMap: #refresh: Rerendering top_effects at [1800, 1200, 1280, 720]
-   59.539ms   0.011ms Zif::LayeredTileMap: #refresh: Rerendered top_effects
-   59.545ms   0.006ms Zif::LayeredTileMap: #refresh: Rerendered all layers
-   59.582ms   0.037ms ZifExample: #standard_tick: Scene switching handled
-   59.609ms   0.027ms ZifExample: #standard_tick: end
+    0.016ms   0.016ms ExampleApp::ZifExample: #standard_tick: begin
+    0.895ms   0.879ms ExampleApp::UISample: delay_button: Button was clicked - demonstrating Tick Trace service
+  504.363ms 503.468ms ExampleApp::UISample: delay_button: Woke up from 500ms second nap
+  504.406ms   0.043ms ExampleApp::ZifExample: #standard_tick: input_service #process_click
+  504.420ms   0.014ms ExampleApp::UISample: #perform_tick: begin
+  504.445ms   0.025ms ExampleApp::UISample: #update_metal_panel: begin
+  504.507ms   0.062ms ExampleApp::UISample: #update_metal_panel: complete
+  504.519ms   0.012ms ExampleApp::UISample: #update_glass_panel: begin
+  504.552ms   0.033ms ExampleApp::UISample: #update_glass_panel: complete
+  504.564ms   0.012ms ExampleApp::UISample: #update_progress_bar: begin
+  504.612ms   0.048ms ExampleApp::UISample: #update_progress_bar: complete
+  504.624ms   0.012ms ExampleApp::UISample: #update_interactable_button: begin
+  504.636ms   0.012ms ExampleApp::UISample: #update_interactable_button: complete
+  504.646ms   0.010ms ExampleApp::UISample: #perform_tick: finished updates
+  504.742ms   0.096ms ExampleApp::UISample: #perform_tick: finished super
+  504.754ms   0.012ms ExampleApp::ZifExample: #standard_tick: Scene #perform_tick complete
+  504.772ms   0.018ms ExampleApp::ZifExample: #standard_tick: Scene switching handled
+  504.901ms   0.129ms ExampleApp::ZifExample: #standard_tick: Action service complete
+  504.920ms   0.019ms ExampleApp::ZifExample: #standard_tick: Complete
 ```
+
+# Coming Soon
+Some features and things being considered for this library:
+- Official support and/or examples for integrating with Draco ECS, and with Tiled tilemaps
+- Parallax camera example
+- Physics, or acceleration equivalent of Actions
+- Ports of DRGTK Sample apps to "Zif style"
+
+If these sound interesting to you, make some noise in the [Dragonruby GTK Discord](https://discord.gg/T8wnRvNn7W) #oss-zif channel.

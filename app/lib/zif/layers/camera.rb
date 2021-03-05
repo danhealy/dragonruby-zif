@@ -2,12 +2,19 @@ module Zif
   module Layers
     # Designed to be used with {Zif::Layers::LayerGroup}.
     #
-    # The Camera is given a set of sprites, typically the containing sprites for a set of {Zif::Layers::Layerable}s.
+    # The Camera is given a set of sprites, typically the containing sprites for a set of {Zif::Layers::Layerable}s via
+    # {Zif::Layers::LayerGroup#layer_containing_sprites}.
     #
-    # It zooms these sprites to fit the viewable area of the screen.  It can be zoomed in and out using the scroll
-    # wheel.  It is responsible for directing the layers to reposition based on camera movements.
+    # It is responsible for directing the layers to reposition based on camera movements.  Specifically, it alters each
+    # layer's +source_x+ and +source_y+ values for panning.
     #
     # This class includes {Zif::Actions::Actionable}, so you can pan the camera using a {Zif::Actions::Action}.
+    #
+    # It has the capability of issuing camera movements based on following a particular sprite on a layer (like a player
+    # character).
+    #
+    # It also has the capability of zooming in and out, by controlling each layer's +source_w+ and +source_h+.
+    # It can be registered as a scrollable with {Zif::Services::InputSerive}.
     class Camera
       include Zif::Actions::Actionable
 

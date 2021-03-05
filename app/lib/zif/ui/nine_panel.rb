@@ -5,7 +5,8 @@ module Zif
     # It is able to have multiple sprites because it inherits from {Zif::CompoundSprite}.
     #
     # @abstract Subclass and override at least {#resize_width} and {#resize_height} to behave in a way which makes sense
-    #   for your specific assets
+    #   for your specific assets.  Suggested to override {#initialize} and call +super+ before setting +@corners+
+    #   +@edges+ and +@fill+ to reasonable defaults for the assets you are using.
     #
     # See below for subclassing examples such as {ExampleApp::GlassPanel}
     class NinePanel < CompoundSprite

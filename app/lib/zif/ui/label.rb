@@ -50,7 +50,7 @@ module Zif
       # @param [Integer] g {g}
       # @param [Integer] b {b}
       # @param [Integer] a {a}
-      def initialize(text, size: -1, alignment: :left, font: "font.tff", ellipsis: "…", r: 51, g: 51, b: 51, a: 255)
+      def initialize(text="", size: -1, alignment: :left, font: "font.tff", ellipsis: "…", r: 51, g: 51, b: 51, a: 255)
         @text = text
         @full_text = text
         @size = size
@@ -62,6 +62,11 @@ module Zif
         @b = b
         @a = a
         recalculate_minimums
+      end
+
+      def text=(new_text)
+        @full_text = new_text
+        @text = new_text
       end
 
       # Set alignment using either symbol names or the enum integer values.

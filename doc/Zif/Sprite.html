@@ -107,14 +107,6 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-  <div class="note todo">
-    <strong>TODO:</strong>
-    <div class='inline'>
-<p>Add example</p>
-</div>
-  </div>
-
-
 <p>A basic sprite which combines actions / animations, click handling, mass assignment and more.</p>
 
 <p>The foundation for most of the Zif library.</p>
@@ -123,11 +115,93 @@
 
 <p>See DRGTK docs on <code>attr_sprite</code>: <a href="http://docs.dragonruby.org/#----attr_sprite.rb">docs.dragonruby.org/#—-attr_sprite.rb</a></p>
 
+<pre class="code ruby"><code class="ruby"><span class='comment'># This only needs to be done once globally, usually in your Zif::Scene#prepare_scene method
+</span><span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_clickable'>register_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_dragon'>dragon</span><span class='rparen'>)</span>
+
+ <span class='comment'># Turn the dragon red when the mouse is clicked down.
+</span> <span class='comment'># This lambda is called by the input service with this sprite (dragon) plus the mouse location.
+</span> <span class='comment'># We don&#39;t need the mouse location for this example so we prefix that argument with _ to indicate it is unused
+</span> <span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_on_mouse_down'>on_mouse_down</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_sprite'>sprite</span><span class='comma'>,</span> <span class='id identifier rubyid__point'>_point</span><span class='op'>|</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='int'>255</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='int'>0</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='int'>0</span>
+ <span class='rbrace'>}</span>
+
+ <span class='comment'># Turn the dragon green when the mouse is clicked down &amp; moved
+</span> <span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_on_mouse_changed'>on_mouse_changed</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_sprite'>sprite</span><span class='comma'>,</span> <span class='id identifier rubyid__point'>_point</span><span class='op'>|</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='int'>0</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='int'>255</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='int'>0</span>
+ <span class='rbrace'>}</span>
+
+ <span class='comment'># Turn the dragon blue when the mouse click ends - the dragon stays blue after this until you click again.
+</span> <span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_sprite'>sprite</span><span class='comma'>,</span> <span class='id identifier rubyid__point'>_point</span><span class='op'>|</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='int'>0</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_g'>g</span> <span class='op'>=</span> <span class='int'>0</span>
+   <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_b'>b</span> <span class='op'>=</span> <span class='int'>255</span>
+ <span class='rbrace'>}</span>
+</code></pre>
+
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Basic usage</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_dragon'>dragon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'>Sprite</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>300</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>300</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='int'>82</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='int'>66</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/dragon_1.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+<span class='comment'># At this point, you can render your dragon:
+</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_dragon'>dragon</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Scaling an image</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='comment'># dragon is the dragon sprite with path +sprites/dragon_1.png+.  This image is 82 pixels wide, 66 pixels tall.
+</span>
+<span class='comment'># Place our sprite at 10,10 on the screen:
+</span><span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>10</span>
+<span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>10</span>
+
+<span class='comment'># The sprite should be 100 pixels by 100 pixels in size on the screen:
+</span><span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='int'>100</span>
+<span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='int'>100</span>
+
+<span class='comment'># Only show the center 50x50 pixels of the source image:
+</span><span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_source_w'>source_w</span> <span class='op'>=</span> <span class='int'>50</span>
+<span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_source_h'>source_h</span> <span class='op'>=</span> <span class='int'>50</span>
+
+<span class='comment'># Take that 50x50 slice from the center of the image
+</span><span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_source_x'>source_x</span> <span class='op'>=</span> <span class='int'>82</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='int'>25</span>
+<span class='id identifier rubyid_dragon'>dragon</span><span class='period'>.</span><span class='id identifier rubyid_source_y'>source_y</span> <span class='op'>=</span> <span class='int'>66</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='int'>25</span>
+
+<span class='comment'># All together, this means we are showing
+</span><span class='comment'># - the center 50x50 pixels of the dragon,
+</span><span class='comment'># - scaled up to fit 100x100,
+</span><span class='comment'># - at 10,10 on the screen</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Handling clicks</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='comment'># Building on dragon from the basic example.  Expects Zif::Services::InputService to be set up.</span></code></pre>
+    
+  </div>
+
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
@@ -1425,24 +1499,24 @@
       <pre class="lines">
 
 
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115</pre>
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='const'>Zif</span><span class='period'>.</span><span class='id identifier rubyid_unique_name'>unique_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sprite</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='ivar'>@name</span>      <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
@@ -1518,7 +1592,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -1575,7 +1649,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -1632,7 +1706,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -1689,7 +1763,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -1746,7 +1820,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -1800,12 +1874,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logical_x'>logical_x</span>
   <span class='ivar'>@logical_x</span>
@@ -1861,12 +1935,12 @@
       <pre class="lines">
 
 
-27
-28
-29</pre>
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logical_y'>logical_y</span>
   <span class='ivar'>@logical_y</span>
@@ -1922,12 +1996,12 @@
       <pre class="lines">
 
 
-21
-22
-23</pre>
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@name</span>
@@ -1986,7 +2060,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2043,7 +2117,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2099,12 +2173,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_render_target'>render_target</span>
   <span class='ivar'>@render_target</span>
@@ -2163,7 +2237,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2220,7 +2294,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2277,7 +2351,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2334,7 +2408,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2391,7 +2465,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2448,7 +2522,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2505,7 +2579,7 @@
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 103</span>
 
 </pre>
     </td>
@@ -2576,12 +2650,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_z_index'>z_index</span>
   <span class='ivar'>@z_index</span>
@@ -2664,17 +2738,17 @@
       <pre class="lines">
 
 
-150
-151
-152
-153
-154
-155
-156
-157</pre>
+186
+187
+188
+189
+190
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 150</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_hash'>rect_array_to_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_arr'>arr</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='lbrace'>{</span>
@@ -2755,17 +2829,17 @@
       <pre class="lines">
 
 
-162
-163
-164
-165
-166
-167
-168
-169</pre>
+198
+199
+200
+201
+202
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_source_hash'>rect_array_to_source_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_arr'>arr</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='lbrace'>{</span>
@@ -2846,12 +2920,12 @@
       <pre class="lines">
 
 
-173
-174
-175</pre>
+209
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rect_hash_to_source_hash'>rect_hash_to_source_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_rect'>rect</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>source_</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>source_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='rbrace'>}</span>
@@ -2911,12 +2985,12 @@
       <pre class="lines">
 
 
-198
-199
-200</pre>
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 198</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center'>center</span>
   <span class='lbracket'>[</span><span class='id identifier rubyid_center_x'>center_x</span><span class='comma'>,</span> <span class='id identifier rubyid_center_y'>center_y</span><span class='rbracket'>]</span>
@@ -2970,12 +3044,12 @@
       <pre class="lines">
 
 
-188
-189
-190</pre>
+224
+225
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 188</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center_x'>center_x</span>
   <span class='lparen'>(</span><span class='ivar'>@x</span> <span class='op'>+</span> <span class='ivar'>@w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -3029,12 +3103,12 @@
       <pre class="lines">
 
 
-193
-194
-195</pre>
+229
+230
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 229</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center_y'>center_y</span>
   <span class='lparen'>(</span><span class='ivar'>@y</span> <span class='op'>+</span> <span class='ivar'>@h</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
@@ -3135,14 +3209,14 @@
       <pre class="lines">
 
 
-142
-143
-144
-145
-146</pre>
+178
+179
+180
+181
+182</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='op'>=</span><span class='symbol'>:up</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@render_target</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_absorb_click?'>absorb_click?</span>
@@ -3198,17 +3272,17 @@
       <pre class="lines">
 
 
-265
-266
-267
-268
-269
-270
-271
-272</pre>
+301
+302
+303
+304
+305
+306
+307
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 301</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span>
   <span class='lbrace'>{</span>
@@ -3294,12 +3368,12 @@
       <pre class="lines">
 
 
-120
-121
-122</pre>
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dup_and_assign'>dup_and_assign</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
@@ -3350,12 +3424,12 @@
       <pre class="lines">
 
 
-132
-133
-134</pre>
+168
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hide'>hide</span>
   <span class='ivar'>@a</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -3417,12 +3491,12 @@
       <pre class="lines">
 
 
-204
-205
-206</pre>
+240
+241
+242</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 240</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rect'>rect</span>
   <span class='lbracket'>[</span><span class='ivar'>@x</span><span class='comma'>,</span> <span class='ivar'>@y</span><span class='comma'>,</span> <span class='ivar'>@w</span><span class='comma'>,</span> <span class='ivar'>@h</span><span class='rbracket'>]</span>
@@ -3476,12 +3550,12 @@
       <pre class="lines">
 
 
-209
-210
-211</pre>
+245
+246
+247</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rect_hash'>rect_hash</span>
   <span class='const'><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_hash'><span class='object_link'><a href="#rect_array_to_hash-class_method" title="Zif::Sprite.rect_array_to_hash (method)">rect_array_to_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
@@ -3517,12 +3591,12 @@
       <pre class="lines">
 
 
-125
-126
-127</pre>
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='ivar'>@a</span> <span class='op'>=</span> <span class='int'>255</span>
@@ -3576,12 +3650,12 @@
       <pre class="lines">
 
 
-260
-261
-262</pre>
+296
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 296</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_as_rect_hash'>source_as_rect_hash</span>
   <span class='const'><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_hash'><span class='object_link'><a href="#rect_array_to_hash-class_method" title="Zif::Sprite.rect_array_to_hash (method)">rect_array_to_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_source_rect'>source_rect</span><span class='rparen'>)</span>
@@ -3635,12 +3709,12 @@
       <pre class="lines">
 
 
-244
-245
-246</pre>
+280
+281
+282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 280</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_center'>source_center</span>
   <span class='lbracket'>[</span><span class='lparen'>(</span><span class='ivar'>@source_x</span> <span class='op'>+</span> <span class='ivar'>@source_w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='ivar'>@source_y</span> <span class='op'>+</span> <span class='ivar'>@source_h</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbracket'>]</span>
@@ -3694,12 +3768,12 @@
       <pre class="lines">
 
 
-224
-225
-226</pre>
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 224</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 260</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_is_set?'>source_is_set?</span>
   <span class='op'>!</span><span class='lparen'>(</span><span class='ivar'>@source_x</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='ivar'>@source_y</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='ivar'>@source_w</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='ivar'>@source_h</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
@@ -3753,12 +3827,12 @@
       <pre class="lines">
 
 
-239
-240
-241</pre>
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 275</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_rect'>source_rect</span>
   <span class='lbracket'>[</span><span class='ivar'>@source_x</span><span class='comma'>,</span> <span class='ivar'>@source_y</span><span class='comma'>,</span> <span class='ivar'>@source_w</span><span class='comma'>,</span> <span class='ivar'>@source_h</span><span class='rbracket'>]</span>
@@ -3812,12 +3886,12 @@
       <pre class="lines">
 
 
-254
-255
-256</pre>
+290
+291
+292</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 254</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_rect_hash'>source_rect_hash</span>
   <span class='const'><span class='object_link'><a href="" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_array_to_source_hash'><span class='object_link'><a href="#rect_array_to_source_hash-class_method" title="Zif::Sprite.rect_array_to_source_hash (method)">rect_array_to_source_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_source_rect'>source_rect</span><span class='rparen'>)</span>
@@ -3871,12 +3945,12 @@
       <pre class="lines">
 
 
-234
-235
-236</pre>
+270
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 234</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 270</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_wh'>source_wh</span>
   <span class='lbracket'>[</span><span class='ivar'>@source_w</span><span class='comma'>,</span> <span class='ivar'>@source_h</span><span class='rbracket'>]</span>
@@ -3930,12 +4004,12 @@
       <pre class="lines">
 
 
-229
-230
-231</pre>
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 229</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 265</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_xy'>source_xy</span>
   <span class='lbracket'>[</span><span class='ivar'>@source_x</span><span class='comma'>,</span> <span class='ivar'>@source_y</span><span class='rbracket'>]</span>
@@ -3989,12 +4063,12 @@
       <pre class="lines">
 
 
-275
-276
-277</pre>
+311
+312
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 311</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='lbrace'>{</span><span class='label'>path:</span> <span class='ivar'>@path</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_source_rect_hash'>source_rect_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_rect_hash'>rect_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_color'>color</span><span class='rparen'>)</span>
@@ -4030,15 +4104,15 @@
       <pre class="lines">
 
 
-216
-217
-218
-219
-220
-221</pre>
+252
+253
+254
+255
+256
+257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 216</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 252</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_view_actual_size!'>view_actual_size!</span>
   <span class='ivar'>@source_x</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -4095,12 +4169,12 @@
       <pre class="lines">
 
 
-183
-184
-185</pre>
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 219</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wh'>wh</span>
   <span class='lbracket'>[</span><span class='ivar'>@w</span><span class='comma'>,</span> <span class='ivar'>@h</span><span class='rbracket'>]</span>
@@ -4154,12 +4228,12 @@
       <pre class="lines">
 
 
-178
-179
-180</pre>
+214
+215
+216</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_xy'>xy</span>
   <span class='lbracket'>[</span><span class='ivar'>@x</span><span class='comma'>,</span> <span class='ivar'>@y</span><span class='rbracket'>]</span>
@@ -4213,12 +4287,12 @@
       <pre class="lines">
 
 
-249
-250
-251</pre>
+285
+286
+287</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/sprite.rb', line 285</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_factor'>zoom_factor</span>
   <span class='lbracket'>[</span><span class='ivar'>@w</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='ivar'>@source_w</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='ivar'>@h</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='ivar'>@source_h</span><span class='rparen'>)</span><span class='rbracket'>]</span>
@@ -4233,7 +4307,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 28 17:07:55 2021 by
+  Generated on Thu Mar  4 22:14:00 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

@@ -109,13 +109,17 @@
     
 <p>For creating and updating Render Targets.</p>
 
-<p>A render target is a way to programmatically create a static image out of sprites.</p>
+<p>A render target in DRGTK is a way to programmatically create a static image out of sprites.  It acts just like <tt>$gtk.args.outputs</tt> in that it accepts an array of <code>sprites</code> and other <code>primitives</code>.  It gets rendered into memory at the end of the tick where it is referenced out of <tt>$<a href="...">gtk.args.outputs</a></tt>, based on its contents.  To display the result, you need to send <tt>$gtk.args.outputs</tt> a sprite which references the name of the render target as its <code>path</code>.</p>
 
 <p>This class holds references to the <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> and all of the configuration options necessary to invoke this concept in DragonRuby GTK.  It also includes a <span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span> referencing the created image in <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
 
 <p>Once set up, you can force DRGTK to fully render the image using <span class='object_link'><a href="#redraw-instance_method" title="Zif::RenderTarget#redraw (method)">#redraw</a></span>, which redraws everything.</p>
 
-<p>Another strategy for redrawing is to reference the previously rendered version of the image, and add to it. This is great for performance reasons if you would otherwise have to render lots of sprites which haven&#39;t changed. This strategy is implemented by <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>.</p>
+<p>Although an already rendered RenderTarget is cheap to display, one drawback of using RenderTargets is that they take a little longer to process in the first place, compared to simply drawing sprites the normal way.  This can become an issue if you need to frequently update the RenderTarget due to changes on the source sprites.  Say you have a large tile map you pregenerate as a RenderTarget when the game loads.  If you need to change a single tile, like if that tile represents a door and the door opens, normally you would need to regenerate the entire RenderTarget using all of the source sprites.</p>
+
+<p>A technique the DragonRuby community (specifically Islacrusez, oeloeloel) has identified to overcome this performance issue is to build another RenderTarget using the previously rendered one, plus whatever sprites are changing.  See this example implementation of this technique: <a href="https://github.com/oeloeloel/persistent-outputs">github.com/oeloeloel/persistent-outputs</a></p>
+
+<p>This strategy is implemented here by <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>.  Since this is inherently an additive process, <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span> allows you to cut out a single rectangle (via the <code>cut_rect</code> param) from the old image to handle deletions.</p>
 
 <p>See DRGTK docs on Render Targets <a href="http://docs.dragonruby.org/#----advanced-rendering---simple-render-targets---main.rb">docs.dragonruby.org/#—-advanced-rendering—simple-render-targets—main.rb</a></p>
 
@@ -124,6 +128,28 @@
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Setting up a basic paint canvas</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_paint_canvas'>paint_canvas</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'>RenderTarget</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Zif::RenderTarget#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='symbol'>:my_paint_canvas</span><span class='comma'>,</span> <span class='label'>bg_color:</span> <span class='symbol'>:white</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>1000</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>500</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@all_current_brushstrokes</span>
+<span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_redraw'>redraw</span>
+<span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_containing_sprite'>containing_sprite</span>
+
+<span class='comment'># Some time later, you can add new brush strokes and delete a rectangle:
+</span>
+<span class='id identifier rubyid_minimap'>minimap</span> <span class='op'>=</span> <span class='comment'># ... a different sprite referencing the RenderTarget as path
+</span><span class='id identifier rubyid_new_brushstroke'>new_brushstroke</span> <span class='op'>=</span> <span class='comment'># ... a new Sprite to add to the render
+</span><span class='id identifier rubyid_erase_rect'>erase_rect</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>200</span><span class='comma'>,</span> <span class='int'>200</span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>10</span><span class='rbracket'>]</span> <span class='comment'># Let&#39;s say you erased something, too
+</span><span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_redraw_from_buffer'>redraw_from_buffer</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_new_brushstroke'>new_brushstroke</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_erase_rect'>erase_rect</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_minimap'>minimap</span><span class='rbracket'>]</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
@@ -630,7 +656,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>This creates four sprite-hashes to capture the area outside of a rectangle, used in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>.</p>
+<p>.                   right                     v   @height -&gt; <code>------</code>—+              |   2  |   |              |      | 3 |       top -&gt; <code>----</code>-+   |              |    |r|   |              | 1  <code>-</code>—+ &lt;- bottom              |    |  4  |              |    |     |       0,0 -&gt; <code>----</code>—–+                   ^     ^                  left   @width This creates four sprite-hashes to capture the area outside of a rectangle, used in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>.</p>
 </div></span>
   
 </li>
@@ -841,27 +867,27 @@
       <pre class="lines">
 
 
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72</pre>
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>bg_color:</span> <span class='symbol'>:black</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='ivar'>@name</span>       <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
@@ -937,12 +963,12 @@
       <pre class="lines">
 
 
-33
-34
-35</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bg_color'>bg_color</span>
   <span class='ivar'>@bg_color</span>
@@ -998,12 +1024,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_height'>height</span>
   <span class='ivar'>@height</span>
@@ -1059,12 +1085,12 @@
       <pre class="lines">
 
 
-39
-40
-41</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='ivar'>@labels</span>
@@ -1120,12 +1146,12 @@
       <pre class="lines">
 
 
-22
-23
-24</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@name</span>
@@ -1181,12 +1207,12 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_primitives'>primitives</span>
   <span class='ivar'>@primitives</span>
@@ -1242,12 +1268,12 @@
       <pre class="lines">
 
 
-36
-37
-38</pre>
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sprites'>sprites</span>
   <span class='ivar'>@sprites</span>
@@ -1303,12 +1329,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_width'>width</span>
   <span class='ivar'>@width</span>
@@ -1364,12 +1390,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_z_index'>z_index</span>
   <span class='ivar'>@z_index</span>
@@ -1477,16 +1503,16 @@
       <pre class="lines">
 
 
-136
-137
-138
-139
-140
-141
-142</pre>
+163
+164
+165
+166
+167
+168
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='op'>=</span><span class='symbol'>:up</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_relative'>relative</span> <span class='op'>=</span> <span class='id identifier rubyid_relative_point'>relative_point</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
@@ -1544,28 +1570,28 @@
       <pre class="lines">
 
 
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94</pre>
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span>
   <span class='kw'>return</span> <span class='ivar'>@containing_sprite</span> <span class='kw'>if</span> <span class='ivar'>@containing_sprite</span>
@@ -1607,6 +1633,23 @@
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
 
+<p>.</p>
+
+<pre class="code ruby"><code class="ruby">                right
+                  v
+@height -&gt; +------+---+
+           |   2  |   |
+           |      | 3 |
+    top -&gt; +----+-+   |
+           |    |r|   |
+           | 1  +-+---+ &lt;- bottom
+           |    |  4  |
+           |    |     |
+    0,0 -&gt; +----+-----+
+                ^     ^
+               left   @width
+</code></pre>
+
 <p>This creates four sprite-hashes to capture the area outside of a rectangle, used in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span></p>
 
 
@@ -1626,8 +1669,8 @@
       
       
         &mdash;
-        <div class='inline'><dl class="rdoc-list label-list"><dt>x, y, w, h
-<dd></dd></dl>
+        <div class='inline'>
+<p><tt>[x, y, w, h]</tt></p>
 </div>
       
     </li>
@@ -1659,35 +1702,6 @@
       <pre class="lines">
 
 
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
 295
 296
 297
@@ -1715,10 +1729,39 @@
 319
 320
 321
-322</pre>
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 266</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cut_containing_sprites'>cut_containing_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_left'>left</span>   <span class='op'>=</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -1813,12 +1856,12 @@
       <pre class="lines">
 
 
-177
-178
-179</pre>
+204
+205
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 204</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exclude_from_serialize'>exclude_from_serialize</span>
   <span class='qwords_beg'>%w[</span><span class='tstring_content'>sprites</span><span class='words_sep'> </span><span class='tstring_content'>primitives</span><span class='tstring_end'>]</span></span>
@@ -1858,27 +1901,27 @@
       <pre class="lines">
 
 
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344</pre>
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 327</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 356</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_full_containing_sprite'>full_containing_sprite</span>
   <span class='kw'>return</span> <span class='ivar'>@full_containing_sprite</span> <span class='kw'>if</span> <span class='ivar'>@full_containing_sprite</span>
@@ -1951,16 +1994,16 @@
       <pre class="lines">
 
 
-168
-169
-170
-171
-172
-173
-174</pre>
+195
+196
+197
+198
+199
+200
+201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_from'>project_from</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span>
@@ -2022,14 +2065,14 @@
       <pre class="lines">
 
 
-160
-161
-162
-163
-164</pre>
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_to'>project_to</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span>
@@ -2067,24 +2110,24 @@
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_redraw'>redraw</span>
   <span class='comment'># puts &quot;RenderTarget#redraw: #{@name} #{@width} #{@height} #{@sprites.length} sprites, #{@labels.length} labels&quot;
@@ -2137,6 +2180,8 @@
 <p>One drawback of using this is that you are forced to specify a single rectangle area which is changing.</p>
 
 <p>Another drawback to using this is that the <code>path</code> for any sprite referencing the RenderTarget needs to change every time the buffer is switched.  Since this references it&#39;s own containing sprite, we can update the path for that sprite automatically, but if there exist any additional sprites referencing the <code>path</code> (like if you have a map and a minimap pointing to the same <code>path</code>), those will have to be updated manually. To support this, you can pass additional containing sprites as an array to have their <code>path</code> updated.</p>
+
+<p>See the <span class='object_link'><a href="../ExampleApp/DoubleBufferRenderTest.html" title="ExampleApp::DoubleBufferRenderTest (class)">ExampleApp::DoubleBufferRenderTest</a></span> scene for a working example.</p>
 
 
   </div>
@@ -2208,28 +2253,28 @@
       <pre class="lines">
 
 
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228</pre>
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_redraw_from_buffer'>redraw_from_buffer</span><span class='lparen'>(</span><span class='label'>sprites:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>cut_rect:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>additional_containing_sprites:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;RenderTarget#redraw_from_buffer: #{@name} Begin&quot;)
@@ -2321,18 +2366,18 @@
       <pre class="lines">
 
 
-148
-149
-150
-151
-152
-153
-154
-155
-156</pre>
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_relative_point'>relative_point</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span>
@@ -2408,13 +2453,13 @@
       <pre class="lines">
 
 
-98
-99
-100
-101</pre>
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resize'>resize</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='rparen'>)</span>
   <span class='ivar'>@width</span> <span class='op'>=</span> <span class='id identifier rubyid_w'>w</span>
@@ -2453,12 +2498,12 @@
       <pre class="lines">
 
 
-234
-235
-236</pre>
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 234</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 263</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_inactive_buffer_name'>set_inactive_buffer_name</span>
   <span class='ivar'>@inactive_buffer_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_buf</span><span class='tstring_end'>&quot;</span></span>
@@ -2520,13 +2565,13 @@
       <pre class="lines">
 
 
-243
-244
-245
-246</pre>
+272
+273
+274
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 243</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 272</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_switch_buffer'>switch_buffer</span><span class='lparen'>(</span><span class='id identifier rubyid_additional_containing_sprites'>additional_containing_sprites</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_additional_containing_sprites'>additional_containing_sprites</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_cs'>cs</span><span class='op'>|</span> <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='ivar'>@inactive_buffer_name</span> <span class='rbrace'>}</span>
@@ -2542,7 +2587,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 28 17:07:55 2021 by
+  Generated on Thu Mar  4 22:14:01 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

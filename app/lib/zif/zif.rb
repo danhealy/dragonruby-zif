@@ -172,6 +172,8 @@ module Zif
     Math.sin(((t / total.to_f) * Math::PI) / 2.0)
   end
 
+  # Checks the running DragonRuby GTK version against {Zif::GTK_COMPATIBLE_VERSION}
+  # If different, it prints a little warning.  This is invoked automatically by {Zif::Game#initialize}
   def self.check_compatibility
     unless $gtk.version == Zif::GTK_COMPATIBLE_VERSION
       puts "+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+"

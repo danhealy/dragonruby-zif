@@ -1,11 +1,21 @@
 module Zif
   module Services
-    # This service keeps track of any clickable sprites that need to be informed of a click.
+    # This service keeps track of sprites and other objects interested in responding to clicks and scroll events, and
+    # passes the events over to them when they occur.
     #
     # Specifically, every tick {Zif::Game} will invoke {#process_click} on this service.
     #
     # In turn, this calls {Zif::Clickable#clicked?} on all {Zif::Clickable} objects which have been previously
     # registered using {#register_clickable}.
+    #
+    # It expects each clickable object to define a +#clicked?(point, kind)+ method.  If the sprite decides it has been
+    # clicked, it should return itself from this method.  Clicks are passed through to sprites based on their +z_index+
+    # value - if this value is nil, the service considers it to be at the bottom.
+    #
+    # {register_scrollable}, is analogous to {register_clickable} but for the scroll wheel. +#scrolled?+ is expected
+    # to be defined, and it receives the mouse point and the direction of scrolling as arguments.  Only {Zif::Camera}
+    # defines +#scrolled?+ out of the box.
+    #
     # @see Zif::Clickable
     class InputService
 

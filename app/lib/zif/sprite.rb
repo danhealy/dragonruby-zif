@@ -8,7 +8,68 @@ module Zif
   # See DRGTK docs on +attr_sprite+:
   # http://docs.dragonruby.org/#----attr_sprite.rb
   #
-  # @todo Add example
+  # @example Basic usage
+  #   dragon = Zif::Sprite.new.tap do |s|
+  #     s.x = 300
+  #     s.y = 300
+  #     s.w = 82
+  #     s.h = 66
+  #     s.path = "sprites/dragon_1.png"
+  #   end
+  #   # At this point, you can render your dragon:
+  #   $gtk.args.outputs.sprites << dragon
+  #
+  # @example Scaling an image
+  #   # dragon is the dragon sprite with path +sprites/dragon_1.png+.  This image is 82 pixels wide, 66 pixels tall.
+  #
+  #   # Place our sprite at 10,10 on the screen:
+  #   dragon.x = 10
+  #   dragon.y = 10
+  #
+  #   # The sprite should be 100 pixels by 100 pixels in size on the screen:
+  #   dragon.w = 100
+  #   dragon.h = 100
+  #
+  #   # Only show the center 50x50 pixels of the source image:
+  #   dragon.source_w = 50
+  #   dragon.source_h = 50
+  #
+  #   # Take that 50x50 slice from the center of the image
+  #   dragon.source_x = 82.fdiv(2) - 25
+  #   dragon.source_y = 66.fdiv(2) - 25
+  #
+  #   # All together, this means we are showing
+  #   # - the center 50x50 pixels of the dragon,
+  #   # - scaled up to fit 100x100,
+  #   # - at 10,10 on the screen
+  # @example Handling clicks
+  #   # Building on dragon from the basic example.  Expects Zif::Services::InputService to be set up.
+  #
+  #  # This only needs to be done once globally, usually in your Zif::Scene#prepare_scene method
+  #  $game.services[:input_service].register_clickable(dragon)
+  #
+  #   # Turn the dragon red when the mouse is clicked down.
+  #   # This lambda is called by the input service with this sprite (dragon) plus the mouse location.
+  #   # We don't need the mouse location for this example so we prefix that argument with _ to indicate it is unused
+  #   dragon.on_mouse_down = lambda {|sprite, _point|
+  #     sprite.r = 255
+  #     sprite.g = 0
+  #     sprite.b = 0
+  #   }
+  #
+  #   # Turn the dragon green when the mouse is clicked down & moved
+  #   dragon.on_mouse_changed = lambda {|sprite, _point|
+  #     sprite.r = 0
+  #     sprite.g = 255
+  #     sprite.b = 0
+  #   }
+  #
+  #   # Turn the dragon blue when the mouse click ends - the dragon stays blue after this until you click again.
+  #   dragon.on_mouse_up = lambda {|sprite, _point|
+  #     sprite.r = 0
+  #     sprite.g = 0
+  #     sprite.b = 255
+  #   }
   class Sprite
     include Zif::Assignable
     include Zif::Serializable
@@ -47,34 +108,9 @@ module Zif
     #   @return [Numeric] Width
     # @!attribute [rw] h
     #   @return [Numeric] Height
-
     # @note The {source_x}, {source_y}, {source_w}, {source_h} attributes define the extent of the {path} image to show.
     #   Think of this as a dynamic crop of the image.  If source_x and source_y are +0,0+ and source_w, source_h are the
     #   same as the width and height of the image, the entire image is projected into this sprite.
-    # @example Scaling an image
-    #   # dragon is the dragon sprite with path +sprites/dragon_1.png+.  This image is 82 pixels wide, 66 pixels tall.
-    #
-    #   # Place our sprite at 10,10 on the screen:
-    #   dragon.x = 10
-    #   dragon.y = 10
-    #
-    #   # The sprite should be 100 pixels by 100 pixels in size on the screen:
-    #   dragon.w = 100
-    #   dragon.h = 100
-    #
-    #   # Only show the center 50x50 pixels of the source image:
-    #   dragon.source_w = 50
-    #   dragon.source_h = 50
-    #
-    #   # Take that 50x50 slice from the center of the image
-    #   dragon.source_x = 82.fdiv(2) - 25
-    #   dragon.source_y = 66.fdiv(2) - 25
-    #
-    #   # All together, this means we are showing
-    #   # - the center 50x50 pixels of the dragon,
-    #   # - scaled up to fit 100x100,
-    #   # - at 10,10 on the screen
-
     # @!attribute [rw] source_x
     #   @return [Numeric] X axis position of the {path} image we want to start sourcing the image from
     # @!attribute [rw] source_y

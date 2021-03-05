@@ -32,7 +32,39 @@ module Zif
     #   prerendered or need few updates duing play. Then choose between {Zif::Layers::SimpleLayer} and
     #   {Zif::Layers::ActiveLayer} as appropriate.
     #
-    # @todo Example
+    # @example Setting up a group of 2 layers
+    #   tile_width_and_height         = 64  # Each tile is 64x64 pixels
+    #   map_width_and_height_in_tiles = 100 # 64 * 100 = 6400x6400 pixels, 10000 tiles total
+    #
+    #   @map = Zif::Layers::LayerGroup.new(
+    #     tile_width:     tile_width_and_height,
+    #     tile_height:    tile_width_and_height,
+    #     logical_width:  map_width_and_height_in_tiles,
+    #     logical_height: map_width_and_height_in_tiles
+    #   )
+    #
+    #   # This example is only using Zif::Layers::ActiveLayer because they are easier to set up,
+    #   # and it is a good place to start in terms of performance.
+    #   @map.new_active_tiled_layer(:tiles)
+    #   @map.new_active_layer(:avatar)
+    #
+    #   @map.layers[:avatar].source_sprites = [@dragon]
+    #
+    #   # Add a bunch of tiles
+    #   a_new_tile = Zif::Sprite.new....
+    #   @map.layers[:tiles].add_positioned_sprite(sprite: a_new_tile, logical_x: x, logical_y: y)
+    #
+    #   # Set up a camera
+    #   @camera = Zif::Camera.new(
+    #     layer_sprites: @map.layer_containing_sprites,
+    #     initial_x: 1800,
+    #     initial_y: 1200
+    #   )
+    #
+    #   $gtk.args.outputs.static_sprites << @camera.layers
+    #
+    #   # All set!  You can move your sprites (like @dragon) around.  You can control the Camera using actions.
+    #   # Most or all of the above code could be placed in a Zif::Scene#prepare_scene method.
     class LayerGroup
       include Zif::Traceable
 

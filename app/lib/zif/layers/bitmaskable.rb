@@ -4,13 +4,13 @@ module Zif
     # Sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.
     # This is a bit opinionated!  Here is how the bitmask is calculated:
     #
-    # +-----+----+-----+
-    # | 128 | 1  |  16 |
-    # +-----+----+-----+
-    # |  8  | <> |  2  |
-    # +-----+----+-----+
-    # |  64 | 4  |  32 |
-    # +-----+----+-----+
+    #   +-----+----+-----+
+    #   | 128 | 1  |  16 |
+    #   +-----+----+-----+
+    #   |  8  | <> |  2  |
+    #   +-----+----+-----+
+    #   |  64 | 4  |  32 |
+    #   +-----+----+-----+
     #
     # (Cardinal directions clockwise, then diagonal directions clockwise)
     #

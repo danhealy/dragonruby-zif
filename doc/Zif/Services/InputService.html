@@ -102,11 +102,15 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>This service keeps track of any clickable sprites that need to be informed of a click.</p>
+<p>This service keeps track of sprites and other objects interested in responding to clicks and scroll events, and passes the events over to them when they occur.</p>
 
 <p>Specifically, every tick <span class='object_link'><a href="../Game.html" title="Zif::Game (class)">Game</a></span> will invoke <span class='object_link'><a href="#process_click-instance_method" title="Zif::Services::InputService#process_click (method)">#process_click</a></span> on this service.</p>
 
 <p>In turn, this calls <span class='object_link'><a href="../Clickable.html#clicked%3F-instance_method" title="Zif::Clickable#clicked? (method)">Clickable#clicked?</a></span> on all <span class='object_link'><a href="../Clickable.html" title="Zif::Clickable (module)">Clickable</a></span> objects which have been previously registered using <span class='object_link'><a href="#register_clickable-instance_method" title="Zif::Services::InputService#register_clickable (method)">#register_clickable</a></span>.</p>
+
+<p>It expects each clickable object to define a <tt>#clicked?(point, kind)</tt> method.  If the sprite decides it has been clicked, it should return itself from this method.  Clicks are passed through to sprites based on their <code>z_index</code> value - if this value is nil, the service considers it to be at the bottom.</p>
+
+<p><span class='object_link'><a href="#register_scrollable-instance_method" title="Zif::Services::InputService#register_scrollable (method)">#register_scrollable</a></span>, is analogous to <span class='object_link'><a href="#register_clickable-instance_method" title="Zif::Services::InputService#register_clickable (method)">#register_clickable</a></span> but for the scroll wheel. <code>#scrolled?</code> is expected to be defined, and it receives the mouse point and the direction of scrolling as arguments.  Only Camera defines <code>#scrolled?</code> out of the box.</p>
 
 
   </div>
@@ -360,13 +364,13 @@
       <pre class="lines">
 
 
-12
-13
-14
-15</pre>
+22
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@last_mouse_bits</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -414,16 +418,6 @@
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
 85
 86
 87
@@ -453,10 +447,20 @@
 111
 112
 113
-114</pre>
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_click'>process_click</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@clickables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -531,21 +535,21 @@
       <pre class="lines">
 
 
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
 128
-129</pre>
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_scroll'>process_scroll</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@scrollables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -628,20 +632,20 @@
       <pre class="lines">
 
 
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42</pre>
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_clickable'>register_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='comma'>,</span> <span class='id identifier rubyid_absorb_click'>absorb_click</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@clickables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_clickable'>clickable</span>
@@ -693,24 +697,24 @@
       <pre class="lines">
 
 
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
 62
 63
 64
 65
-66</pre>
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_scrollable'>register_scrollable</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='comma'>,</span> <span class='id identifier rubyid_absorb_scroll'>absorb_scroll</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@scrollables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_scrollable'>scrollable</span>
@@ -773,12 +777,12 @@
       <pre class="lines">
 
 
-46
-47
-48</pre>
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_clickable'>remove_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='rparen'>)</span>
   <span class='ivar'>@clickables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='rparen'>)</span>
@@ -814,12 +818,12 @@
       <pre class="lines">
 
 
-69
-70
-71</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_scrollable'>remove_scrollable</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='rparen'>)</span>
   <span class='ivar'>@scrollables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='rparen'>)</span>
@@ -855,15 +859,15 @@
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23</pre>
+28
+29
+30
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@clickables</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -881,7 +885,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 28 17:07:57 2021 by
+  Generated on Thu Mar  4 22:14:02 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

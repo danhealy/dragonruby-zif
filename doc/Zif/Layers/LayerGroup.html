@@ -107,14 +107,6 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-  <div class="note todo">
-    <strong>TODO:</strong>
-    <div class='inline'>
-<p>Example</p>
-</div>
-  </div>
-
-
 <p>Designed to be used with <span class='object_link'><a href="Camera.html" title="Zif::Layers::Camera (class)">Camera</a></span>.</p>
 
 <p>Creates a set of overlapping play area layers based on <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> (<span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>) or <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> (<span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span>) and handles redrawing them.</p>
@@ -141,6 +133,49 @@
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Setting up a group of 2 layers</p>
+</div></p>
+      
+      <pre class="example code"><code>tile_width_and_height         = 64  # Each tile is 64x64 pixels
+map_width_and_height_in_tiles = 100 # 64 * 100 = 6400x6400 pixels, 10000 tiles total
+
+@map = Zif::Layers::LayerGroup.new(
+  tile_width:     tile_width_and_height,
+  tile_height:    tile_width_and_height,
+  logical_width:  map_width_and_height_in_tiles,
+  logical_height: map_width_and_height_in_tiles
+)
+
+# This example is only using Zif::Layers::ActiveLayer because they are easier to set up,
+# and it is a good place to start in terms of performance.
+@map.new_active_tiled_layer(:tiles)
+@map.new_active_layer(:avatar)
+
+@map.layers[:avatar].source_sprites = [@dragon]
+
+# Add a bunch of tiles
+a_new_tile = Zif::Sprite.new....
+@map.layers[:tiles].add_positioned_sprite(sprite: a_new_tile, logical_x: x, logical_y: y)
+
+# Set up a camera
+@camera = Zif::Camera.new(
+  layer_sprites: @map.layer_containing_sprites,
+  initial_x: 1800,
+  initial_y: 1200
+)
+
+$gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
+
+# All set!  You can move your sprites (like @dragon) around.  You can control the Camera using actions.
+# Most or all of the above code could be placed in a Zif::Scene#prepare_scene method.</code></pre>
+    
+  </div>
+
 
 </div>
 
@@ -947,25 +982,25 @@
       <pre class="lines">
 
 
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74</pre>
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>map</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
                <span class='label'>tile_width:</span> <span class='int'>64</span><span class='comma'>,</span>
@@ -1039,12 +1074,12 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_layers'>layers</span>
   <span class='ivar'>@layers</span>
@@ -1100,12 +1135,12 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logical_height'>logical_height</span>
   <span class='ivar'>@logical_height</span>
@@ -1161,12 +1196,12 @@
       <pre class="lines">
 
 
-46
-47
-48</pre>
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logical_width'>logical_width</span>
   <span class='ivar'>@logical_width</span>
@@ -1222,12 +1257,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@name</span>
@@ -1283,12 +1318,12 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tile_height'>tile_height</span>
   <span class='ivar'>@tile_height</span>
@@ -1344,12 +1379,12 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tile_width'>tile_width</span>
   <span class='ivar'>@tile_width</span>
@@ -1405,12 +1440,12 @@
       <pre class="lines">
 
 
-50
-51
-52</pre>
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_z_index'>z_index</span>
   <span class='ivar'>@z_index</span>
@@ -1466,14 +1501,14 @@
       <pre class="lines">
 
 
-78
-79
-80
-81
-82</pre>
+110
+111
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='rparen'>)</span>
   <span class='ivar'>@layers</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_layer'>layer</span>
@@ -1511,17 +1546,17 @@
       <pre class="lines">
 
 
-187
-188
-189
-190
-191
-192
-193
-194</pre>
+219
+220
+221
+222
+223
+224
+225
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 219</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_force_refresh'>force_refresh</span>
   <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid__name'>_name</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='op'>|</span>
@@ -1551,12 +1586,12 @@
       <pre class="lines">
 
 
-231
-232
-233</pre>
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 263</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1610,12 +1645,12 @@
       <pre class="lines">
 
 
-204
-205
-206</pre>
+236
+237
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 236</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_layer_containing_sprites'>layer_containing_sprites</span>
   <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:containing_sprite</span><span class='rparen'>)</span>
@@ -1669,12 +1704,12 @@
       <pre class="lines">
 
 
-197
-198
-199</pre>
+229
+230
+231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 229</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_layer_names'>layer_names</span>
   <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
@@ -1776,15 +1811,15 @@
       <pre class="lines">
 
 
-178
-179
-180
-181
-182
-183</pre>
+210
+211
+212
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logical_pos'>logical_pos</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
   <span class='lbracket'>[</span>
@@ -1841,12 +1876,12 @@
       <pre class="lines">
 
 
-151
-152
-153</pre>
+183
+184
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_height'>max_height</span>
   <span class='ivar'>@tile_height</span> <span class='op'>*</span> <span class='ivar'>@logical_height</span>
@@ -1900,12 +1935,12 @@
       <pre class="lines">
 
 
-146
-147
-148</pre>
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_width'>max_width</span>
   <span class='ivar'>@tile_width</span> <span class='op'>*</span> <span class='ivar'>@logical_width</span>
@@ -2039,17 +2074,17 @@
       <pre class="lines">
 
 
-163
-164
-165
-166
-167
-168
-169
-170</pre>
+195
+196
+197
+198
+199
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_natural_rect'>natural_rect</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='comma'>,</span> <span class='id identifier rubyid_x_range'>x_range</span><span class='comma'>,</span> <span class='id identifier rubyid_y_range'>y_range</span><span class='rparen'>)</span>
   <span class='lbracket'>[</span>
@@ -2128,12 +2163,12 @@
       <pre class="lines">
 
 
-141
-142
-143</pre>
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_active_bitmasked_tiled_layer'>new_active_bitmasked_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActiveBitmaskedTiledLayer.html" title="Zif::Layers::ActiveBitmaskedTiledLayer (class)">ActiveBitmaskedTiledLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2207,12 +2242,12 @@
       <pre class="lines">
 
 
-87
-88
-89</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_active_layer'>new_active_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2286,12 +2321,12 @@
       <pre class="lines">
 
 
-123
-124
-125</pre>
+155
+156
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_active_tiled_layer'>new_active_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Layers.html" title="Zif::Layers (module)">Layers</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">ActiveTiledLayer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ActiveLayer.html#initialize-instance_method" title="Zif::Layers::ActiveLayer#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='ivar'>@z_index</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2383,15 +2418,15 @@
       <pre class="lines">
 
 
-131
-132
-133
-134
-135
-136</pre>
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_bitmasked_tiled_layer'>new_bitmasked_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span>
@@ -2504,21 +2539,21 @@
       <pre class="lines">
 
 
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107</pre>
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_simple_layer'>new_simple_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>clear_sprites_after_draw:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span>
@@ -2619,15 +2654,15 @@
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118</pre>
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 145</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_tiled_layer'>new_tiled_layer</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_add_layer'>add_layer</span><span class='lparen'>(</span>
@@ -2666,18 +2701,18 @@
       <pre class="lines">
 
 
-209
-210
-211
-212
-213
-214
-215
-216
-217</pre>
+241
+242
+243
+244
+245
+246
+247
+248
+249</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 241</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_refresh'>refresh</span>
   <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_layer_name'>layer_name</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='op'>|</span>
@@ -2708,20 +2743,20 @@
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229</pre>
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_serialize'>serialize</span>
   <span class='lbrace'>{</span>
@@ -2754,12 +2789,12 @@
       <pre class="lines">
 
 
-235
-236
-237</pre>
+267
+268
+269</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 235</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/layer_group.rb', line 267</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -2774,7 +2809,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 28 17:07:56 2021 by
+  Generated on Thu Mar  4 22:14:02 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

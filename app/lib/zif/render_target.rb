@@ -1,19 +1,46 @@
 module Zif
   # For creating and updating Render Targets.
   #
-  # A render target is a way to programmatically create a static image out of sprites.
+  # A render target in DRGTK is a way to programmatically create a static image out of sprites.  It acts just like
+  # +$gtk.args.outputs+ in that it accepts an array of +sprites+ and other +primitives+.  It gets rendered into memory
+  # at the end of the tick where it is referenced out of +$gtk.args.outputs[...]+, based on its contents.  To display
+  # the result, you need to send +$gtk.args.outputs+ a sprite which references the name of the render target as its
+  # +path+.
   #
   # This class holds references to the {sprites} and all of the configuration options necessary to invoke this concept
   # in DragonRuby GTK.  It also includes a {Zif::Sprite} referencing the created image in {containing_sprite}.
   #
   # Once set up, you can force DRGTK to fully render the image using {#redraw}, which redraws everything.
   #
-  # Another strategy for redrawing is to reference the previously rendered version of the image, and add to it.
-  # This is great for performance reasons if you would otherwise have to render lots of sprites which haven't changed.
-  # This strategy is implemented by {#redraw_from_buffer}.
+  # Although an already rendered RenderTarget is cheap to display, one drawback of using RenderTargets is that they take
+  # a little longer to process in the first place, compared to simply drawing sprites the normal way.  This can become
+  # an issue if you need to frequently update the RenderTarget due to changes on the source sprites.  Say you have a
+  # large tile map you pregenerate as a RenderTarget when the game loads.  If you need to change a single tile, like if
+  # that tile represents a door and the door opens, normally you would need to regenerate the entire RenderTarget using
+  # all of the source sprites.
+  #
+  # A technique the DragonRuby community (specifically Islacrusez, oeloeloel) has identified to overcome this
+  # performance issue is to build another RenderTarget using the previously rendered one, plus whatever sprites are
+  # changing.  See this example implementation of this technique: https://github.com/oeloeloel/persistent-outputs
+  #
+  # This strategy is implemented here by {#redraw_from_buffer}.  Since this is inherently an additive process,
+  # {#redraw_from_buffer} allows you to cut out a single rectangle (via the +cut_rect+ param) from the old image to
+  # handle deletions.
   #
   # See DRGTK docs on Render Targets
   # http://docs.dragonruby.org/#----advanced-rendering---simple-render-targets---main.rb
+  # @example Setting up a basic paint canvas
+  #   paint_canvas = Zif::RenderTarget.new(:my_paint_canvas, bg_color: :white, width: 1000, height: 500)
+  #   paint_canvas.sprites << @all_current_brushstrokes
+  #   paint_canvas.redraw
+  #   $gtk.args.outputs.static_sprites << paint_canvas.containing_sprite
+  #
+  #   # Some time later, you can add new brush strokes and delete a rectangle:
+  #
+  #   minimap = # ... a different sprite referencing the RenderTarget as path
+  #   new_brushstroke = # ... a new Sprite to add to the render
+  #   erase_rect = [200, 200, 10, 10] # Let's say you erased something, too
+  #   paint_canvas.redraw_from_buffer([new_brushstroke], erase_rect, [minimap])
   class RenderTarget
     include Zif::Serializable
 
@@ -201,6 +228,8 @@ module Zif
     # have a map and a minimap pointing to the same +path+), those will have to be updated manually.
     # To support this, you can pass additional containing sprites as an array to have their +path+ updated.
     #
+    # See the {ExampleApp::DoubleBufferRenderTest} scene for a working example.
+    #
     # @todo Need some examples of double buffering
     # @param [Array<Zif::Sprite>] sprites Optional. An array of sprites to add to the image in this redraw.
     # @param [Array<Integer>] cut_rect Optional.  [x, y, w, h], the area to cut out from the existing buffer.
@@ -245,22 +274,22 @@ module Zif
       @inactive_buffer_name, @name = @name, @inactive_buffer_name
     end
 
-    #                  right
-    #                    v
-    # .@height -> +------+---+
-    #             |   2  |   |
-    #             |      | 3 |
-    #      top -> +----+-+   |
-    #             |    |r|   |
-    #             | 1  +-+---+ <- bottom
-    #             |    |  4  |
-    #             |    |     |
-    #      0,0 -> +----+-----+
-    #                  ^     ^
-    #                 left   @width
-
+    #   .
+    #                   right
+    #                     v
+    #   @height -> +------+---+
+    #              |   2  |   |
+    #              |      | 3 |
+    #       top -> +----+-+   |
+    #              |    |r|   |
+    #              | 1  +-+---+ <- bottom
+    #              |    |  4  |
+    #              |    |     |
+    #       0,0 -> +----+-----+
+    #                   ^     ^
+    #                  left   @width
     # This creates four sprite-hashes to capture the area outside of a rectangle, used in {redraw_from_buffer}
-    # @param [Array<Integer>] rect [x, y, w, h]
+    # @param [Array<Integer>] rect +[x, y, w, h]+
     # @return [Array<Hash<Symbol, Numeric>>] four sprites around the rect
     # @api private
     def cut_containing_sprites(rect)

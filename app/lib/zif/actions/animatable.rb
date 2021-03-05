@@ -1,6 +1,7 @@
 module Zif
   module Actions
-    # A mixin for an {Zif::Actions::Actionable} class which can set +#path=+
+    # A mixin to assist with sprite animations, to use with an object which already includes {Zif::Actions::Actionable}.
+    # Under the hood, these are implemented as {Zif::Actions::Sequence}s which modify the +path+ over time.
     module Animatable
 
       # @return [Hash<(String, Symbol), Zif::Actions::Sequence>] Registered sequences by name.

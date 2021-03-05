@@ -9,9 +9,14 @@ module Zif
     #
     # Because this inherits from {Zif::CompoundSprite} and {Zif::Sprite}, it obtains a lot of extra functionality.
     # An important aspect is that it is a {Zif::Clickable} and can be registered as a clickable with the
-    # {Zif::Services::InputService}
+    # {Zif::Services::InputService}.
     #
-    # Use {toggle_pressed} to switch states
+    # By default it will automatically set up the click handlers to handle switching states based on clicks.  You can
+    # pass a block to {initialize}, this will be executed if the button is clicked and the mouse click goes up within
+    # the rectangle of the button.  (You can click down on the button, move the mouse outside, and let go - it will not
+    # trigger the callback in this case.)
+    #
+    # Use {toggle_pressed} to switch states manually.
     class TwoStageButton < CompoundSprite
       # @return [Zif::Sprite] The sprite to use for the normal (unpressed) state
       attr_accessor :normal

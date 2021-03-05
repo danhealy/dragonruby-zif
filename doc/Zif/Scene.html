@@ -113,14 +113,6 @@
 </div>
 </div>
 
-  <div class="note todo">
-    <strong>TODO:</strong>
-    <div class='inline'>
-<p>Add a simple example</p>
-</div>
-  </div>
-
-
 <p>A Scene is a full-screen view of your game. The concept is to show one scene at a time.</p>
 
 <p>Each scene in your game should be a subclass of <span class='object_link'><a href="" title="Zif::Scene (class)">Scene</a></span> which overrides at least <span class='object_link'><a href="#perform_tick-instance_method" title="Zif::Scene#perform_tick (method)">#perform_tick</a></span>.</p>
@@ -136,6 +128,59 @@
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>An example scene:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='kw'>class</span> <span class='const'>OpeningScene</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'>Scene</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+    <span class='comment'># If OpeningScene is registered by symbol using Zif::Game#register_scene, this initialize will happen each
+</span>    <span class='comment'># time the game switches to this scene.  Otherwise you could instantiate this scene somewhere and simply
+</span>    <span class='comment'># return it from another scene&#39;s #perform_tick
+</span>    <span class='ivar'>@dragon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span> <span class='comment'># ....
+</span>    <span class='ivar'>@hello</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="UI.html" title="Zif::UI (module)">UI</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="UI/Label.html" title="Zif::UI::Label (class)">Label</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="UI/Label.html#initialize-instance_method" title="Zif::UI::Label#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello World!</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_label'>label</span><span class='op'>|</span>
+      <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>100</span>
+      <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>100</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@current_scene_tick_count</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_prepare_scene'>prepare_scene</span>
+    <span class='comment'># You probably want to remove the things registered with the services when scenes change
+</span>    <span class='comment'># You can remove items explicitly using #remove_.., but #reset_.. will clear everything
+</span>    <span class='comment'># You can also do this when a scene is being changed away from, using the #unload_scene method.
+</span>    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:action_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reset_actionables'>reset_actionables</span>
+    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reset'>reset</span>
+    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_labels'>static_labels</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+
+    <span class='comment'># Now you can use this to do one-time setup code.
+</span>    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:action_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_actionable'>register_actionable</span><span class='lparen'>(</span><span class='ivar'>@dragon</span><span class='rparen'>)</span>
+    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_clickable'>register_clickable</span><span class='lparen'>(</span><span class='ivar'>@dragon</span><span class='rparen'>)</span>
+
+    <span class='comment'># Best practice is to use static outputs, this gives you a lot more performance and there is no need to append
+</span>    <span class='comment'># to the array inside #perform_tick.
+</span>    <span class='comment'># The only downside is that you have to manage this list manually.  You can remove sprites at any time in
+</span>    <span class='comment'># #perform_tick.
+</span>    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@dragon</span>
+    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_labels'>static_labels</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@hello</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
+    <span class='ivar'>@current_scene_tick_count</span> <span class='op'>+=</span> <span class='int'>1</span>
+    <span class='ivar'>@hello</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello World! </span><span class='embexpr_beg'>#{</span><span class='ivar'>@current_scene_tick_count</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+    <span class='comment'># Tell Zif::Game to attempt to switch to the scene registered with the name :rainbow_road after some time
+</span>    <span class='kw'>return</span> <span class='symbol'>:rainbow_road</span> <span class='kw'>if</span> <span class='ivar'>@current_scene_tick_count</span> <span class='op'>&gt;</span> <span class='int'>200</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -312,12 +357,12 @@
       <pre class="lines">
 
 
-32
-33
-34</pre>
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/scene.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/scene.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Zif::Scene#perform_tick: Please override #perform_tick for </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -353,11 +398,11 @@
       <pre class="lines">
 
 
-40
-41</pre>
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/scene.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/scene.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepare_scene'>prepare_scene</span>
 <span class='kw'>end</span></pre>
@@ -392,11 +437,11 @@
       <pre class="lines">
 
 
-46
-47</pre>
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/scene.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/scene.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unload_scene'>unload_scene</span>
 <span class='kw'>end</span></pre>
@@ -410,7 +455,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 28 17:07:54 2021 by
+  Generated on Thu Mar  4 22:14:00 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>

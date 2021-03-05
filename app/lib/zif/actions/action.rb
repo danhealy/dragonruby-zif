@@ -63,7 +63,7 @@ module Zif
       # ------------------
       # @!group 1. Public Interface
 
-      # @example Detailed explaination
+      # @example Detailed explanation
       #   # dragon is a Zif::Sprite (and therefore a Zif::Actions::Actionable, but any class that includes Actionable
       #   # can receive an Action like this.  A non-Sprite example is Zif::Layers::Camera).
       #   # The initial x position is being set to 200 here:

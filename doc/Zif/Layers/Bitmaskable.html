@@ -93,7 +93,14 @@
     
 <p>A mixin to extend <span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span> functionality. Sprites are chosen via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling. This is a bit opinionated!  Here is how the bitmask is calculated:</p>
 
-<p><code>-----</code>—-<code>-----</code> | 128 | 1  |  16 | <code>-----</code>—-<code>-----</code> |  8  | &lt;&gt; |  2  | <code>-----</code>—-<code>-----</code> |  64 | 4  |  32 | <code>-----</code>—-<code>-----</code></p>
+<pre class="code ruby"><code class="ruby">+-----+----+-----+
+| 128 | 1  |  16 |
++-----+----+-----+
+|  8  | &lt;&gt; |  2  |
++-----+----+-----+
+|  64 | 4  |  32 |
++-----+----+-----+
+</code></pre>
 
 <p>(Cardinal directions clockwise, then diagonal directions clockwise)</p>
 
@@ -1273,7 +1280,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 28 17:07:54 2021 by
+  Generated on Thu Mar  4 22:14:00 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>
