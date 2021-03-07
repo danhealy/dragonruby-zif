@@ -9,6 +9,17 @@ module ExampleApp
       @tracer_service_name = :tracer
       @scene_timer = 60 * 60
       @pause_timer = false
+      @timer_bar = Zif::Sprite.new
+      @timer_bar.assign(
+        x:        0,
+        y:        718,
+        w:        1280,
+        h:        2,
+        a:        80,
+        z_index:  999,
+        path:     "sprites/white_1.png"
+      )
+      @timer_bar_set = false
     end
 
     def prepare_scene
@@ -20,19 +31,39 @@ module ExampleApp
       tracer.clear_averages
       $gtk.args.outputs.static_sprites.clear
       $gtk.args.outputs.static_labels.clear
+      @timer_bar_set = false
     end
 
     def perform_tick
-      display_context_labels
-
       $game.services[:tracer].clear_averages if $gtk.args.inputs.keyboard.key_up.delete
+      unless @timer_bar_set
+        $gtk.args.outputs.static_sprites << @timer_bar
+        @timer_bar_set = true
+      end
 
       if $gtk.args.inputs.keyboard.key_up.pageup
         @pause_timer = !@pause_timer
         @scene_timer += 100 if @pause_timer
       end
 
-      @scene_timer -= 1 unless @pause_timer
+      if @pause_timer
+        @timer_bar.assign(
+          w: 1280,
+          r: 255,
+          g: 0,
+          b: 0
+        )
+      else
+        @scene_timer -= 1
+        @timer_bar.assign(
+          w: @scene_timer,
+          r: 0,
+          g: 255,
+          b: 180
+        )
+      end
+
+      display_context_labels
 
       return unless @next_scene
 
@@ -42,8 +73,9 @@ module ExampleApp
     # rubocop:disable Layout/LineLength
     def display_context_labels
       color = {r: 255, g: 255, b: 255, a: 255}
-      $gtk.args.outputs.labels << { x: 4, y: 720 - 0, text: "#{self.class.name}.  Press spacebar to transition to #{@next_scene}, or wait #{@scene_timer} ticks." }.merge(color)
-      $gtk.args.outputs.labels << { x: 0, y: 720 - 20, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
+      wait_text = @pause_timer ? ". Paused, press pgup to unpause." : ", or wait #{@scene_timer} ticks.  Press pgup to pause."
+      $gtk.args.outputs.labels << { x: 4, y: 720 - 2, text: "#{self.class.name}.  Press spacebar to #{@next_scene}#{wait_text}" }.merge(color)
+      $gtk.args.outputs.labels << { x: 0, y: 720 - 22, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
       $gtk.args.outputs.labels << { x: 4, y: 24, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
       $gtk.args.outputs.labels << { x: 4, y: 44, text: "Max slowest mark: #{tracer&.slowest_max_mark}" }.merge(color)
       $gtk.args.outputs.labels << { x: 4, y: 64, text: "Avg slowest mark: #{tracer&.slowest_avg_mark}" }.merge(color)
