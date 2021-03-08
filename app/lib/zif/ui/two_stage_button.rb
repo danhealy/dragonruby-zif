@@ -2,7 +2,7 @@ module Zif
   module UI
     # This is a button which has pressed and unpressed states defined using two different sprites.
     #
-    # If you give it a label by +mybutton.labels << Zif::Label.new ...+, there are some convenience methods available
+    # If you give it a label by +mybutton.labels << Zif::UI::Label.new ...+, there are some convenience methods available
     # {retruncate_label} {recenter_label} {label_text=}.
     #
     # It is able to have multiple sprites and a label because it inherits from {Zif::CompoundSprite}.
@@ -74,7 +74,7 @@ module Zif
         end
       end
 
-      # @return [Zif::Label] The label of the button
+      # @return [Zif::UI::Label] The label of the button
       def label
         @labels.first
       end
@@ -88,7 +88,7 @@ module Zif
         label.recenter_in(@w, cur_h, offset: @label_y_offset)
       end
 
-      # Calls {Zif::Label#retruncate} on the label
+      # Calls {Zif::UI::Label#retruncate} on the label
       # @param [Integer] padding Some padding to subtract from the width of the sprite
       def retruncate_label(padding=0)
         return unless label
@@ -96,7 +96,7 @@ module Zif
         label.retruncate(@w - padding)
       end
 
-      # Changes the {Zif::Label#full_text} of the label
+      # Changes the {Zif::UI::Label#full_text} of the label
       def label_text=(text)
         return unless label
 

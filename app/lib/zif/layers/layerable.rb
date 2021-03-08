@@ -100,7 +100,7 @@ module Zif
         )
 
         # puts "Layerable#clicked?(#{point}): #{@layer_name} #{x} #{y}"
-        intersecting_sprites(x, y, x, y).reverse_each.find do |sprite|
+        intersecting_sprites(left: x, bottom: y, right: x, top: y).reverse_each.find do |sprite|
           # puts "  clicked? -> #{sprite}"
           sprite.respond_to?(:clicked?) && sprite.clicked?([x, y], kind)
         end

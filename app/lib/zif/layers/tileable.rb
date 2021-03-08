@@ -108,7 +108,7 @@ module Zif
 
         Enumerator.new do |yielder|
           loop do
-            next_tile = tile(b, a)
+            next_tile = tile(a, b)
             yielder << next_tile if next_tile
             r, a = (a + 1).divmod(max_x)
             if r.positive?

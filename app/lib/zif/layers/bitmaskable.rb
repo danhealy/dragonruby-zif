@@ -50,7 +50,7 @@ module Zif
       # @param [Integer] y logical_y position to remove
       def remove_at(x, y)
         @presence_data[y][x] = false
-        remove_tile(y, x)
+        remove_tile(x, y)
         redraw_at(x, y)
       end
 
@@ -135,7 +135,7 @@ module Zif
 
         (from_y..to_y).each do |i|
           (from_x..to_x).each do |j|
-            remove_tile(i, j)
+            remove_tile(j, i)
             bitmask = @bitmask_data[i][j]
             next unless bitmask
 

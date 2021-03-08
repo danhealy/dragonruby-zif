@@ -307,9 +307,23 @@ module Zif
       }
     end
 
+    # @note Use +#assign+ if you want to assign with a hash.  This works with positional array.
+    # @param [Array<Numeric>] rgba_array +[r, g, b, a]+.  If any entry is nil, assignment is skipped.
+    def color=(rgba_array=[])
+      @r = rgba_array[0] if rgba_array[0]
+      @g = rgba_array[1] if rgba_array[1]
+      @b = rgba_array[2] if rgba_array[2]
+      @a = rgba_array[3] if rgba_array[3]
+    end
+
     # @return [Hash<Symbol, Numeric>] Hash of {color} + {rect_hash} + {source_rect_hash} + {path}
     def to_h
       {path: @path}.merge(source_rect_hash).merge(rect_hash).merge(color)
+    end
+
+    # @api private
+    def exclude_from_serialize
+      %w[render_target]
     end
   end
 end

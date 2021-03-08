@@ -86,12 +86,12 @@ module Zif
 
       alias alignment_enum align
 
-      # @return [Array<Integer>] 4-element array [+x+, +y+, +w+, +h+] of the current text
+      # @return [Array<Integer>] 2-element array [+w+, +h+] of the current text
       def rect
         $gtk.calcstringbox(@text, @size, @font).map(&:round)
       end
 
-      # @return [Array<Integer>] 4-element array [+x+, +y+, +w+, +h+] of the full sized text
+      # @return [Array<Integer>] 2-element array [+w+, +h+] of the full sized text
       def full_size_rect
         $gtk.calcstringbox(@full_text, @size, @font).map(&:round)
       end

@@ -39,7 +39,7 @@ module Zif
       # @param [Zif::Clickable] clickable A clickable object
       # @param [Boolean] absorb_click Should +clickable+ absorb clicks?
       #   If +clickable+ responds to +#absorb_click?+, this is true by default.
-      def register_clickable(clickable, absorb_click=nil)
+      def register_clickable(clickable, absorb_click: nil)
         @clickables << clickable
         @absorb_list << clickable if absorb_click || (clickable.respond_to?(:absorb_click?) && clickable.absorb_click?)
         @clickables.sort! do |a, b|
