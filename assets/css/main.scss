@@ -2,6 +2,8 @@
 # These are CSS overrides for the dragonruby-zif documentation site.
 ---
 
+$link-color: #0092ca;
+
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin

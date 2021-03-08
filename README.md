@@ -4,6 +4,11 @@ Zif is a collection of features commonly required in 2D games.  The name is a re
 
 This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class level documentation - e.g. `Zif::Sprite`.
 
+**The best version of this README is available here:**
+[https://danhealy.github.io/dragonruby-zif/](https://danhealy.github.io/dragonruby-zif/)
+
+API documentation is available at [https://danhealy.github.io/dragonruby-zif/docs/](https://danhealy.github.io/dragonruby-zif/docs/)
+
 ## Example App
 This repo is an example app showcasing the major features - the `Zif` library itself is entirely contained within the `app/lib` directory.
 
@@ -71,7 +76,7 @@ end
 $gtk.args.outputs.sprites << dragon
 ```
 
-See the documentation of `Zif::Sprite` for details.
+See the documentation of [`Zif::Sprite`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Sprite.html) for details.
 
 See the `ExampleApp::UISample` scene for a working example.
 
@@ -114,7 +119,7 @@ end
 $gtk.args.outputs.sprites << battlefield
 ```
 
-See the documentation of `Zif::CompoundSprite` for details.
+See the documentation for details: [`Zif::CompoundSprite`](https://danhealy.github.io/dragonruby-zif/docs/Zif/CompoundSprite.html)
 
 See the `ExampleApp::CompoundSpriteTest` scene for a working example.
 
@@ -148,7 +153,7 @@ erase_rect = [200, 200, 10, 10] # Let's say you erased something, too
 paint_canvas.redraw_from_buffer([new_brushstroke], erase_rect, [minimap])
 ```
 
-See the documentation of `Zif::CompoundSprite` for details.
+See the documentation for details: [`Zif::RenderTarget`](https://danhealy.github.io/dragonruby-zif/docs/Zif/RenderTarget.html)
 
 See the `ExampleApp::DoubleBufferRenderTest` scene for a working example.
 
@@ -185,7 +190,7 @@ def tick(args)
 end
 ```
 
-See the documentation of `Zif::Game` for details.
+See the documentation for details: [`Zif::Game`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Game.html)
 
 See `ExampleApp::ZifExample` for a working example.
 
@@ -242,7 +247,7 @@ class OpeningScene < Zif::Scene
 end
 ```
 
-See the documentation of `Zif::Scene` for details.
+See the documentation for details: [`Zif::Scene`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Scene.html)
 
 See `ExampleApp::ZifExampleScene` for a working example - this scene class is shared amongst the example app, so it's designed around the auto-advancing scene behavior.
 
@@ -271,7 +276,7 @@ An Actionable can have several Actions running simultaneously, and they can be s
 )
 ```
 
-See the documentation of `Zif::Actions::Action`, `Zif::Actions::Actionable`, and `Zif::Services::ActionService` for details.
+See the documentation for details: [`Zif::Actions::Action`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Actions/Action.html), [`Zif::Actions::Actionable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Actions/Actionable.html), [`Zif::Services::ActionService`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/ActionService.html)
 
 Take a look at the code for `@dragon` inside `ExampleApp::UISample` for a simple working example.
 
@@ -305,7 +310,7 @@ A Sequence is a series of `Zif::Actions::Action` to be run in order.  Behaves li
 )
 ```
 
-See the documentation of `Zif::Actions::Sequence` for details.
+See the documentation for details: [`Zif::Actions::Sequence`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Actions/Sequence.html)
 
 Again, take a look at the code for `@dragon` inside `ExampleApp::UISample` for a simple working example.
 
@@ -340,7 +345,7 @@ Animatable is a mixin to assist with sprite animations.  Under the hood, these a
 ```
 ![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/dragon_actions.gif?raw=true)
 
-See the documentation of `Zif::Actions::Animatable` for details.
+See the documentation for details: [`Zif::Actions::Animatable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Actions/Animatable.html)
 
 ## `Zif::Layers`
 
@@ -392,19 +397,19 @@ $gtk.args.outputs.static_sprites << @camera.layers
 #  You can control the Camera using actions.
 # Most or all of the above code could be placed in a Zif::Scene#prepare_scene
 ```
-See the documentation of `Zif::Layers::LayerGroup` for details.
+See the documentation for details: [`Zif::Layers::LayerGroup`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/LayerGroup.html)
 
 See `ExampleApp::World` for a working example.
 
 ### `Zif::Layers::SimpleLayer`
 This layer is based on `Zif::RenderTarget` and therefore the component sprites will not be rendered until `Zif::RenderTarget#redraw` or `Zif::RenderTarget#redraw_from_buffer` is called - typically via `Zif::Layers::SimpleLayer#rerender`.
 
-See the documentation of `Zif::Layers::SimpleLayer` for details.
+See the documentation for details: [`Zif::Layers::SimpleLayer`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/SimpleLayer.html)
 
 ### `Zif::Layers::ActiveLayer`
 In contrast to `Zif::Layers::SimpleLayer`, `Zif::Layers::ActiveLayer` is built on `Zif::CompoundSprite` and therefore must rerender every sprite on every tick.  This is balanced by not incurring a performance / memory penalty by rendering a sprite the size of the entire `Zif::Layers::LayerGroup` width times height.
 
-See the documentation of `Zif::Layers::ActiveLayer` for details.
+See the documentation for details: [`Zif::Layers::ActiveLayer`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/ActiveLayer.html)
 
 ### Deciding between `Zif::Layers::SimpleLayer` & `Zif::Layers::ActiveLayer`
 This depends on your application.  In general, try organizing your layers into those that don't change at all, or only change when action (like camera movement) isn't happening, and put those sprites into a `Zif::Layers::SimpleLayer`.  Then take all of the sprites which do need to change often, or are necessary for action, and put those in `Zif::Layers::ActiveLayer`s.
@@ -416,13 +421,13 @@ The Tileable mixin provides functionality to Layers to support a grid organizati
 
 If your sprites need to snap to a grid, you should use one of these.  See the section above for tips on choosing one or the other.
 
-See the documentation for details: `Zif::Layers::Tileable`, `Zif::Layers::TiledLayer`, `Zif::Layers::ActiveTiledLayer`
+See the documentation for details: [`Zif::Layers::Tileable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/Tileable.html), [`Zif::Layers::TiledLayer`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/TiledLayer.html), [`Zif::Layers::ActiveTiledLayer`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/ActiveTiledLayer.html)
 
 ### `Zif::Layers::Bitmaskable`
 A layer which extends Tileable, where the sprites are chosen automatically via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.
 
-A detailed explanation of this technique is described in the class documentation for `Zif::Layers::Bitmaskable` and at this resource:
-https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673
+A detailed explanation of this technique is described in the class documentation for [`Zif::Layers::Bitmaskable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/Bitmaskable.html) and at this resource:
+[https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673](https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673)
 
 This mixin is included in `Zif::Layers::BitmaskedTiledLayer` and `Zif::Layers::ActiveBitmaskedTiledLayer`.
 
@@ -444,7 +449,7 @@ It also has the capability of zooming in and out, by controlling each layer's `s
 @camera.start_following(@dragon)
 ```
 
-See the documentation for details: `Zif::Layers::Camera`
+See the documentation for details: [`Zif::Layers::Camera`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers/Camera.html)
 
 A working example is available in `ExampleApp::World`.
 
@@ -456,14 +461,14 @@ Simple UI components. Examples for these classes exist in `ExampleApp::UISample`
 ### `Zif::UI::Label`
 A wrapper for the `label` DRGTK primitive: displaying text using a font, size, alignment, color. Includes `Zif::Actions::Actionable`!  Supports text truncation by calculating it's own width.
 
-See the documentation for details: `Zif::UI::Label`
+See the documentation for details: [`Zif::UI::Label`](https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/Label.html)
 
 ### `Zif::UI::TwoStageButton`
 This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.
 
 This is implemented using `Zif::CompoundSprite`, so it is a `Zif::Clickable`, and by default it has already set up the click handlers to handle switching states based on clicks.  You can pass a block to the constructor, this will be executed if the button is clicked and the mouse click goes up within the rectangle of the button. (You can click down on the button, move the mouse outside, and let go - it will not trigger the callback in this case.)
 
-See the documentation for details: `Zif::UI::TwoStageButton`
+See the documentation for details: [`Zif::UI::TwoStageButton`](https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/TwoStageButton.html)
 
 ![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/press_button.gif?raw=true)
 
@@ -476,10 +481,14 @@ Because the implementation of this partially depends on the visual assets you ar
 
 Ideally, these corners and edges would be `Zif::Sprite`s and therefore `Zif::Clickable`s - you could use this to implement click & drag, or drag-to-resize using the resize methods.
 
+See the documentation for details: [`Zif::UI::NinePanel`](https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/NinePanel.html)
+
 ## `Zif::Services` & `Zif::Services::ServiceGroup`
 Services are game utilities which can be accessed from any context within your app.
 
 If you use `Zif::Game`, every Zif service will be set up for you using `Zif::Services::ServiceGroup`, and registered in the `Game`'s instance variable `@services` named by a symbol.  For example, you will be able to access the `Zif::Services::ActionService` by `$game.services[:action_service]`.  This is because `Zif::Game` runs `@services.register(:action_service, Zif::ActionService.new)` during initialization, and by convention, both `$game` and `$services` are available as global variables.
+
+See the documentation for details: [`Zif::Services::ServiceGroup`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/ServiceGroup.html)
 
 ### `Zif::Services::ActionService`
 See `Zif::Actions` above for more information on Actions.
@@ -490,7 +499,7 @@ If you are using `Zif::Game`, this service is registered as `:action_service`.  
 
 If you are not using `Zif::Game`, ensure you are calling `Zif::Services::ActionService#run_all_actions` once per tick.
 
-See documentation for details: `Zif::Services::ActionService`
+See the documentation for details: [`Zif::Services::ActionService`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/ActionService.html)
 
 ### `Zif::Services::InputService`
 Keeps track of sprites and other objects interested in responding to clicks and scroll events, and passes the events over to them when they occur.
@@ -501,7 +510,9 @@ Clickable sprites should mixin `Zif::Clickable` or be compatible by defining a `
 
 Scrollable objects should define `#scrolled?`.  `Zif::Layers::Camera` uses this.
 
-See the documentation for details: `Zif::Services::InputService`, `Zif::Clickable`.  `Zif::Layers` handle clicks in a hierarchical way, see documentation for info.
+See the documentation for details: [`Zif::Services::InputService`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/InputService.html), [`Zif::Clickable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Clickable.html)
+
+[`Zif::Layers`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers.html) handle clicks in a hierarchical way, see documentation for info.
 
 There are many working clickable examples in the `ExampleApp`.
 
@@ -518,7 +529,7 @@ $services[:sprite_registry].register_basic_sprite("dragon_1", width: 82, height:
 
 The autotiling feature of `Zif::Layers::Bitmaskable` is designed around having the tile assets registered in this service.
 
-See the documentation for details: `Zif::Services::SpriteRegistry`
+See the documentation for details: [`Zif::Services::SpriteRegistry`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/SpriteRegistry.html)
 
 ### `Zif::Services::TickTraceService` & `Zif::Traceable`
 Generally, you want your game to run at a full 60fps.  If your tick takes longer than 16.6ms, you'll drop below that number.  This service is designed to report when a tick has taken longer than a threshold (20ms by default), and hopefully narrow down the slowest section of code. `Zif::Services::TickTraceService#reset_tick` must be called at the beginning of a tick, and then `#finish` at the end.  If you use `Zif::Game`, this is done for you.
@@ -556,6 +567,8 @@ Zif::Services::TickTraceService: Slow tick. 504.920ms elapsed >  20.000ms thresh
   504.901ms   0.129ms ExampleApp::ZifExample: #standard_tick: Action service complete
   504.920ms   0.019ms ExampleApp::ZifExample: #standard_tick: Complete
 ```
+
+See the documentation for details: [`Zif::Services::TickTraceService`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/TickTraceService.html), [`Zif::Traceable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Traceable.html)
 
 # Coming Soon
 Some features and things being considered for this library:

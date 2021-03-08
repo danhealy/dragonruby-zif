@@ -68,3 +68,4 @@ exclude:
   - metadata
   - sprites
   - tests
+  - API_README.md

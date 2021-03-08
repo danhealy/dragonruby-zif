@@ -172,7 +172,7 @@ audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 /* Prevents modern browsers from displaying 'audio' without controls */
 audio:not([controls]) { display: none; }
 
-a { color: #393e46; }
+a { color: #0092ca; }
 
 /* Apply focus state */
 /* Remove outline from links */
@@ -249,8 +249,8 @@ blockquote cite { font-style: italic; }
 blockquote cite:before { content: "\2014"; padding-right: 5px; }
 
 /* links */
-a:visited { color: #575b62; }
-a:hover { color: #2b2f35; outline: 0; }
+a:visited { color: #26a2d2; }
+a:hover { color: #006e98; outline: 0; }
 
 /* buttons */
 /* code */
@@ -283,7 +283,7 @@ figure.third figcaption { width: 100%; }
 /* Figure captions */
 figcaption { margin-bottom: 0.5em; color: #393e46; font-family: Georgia, Times, serif; font-size: 0.75em; }
 figcaption a { -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; }
-figcaption a:hover { color: #2b2f35; }
+figcaption a:hover { color: #006e98; }
 
 /* Fix IE9 SVG bug */
 svg:not(:root) { overflow: hidden; }
@@ -578,7 +578,7 @@ tr, td, th { vertical-align: middle; }
 .pagination ul { margin: 0; padding: 0; list-style-type: none; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; }
 .pagination li { display: block; float: left; margin-left: -1px; }
 .pagination li a { display: block; margin-bottom: 0.25em; padding: 0.5em 1em; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; font-size: 14px; font-weight: bold; line-height: 1.5; text-align: center; text-decoration: none; color: #393e46; border: 1px solid #9b9b9d; border-radius: 0; }
-.pagination li a:hover { color: #2b2f35; }
+.pagination li a:hover { color: #006e98; }
 .pagination li a.current, .pagination li a.current.disabled { color: #fff; background: #0092ca; }
 .pagination li a.disabled { color: rgba(57, 62, 70, 0.5); pointer-events: none; cursor: not-allowed; }
 .pagination li:first-child { margin-left: 0; }
@@ -1008,7 +1008,7 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 .page__taxonomy strong { margin-right: 10px; }
 
 .page__taxonomy-item { display: inline-block; margin-right: 5px; margin-bottom: 8px; padding: 5px 10px; text-decoration: none; border: 1px solid #9b9b9d; border-radius: 4px; }
-.page__taxonomy-item:hover { text-decoration: none; color: #2b2f35; }
+.page__taxonomy-item:hover { text-decoration: none; color: #006e98; }
 
 .taxonomy__section { margin-bottom: 2em; padding-bottom: 1em; }
 .taxonomy__section:not(:last-child) { border-bottom: solid 1px #cecfd1; }
