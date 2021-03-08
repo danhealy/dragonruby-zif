@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1 id="zif-a-drop-in-framework-for-dragonruby-gtk">Zif: A Drop-in Framework for DragonRuby GTK</h1>
+
+<p>Zif is a collection of features commonly required in 2D games.  The name is a reference to <a href="https://console5.com/wiki/Improving_NES-001_Reliability">Zero Insertion Force connectors used on the original Nintendo</a> - You can drop it in your project and it should just work.  Everything is namespaced to <code>Zif</code> so any existing classes or namespaces you have should be preserved.</p>
+
+<p>This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class level documentation - e.g. <code>Zif::Sprite</code>.</p>
+
+<h2 id="example-app">Example App</h2>
+
+<p>This repo is an example app showcasing the major features - the <code>Zif</code> library itself is entirely contained within the <code>app/lib</code> directory.</p>
+
+<p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/ui_sample.gif?raw=true" alt=""></p>
+
+<h3 id="running-the-example-app">Running the Example App:</h3>
+
+<ol>
+<li>Create a fresh copy of DragonRuby GTK - you can call this folder <code>dragonruby-zif-testbed</code> and it should contain the <code>dragonruby</code> executable.</li>
+<li>Change directory in your terminal to <code>dragonruby-zif-testbed</code></li>
+<li>Clone this entire <code>dragonruby-zif</code> repo inside the <code>dragonruby-zif-testbed</code> directory - <code>git clone https://github.com/danhealy/dragonruby-zif.git</code>.</li>
+<li>Run using <code>./dragonruby dragonruby-zif/</code></li>
+</ol>
+
+<h2 id="installation-in-your-app">Installation in your app:</h2>
+
+<p>App dependencies in DRGTK currently have to be managed manually, by copying the source into your project.</p>
+
+<ol>
+<li>Download a copy of Zif somewhere: <code>git clone https://github.com/danhealy/dragonruby-zif.git</code>.</li>
+<li>Create a <code>lib</code> directory inside your project&#39;s <code>app</code> directory, and then copy Zif&#39;s <code>app/lib/zif</code> directory into it.</li>
+<li>In your <code>main.rb</code>, require the parts of Zif you need.  To require everything:</li>
+</ol>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Require all of the Zif library:
+</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/require.rb</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tick'><span class='object_link'><a href="top-level-namespace.html#tick-instance_method" title="#tick (method)">tick</a></span></span>
+  <span class='comment'># ....
+</span><span class='kw'>end</span>
+</code></pre>
+
+<p>If you only want to require some parts, please see the <code>require.rb</code> file for more information.</p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>DragonRuby GTK provides the basic functionality you need to program a game.  It has the concept of the <code>tick</code> loop, lets you render sprites to the screen by sending basic value objects to <code>outputs</code>, and so on.</p>
+
+<p>There is a set of data and behavior that all sprites in your game share - they all have a position, they all have width and height, they all reference a path to some image, etc.  Maybe you are working on a puzzle game - your puzzle pieces are sprites, but they share some additional behavior and data - which piece it is, how pieces can move.  Why not leverage this similarity by formalizing the shared concepts in your game?  You may want to consider using object-oriented design to encapsulate the distinct concepts in your code.  After all, the Ruby programming language has a strong focus on supporting object-oriented programming techniques.</p>
+
+<p>Zif aims to provide a framework for the shared concepts you might have in any game, as they relate to using the DragonRuby GTK.  The foundation of Zif is the <code>Zif::Sprite</code> class, which defines the attributes a Sprite needs to have to work with DRGTK, and builds on that to provide some functionality not given to you directly by DRGTK.  For example, maybe you want know the center point of your sprite?  If you are only using the value objects expected by DRGTK, you defined it using <code>x</code> and <code>y</code> coordinates with some <code>width</code> and <code>height</code>, and that&#39;s all it knows.  If you define the same sprite using <code>Zif::Sprite</code>, you can use <code>Zif::Sprite#center</code>.  This becomes more powerful as you build upon it.  You could make a <code>PuzzlePiece</code> class which inherits from <code>Zif::Sprite</code>, and now it can also find it&#39;s <code>#center</code> without any additional effort.</p>
+
+<p>The major categories of concepts the Zif framework introduces are:</p>
+
+<ul>
+<li>Basic wrappers around DRGTK concepts like <code>Zif::Sprite</code>, <code>Zif::RenderTarget</code></li>
+<li><code>Zif::Actions</code>, things which should change over time, possibly using using an easing function</li>
+<li><code>Zif::Layers</code>, ways of organizing large sets of sprites, moving them in unison, and optimizing performance</li>
+<li><code>Zif::UI</code> components like labels, buttons and scalable windows</li>
+<li>The <code>Zif::Game</code> and <code>Zif::Scene</code> classes which organize the game lifecycle</li>
+<li><code>Zif::Services</code> which support your game by keeping track of <code>Zif::Actions</code>, inputs, your image assets, and performance</li>
+</ul>
+
+<p>Finally, Zif has been designed to work as a whole, or by only bringing in the parts you need.  There is some level of dependency relationships between these concepts (<code>Zif::RenderTarget</code> doesn&#39;t work without <code>Zif::Sprite</code>, for example), but an effort was made to document this precisely, so you should be able to pick and choose only the concepts you want to use.</p>
+
+<h1 id="feature-overview">Feature Overview</h1>
+
+<h2 id="basic-features">Basic Features</h2>
+
+<h3 id="zif-sprite"><code>Zif::Sprite</code></h3>
+
+<p>This class is the basis for most of the framework.  It&#39;s a basic sprite (using DRGTK&#39;s <a href="http://docs.dragonruby.org/#----attr_sprite.rb">attr_sprite</a> ), which combines actions / animations, click handling, mass assignment and more.</p>
+
+<p><strong>Example usage</strong>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_dragon'>dragon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>300</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>300</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='int'>82</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='int'>66</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/dragon_1.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+<span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_dragon'>dragon</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::Sprite</code> for details.</p>
+
+<p>See the <code>ExampleApp::UISample</code> scene for a working example.</p>
+
+<h3 id="zif-compoundsprite"><code>Zif::CompoundSprite</code></h3>
+
+<p>This class acts like a (inherits from) <code>Sprite</code> but can itself accept a list of <code>@sprites</code> and <code>@labels</code>, like <code>$gtk.args.outputs</code>.  Sprites and labels added to these arrays will be drawn using the <code>CompoundSprite#draw_override</code> method, which is checked by DragonRuby GTK during the draw cycle.</p>
+
+<p><strong>Example usage</strong>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_alduin'>alduin</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>100</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='int'>82</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='int'>66</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/dragon_1.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_bahamut'>bahamut</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>200</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='int'>82</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='int'>66</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_flip_horizontally'>flip_horizontally</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/dragon_1.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='comment'># Now we have 2 dragons facing each other, but we are not adding these
+</span><span class='comment'># to args.outputs.sprites individually.
+</span><span class='comment'># They are on a battlefield and can be moved in unison!
+</span><span class='id identifier rubyid_battlefield'>battlefield</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/CompoundSprite.html#initialize-instance_method" title="Zif::CompoundSprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cs'>cs</span><span class='op'>|</span>
+  <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_alduin'>alduin</span><span class='comma'>,</span> <span class='id identifier rubyid_bahamut'>bahamut</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>130</span> <span class='comment'># This causes bahamut to appear at x == 330 on screen
+</span>  <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>20</span>  <span class='comment'># This causes alduin to appear at y == 120 on screen
+</span>  <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='int'>300</span> <span class='comment'># Should be at least as wide as the farthest x value + width (200+82)
+</span>  <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='int'>200</span> <span class='comment'># Should be at least as high as the largest y value + height (100+66)
+</span>  <span class='comment'># No path is defined --
+</span>  <span class='comment'># CompoundSprite is for organization only and does not display directly.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Add the battlefield to outputs.
+</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_battlefield'>battlefield</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::CompoundSprite</code> for details.</p>
+
+<p>See the <code>ExampleApp::CompoundSpriteTest</code> scene for a working example.</p>
+
+<p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/compound_sprite.gif?raw=true" alt=""></p>
+
+<h3 id="zif-rendertarget"><code>Zif::RenderTarget</code></h3>
+
+<p>A render target in DRGTK is a way to programmatically create a static image out of sprites.  It acts just like <code>$gtk.args.outputs</code> in that it accepts an array of <code>sprites</code> and other <code>primitives</code>.  It gets rendered into memory at the end of the tick where it is referenced out of <code>$gtk.args.outputs[...]</code>, based on its contents.  To display the result, you need to send <code>$gtk.args.outputs</code> a sprite which references the name of the render target as its <code>path</code>.</p>
+
+<p>Render targets are great for increasing the performance of your game by rendering a large collection of sprites once, and then just reusing that render later. It&#39;s also good for displaying the same image composed of many sprites multiple times (think minimap or mirrors).</p>
+
+<p>The Zif class <code>Zif::RenderTarget</code> wraps this functionality.  It holds references to the <code>Zif::RenderTarget#sprites</code> and all of the configuration options necessary to invoke this concept in DragonRuby GTK.  It also includes a <code>Zif::Sprite</code> referencing the created image in <code>Zif::RenderTarget#containing_sprite</code>.</p>
+
+<p><strong>Example usage</strong>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_paint_canvas'>paint_canvas</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/RenderTarget.html#initialize-instance_method" title="Zif::RenderTarget#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='symbol'>:my_paint_canvas</span><span class='comma'>,</span>
+  <span class='label'>bg_color:</span> <span class='symbol'>:white</span><span class='comma'>,</span>
+  <span class='label'>width:</span> <span class='int'>1000</span><span class='comma'>,</span>
+  <span class='label'>height:</span> <span class='int'>500</span>
+<span class='rparen'>)</span>
+<span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@all_current_brushstrokes</span>
+<span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_redraw'>redraw</span>
+<span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_containing_sprite'>containing_sprite</span>
+
+<span class='comment'># Some time later, you can add new brush strokes and delete a rectangle:
+</span>
+<span class='id identifier rubyid_minimap'>minimap</span> <span class='op'>=</span> <span class='comment'># ... a different sprite referencing the RenderTarget as path
+</span><span class='id identifier rubyid_new_brushstroke'>new_brushstroke</span> <span class='op'>=</span> <span class='comment'># ... a new Sprite to add to the render
+</span><span class='id identifier rubyid_erase_rect'>erase_rect</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>200</span><span class='comma'>,</span> <span class='int'>200</span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>10</span><span class='rbracket'>]</span> <span class='comment'># Let&#39;s say you erased something, too
+</span><span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_redraw_from_buffer'>redraw_from_buffer</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_new_brushstroke'>new_brushstroke</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_erase_rect'>erase_rect</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_minimap'>minimap</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::CompoundSprite</code> for details.</p>
+
+<p>See the <code>ExampleApp::DoubleBufferRenderTest</code> scene for a working example.</p>
+
+<h3 id="zif-game"><code>Zif::Game</code></h3>
+
+<p>This is designed to be the base class for your game.  It&#39;s mainly responsible for Scene switching and yielding to <code>Zif::Scene#perform_tick</code> as described below, but also it automatically registers all the <code>Zif::Services</code> and provides standard functionality around this, including exception handling.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># =-=-=- In your app/my_game.rb -=-=-=
+</span><span class='kw'>class</span> <span class='const'>MyGame</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Game.html" title="Zif::Game (class)">Game</a></span></span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+    <span class='comment'># do anything here, like register services...
+</span>    <span class='const'>MyOneTime</span><span class='period'>.</span><span class='id identifier rubyid_setups'>setups</span>
+
+    <span class='comment'># RainbowRoadScene is a Zif::Scene subclass
+</span>    <span class='id identifier rubyid_register_scene'>register_scene</span><span class='lparen'>(</span><span class='symbol'>:rainbow_road</span><span class='comma'>,</span> <span class='const'>RainbowRoadScene</span><span class='rparen'>)</span>
+
+    <span class='comment'># (OpeningScene is also a Zif::Scene subclass)
+</span>    <span class='ivar'>@scene</span> <span class='op'>=</span> <span class='const'>OpeningScene</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='comment'># =-=-=- In your app/main.rb -=-=-=
+</span><span class='comment'># Require all of the Zif library:
+</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app/lib/zif/require.rb</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my_game.rb</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>def</span> <span class='id identifier rubyid_tick'><span class='object_link'><a href="top-level-namespace.html#tick-instance_method" title="#tick (method)">tick</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>==</span> <span class='int'>2</span>
+    <span class='gvar'>$game</span> <span class='op'>=</span> <span class='const'>MyGame</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_scene'>scene</span><span class='period'>.</span><span class='id identifier rubyid_prepare_scene'>prepare_scene</span> <span class='comment'># if needed on first scene
+</span>  <span class='kw'>end</span>
+  <span class='gvar'>$game</span><span class='op'>&amp;.</span><span class='id identifier rubyid_perform_tick'>perform_tick</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::Game</code> for details.</p>
+
+<p>See <code>ExampleApp::ZifExample</code> for a working example.</p>
+
+<h3 id="zif-scene"><code>Zif::Scene</code></h3>
+
+<p>A <code>Scene</code> is a full-screen view of your game.  The concept in <code>Zif::Game</code> is to show one <code>Scene</code> at a time.  So each <code>Scene</code> in your game should be a subclass of <code>Zif::Scene</code> which overrides <code>Zif::Scene#perform_tick</code>.  Using the structure in <code>Zif::Game</code>, <code>#perform_tick</code> comes after input handling and before updating <code>Zif::Actions::Actionable</code>s.  So your subclass should use <code>#perform_tick</code> to add/remove <code>Zif::Clickable</code>s/<code>Zif::Actions::Actionable</code>s, and respond to any detected input.  Switching scenes is handled in <code>Zif::Game</code>, based on the return value of <code>#perform_tick</code>.  You can optionally define <code>Zif::Scene#prepare_scene</code> - a method invoked prior to the first tick it becomes the active scene, and <code>Zif::Scene#unload_scene</code> which is invoked after the Scene has been switched out.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<pre class="code ruby"><code class="ruby"><span class='kw'>class</span> <span class='const'>OpeningScene</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Scene.html" title="Zif::Scene (class)">Scene</a></span></span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+    <span class='comment'># If OpeningScene is registered by symbol using Zif::Game#register_scene,
+</span>    <span class='comment'># this initialize will happen each time the game switches to this scene.
+</span>    <span class='comment'># Otherwise you could instantiate this scene somewhere and simply
+</span>    <span class='comment'># return it from another scene&#39;s #perform_tick
+</span>    <span class='ivar'>@dragon</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span> <span class='comment'># ....
+</span>    <span class='ivar'>@hello</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/UI.html" title="Zif::UI (module)">UI</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zif/UI/Label.html" title="Zif::UI::Label (class)">Label</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Zif/UI/Label.html#initialize-instance_method" title="Zif::UI::Label#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello World!</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_label'>label</span><span class='op'>|</span>
+      <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>100</span>
+      <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>100</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@current_scene_tick_count</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_prepare_scene'>prepare_scene</span>
+    <span class='comment'># You probably want to remove the things registered with the services when
+</span>    <span class='comment'># scenes change. You can remove items explicitly using #remove_.., but
+</span>    <span class='comment'># #reset_.. will clear everything. You can also do this when a scene is
+</span>    <span class='comment'># being changed away from, using the #unload_scene method.
+</span>    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:action_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reset_actionables'>reset_actionables</span>
+    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reset'>reset</span>
+    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_labels'>static_labels</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+
+    <span class='comment'># Now you can use this to do one-time setup code.
+</span>    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:action_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_actionable'>register_actionable</span><span class='lparen'>(</span><span class='ivar'>@dragon</span><span class='rparen'>)</span>
+    <span class='gvar'>$game</span><span class='period'>.</span><span class='id identifier rubyid_services'>services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_clickable'>register_clickable</span><span class='lparen'>(</span><span class='ivar'>@dragon</span><span class='rparen'>)</span>
+
+    <span class='comment'># Best practice is to use static outputs, this gives you a lot more
+</span>    <span class='comment'># performance and there is no need to append to the array inside
+</span>    <span class='comment'># #perform_tick. The only downside is that you have to manage this list
+</span>    <span class='comment'># manually.  You can remove sprites at any time in #perform_tick.
+</span>    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@dragon</span>
+    <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_labels'>static_labels</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@hello</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
+    <span class='ivar'>@current_scene_tick_count</span> <span class='op'>+=</span> <span class='int'>1</span>
+    <span class='ivar'>@hello</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello World! </span><span class='embexpr_beg'>#{</span><span class='ivar'>@current_scene_tick_count</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+    <span class='comment'># Tell Zif::Game to attempt to switch to the scene registered with the name
+</span>    <span class='comment'># :rainbow_road after some time
+</span>    <span class='kw'>return</span> <span class='symbol'>:rainbow_road</span> <span class='kw'>if</span> <span class='ivar'>@current_scene_tick_count</span> <span class='op'>&gt;</span> <span class='int'>200</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::Scene</code> for details.</p>
+
+<p>See <code>ExampleApp::ZifExampleScene</code> for a working example - this scene class is shared amongst the example app, so it&#39;s designed around the auto-advancing scene behavior.</p>
+
+<h2 id="zif-actions-aka-tweening-easing"><code>Zif::Actions</code> (aka tweening, easing)</h2>
+
+<p>Inspried by <a href="https://developer.apple.com/documentation/spritekit/skaction">SpriteKit&#39;s Actions</a> and <a href="https://www.youtube.com/watch?v=mr5xkf6zSzk">Squirrel Eiserloh&#39;s GDC talk on nonlinear transformations</a>.</p>
+
+<h3 id="zif-actions-action-zif-actions-actionable"><code>Zif::Actions::Action</code> &amp; <code>Zif::Actions::Actionable</code></h3>
+
+<p>ß
+An Action is a transition of a set of attributes over time using an easing function (aka tweening, easing).</p>
+
+<p>Your objects can accept Actions by mixing in <code>Zif::Actions::Actionable</code> and calling the <code>Zif::Actions::Actionable#run_action</code> method.  You can specify the number of times the Action should be repeated, and set a callback for when the Action is finished.</p>
+
+<p>An Actionable can have several Actions running simultaneously, and they can be started and stopped manually.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># @dragon is a Zif::Sprite and therefore an Actionable, and already registered
+</span><span class='comment'># with the ActionService.  Move from starting position to 1000x over 1 second,
+</span><span class='comment'># starting slowly, then flip the sprite at the end.  Note that starting
+</span><span class='comment'># position is just taken from the current state of @dragon rather than
+</span><span class='comment'># specified.
+</span><span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span>
+  <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>x:</span> <span class='int'>1000</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>duration:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span><span class='comma'>,</span> <span class='label'>easing:</span> <span class='symbol'>:smooth_start</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_flip_horizontally'>flip_horizontally</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>end</span>
+<span class='rparen'>)</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::Actions::Action</code>, <code>Zif::Actions::Actionable</code>, and <code>Zif::Services::ActionService</code> for details.</p>
+
+<p>Take a look at the code for <code>@dragon</code> inside <code>ExampleApp::UISample</code> for a simple working example.</p>
+
+<p>More complicated examples can be seen in <code>ExampleApp::World</code> - The dragon is using Actions to move across the map, and the map itself is panning to track the dragon using Actions.</p>
+
+<h3 id="zif-actions-sequence"><code>Zif::Actions::Sequence</code></h3>
+
+<p>A Sequence is a series of <code>Zif::Actions::Action</code> to be run in order.  Behaves like an Action, you run it using the same <code>Zif::Actions::Actionable#run_action</code> method.  You can specify the number of times the sequence should be repeated, and set a callback for when the sequence is finished.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<pre class="code ruby"><code class="ruby"><span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span>
+  <span class='const'><span class='object_link'><a href="Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'>Sequence</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='lbracket'>[</span>
+      <span class='comment'># Move from starting position to 1000x over 1 second, starting slowly,
+</span>      <span class='comment'># then flip the sprite at the end
+</span>      <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span>
+        <span class='lbrace'>{</span><span class='label'>x:</span> <span class='int'>1000</span><span class='rbrace'>}</span><span class='comma'>,</span>
+        <span class='label'>duration:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span><span class='comma'>,</span>
+        <span class='label'>easing:</span> <span class='symbol'>:smooth_start</span>
+      <span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_flip_horizontally'>flip_horizontally</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+      <span class='comment'># Move from the new position (1000x) back to the start 600x over 2
+</span>      <span class='comment'># seconds, stopping slowly, then flip again
+</span>      <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span>
+        <span class='lbrace'>{</span><span class='label'>x:</span> <span class='int'>600</span><span class='rbrace'>}</span><span class='comma'>,</span>
+        <span class='label'>duration:</span> <span class='int'>2</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span><span class='comma'>,</span>
+        <span class='label'>easing:</span> <span class='symbol'>:smooth_stop</span>
+      <span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_flip_horizontally'>flip_horizontally</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='rbrace'>}</span>
+    <span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>repeat:</span> <span class='symbol'>:forever</span>
+  <span class='rparen'>)</span>
+<span class='rparen'>)</span>
+</code></pre>
+
+<p>See the documentation of <code>Zif::Actions::Sequence</code> for details.</p>
+
+<p>Again, take a look at the code for <code>@dragon</code> inside <code>ExampleApp::UISample</code> for a simple working example.</p>
+
+<h3 id="zif-actions-animatable"><code>Zif::Actions::Animatable</code></h3>
+
+<p>Animatable is a mixin to assist with sprite animations.  Under the hood, these are implemented as <code>Zif::Actions::Sequence</code>s which modify the <code>path</code> over time, and they are registered using a name.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Register the animation for a flying Dragon.
+</span> <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_new_basic_animation'>new_basic_animation</span><span class='lparen'>(</span>
+   <span class='label'>named:</span> <span class='symbol'>:fly</span><span class='comma'>,</span>
+   <span class='label'>paths_and_durations:</span> <span class='lbracket'>[</span>
+     <span class='comment'>#   +-- path for this frame
+</span>     <span class='comment'>#   |        +-- duration for this frame
+</span>     <span class='comment'>#   v        v
+</span>     <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='comment'># This animation uses 4 separate image files
+</span>     <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='comment'># Hold each frame for 4 ticks
+</span>     <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_3</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='comment'># The actual image exists at: app/sprites/dragon_3.png
+</span>     <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_4</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span><span class='comma'>,</span>
+     <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_3</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span><span class='comma'>,</span>
+     <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span>  <span class='comment'># Repeats forever, which takes it back to 1
+</span>   <span class='rbracket'>]</span>
+ <span class='rparen'>)</span>
+
+ <span class='comment'># We don&#39;t have to register this sequence manually using
+</span> <span class='comment'># #register_animation_sequence, the #new_basic_animation method takes care of
+</span> <span class='comment'># that for us.
+</span>
+ <span class='comment'># So now we can run this animation:
+</span> <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run_animation_sequence'>run_animation_sequence</span><span class='lparen'>(</span><span class='symbol'>:fly</span><span class='rparen'>)</span>
+</code></pre>
+
+<p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/dragon_actions.gif?raw=true" alt=""></p>
+
+<p>See the documentation of <code>Zif::Actions::Animatable</code> for details.</p>
+
+<h2 id="zif-layers"><code>Zif::Layers</code></h2>
+
+<p>If your game&#39;s play area extends beyond the screen resolution, you likely want some way of managing this!  <code>Zif::Layers</code> are designed for this use case.  They provide several different strategies for performantly rendering large numbers of sprites, organizing them by a Z-index, and moving them in unison via the <code>Zif::Layers::Camera</code> class.</p>
+
+<h3 id="zif-layers-layergroup"><code>Zif::Layers::LayerGroup</code></h3>
+
+<p>Creates a set of overlapping play area layers based on <code>Zif::Layers::SimpleLayer</code> (<code>Zif::RenderTarget</code>) or <code>Zif::Layers::ActiveLayer</code> (<code>Zif::CompoundSprite</code>) and handles redrawing them.</p>
+
+<p>Has a concept of <code>logical</code> position as a multiple of <code>tile</code> width/height, applicable to any <code>Zif::Layers::Tileable</code> layers. For example, if your tiles are <code>16px</code> wide, the 5th tile is at <code>@logical_x==4</code> but at <code>@x==64</code> on the layer.</p>
+
+<p><strong>Example usage</strong>:</p>
+
+<pre class="code ruby"><code class="ruby">tile_width_and_height         = 64  # Each tile is 64x64 pixels
+map_width_and_height_in_tiles = 100 # 64 * 100 = 6400x6400 pixels, 10000 tiles
+
+@map = Zif::Layers::LayerGroup.new(
+  tile_width:     tile_width_and_height,
+  tile_height:    tile_width_and_height,
+  logical_width:  map_width_and_height_in_tiles,
+  logical_height: map_width_and_height_in_tiles
+)
+
+# This example is only using Zif::Layers::ActiveLayer because they are easier
+# to set up, and it is a good place to start in terms of performance.
+@map.new_active_tiled_layer(:tiles)
+@map.new_active_layer(:avatar)
+
+@map.layers[:avatar].source_sprites = [@dragon]
+
+# Add a bunch of tiles
+a_new_tile = Zif::Sprite.new....
+@map.layers[:tiles].add_positioned_sprite(
+  sprite: a_new_tile,
+  logical_x: x,
+  logical_y: y
+)
+
+# Set up a camera
+@camera = Zif::Layers::Camera.new(
+  layer_sprites: @map.layer_containing_sprites,
+  initial_x: 1800,
+  initial_y: 1200
+)
+
+$gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
+
+# All set!  You can move your sprites (like @dragon) around.
+#  You can control the Camera using actions.
+# Most or all of the above code could be placed in a Zif::Scene#prepare_scene
+</code></pre>
+
+<p>See the documentation of <code>Zif::Layers::LayerGroup</code> for details.</p>
+
+<p>See <code>ExampleApp::World</code> for a working example.</p>
+
+<h3 id="zif-layers-simplelayer"><code>Zif::Layers::SimpleLayer</code></h3>
+
+<p>This layer is based on <code>Zif::RenderTarget</code> and therefore the component sprites will not be rendered until <code>Zif::RenderTarget#redraw</code> or <code>Zif::RenderTarget#redraw_from_buffer</code> is called - typically via <code>Zif::Layers::SimpleLayer#rerender</code>.</p>
+
+<p>See the documentation of <code>Zif::Layers::SimpleLayer</code> for details.</p>
+
+<h3 id="zif-layers-activelayer"><code>Zif::Layers::ActiveLayer</code></h3>
+
+<p>In contrast to <code>Zif::Layers::SimpleLayer</code>, <code>Zif::Layers::ActiveLayer</code> is built on <code>Zif::CompoundSprite</code> and therefore must rerender every sprite on every tick.  This is balanced by not incurring a performance / memory penalty by rendering a sprite the size of the entire <code>Zif::Layers::LayerGroup</code> width times height.</p>
+
+<p>See the documentation of <code>Zif::Layers::ActiveLayer</code> for details.</p>
+
+<h3 id="deciding-between-zif-layers-simplelayer-zif-layers-activelayer">Deciding between <code>Zif::Layers::SimpleLayer</code> &amp; <code>Zif::Layers::ActiveLayer</code></h3>
+
+<p>This depends on your application.  In general, try organizing your layers into those that don&#39;t change at all, or only change when action (like camera movement) isn&#39;t happening, and put those sprites into a <code>Zif::Layers::SimpleLayer</code>.  Then take all of the sprites which do need to change often, or are necessary for action, and put those in <code>Zif::Layers::ActiveLayer</code>s.</p>
+
+<p>You can use either <code>Zif::Layers::SimpleLayer</code> or <code>Zif::Layers::ActiveLayer</code> directly when the sprites contained don&#39;t need to snap to the tile grid set up in the <code>Zif::Layers::LayerGroup</code>.</p>
+
+<h3 id="zif-layers-tileable"><code>Zif::Layers::Tileable</code></h3>
+
+<p>The Tileable mixin provides functionality to Layers to support a grid organization.  The two classes based on the Tileable mixin are <code>Zif::Layers::TiledLayer</code> and <code>Zif::Layers::ActiveTiledLayer</code>.</p>
+
+<p>If your sprites need to snap to a grid, you should use one of these.  See the section above for tips on choosing one or the other.</p>
+
+<p>See the documentation for details: <code>Zif::Layers::Tileable</code>, <code>Zif::Layers::TiledLayer</code>, <code>Zif::Layers::ActiveTiledLayer</code></p>
+
+<h3 id="zif-layers-bitmaskable"><code>Zif::Layers::Bitmaskable</code></h3>
+
+<p>A layer which extends Tileable, where the sprites are chosen automatically via bitmasked adjacency rules on the presence data layer - otherwise known as Autotiling.</p>
+
+<p>A detailed explanation of this technique is described in the class documentation for <code>Zif::Layers::Bitmaskable</code> and at this resource:
+<a href="https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673">https://gamedevelopment.tutsplus.com/tutorials/how-to-use-tile-bitmasking-to-auto-tile-your-level-layouts--cms-25673</a></p>
+
+<p>This mixin is included in <code>Zif::Layers::BitmaskedTiledLayer</code> and <code>Zif::Layers::ActiveBitmaskedTiledLayer</code>.</p>
+
+<h3 id="zif-layers-camera"><code>Zif::Layers::Camera</code></h3>
+
+<p>The Camera is given a set of sprites, typically the containing sprites for a set of <code>Zif::Layers::Layerable</code>s via <code>Zif::Layers::LayerGroup#layer_containing_sprites</code>.</p>
+
+<p>It is responsible for directing the layers to reposition based on camera movements.  Specifically, it alters each layer&#39;s <code>source_x</code> and <code>source_y</code> values for panning.</p>
+
+<p>This class includes <code>Zif::Actions::Actionable</code>, so you can pan the camera using a <code>Zif::Actions::Action</code>.</p>
+
+<p>It has the capability of issuing camera movements based on following a particular sprite on a layer (like a player character).</p>
+
+<p>It also has the capability of zooming in and out, by controlling each layer&#39;s <code>source_w</code> and <code>source_h</code>. It can be registered as a scrollable with <code>Zif::Services::InputService</code>.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Using the setup example from Zif::Layers::LayerGroup
+</span><span class='comment'># Assumes @camera has been registered as an actionable
+</span><span class='ivar'>@camera</span><span class='period'>.</span><span class='id identifier rubyid_start_following'>start_following</span><span class='lparen'>(</span><span class='ivar'>@dragon</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See the documentation for details: <code>Zif::Layers::Camera</code></p>
+
+<p>A working example is available in <code>ExampleApp::World</code>.</p>
+
+<p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/world.gif?raw=true" alt=""></p>
+
+<h2 id="zif-ui"><code>Zif::UI</code></h2>
+
+<p>Simple UI components. Examples for these classes exist in <code>ExampleApp::UISample</code>.</p>
+
+<h3 id="zif-ui-label"><code>Zif::UI::Label</code></h3>
+
+<p>A wrapper for the <code>label</code> DRGTK primitive: displaying text using a font, size, alignment, color. Includes <code>Zif::Actions::Actionable</code>!  Supports text truncation by calculating it&#39;s own width.</p>
+
+<p>See the documentation for details: <code>Zif::UI::Label</code></p>
+
+<h3 id="zif-ui-twostagebutton"><code>Zif::UI::TwoStageButton</code></h3>
+
+<p>This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.</p>
+
+<p>This is implemented using <code>Zif::CompoundSprite</code>, so it is a <code>Zif::Clickable</code>, and by default it has already set up the click handlers to handle switching states based on clicks.  You can pass a block to the constructor, this will be executed if the button is clicked and the mouse click goes up within the rectangle of the button. (You can click down on the button, move the mouse outside, and let go - it will not trigger the callback in this case.)</p>
+
+<p>See the documentation for details: <code>Zif::UI::TwoStageButton</code></p>
+
+<p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/press_button.gif?raw=true" alt=""></p>
+
+<h3 id="zif-ui-ninepanel"><code>Zif::UI::NinePanel</code></h3>
+
+<p>Nine-slice sprites, built on <code>Zif::CompoundSprite</code>: <a href="https://en.wikipedia.org/wiki/9-slice_scaling">https://en.wikipedia.org/wiki/9-slice_scaling</a></p>
+
+<p>Because the implementation of this partially depends on the visual assets you are using, this is an <strong>abstract</strong> class.  You are expected to subclass this to:</p>
+
+<ul>
+<li>override <code>#initialize</code> with <code>super</code> to set the <code>@corners</code>, <code>@edges</code> and <code>@fill</code> with sprites</li>
+<li>override <code>#resize_width</code> and <code>#resize_height</code> to manage resizing the above sprites in a sensible way</li>
+</ul>
+
+<p>Ideally, these corners and edges would be <code>Zif::Sprite</code>s and therefore <code>Zif::Clickable</code>s - you could use this to implement click &amp; drag, or drag-to-resize using the resize methods.</p>
+
+<h2 id="zif-services-zif-services-servicegroup"><code>Zif::Services</code> &amp; <code>Zif::Services::ServiceGroup</code></h2>
+
+<p>Services are game utilities which can be accessed from any context within your app.</p>
+
+<p>If you use <code>Zif::Game</code>, every Zif service will be set up for you using <code>Zif::Services::ServiceGroup</code>, and registered in the <code>Game</code>&#39;s instance variable <code>@services</code> named by a symbol.  For example, you will be able to access the <code>Zif::Services::ActionService</code> by <code>$game.services[:action_service]</code>.  This is because <code>Zif::Game</code> runs <code>@services.register(:action_service, Zif::ActionService.new)</code> during initialization, and by convention, both <code>$game</code> and <code>$services</code> are available as global variables.</p>
+
+<h3 id="zif-services-actionservice"><code>Zif::Services::ActionService</code></h3>
+
+<p>See <code>Zif::Actions</code> above for more information on Actions.</p>
+
+<p>Each tick, checks sprites which have been registered for running actions.</p>
+
+<p>If you are using <code>Zif::Game</code>, this service is registered as <code>:action_service</code>.  All you need to do is register any object which needs to be checked for running <code>Action</code>s by using <code>Zif::Services::ActionService#register_actionable</code>.</p>
+
+<p>If you are not using <code>Zif::Game</code>, ensure you are calling <code>Zif::Services::ActionService#run_all_actions</code> once per tick.</p>
+
+<p>See documentation for details: <code>Zif::Services::ActionService</code></p>
+
+<h3 id="zif-services-inputservice"><code>Zif::Services::InputService</code></h3>
+
+<p>Keeps track of sprites and other objects interested in responding to clicks and scroll events, and passes the events over to them when they occur.</p>
+
+<p>If you are using <code>Zif::Game</code>, this service is registered as <code>:input_service</code>.  All you need to do is register any sprite which needs  to respond to clicks or scrolls using <code>Zif::Services::InputService#register_clickable</code> and <code>#register_scrollable</code>.</p>
+
+<p>Clickable sprites should mixin <code>Zif::Clickable</code> or be compatible by defining a <code>#clicked?</code> method and <code>@on_mouse_up</code> instance variable callbacks.  All <code>Zif::Sprite</code>s follow this convention.</p>
+
+<p>Scrollable objects should define <code>#scrolled?</code>.  <code>Zif::Layers::Camera</code> uses this.</p>
+
+<p>See the documentation for details: <code>Zif::Services::InputService</code>, <code>Zif::Clickable</code>.  <code>Zif::Layers</code> handle clicks in a hierarchical way, see documentation for info.</p>
+
+<p>There are many working clickable examples in the <code>ExampleApp</code>.</p>
+
+<h3 id="zif-services-spriteregistry"><code>Zif::Services::SpriteRegistry</code></h3>
+
+<p>This service is for registering your sprite assets once, and assists in creating new <code>Zif::Sprite</code> instances from the parameters described when registering.</p>
+
+<p><strong>Example usage:</strong></p>
+
+<p>The following code will create a <code>Zif::Sprite</code> with width and height of 82px and 66px, referencing a <code>path</code> of <code>sprites/dragon_1.png</code>.  The second line demonstrates getting a fresh <code>Zif::Sprite</code> copy with these settings.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_register_basic_sprite'>register_basic_sprite</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>82</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>66</span><span class='rparen'>)</span>
+<span class='ivar'>@dragon</span> <span class='op'>=</span> <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='symbol'>:sprite_registry</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_construct'>construct</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>The autotiling feature of <code>Zif::Layers::Bitmaskable</code> is designed around having the tile assets registered in this service.</p>
+
+<p>See the documentation for details: <code>Zif::Services::SpriteRegistry</code></p>
+
+<h3 id="zif-services-ticktraceservice-zif-traceable"><code>Zif::Services::TickTraceService</code> &amp; <code>Zif::Traceable</code></h3>
+
+<p>Generally, you want your game to run at a full 60fps.  If your tick takes longer than 16.6ms, you&#39;ll drop below that number.  This service is designed to report when a tick has taken longer than a threshold (20ms by default), and hopefully narrow down the slowest section of code. <code>Zif::Services::TickTraceService#reset_tick</code> must be called at the beginning of a tick, and then <code>#finish</code> at the end.  If you use <code>Zif::Game</code>, this is done for you.</p>
+
+<p>The <code>Zif::Traceable</code> mixin helps you use this service from an object, all you need to do is <code>include Zif::Traceable</code> in any class you want to mark, set the <code>@tracer_service_name</code> ivar to <code>:tracer</code>, and then <code>mark(&#39;a section of code&#39;)</code>.  By convention, you should include the name of the method which calls <code>#mark</code>:  <code>mark(&#39;#my_method: a section of code&#39;)</code></p>
+
+<p><code>Zif::Traceable#mark_and_print</code> is also available, if you want to print to the console when you mark the section.</p>
+
+<p><strong>Example output:</strong></p>
+
+<p>The <code>ExampleApp::UISample</code> scene includes a little button to simulate a slow tick (it sleeps for half a second).  This is the console output from clicking that button.</p>
+
+<pre class="code ruby"><code class="ruby">ExampleApp::UISample: delay_button: Button was clicked - demonstrating Tick Trace service
+ExampleApp::UISample: delay_button: Woke up from 500ms second nap
+================================================================================
+Zif::Services::TickTraceService: Slow tick. 504.920ms elapsed &gt;  20.000ms threshold, longest step &#39;ExampleApp::UISample: delay_button: Woke up from 500ms second nap&#39; 503.468ms:
+       mark     delta label
+    0.016ms   0.016ms ExampleApp::ZifExample: #standard_tick: begin
+    0.895ms   0.879ms ExampleApp::UISample: delay_button: Button was clicked - demonstrating Tick Trace service
+  504.363ms 503.468ms ExampleApp::UISample: delay_button: Woke up from 500ms second nap
+  504.406ms   0.043ms ExampleApp::ZifExample: #standard_tick: input_service #process_click
+  504.420ms   0.014ms ExampleApp::UISample: #perform_tick: begin
+  504.445ms   0.025ms ExampleApp::UISample: #update_metal_panel: begin
+  504.507ms   0.062ms ExampleApp::UISample: #update_metal_panel: complete
+  504.519ms   0.012ms ExampleApp::UISample: #update_glass_panel: begin
+  504.552ms   0.033ms ExampleApp::UISample: #update_glass_panel: complete
+  504.564ms   0.012ms ExampleApp::UISample: #update_progress_bar: begin
+  504.612ms   0.048ms ExampleApp::UISample: #update_progress_bar: complete
+  504.624ms   0.012ms ExampleApp::UISample: #update_interactable_button: begin
+  504.636ms   0.012ms ExampleApp::UISample: #update_interactable_button: complete
+  504.646ms   0.010ms ExampleApp::UISample: #perform_tick: finished updates
+  504.742ms   0.096ms ExampleApp::UISample: #perform_tick: finished super
+  504.754ms   0.012ms ExampleApp::ZifExample: #standard_tick: Scene #perform_tick complete
+  504.772ms   0.018ms ExampleApp::ZifExample: #standard_tick: Scene switching handled
+  504.901ms   0.129ms ExampleApp::ZifExample: #standard_tick: Action service complete
+  504.920ms   0.019ms ExampleApp::ZifExample: #standard_tick: Complete
+</code></pre>
+
+<h1 id="coming-soon">Coming Soon</h1>
+
+<p>Some features and things being considered for this library:</p>
+
+<ul>
+<li>Official support and/or examples for integrating with Draco ECS, and with Tiled tilemaps</li>
+<li>Parallax camera example</li>
+<li>Physics, or acceleration equivalent of Actions</li>
+<li>Ports of DRGTK Sample apps to &quot;Zif style&quot;</li>
+</ul>
+
+<p>If these sound interesting to you, make some noise in the <a href="https://discord.gg/T8wnRvNn7W">Dragonruby GTK Discord</a> #oss-zif channel.</p>
+</div></div>
+
+      <div id="footer">
+  Generated on Mon Mar  8 02:41:50 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>

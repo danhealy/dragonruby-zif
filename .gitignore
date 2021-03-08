@@ -5,6 +5,5 @@ exceptions/*
 console_history.txt
 .dragonruby/*
 .yardoc/*
-docs/search_results.txt
 app/server_ip_address.txt
 metadata/game_metadata.txt

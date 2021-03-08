@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Zif::RenderTarget
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Zif::RenderTarget";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span>
+     &raquo; 
+    <span class="title">RenderTarget</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Zif::RenderTarget
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Zif::RenderTarget</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/lib/zif/render_target.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>For creating and updating Render Targets.</p>
+
+<p>A render target in DRGTK is a way to programmatically create a static image out of sprites.  It acts just like <tt>$gtk.args.outputs</tt> in that it accepts an array of <code>sprites</code> and other <code>primitives</code>.  It gets rendered into memory at the end of the tick where it is referenced out of <tt>$<a href="...">gtk.args.outputs</a></tt>, based on its contents.  To display the result, you need to send <tt>$gtk.args.outputs</tt> a sprite which references the name of the render target as its <code>path</code>.</p>
+
+<p>This class holds references to the <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> and all of the configuration options necessary to invoke this concept in DragonRuby GTK.  It also includes a <span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span> referencing the created image in <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+
+<p>Once set up, you can force DRGTK to fully render the image using <span class='object_link'><a href="#redraw-instance_method" title="Zif::RenderTarget#redraw (method)">#redraw</a></span>, which redraws everything.</p>
+
+<p>Although an already rendered RenderTarget is cheap to display, one drawback of using RenderTargets is that they take a little longer to process in the first place, compared to simply drawing sprites the normal way.  This can become an issue if you need to frequently update the RenderTarget due to changes on the source sprites.  Say you have a large tile map you pregenerate as a RenderTarget when the game loads.  If you need to change a single tile, like if that tile represents a door and the door opens, normally you would need to regenerate the entire RenderTarget using all of the source sprites.</p>
+
+<p>A technique the DragonRuby community (specifically Islacrusez, oeloeloel) has identified to overcome this performance issue is to build another RenderTarget using the previously rendered one, plus whatever sprites are changing.  See this example implementation of this technique: <a href="https://github.com/oeloeloel/persistent-outputs">github.com/oeloeloel/persistent-outputs</a></p>
+
+<p>This strategy is implemented here by <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>.  Since this is inherently an additive process, <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span> allows you to cut out a single rectangle (via the <code>cut_rect</code> param) from the old image to handle deletions.</p>
+
+<p>See DRGTK docs on Render Targets <a href="http://docs.dragonruby.org/#----advanced-rendering---simple-render-targets---main.rb">docs.dragonruby.org/#—-advanced-rendering—simple-render-targets—main.rb</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Setting up a basic paint canvas</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_paint_canvas'>paint_canvas</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'>RenderTarget</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Zif::RenderTarget#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='symbol'>:my_paint_canvas</span><span class='comma'>,</span> <span class='label'>bg_color:</span> <span class='symbol'>:white</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>1000</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>500</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@all_current_brushstrokes</span>
+<span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_redraw'>redraw</span>
+<span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='period'>.</span><span class='id identifier rubyid_static_sprites'>static_sprites</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_containing_sprite'>containing_sprite</span>
+
+<span class='comment'># Some time later, you can add new brush strokes and delete a rectangle:
+</span>
+<span class='id identifier rubyid_minimap'>minimap</span> <span class='op'>=</span> <span class='comment'># ... a different sprite referencing the RenderTarget as path
+</span><span class='id identifier rubyid_new_brushstroke'>new_brushstroke</span> <span class='op'>=</span> <span class='comment'># ... a new Sprite to add to the render
+</span><span class='id identifier rubyid_erase_rect'>erase_rect</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>200</span><span class='comma'>,</span> <span class='int'>200</span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='int'>10</span><span class='rbracket'>]</span> <span class='comment'># Let&#39;s say you erased something, too
+</span><span class='id identifier rubyid_paint_canvas'>paint_canvas</span><span class='period'>.</span><span class='id identifier rubyid_redraw_from_buffer'>redraw_from_buffer</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_new_brushstroke'>new_brushstroke</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_erase_rect'>erase_rect</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_minimap'>minimap</span><span class='rbracket'>]</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Layers/SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">Layers::SimpleLayer</a></span></p>
+</div>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bg_color-instance_method" title="#bg_color (instance method)">#<strong>bg_color</strong>  &#x21d2; Symbol, Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Accepts <code>:black</code>, <code>:white</code>, or an RGBA color array like <tt>[255,255,255,255]</tt>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">#<strong>height</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The total height of the rendered image.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Array&lt;Zif::UI::Label&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of labels this RenderTarget is rendering.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String, Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the render target.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primitives-instance_method" title="#primitives (instance method)">#<strong>primitives</strong>  &#x21d2; Array&lt;Zif::Sprite, Hash&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of other primitives this RenderTarget is rendering.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sprites-instance_method" title="#sprites (instance method)">#<strong>sprites</strong>  &#x21d2; Array&lt;Zif::Sprite&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The list of sprites this RenderTarget is rendering.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">#<strong>width</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The total width of the rendered image.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#z_index-instance_method" title="#z_index (instance method)">#<strong>z_index</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>When comparing the containing sprite with other sprites, this sets the layering order.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      1. Public Interface
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clicked%3F-instance_method" title="#clicked? (instance method)">#<strong>clicked?</strong>(point, kind = :up)  &#x21d2; Object<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This implements functionality for the <span class='object_link'><a href="Services/InputService.html" title="Zif::Services::InputService (class)">Services::InputService</a></span> to check for click handlers amongst the list of <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> and <span class='object_link'><a href="#primitives-instance_method" title="Zif::RenderTarget#primitives (method)">#primitives</a></span> assigned to this object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#containing_sprite-instance_method" title="#containing_sprite (instance method)">#<strong>containing_sprite</strong>  &#x21d2; Zif::Sprite </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A sprite which references this render target as its <code>path</code>, and set to the same <code>width</code> and <code>height</code> by default.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exclude_from_serialize-instance_method" title="#exclude_from_serialize (instance method)">#<strong>exclude_from_serialize</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(name, bg_color: :black, width: 1, height: 1, z_index: 0)  &#x21d2; RenderTarget </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of RenderTarget.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_from-instance_method" title="#project_from (instance method)">#<strong>project_from</strong>(rect = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reassigns the <code>source_x</code>, <code>source_y</code>, <code>source_w</code> and <code>source_h</code> of the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_to-instance_method" title="#project_to (instance method)">#<strong>project_to</strong>(rect = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reassigns the x, y, width and height of the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#redraw-instance_method" title="#redraw (instance method)">#<strong>redraw</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Call this method when you want to actually draw all <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> onto the rendered image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#redraw_from_buffer-instance_method" title="#redraw_from_buffer (instance method)">#<strong>redraw_from_buffer</strong>(sprites: [], cut_rect: nil, additional_containing_sprites: [])  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Double Buffering.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#relative_point-instance_method" title="#relative_point (instance method)">#<strong>relative_point</strong>(point)  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Convert the positional [x, y] array <code>point</code> from the screen coordinates, to the relative coordinates inside the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resize-instance_method" title="#resize (instance method)">#<strong>resize</strong>(w, h)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      2. Private-ish methods
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cut_containing_sprites-instance_method" title="#cut_containing_sprites (instance method)">#<strong>cut_containing_sprites</strong>(rect)  &#x21d2; Array&lt;Hash&lt;Symbol, Numeric&gt;&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>.                   right                     v   @height -&gt; <code>------</code>—+              |   2  |   |              |      | 3 |       top -&gt; <code>----</code>-+   |              |    |r|   |              | 1  <code>-</code>—+ &lt;- bottom              |    |  4  |              |    |     |       0,0 -&gt; <code>----</code>—–+                   ^     ^                  left   @width This creates four sprite-hashes to capture the area outside of a rectangle, used in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#full_containing_sprite-instance_method" title="#full_containing_sprite (instance method)">#<strong>full_containing_sprite</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Like <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>, returns a Zif::Sprite referencing <span class='object_link'><a href="#name-instance_method" title="Zif::RenderTarget#name (method)">#name</a></span> as <code>path</code> at the full width.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_inactive_buffer_name-instance_method" title="#set_inactive_buffer_name (instance method)">#<strong>set_inactive_buffer_name</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#switch_buffer-instance_method" title="#switch_buffer (instance method)">#<strong>switch_buffer</strong>(additional_containing_sprites = [])  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Switch the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span> (and optional additional containing sprites) <code>path</code> to the inactive buffer Swap names so the name is the inactive name and vice versa.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Serializable.html" title="Zif::Serializable (module)">Serializable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Serializable.html#inspect-instance_method" title="Zif::Serializable#inspect (method)">#inspect</a></span>, <span class='object_link'><a href="Serializable.html#serialize-instance_method" title="Zif::Serializable#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="Serializable.html#to_s-instance_method" title="Zif::Serializable#to_s (method)">#to_s</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(name, bg_color: :black, width: 1, height: 1, z_index: 0)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::RenderTarget (class)">RenderTarget</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of RenderTarget.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#name-instance_method" title="Zif::RenderTarget#name (method)">#name</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bg_color</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:black</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#bg_color-instance_method" title="Zif::RenderTarget#bg_color (method)">#bg_color</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#width-instance_method" title="Zif::RenderTarget#width (method)">#width</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#height-instance_method" title="Zif::RenderTarget#height (method)">#height</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>z_index</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#z_index-instance_method" title="Zif::RenderTarget#z_index (method)">#z_index</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>bg_color:</span> <span class='symbol'>:black</span><span class='comma'>,</span> <span class='label'>width:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>height:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='int'>0</span><span class='rparen'>)</span>
+  <span class='ivar'>@name</span>       <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@width</span>      <span class='op'>=</span> <span class='id identifier rubyid_width'>width</span>
+  <span class='ivar'>@height</span>     <span class='op'>=</span> <span class='id identifier rubyid_height'>height</span>
+  <span class='ivar'>@z_index</span>    <span class='op'>=</span> <span class='id identifier rubyid_z_index'>z_index</span>
+  <span class='ivar'>@sprites</span>    <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@labels</span>     <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@primitives</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='comment'># This could probably be improved with a Color module
+</span>  <span class='ivar'>@bg_color</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_bg_color'>bg_color</span>
+              <span class='kw'>when</span> <span class='symbol'>:black</span>
+                <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span>
+              <span class='kw'>when</span> <span class='symbol'>:white</span>
+                <span class='lbracket'>[</span><span class='int'>255</span><span class='comma'>,</span> <span class='int'>255</span><span class='comma'>,</span> <span class='int'>255</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span>
+              <span class='kw'>else</span>
+                <span class='id identifier rubyid_bg_color'>bg_color</span>
+              <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bg_color=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="bg_color-instance_method">
+  
+    #<strong>bg_color</strong>  &#x21d2; <tt>Symbol</tt>, <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns Accepts <code>:black</code>, <code>:white</code>, or an RGBA color array like <tt>[255,255,255,255]</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Accepts <code>:black</code>, <code>:white</code>, or an RGBA color array like <tt>[255,255,255,255]</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bg_color'>bg_color</span>
+  <span class='ivar'>@bg_color</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="height=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="height-instance_method">
+  
+    #<strong>height</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The total height of the rendered image. This could be larger or smaller than the size used to display the image on the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The total height of the rendered image. This could be larger or smaller than the size used to display the image on the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_height'>height</span>
+  <span class='ivar'>@height</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="UI/Label.html" title="Zif::UI::Label (class)">Zif::UI::Label</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The list of labels this RenderTarget is rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="UI/Label.html" title="Zif::UI::Label (class)">Zif::UI::Label</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The list of labels this RenderTarget is rendering.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='ivar'>@labels</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt>, <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The name of the render target.  This is used when invoking the render target in DRGTK, so this must be unique.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the render target.  This is used when invoking the render target in DRGTK, so this must be unique.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="primitives=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="primitives-instance_method">
+  
+    #<strong>primitives</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>, Hash&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The list of other primitives this RenderTarget is rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>, Hash&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The list of other primitives this RenderTarget is rendering.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_primitives'>primitives</span>
+  <span class='ivar'>@primitives</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="sprites=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="sprites-instance_method">
+  
+    #<strong>sprites</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The list of sprites this RenderTarget is rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The list of sprites this RenderTarget is rendering.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sprites'>sprites</span>
+  <span class='ivar'>@sprites</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="width=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="width-instance_method">
+  
+    #<strong>width</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The total width of the rendered image. This could be larger or smaller than the size used to display the image on the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The total width of the rendered image. This could be larger or smaller than the size used to display the image on the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_width'>width</span>
+  <span class='ivar'>@width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="z_index=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="z_index-instance_method">
+  
+    #<strong>z_index</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns When comparing the containing sprite with other sprites, this sets the layering order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>When comparing the containing sprite with other sprites, this sets the layering order.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_z_index'>z_index</span>
+  <span class='ivar'>@z_index</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="clicked?-instance_method">
+  
+    #<strong>clicked?</strong>(point, kind = :up)  &#x21d2; <tt>Object</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This implements functionality for the <span class='object_link'><a href="Services/InputService.html" title="Zif::Services::InputService (class)">Services::InputService</a></span> to check for click handlers amongst the list of <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> and <span class='object_link'><a href="#primitives-instance_method" title="Zif::RenderTarget#primitives (method)">#primitives</a></span> assigned to this object. It will adjust the <code>point</code> from the screen itself to the relative position of the <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> within the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>, and send this adjusted point to the <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> <code>#clicked?</code> method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><dl class="rdoc-list label-list"><dt>x, y
+<dd>
+<p>position Array of the current mouse click.</p>
+</dd></dl>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kind</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:up</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The kind of click coming through, one of [:up, :down, :changed]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>If any <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> or <span class='object_link'><a href="#primitives-instance_method" title="Zif::RenderTarget#primitives (method)">#primitives</a></span> respond positively to being <code>#clicked?</code> at the adjusted <code>point</code>, this returns the object which was clicked. Otherwise return <code>nil</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Clickable.html#clicked%3F-instance_method" title="Zif::Clickable#clicked? (method)">Clickable#clicked?</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165
+166
+167
+168
+169</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='op'>=</span><span class='symbol'>:up</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_relative'>relative</span> <span class='op'>=</span> <span class='id identifier rubyid_relative_point'>relative_point</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
+  <span class='comment'># puts &quot;#{self.class.name}:#{name}: clicked? #{point} -&gt; relative #{relative}&quot;
+</span>
+  <span class='id identifier rubyid_find_and_return'>find_and_return</span> <span class='op'>=</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:clicked?</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_relative'>relative</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@sprites</span><span class='period'>.</span><span class='id identifier rubyid_reverse_each'>reverse_each</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_find_and_return'>find_and_return</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='ivar'>@primitives</span><span class='period'>.</span><span class='id identifier rubyid_reverse_each'>reverse_each</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_find_and_return'>find_and_return</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="containing_sprite-instance_method">
+  
+    #<strong>containing_sprite</strong>  &#x21d2; <tt><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns A sprite which references this render target as its <code>path</code>, and set to the same <code>width</code> and <code>height</code> by default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A sprite which references this render target as its <code>path</code>, and set to the same <code>width</code> and <code>height</code> by default</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span>
+  <span class='kw'>return</span> <span class='ivar'>@containing_sprite</span> <span class='kw'>if</span> <span class='ivar'>@containing_sprite</span>
+
+  <span class='id identifier rubyid_redraw'>redraw</span>
+  <span class='ivar'>@containing_sprite</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rt_</span><span class='embexpr_beg'>#{</span><span class='ivar'>@name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_containing_sprite</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_z_index'>z_index</span> <span class='op'>=</span> <span class='ivar'>@z_index</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='ivar'>@width</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='ivar'>@height</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='ivar'>@name</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_x'>source_x</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_y'>source_y</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_w'>source_w</span> <span class='op'>=</span> <span class='ivar'>@width</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_h'>source_h</span> <span class='op'>=</span> <span class='ivar'>@height</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_render_target'>render_target</span> <span class='op'>=</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cut_containing_sprites-instance_method">
+  
+    #<strong>cut_containing_sprites</strong>(rect)  &#x21d2; <tt>Array&lt;Hash&lt;Symbol, Numeric&gt;&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>.</p>
+
+<pre class="code ruby"><code class="ruby">                right
+                  v
+@height -&gt; +------+---+
+           |   2  |   |
+           |      | 3 |
+    top -&gt; +----+-+   |
+           |    |r|   |
+           | 1  +-+---+ &lt;- bottom
+           |    |  4  |
+           |    |     |
+    0,0 -&gt; +----+-----+
+                ^     ^
+               left   @width
+</code></pre>
+
+<p>This creates four sprite-hashes to capture the area outside of a rectangle, used in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><tt>[x, y, w, h]</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Hash&lt;Symbol, Numeric&gt;&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>four sprites around the rect</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 295</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cut_containing_sprites'>cut_containing_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_left'>left</span>   <span class='op'>=</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_bottom'>bottom</span> <span class='op'>=</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_right'>right</span>  <span class='op'>=</span> <span class='id identifier rubyid_left'>left</span> <span class='op'>+</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_top'>top</span>    <span class='op'>=</span> <span class='id identifier rubyid_bottom'>bottom</span> <span class='op'>+</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+
+  <span class='lbracket'>[</span>
+    <span class='comment'># 1
+</span>    <span class='lbrace'>{</span>
+      <span class='label'>x:</span>        <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>source_x:</span> <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>y:</span>        <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>source_y:</span> <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>w:</span>        <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span>
+      <span class='label'>source_w:</span> <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span>
+      <span class='label'>h:</span>        <span class='id identifier rubyid_top'>top</span><span class='comma'>,</span>
+      <span class='label'>source_h:</span> <span class='id identifier rubyid_top'>top</span><span class='comma'>,</span>
+      <span class='label'>path:</span>     <span class='ivar'>@name</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='comment'># 2
+</span>    <span class='lbrace'>{</span>
+      <span class='label'>x:</span>        <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>source_x:</span> <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>y:</span>        <span class='id identifier rubyid_top'>top</span><span class='comma'>,</span>
+      <span class='label'>source_y:</span> <span class='id identifier rubyid_top'>top</span><span class='comma'>,</span>
+      <span class='label'>w:</span>        <span class='id identifier rubyid_right'>right</span><span class='comma'>,</span>
+      <span class='label'>source_w:</span> <span class='id identifier rubyid_right'>right</span><span class='comma'>,</span>
+      <span class='label'>h:</span>        <span class='ivar'>@height</span> <span class='op'>-</span> <span class='id identifier rubyid_top'>top</span><span class='comma'>,</span>
+      <span class='label'>source_h:</span> <span class='ivar'>@height</span> <span class='op'>-</span> <span class='id identifier rubyid_top'>top</span><span class='comma'>,</span>
+      <span class='label'>path:</span>     <span class='ivar'>@name</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='comment'># 3
+</span>    <span class='lbrace'>{</span>
+      <span class='label'>x:</span>        <span class='id identifier rubyid_right'>right</span><span class='comma'>,</span>
+      <span class='label'>source_x:</span> <span class='id identifier rubyid_right'>right</span><span class='comma'>,</span>
+      <span class='label'>y:</span>        <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span>
+      <span class='label'>source_y:</span> <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span>
+      <span class='label'>w:</span>        <span class='ivar'>@width</span> <span class='op'>-</span> <span class='id identifier rubyid_right'>right</span><span class='comma'>,</span>
+      <span class='label'>source_w:</span> <span class='ivar'>@width</span> <span class='op'>-</span> <span class='id identifier rubyid_right'>right</span><span class='comma'>,</span>
+      <span class='label'>h:</span>        <span class='ivar'>@height</span> <span class='op'>-</span> <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span>
+      <span class='label'>source_h:</span> <span class='ivar'>@height</span> <span class='op'>-</span> <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span>
+      <span class='label'>path:</span>     <span class='ivar'>@name</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='comment'># 4
+</span>    <span class='lbrace'>{</span>
+      <span class='label'>x:</span>        <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span>
+      <span class='label'>source_x:</span> <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span>
+      <span class='label'>y:</span>        <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>source_y:</span> <span class='int'>0</span><span class='comma'>,</span>
+      <span class='label'>w:</span>        <span class='ivar'>@width</span> <span class='op'>-</span> <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span>
+      <span class='label'>source_w:</span> <span class='ivar'>@width</span> <span class='op'>-</span> <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span>
+      <span class='label'>h:</span>        <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span>
+      <span class='label'>source_h:</span> <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span>
+      <span class='label'>path:</span>     <span class='ivar'>@name</span>
+    <span class='rbrace'>}</span>
+  <span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="exclude_from_serialize-instance_method">
+  
+    #<strong>exclude_from_serialize</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Serializable.html#exclude_from_serialize-instance_method" title="Zif::Serializable#exclude_from_serialize (method)">Serializable#exclude_from_serialize</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+204
+205
+206</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 204</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exclude_from_serialize'>exclude_from_serialize</span>
+  <span class='qwords_beg'>%w[</span><span class='tstring_content'>sprites</span><span class='words_sep'> </span><span class='tstring_content'>primitives</span><span class='tstring_end'>]</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="full_containing_sprite-instance_method">
+  
+    #<strong>full_containing_sprite</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Like <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>, returns a Zif::Sprite referencing <span class='object_link'><a href="#name-instance_method" title="Zif::RenderTarget#name (method)">#name</a></span> as <code>path</code> at the full width. This is private because it&#39;s used internally in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>, it should not be modified externally</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 356</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_full_containing_sprite'>full_containing_sprite</span>
+  <span class='kw'>return</span> <span class='ivar'>@full_containing_sprite</span> <span class='kw'>if</span> <span class='ivar'>@full_containing_sprite</span>
+
+  <span class='ivar'>@full_containing_sprite</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Sprite.html#initialize-instance_method" title="Zif::Sprite#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rt_</span><span class='embexpr_beg'>#{</span><span class='ivar'>@name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_full_containing_sprite</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_z_index'>z_index</span> <span class='op'>=</span> <span class='ivar'>@z_index</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='ivar'>@width</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='ivar'>@height</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='ivar'>@name</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_x'>source_x</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_y'>source_y</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_w'>source_w</span> <span class='op'>=</span> <span class='ivar'>@width</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_source_h'>source_h</span> <span class='op'>=</span> <span class='ivar'>@height</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_render_target'>render_target</span> <span class='op'>=</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_from-instance_method">
+  
+    #<strong>project_from</strong>(rect = {})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reassigns the <code>source_x</code>, <code>source_y</code>, <code>source_w</code> and <code>source_h</code> of the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Numeric&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Hash containing <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code> keys and Numeric values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 195</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_from'>project_from</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_rect_hash'>source_rect_hash</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span>
+      <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Sprite</a></span></span><span class='period'>.</span><span class='id identifier rubyid_rect_hash_to_source_hash'><span class='object_link'><a href="Sprite.html#rect_hash_to_source_hash-class_method" title="Zif::Sprite.rect_hash_to_source_hash (method)">rect_hash_to_source_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_to-instance_method">
+  
+    #<strong>project_to</strong>(rect = {})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reassigns the x, y, width and height of the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rect</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol, Numeric&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Hash containing <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code> keys and Numeric values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187
+188
+189
+190
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 187</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_to'>project_to</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_assign'>assign</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_rect_hash'>rect_hash</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_rect'>rect</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="redraw-instance_method">
+  
+    #<strong>redraw</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Call this method when you want to actually draw all <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> onto the rendered image. You will need to redraw if you want any changes made to <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> to be reflected in the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>. This works by asking DRGTK for a reference to the render target by name, and resetting the <span class='object_link'><a href="#width-instance_method" title="Zif::RenderTarget#width (method)">#width</a></span> and <span class='object_link'><a href="#height-instance_method" title="Zif::RenderTarget#height (method)">#height</a></span>. DRGTK detects this and performs the render at the end of the tick. Therefore, please do not attempt to reference this render target directly via <tt>$gtk.args</tt> outside of this class - it will cause the render target to be redrawn without directing it to draw the sprites contained here.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_redraw'>redraw</span>
+  <span class='comment'># puts &quot;RenderTarget#redraw: #{@name} #{@width} #{@height} #{@sprites.length} sprites, #{@labels.length} labels&quot;
+</span>  <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;#redraw: #{@name} Begin&quot;)
+</span>  <span class='id identifier rubyid_targ'>targ</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='lbracket'>[</span><span class='ivar'>@name</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span>  <span class='op'>=</span> <span class='ivar'>@width</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span> <span class='op'>=</span> <span class='ivar'>@height</span>
+
+  <span class='comment'># It&#39;s important to set the background color intentionally.  Even if alpha == 0, semi-transparent images in
+</span>  <span class='comment'># render targets will pick up this color as an additive.  Usually you want black.
+</span>  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_background_color'>background_color</span> <span class='op'>=</span> <span class='ivar'>@bg_color</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_primitives'>primitives</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@primitives</span> <span class='kw'>if</span> <span class='ivar'>@primitives</span><span class='op'>&amp;.</span><span class='id identifier rubyid_any?'>any?</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span>    <span class='op'>&lt;&lt;</span> <span class='ivar'>@sprites</span>    <span class='kw'>if</span> <span class='ivar'>@sprites</span><span class='op'>&amp;.</span><span class='id identifier rubyid_any?'>any?</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span>     <span class='op'>&lt;&lt;</span> <span class='ivar'>@labels</span>     <span class='kw'>if</span> <span class='ivar'>@labels</span><span class='op'>&amp;.</span><span class='id identifier rubyid_any?'>any?</span>
+  <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;#redraw: #{@name} Complete&quot;)
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="redraw_from_buffer-instance_method">
+  
+    #<strong>redraw_from_buffer</strong>(sprites: [], cut_rect: nil, additional_containing_sprites: [])  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>Need some examples of double buffering</p>
+</div>
+  </div>
+
+
+<p>Double Buffering</p>
+
+<p>This method is for drawing new sprites on top of an already rendered RT, and optionally cut out a rectangle from the RT (for deletion) You might want to use this if your list of <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> for the RT is very large, so rendering all of the sprites is slow, and you just need to modify a small subset.</p>
+
+<p>The classic example is a paint application, where each tick adds a new brush stroke to the canvas. Instead of letting the <span class='object_link'><a href="#sprites-instance_method" title="Zif::RenderTarget#sprites (method)">#sprites</a></span> array grow unbounded and redrawing all of them for each stroke, simply take the previous canvas and draw a new sprite on top of it.</p>
+
+<p>A more complex example is if a single tile is changing inside of a large tile map. Instead of redrawing every tile, delete the tile which is changing from the already rendered target, and then redraw just the changing tile.</p>
+
+<p>One drawback of using this is that you are forced to specify a single rectangle area which is changing.</p>
+
+<p>Another drawback to using this is that the <code>path</code> for any sprite referencing the RenderTarget needs to change every time the buffer is switched.  Since this references it&#39;s own containing sprite, we can update the path for that sprite automatically, but if there exist any additional sprites referencing the <code>path</code> (like if you have a map and a minimap pointing to the same <code>path</code>), those will have to be updated manually. To support this, you can pass additional containing sprites as an array to have their <code>path</code> updated.</p>
+
+<p>See the <span class='object_link'><a href="../ExampleApp/DoubleBufferRenderTest.html" title="ExampleApp::DoubleBufferRenderTest (class)">ExampleApp::DoubleBufferRenderTest</a></span> scene for a working example.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sprites</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional. An array of sprites to add to the image in this redraw.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cut_rect</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional.  [x, y, w, h], the area to cut out from the existing buffer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>additional_containing_sprites</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Optional. An array of other containing sprites besides <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span> whose <code>path</code> needs updating after switching buffers.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 239</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_redraw_from_buffer'>redraw_from_buffer</span><span class='lparen'>(</span><span class='label'>sprites:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>cut_rect:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>additional_containing_sprites:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;RenderTarget#redraw_from_buffer: #{@name} Begin&quot;)
+</span>  <span class='id identifier rubyid_source_buffer_sprites'>source_buffer_sprites</span> <span class='op'>=</span> <span class='id identifier rubyid_cut_rect'>cut_rect</span> <span class='op'>?</span> <span class='id identifier rubyid_cut_containing_sprites'>cut_containing_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_cut_rect'>cut_rect</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='lbracket'>[</span><span class='id identifier rubyid_full_containing_sprite'>full_containing_sprite</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_set_inactive_buffer_name'>set_inactive_buffer_name</span> <span class='kw'>unless</span> <span class='ivar'>@inactive_buffer_name</span>
+  <span class='comment'># puts &quot;RenderTarget#redraw_from_buffer: name: #{@name}, inactive: #{@inactive_buffer_name}&quot;
+</span>  <span class='comment'># puts &quot;RenderTarget#redraw_from_buffer: cut_rect: #{cut_rect}, source: #{source_buffer_sprites.inspect}&quot;
+</span>
+  <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;RenderTarget#redraw_from_buffer: #{@name} Sprites&quot;)
+</span>  <span class='id identifier rubyid_targ'>targ</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_outputs'>outputs</span><span class='lbracket'>[</span><span class='ivar'>@inactive_buffer_name</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_width'>width</span>  <span class='op'>=</span> <span class='ivar'>@width</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_height'>height</span> <span class='op'>=</span> <span class='ivar'>@height</span>
+  <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;RenderTarget#redraw_from_buffer: #{@name} HW&quot;)
+</span>  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_background_color'>background_color</span> <span class='op'>=</span> <span class='ivar'>@bg_color</span>
+  <span class='id identifier rubyid_targ'>targ</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_source_buffer_sprites'>source_buffer_sprites</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_sprites'>sprites</span>
+
+  <span class='id identifier rubyid_switch_buffer'>switch_buffer</span><span class='lparen'>(</span><span class='id identifier rubyid_additional_containing_sprites'>additional_containing_sprites</span><span class='rparen'>)</span>
+  <span class='comment'># $services&amp;.named(:tracer)&amp;..mark(&quot;RenderTarget#redraw_from_buffer: #{@name} End&quot;)
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="relative_point-instance_method">
+  
+    #<strong>relative_point</strong>(point)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Convert the positional [x, y] array <code>point</code> from the screen coordinates, to the relative coordinates inside the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><dl class="rdoc-list label-list"><dt>x, y
+<dd>
+<p>position Array in the context of the screen</p>
+</dd></dl>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>point [x, y] position Array in the context of the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 175</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_relative_point'>relative_point</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_sub_positions'><span class='object_link'><a href="../Zif.html#sub_positions-class_method" title="Zif.sub_positions (method)">sub_positions</a></span></span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='comment'># FIXME??: Zif.position_math(:mult, point, containing_sprite.source_wh),
+</span>      <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_xy'>xy</span>
+    <span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='period'>.</span><span class='id identifier rubyid_source_xy'>source_xy</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resize-instance_method">
+  
+    #<strong>resize</strong>(w, h)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>w</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Change width</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>h</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Change height</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resize'>resize</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='rparen'>)</span>
+  <span class='ivar'>@width</span> <span class='op'>=</span> <span class='id identifier rubyid_w'>w</span>
+  <span class='ivar'>@height</span> <span class='op'>=</span> <span class='id identifier rubyid_h'>h</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_inactive_buffer_name-instance_method">
+  
+    #<strong>set_inactive_buffer_name</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+263
+264
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 263</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_inactive_buffer_name'>set_inactive_buffer_name</span>
+  <span class='ivar'>@inactive_buffer_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='ivar'>@name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_buf</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="switch_buffer-instance_method">
+  
+    #<strong>switch_buffer</strong>(additional_containing_sprites = [])  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+<p>Switch the <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span> (and optional additional containing sprites) <code>path</code> to the inactive buffer Swap names so the name is the inactive name and vice versa. Private, you should probably not call this directly, it is called automatically by <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>additional_containing_sprites</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span>&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of other containing sprites to update.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+272
+273
+274
+275</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/render_target.rb', line 272</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_switch_buffer'>switch_buffer</span><span class='lparen'>(</span><span class='id identifier rubyid_additional_containing_sprites'>additional_containing_sprites</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_containing_sprite'>containing_sprite</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_additional_containing_sprites'>additional_containing_sprites</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_cs'>cs</span><span class='op'>|</span> <span class='id identifier rubyid_cs'>cs</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='ivar'>@inactive_buffer_name</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@inactive_buffer_name</span><span class='comma'>,</span> <span class='ivar'>@name</span> <span class='op'>=</span> <span class='ivar'>@name</span><span class='comma'>,</span> <span class='ivar'>@inactive_buffer_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Mar  8 02:41:51 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.6.3).
+</div>
+
+    </div>
+  </body>
+</html>
