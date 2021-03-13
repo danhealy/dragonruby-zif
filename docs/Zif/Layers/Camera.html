@@ -872,7 +872,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#each_layer-instance_method" title="#each_layer (instance method)">#<strong>each_layer</strong>(&amp;_block)  &#x21d2; Enumerator </a>
+      <a href="#each_layer-instance_method" title="#each_layer (instance method)">#<strong>each_layer</strong>(&amp;block)  &#x21d2; Enumerator </a>
     
 
     
@@ -3147,19 +3147,19 @@
       <pre class="lines">
 
 
+301
+302
+303
+304
 305
 306
 307
 308
 309
-310
-311
-312
-313
-314</pre>
+310</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 305</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 301</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center'>center</span><span class='lparen'>(</span><span class='id identifier rubyid_from'>from</span><span class='op'>=</span><span class='id identifier rubyid_pos'>pos</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span>
@@ -3222,6 +3222,9 @@
       <pre class="lines">
 
 
+280
+281
+282
 283
 284
 285
@@ -3230,13 +3233,10 @@
 288
 289
 290
-291
-292
-293
-294</pre>
+291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 280</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_center_screen'>center_screen</span><span class='lparen'>(</span><span class='id identifier rubyid_around'>around</span><span class='op'>=</span><span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_center_to'>center_to</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_sub_positions'><span class='object_link'><a href="../../Zif.html#sub_positions-class_method" title="Zif.sub_positions (method)">sub_positions</a></span></span><span class='lparen'>(</span>
@@ -3258,7 +3258,7 @@
       <div class="method_details ">
   <h3 class="signature " id="each_layer-instance_method">
   
-    #<strong>each_layer</strong>(&amp;_block)  &#x21d2; <tt>Enumerator</tt> 
+    #<strong>each_layer</strong>(&amp;block)  &#x21d2; <tt>Enumerator</tt> 
   
 
   
@@ -3278,7 +3278,7 @@
   
     <li>
       
-        <span class='name'>_block</span>
+        <span class='name'>block</span>
       
       
         <span class='type'>(<tt>Block</tt>)</span>
@@ -3319,19 +3319,15 @@
       <pre class="lines">
 
 
+164
 165
-166
-167
-168
-169</pre>
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 164</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_each_layer'>each_layer</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span><span class='rparen'>)</span>
-  <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_layer'>layer</span><span class='op'>|</span>
-    <span class='kw'>yield</span> <span class='id identifier rubyid_layer'>layer</span>
-  <span class='kw'>end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_each_layer'>each_layer</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='ivar'>@layers</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3382,12 +3378,12 @@
       <pre class="lines">
 
 
-190
-191
-192</pre>
+187
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_follow_x'>follow_x</span>
   <span class='ivar'>@last_follow</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -3441,12 +3437,12 @@
       <pre class="lines">
 
 
-195
-196
-197</pre>
+192
+193
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 192</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_follow_x='>follow_x=</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
   <span class='ivar'>@last_follow</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_x'>x</span>
@@ -3500,12 +3496,12 @@
       <pre class="lines">
 
 
-200
-201
-202</pre>
+197
+198
+199</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 197</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_follow_y'>follow_y</span>
   <span class='ivar'>@last_follow</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
@@ -3559,12 +3555,12 @@
       <pre class="lines">
 
 
-205
-206
-207</pre>
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 205</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 202</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_follow_y='>follow_y=</span><span class='lparen'>(</span><span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
   <span class='ivar'>@last_follow</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_y'>y</span>
@@ -3618,12 +3614,12 @@
       <pre class="lines">
 
 
+158
 159
-160
-161</pre>
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_full_view_rect'>full_view_rect</span>
   <span class='lbracket'>[</span><span class='ivar'>@cur_w</span><span class='comma'>,</span> <span class='ivar'>@cur_h</span><span class='rbracket'>]</span>
@@ -3677,12 +3673,12 @@
       <pre class="lines">
 
 
+153
 154
-155
-156</pre>
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 153</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_view_rect'>max_view_rect</span>
   <span class='lbracket'>[</span><span class='lparen'>(</span><span class='ivar'>@native_screen_width</span> <span class='op'>*</span> <span class='ivar'>@max_zoom_out</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='ivar'>@native_screen_height</span> <span class='op'>*</span> <span class='ivar'>@max_zoom_out</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbracket'>]</span>
@@ -3736,12 +3732,12 @@
       <pre class="lines">
 
 
+148
 149
-150
-151</pre>
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_view_rect'>min_view_rect</span>
   <span class='lbracket'>[</span><span class='lparen'>(</span><span class='ivar'>@native_screen_width</span> <span class='op'>*</span> <span class='ivar'>@max_zoom_in</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='ivar'>@native_screen_height</span> <span class='op'>*</span> <span class='ivar'>@max_zoom_in</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbracket'>]</span>
@@ -3831,18 +3827,18 @@
       <pre class="lines">
 
 
+210
+211
+212
 213
 214
 215
 216
 217
-218
-219
-220
-221</pre>
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 213</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_move'>move</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_orig_pos_x'>orig_pos_x</span> <span class='op'>=</span> <span class='ivar'>@pos_x</span>
@@ -3924,15 +3920,15 @@
       <pre class="lines">
 
 
+224
+225
+226
 227
 228
-229
-230
-231
-232</pre>
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_move_rel'>move_rel</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_y'>y</span>
@@ -3989,12 +3985,12 @@
       <pre class="lines">
 
 
-297
-298
-299</pre>
+294
+295
+296</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 297</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 294</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pos'>pos</span>
   <span class='lbracket'>[</span><span class='ivar'>@pos_x</span><span class='comma'>,</span> <span class='ivar'>@pos_y</span><span class='rbracket'>]</span>
@@ -4087,18 +4083,18 @@
       <pre class="lines">
 
 
+345
+346
+347
+348
 349
 350
 351
 352
-353
-354
-355
-356
-357</pre>
+353</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 349</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scrolled?'>scrolled?</span><span class='lparen'>(</span><span class='id identifier rubyid__point'>_point</span><span class='comma'>,</span> <span class='id identifier rubyid_direction'>direction</span><span class='rparen'>)</span>
   <span class='comment'># translated_point = translate_pos(point)
@@ -4160,6 +4156,9 @@
       <pre class="lines">
 
 
+235
+236
+237
 238
 239
 240
@@ -4198,13 +4197,10 @@
 273
 274
 275
-276
-277
-278
-279</pre>
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 238</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 235</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start_following'>start_following</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
   <span class='comment'># We want to start following the leading sprite if it reaches the margins:
@@ -4317,12 +4313,12 @@
       <pre class="lines">
 
 
-398
-399
-400</pre>
+394
+395
+396</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 398</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 394</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_translate_pos'>translate_pos</span><span class='lparen'>(</span><span class='id identifier rubyid_given'>given</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add_positions'><span class='object_link'><a href="../../Zif.html#add_positions-class_method" title="Zif.add_positions (method)">add_positions</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_position_math'><span class='object_link'><a href="../../Zif.html#position_math-class_method" title="Zif.position_math (method)">position_math</a></span></span><span class='lparen'>(</span><span class='symbol'>:mult</span><span class='comma'>,</span> <span class='id identifier rubyid_given'>given</span><span class='comma'>,</span> <span class='id identifier rubyid_zoom_factor'>zoom_factor</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_pos'>pos</span><span class='rparen'>)</span>
@@ -4376,12 +4372,12 @@
       <pre class="lines">
 
 
-390
-391
-392</pre>
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 390</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 386</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_factor'>zoom_factor</span>
   <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_position_math'><span class='object_link'><a href="../../Zif.html#position_math-class_method" title="Zif.position_math (method)">position_math</a></span></span><span class='lparen'>(</span><span class='symbol'>:fdiv</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='ivar'>@cur_w</span><span class='comma'>,</span> <span class='ivar'>@cur_h</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_zoom_unit'>zoom_unit</span><span class='rparen'>)</span>
@@ -4439,13 +4435,13 @@
       <pre class="lines">
 
 
-368
-369
-370
-371</pre>
+364
+365
+366
+367</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_in'>zoom_in</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='op'>=</span><span class='lparen'>(</span><span class='ivar'>@last_follow</span> <span class='op'>||</span> <span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='ivar'>@zoom_step</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='ivar'>@zoom_step</span> <span class='op'>-</span> <span class='int'>1</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
@@ -4504,13 +4500,13 @@
       <pre class="lines">
 
 
-361
-362
-363
-364</pre>
+357
+358
+359
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 361</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_out'>zoom_out</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='op'>=</span><span class='lparen'>(</span><span class='ivar'>@last_follow</span> <span class='op'>||</span> <span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='ivar'>@zoom_step</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='ivar'>@zoom_step</span> <span class='op'>+</span> <span class='int'>1</span><span class='comma'>,</span> <span class='ivar'>@zoom_steps</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
@@ -4587,18 +4583,18 @@
       <pre class="lines">
 
 
+373
+374
+375
+376
 377
 378
 379
 380
-381
-382
-383
-384
-385</pre>
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 377</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 373</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_to'>zoom_to</span><span class='lparen'>(</span><span class='id identifier rubyid_factor'>factor</span><span class='op'>=</span><span class='float'>1.0</span><span class='comma'>,</span> <span class='id identifier rubyid_point'>point</span><span class='op'>=</span><span class='lparen'>(</span><span class='ivar'>@last_follow</span> <span class='op'>||</span> <span class='id identifier rubyid_center'>center</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_base_mult'>base_mult</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_factor'>factor</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='int'>80</span><span class='rparen'>)</span>
@@ -4658,12 +4654,12 @@
       <pre class="lines">
 
 
-338
-339
-340</pre>
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 338</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/camera.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zoom_unit'>zoom_unit</span>
   <span class='lbracket'>[</span><span class='ivar'>@native_screen_width</span><span class='comma'>,</span> <span class='ivar'>@native_screen_height</span><span class='rbracket'>]</span>
@@ -4678,7 +4674,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Mar  8 02:52:57 2021 by
+  Generated on Fri Mar 12 18:02:42 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.6.3).
 </div>
