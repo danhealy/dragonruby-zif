@@ -1,0 +1,53 @@
+[package]
+name = "zif"
+authors = ["Dan Healy <dan@beyondludus.com>"]
+version = "2.0.0-rc.2"
+url = "https://danhealy.github.io/dragonruby-zif/"
+
+# Which files do you want to be automatically required from your package.
+requires = [
+  "smaug/zif/app/lib/zif/zif.rb",
+  "smaug/zif/app/lib/zif/serializable.rb",
+  "smaug/zif/app/lib/zif/clickable.rb",
+  "smaug/zif/app/lib/zif/services/service_group.rb",
+  "smaug/zif/app/lib/zif/services/input_service.rb",
+  "smaug/zif/app/lib/zif/services/tick_trace_service.rb",
+  "smaug/zif/app/lib/zif/traceable.rb",
+  "smaug/zif/app/lib/zif/assignable.rb",
+  "smaug/zif/app/lib/zif/actions/action.rb",
+  "smaug/zif/app/lib/zif/scene.rb",
+  "smaug/zif/app/lib/zif/actions/sequence.rb",
+  "smaug/zif/app/lib/zif/actions/actionable.rb",
+  "smaug/zif/app/lib/zif/ui/label.rb",
+  "smaug/zif/app/lib/zif/actions/animatable.rb",
+  "smaug/zif/app/lib/zif/services/action_service.rb",
+  "smaug/zif/app/lib/zif/sprite.rb",
+  "smaug/zif/app/lib/zif/render_target.rb",
+  "smaug/zif/app/lib/zif/compound_sprite.rb",
+  "smaug/zif/app/lib/zif/services/sprite_registry.rb",
+  "smaug/zif/app/lib/zif/ui/nine_panel_edge.rb",
+  "smaug/zif/app/lib/zif/ui/two_stage_button.rb",
+  "smaug/zif/app/lib/zif/ui/nine_panel.rb",
+  "smaug/zif/app/lib/zif/layers/camera.rb",
+  "smaug/zif/app/lib/zif/layers/layerable.rb",
+  "smaug/zif/app/lib/zif/layers/tileable.rb",
+  "smaug/zif/app/lib/zif/layers/bitmaskable.rb",
+  "smaug/zif/app/lib/zif/layers/active_layer.rb",
+  "smaug/zif/app/lib/zif/layers/active_tiled_layer.rb",
+  "smaug/zif/app/lib/zif/layers/active_bitmasked_tiled_layer.rb",
+  "smaug/zif/app/lib/zif/layers/simple_layer.rb",
+  "smaug/zif/app/lib/zif/layers/tiled_layer.rb",
+  "smaug/zif/app/lib/zif/layers/bitmasked_tiled_layer.rb",
+  "smaug/zif/app/lib/zif/layers/layer_group.rb",
+  "smaug/zif/app/lib/zif/game.rb"
+]
+
+[package.installs]
+# Example
+#
+# <from> = <to>
+# "lib/library.rb" = "app/lib/library.rb"
+
+[dragonruby]
+version = "2.7"
+edition = "standard"
