@@ -1,6 +1,6 @@
 # This is the namespace for the Zif library, and in the +app/lib/zif/zif.rb+ file are some miscellaneous helper methods
 module Zif
-  GTK_COMPATIBLE_VERSION = "2.7"
+  GTK_COMPATIBLE_VERSION = '2.7'.freeze
 
   # @param [Numeric] i
   # @param [Numeric] max
@@ -175,15 +175,15 @@ module Zif
   # Checks the running DragonRuby GTK version against {Zif::GTK_COMPATIBLE_VERSION}
   # If different, it prints a little warning.  This is invoked automatically by {Zif::Game#initialize}
   def self.check_compatibility
-    unless $gtk.version == Zif::GTK_COMPATIBLE_VERSION
-      puts "+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+"
-      puts "|      This version of the Zif framework was tested against DRGTK '#{Zif::GTK_COMPATIBLE_VERSION}'       |"
-      puts "|                You are running DragonRuby GTK Version '#{$gtk.version}'                 |"
-      puts "|                                                                             |"
-      puts "| Please ensure you are using the latest versions of DRGTK and Zif:           |"
-      puts "| DRGTK: http://dragonruby.herokuapp.com/toolkit/game                         |"
-      puts "| Zif:   https://github.com/danhealy/dragonruby-zif/releases                  |"
-      puts "+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+"
-    end
+    return if $gtk.version == Zif::GTK_COMPATIBLE_VERSION
+
+    puts '+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+'
+    puts "|      This version of the Zif framework was tested against DRGTK '#{Zif::GTK_COMPATIBLE_VERSION}'       |"
+    puts "|                You are running DragonRuby GTK Version '#{$gtk.version}'                 |"
+    puts '|                                                                             |'
+    puts '| Please ensure you are using the latest versions of DRGTK and Zif:           |'
+    puts '| DRGTK: http://dragonruby.herokuapp.com/toolkit/game                         |'
+    puts '| Zif:   https://github.com/danhealy/dragonruby-zif/releases                  |'
+    puts '+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+'
   end
 end

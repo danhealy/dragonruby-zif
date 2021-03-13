@@ -20,7 +20,6 @@ module Zif
     # See the code and {ExampleApp::MetalPanel}
     # @deprecated
     class NinePanelEdge
-
       attr_accessor :ready, :width, :height
 
       # @!attribute [rw] left_edge

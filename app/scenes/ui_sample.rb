@@ -146,16 +146,20 @@ module ExampleApp
         Zif::Actions::Sequence.new(
           [
             # Move from starting position to 1000x over 1 second, starting slowly, then flip the sprite at the end
-            @dragon.new_action({x: 1000}, duration: 1.seconds, easing: :smooth_start) { @dragon.flip_horizontally = true },
+            @dragon.new_action({x: 1000}, duration: 1.seconds, easing: :smooth_start) do
+              @dragon.flip_horizontally = true
+            end,
             # Move from the new position (1000x) back to the start 600x over 2 seconds, stopping slowly, then flip again
-            @dragon.new_action({x: 600}, duration: 2.seconds, easing: :smooth_stop) { @dragon.flip_horizontally = false }
+            @dragon.new_action({x: 600}, duration: 2.seconds, easing: :smooth_stop) do
+              @dragon.flip_horizontally = false
+            end
           ],
           repeat: :forever
         )
       )
 
       @dragon.new_basic_animation(
-        named: :fly,
+        named:               :fly,
         paths_and_durations: 1.upto(4).map { |i| ["dragon_#{i}", 4] } + 3.downto(2).map { |i| ["dragon_#{i}", 4] }
       )
 

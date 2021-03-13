@@ -3,7 +3,6 @@ module Zif
     # A mixin to assist with sprite animations, to use with an object which already includes {Zif::Actions::Actionable}.
     # Under the hood, these are implemented as {Zif::Actions::Sequence}s which modify the +path+ over time.
     module Animatable
-
       # @return [Hash<(String, Symbol), Zif::Actions::Sequence>] Registered sequences by name.
       attr_reader :animation_sequences
 

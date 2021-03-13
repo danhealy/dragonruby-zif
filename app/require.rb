@@ -14,5 +14,6 @@ require 'app/scenes/double_buffer_render_test.rb'
 require 'app/scenes/compound_sprite_test.rb'
 
 require 'app/avatar.rb'
+require 'app/pixie.rb'
 
 require 'app/zif_example.rb'

@@ -1,7 +1,7 @@
 module ExampleApp
   # An example which uses {Zif::Layers::LayerGroup} and {Zif::Layers::Camera}
   class World < ZifExampleScene
-    attr_accessor :map, :camera, :avatar, :last_rendered_camera
+    attr_accessor :map, :camera, :avatar, :pixie, :last_rendered_camera
 
     # For init
     attr_accessor :ready, :progress, :finished_at
@@ -26,7 +26,14 @@ module ExampleApp
         @map.max_height
       )
 
+      @pixie = Pixie.new
+      @pixie.x = 1659
+      @pixie.y = 1659
+      @pixie.spin
+      @pixie.float_to(@avatar)
+
       @map.layers[:avatar].sprites << @avatar
+      @map.layers[:avatar].sprites << @pixie
 
       @ready = false
       @progress = Hash.new(0)
@@ -104,11 +111,11 @@ module ExampleApp
     def finish_initialization
       puts 'World#finish_initialization: Begin'
       @camera = Zif::Layers::Camera.new(
-        layer_sprites:    @map.layer_containing_sprites,
-        starting_width:   Zif::Layers::Camera::DEFAULT_SCREEN_WIDTH,
-        starting_height:  Zif::Layers::Camera::DEFAULT_SCREEN_HEIGHT,
-        initial_x:        0,
-        initial_y:        400
+        layer_sprites:   @map.layer_containing_sprites,
+        starting_width:  Zif::Layers::Camera::DEFAULT_SCREEN_WIDTH,
+        starting_height: Zif::Layers::Camera::DEFAULT_SCREEN_HEIGHT,
+        initial_x:       0,
+        initial_y:       400
       )
 
       @map.layers[:tiles].should_render = true
@@ -123,6 +130,7 @@ module ExampleApp
 
       $game.services[:action_service].register_actionable(@avatar)
       $game.services[:action_service].register_actionable(@camera)
+      $game.services[:action_service].register_actionable(@pixie)
       $game.services[:input_service].register_clickable(@map.layers[:tiles].containing_sprite)
 
       $game.services[:input_service].register_scrollable(@camera)

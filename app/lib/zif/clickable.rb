@@ -6,7 +6,6 @@ module Zif
   #
   # This also works for simple single touch responses on mobile targets.
   module Clickable
-
     # @return [Lambda] Called when the mouse click begins.  Called with +point+ [x, y] position Array arg.
     attr_accessor :on_mouse_down
 

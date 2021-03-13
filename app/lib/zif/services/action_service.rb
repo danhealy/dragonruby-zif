@@ -7,7 +7,6 @@ module Zif
     # been previously registered using {#register_actionable}.
     # @see Zif::Action::Actionable
     class ActionService
-
       # @return [Array<Zif::Action::Actionable>] The list of {Zif::Action::Actionable}s to check each tick
       attr_reader :actionables
 
@@ -28,7 +27,7 @@ module Zif
       # @param [Zif::Actions::Actionable] actionable
       def register_actionable(actionable)
         unless actionable.is_a?(Zif::Actions::Actionable)
-          raise ArgumentError, "Zif::Services::ActionService#register_actionable:" /
+          raise ArgumentError, 'Zif::Services::ActionService#register_actionable:' /
                                " #{actionable} is not a Zif::Actions::Actionable"
         end
 

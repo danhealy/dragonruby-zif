@@ -192,7 +192,6 @@ module Zif
       }
     end
 
-
     # @param [Array<Numeric>] arr Takes an array of +[source_x, source_y, source_w, source_h]+ integers
     # @return [Hash<Symbol, Numeric>] Converts the array into a hash with those values mapped like +{source_x: ... }+
     def self.rect_array_to_source_hash(arr=[])

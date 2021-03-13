@@ -182,7 +182,7 @@ module Zif
       else
         puts 'Exception occured before tracer service was initialized'
       end
-      puts '=' + ('-' * 118) + '='
+      puts "=#{'-' * 118}="
     end
   end
 end

@@ -7,14 +7,24 @@ AllCops:
     - 'app/tests.rb'
     - 'app/repl.rb'
 
+# Incompatible with x, y, etc
 Naming/MethodParameterName:
+  Enabled: false
+
+# This will complain about :my_image_1 used in SpriteRegistry
+# I don't really want to enforce a style here.
+Naming/VariableNumber:
+  Enabled: false
+
+# Doesn't seem to be a clean way to skip enforcing this for abstract classes
+Lint/MissingSuper:
   Enabled: false
 
 Metrics/ParameterLists:
   Enabled: false
 
 # A lot of this shit is blown up by assigning x/y/w/h/path/source_x/source_y etc all the damn time
-Metrics/MethodLength:
+Metrics/AbcSize:
   Max: 100
 
 Metrics/BlockLength:
@@ -26,53 +36,59 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 30
 
-Metrics/AbcSize:
+Metrics/MethodLength:
   Max: 100
 
 Metrics/PerceivedComplexity:
   Max: 10
 
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/FormatStringToken:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/IfInsideElse:
+  AllowIfModifier: true
+
+Style/RandomWithOffset:
+  Enabled: false
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: false
+
+Style/RedundantReturn:
   Enabled: false
 
 # Normally I like using double quotes but I think DR/mRuby can't hang
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 
-Style/RedundantReturn:
-  Enabled: false
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
 
-Style/IfInsideElse:
-  AllowIfModifier: true
-
-Style/FormatString:
-  EnforcedStyle: percent
-
-Style/GlobalVars:
-  Enabled: false
-
-Style/RandomWithOffset:
-  Enabled: false
-
-Style/FormatStringToken:
-  Enabled: false
-
-Layout/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
+Layout/HashAlignment:
+  EnforcedColonStyle: table
 
 # Ignoring comment lines due to YARD
 Layout/LineLength:
   Max: 120
   IgnoredPatterns: ['^ *# ']
 
-Layout/HashAlignment:
-  EnforcedColonStyle: table
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
 
 Layout/SpaceInsideArrayLiteralBrackets:
   Enabled: false
 
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
-
-Layout/FirstHashElementIndentation:
-  EnforcedStyle: consistent

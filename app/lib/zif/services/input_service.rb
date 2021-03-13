@@ -18,7 +18,6 @@ module Zif
     #
     # @see Zif::Clickable
     class InputService
-
       def initialize
         @last_mouse_bits = 0
         reset
@@ -43,8 +42,8 @@ module Zif
         @clickables << clickable
         @absorb_list << clickable if absorb_click || (clickable.respond_to?(:absorb_click?) && clickable.absorb_click?)
         @clickables.sort! do |a, b|
-          next 1 unless a&.respond_to?(:z_index)
-          next -1 unless b&.respond_to?(:z_index)
+          next 1 unless a.respond_to?(:z_index)
+          next -1 unless b.respond_to?(:z_index)
 
           b.z_index <=> a.z_index
         end
@@ -67,8 +66,8 @@ module Zif
         end
 
         @scrollables.sort! do |a, b|
-          next 1 unless a&.respond_to?(:z_index)
-          next -1 unless b&.respond_to?(:z_index)
+          next 1 unless a.respond_to?(:z_index)
+          next -1 unless b.respond_to?(:z_index)
 
           b.z_index <=> a.z_index
         end

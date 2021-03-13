@@ -8,7 +8,7 @@ module Zif
         left:   0,
         center: 1,
         right:  2
-      }
+      }.freeze
 
       # @return [Numeric] X axis position
       attr_accessor :x
@@ -50,7 +50,7 @@ module Zif
       # @param [Integer] g {g}
       # @param [Integer] b {b}
       # @param [Integer] a {a}
-      def initialize(text="", size: -1, alignment: :left, font: "font.tff", ellipsis: "…", r: 51, g: 51, b: 51, a: 255)
+      def initialize(text='', size: -1, alignment: :left, font: 'font.tff', ellipsis: '…', r: 51, g: 51, b: 51, a: 255)
         @text = text
         @full_text = text
         @size = size

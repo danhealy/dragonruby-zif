@@ -4,7 +4,6 @@ module Zif
   #
   # A mixin to allow assignment of sprite ivars using a hash
   module Assignable
-
     # rubocop:disable Metrics/PerceivedComplexity
 
     # Mass assignment of attributes for Sprite-like objects.

@@ -144,7 +144,6 @@ module Zif
         move(initial_x, initial_y)
       end
 
-
       # @return [Array<Integer>] +[w, h]+ The minimum width and height of the camera viewport, assuming fully zoomed in
       def min_view_rect
         [(@native_screen_width * @max_zoom_in).to_i, (@native_screen_height * @max_zoom_in).to_i]
@@ -160,12 +159,10 @@ module Zif
         [@cur_w, @cur_h]
       end
 
-      # @param [Block] _block The block to execute on each element of {layers}
+      # @param [Block] block The block to execute on each element of {layers}
       # @return [Enumerator] Iterate over each element of {layers}
-      def each_layer(&_block)
-        @layers.each do |layer|
-          yield layer
-        end
+      def each_layer(&block)
+        @layers.each(&block)
       end
 
       # To support Actions being run on pos_x and pos_y (clamped):
@@ -297,7 +294,6 @@ module Zif
       def pos
         [@pos_x, @pos_y]
       end
-
 
       # Calculates the difference between +[{cur_w}/2, {cur_h}/2]+ and +from+
       # @param [Array<Float>] from +[x, y]+, defaults to {pos}

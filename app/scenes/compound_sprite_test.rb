@@ -6,6 +6,7 @@ module ExampleApp
 
     attr_accessor :compound_sprite
 
+    # rubocop:disable Metrics/AbcSize
     def initialize
       super
       @tracer_service_name = :tracer
@@ -69,7 +70,7 @@ module ExampleApp
         )
 
         dragon.new_basic_animation(
-          named: :fly,
+          named:               :fly,
           paths_and_durations: 1.upto(4).map { |i| ["dragon_#{i}", 4] } + 3.downto(2).map { |i| ["dragon_#{i}", 4] }
         )
 
@@ -84,17 +85,9 @@ module ExampleApp
 
       50.times do |i|
         _wait, layer = i.divmod(10)
-        pixie = $game.services[:sprite_registry].construct(:white_1).tap do |s|
+        pixie = Pixie.new.tap do |s|
           s.x = lead_dragon.x
           s.y = lead_dragon.y
-          s.w = 10
-          s.h = 10
-          s.source_x = 0
-          s.source_y = 0
-          s.source_w = 10
-          s.source_h = 10
-          s.a = 0
-          s.r, s.g, s.b = Zif.rand_rgb(100, 255)
         end
 
         # Start spraying
@@ -150,6 +143,7 @@ module ExampleApp
         )
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def prepare_scene
       super
@@ -194,13 +188,13 @@ module ExampleApp
       pix.y = @dragons[idx].center_y - 10
       pix.a = 50
       pix.run_action(pix.new_action(
-                {
-                  x:     pix.x + ((rand(100) + 20) * dir),
-                  angle: rand(360 * 5)
-                },
-                duration: 2.seconds,
-                easing: :smooth_stop5
-              ))
+                       {
+                         x:     pix.x + ((rand(100) + 20) * dir),
+                         angle: rand(360 * 5)
+                       },
+                       duration: 2.seconds,
+                       easing:   :smooth_stop5
+                     ))
       pix.run_action(pix.new_action({y: pix.y + Zif.relative_rand(50)}, duration: 2.seconds, easing: :smooth_stop5))
       pix.run_action(
         pix.fade_out(rand.seconds) do

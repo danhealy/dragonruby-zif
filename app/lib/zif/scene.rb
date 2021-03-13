@@ -75,17 +75,14 @@ module Zif
       raise "Zif::Scene#perform_tick: Please override #perform_tick for #{self.class}"
     end
 
-
     # Optional - Your scene can use this for setup code before the scene is displayed.
     # You could register sprites with input service, etc.
     # @return [void] N/A - Ignored by {Zif::Game}
-    def prepare_scene
-    end
+    def prepare_scene; end
 
     # Optional - Your scene can use this for tear-down code when the scene is being transitioned away.
     # You could reset input service clickables, etc
     # @return [void] N/A - Ignored by {Zif::Game}
-    def unload_scene
-    end
+    def unload_scene; end
   end
 end

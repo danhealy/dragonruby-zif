@@ -131,8 +131,8 @@ module Zif
           Zif::Layers::SimpleLayer.new(
             self,
             name,
-            z_index: @z_index,
-            render_only_visible: render_only_visible,
+            z_index:                  @z_index,
+            render_only_visible:      render_only_visible,
             clear_sprites_after_draw: clear_sprites_after_draw
           )
         )

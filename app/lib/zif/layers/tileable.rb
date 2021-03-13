@@ -41,7 +41,7 @@ module Zif
         # puts "#{@layer_name}: Tileable#add_positioned_sprite #{logical_x} #{logical_y}"
         # puts "#{@sprites.class.to_s}"
         @sprites[tile_pos_to_sprite_index(logical_x, logical_y)] = position_sprite(
-          sprite: sprite,
+          sprite:    sprite,
           logical_x: logical_x,
           logical_y: logical_y
         )

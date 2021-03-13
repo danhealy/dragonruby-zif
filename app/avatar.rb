@@ -19,6 +19,7 @@ module ExampleApp
     WALK_SPEED = 8
 
     def initialize(proto, x=0, y=0, max_x=1280, max_y=720)
+      super()
       assign(proto.to_h)
       stop_walking
 
@@ -31,7 +32,7 @@ module ExampleApp
       @map_bounds = [[0, 0], Zif.sub_positions([@max_x, @max_y], wh)]
 
       new_basic_animation(
-        named: :fly,
+        named:               :fly,
         paths_and_durations: [1, 2, 3, 4, 3, 2].map { |i| ["dragon_#{i}", 4] }
       )
     end
@@ -68,7 +69,7 @@ module ExampleApp
           y: @moving_to[1]
         },
         duration: duration,
-        easing: :smooth_stop
+        easing:   :smooth_stop
       ) { stop_walking }
 
       run_action(@movement_action)

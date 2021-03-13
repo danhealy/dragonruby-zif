@@ -15,7 +15,6 @@ module Zif
     #
     # Turn on running average calculation by setting {measure_averages} to +true+
     class TickTraceService
-
       # @return [Float] Time, in seconds.  A trace report is generated if your tick takes longer than this amount.
       attr_accessor :time_threshold
 

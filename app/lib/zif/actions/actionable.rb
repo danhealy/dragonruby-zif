@@ -4,7 +4,6 @@ module Zif
     #
     # A mixin to facilitate {Zif::Actions::Action}s and {Zif::Actions::Sequence}s running on this object
     module Actionable
-
       # @return [Array<Zif::Actions::Action, Zif::Actions::Sequence>] The list of running {Zif::Actions::Action}s and {Zif::Actions::Sequence}s
       attr_reader :actions
 
@@ -89,7 +88,6 @@ module Zif
       def fade_out(duration=3.seconds, &block)
         new_action({a: 0}, duration: duration, &block)
       end
-
 
       # Example factory
       # Returns a new {Zif::Actions::Action} which eases the sprite's +a+ alpha to +255+ over +duration+

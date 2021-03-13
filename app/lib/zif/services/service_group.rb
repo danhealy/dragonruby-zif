@@ -9,7 +9,6 @@ module Zif
     # @example Invoke a method on the {Zif::Services::TickTraceService} via the ServiceGroup instance on a {Zif::Game}
     #   $game.services[:tracer].mark("Hello World")
     class ServiceGroup
-
       # @return [Array<Zif::Services>] The registered services.
       attr_reader :services
 

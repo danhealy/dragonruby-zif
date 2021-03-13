@@ -18,6 +18,9 @@ module Zif
       #   using +attr_accessor+, or manually defined e.g. +def x=(new_x)+ ..
       attr_accessor :finish
 
+      # @return [Object] An object being followed.  Reset {finish} based on this object's values each tick.
+      attr_accessor :follow
+
       # @return [Proc] A callback to run at the end of the action
       attr_accessor :callback
 
@@ -118,17 +121,30 @@ module Zif
       #
       #   (+:key+ getter and +:key=+ setter, as you get with an +attr_accessor+, but could also be defined manually.
       #   See {Zif::Layers::Camera#pos_x=} for an example of a manually defined Actionable attribute)
+      # @param [Object] follow Another object to follow.  The finish condition will be reset each tick by the follow
+      #   object's value for the provided keys.
       # @param [Numeric] duration
       # @param [Symbol] easing (see {Action::EASING_FUNCS})
       # @param [Symbol] rounding (see {Action::ROUNDING_FUNCS})
       # @param [Integer, Symbol] repeat (see {Action::REPEAT_NAMES} for valid symbols)
       # @param [Block] block Callback to perform when action completes
-      def initialize(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &block)
+      # rubocop:disable Metrics/PerceivedComplexity
+      def initialize(
+        node,
+        finish,
+        follow:   nil,
+        duration: 1.second,
+        easing:   :linear,
+        rounding: :round,
+        repeat:   1,
+        &block
+      )
         unless node.is_a? Zif::Actions::Actionable
           raise ArgumentError, "Invalid node: #{node}, expected a Zif::Actions::Actionable"
         end
 
         @node = node
+        @follow = follow
 
         unless EASING_FUNCS.include? easing
           raise ArgumentError, "Invalid easing function: '#{easing}'.  Must be in #{EASING_FUNCS}"
@@ -143,10 +159,25 @@ module Zif
         @rounding = rounding
 
         @start = {}
-        finish.keys.each do |key|
+        finish.each_key do |key|
           [key, "#{key}="].each do |req_meth|
             unless @node.respond_to?(req_meth)
-              raise ArgumentError, "Invalid finish condition: #{@node} doesn't have '##{req_meth}'"
+              raise ArgumentError, "Invalid finish condition: #{@node} doesn't have a method named '##{req_meth}'"
+            end
+          end
+        end
+
+        if @follow
+          finish.each do |key, val|
+            unless val.is_a? Symbol
+              raise ArgumentError, "You provided an object to follow.  A Symbol was expected instead of '#{val}' " \
+                                   "(#{val.class}) for the key-value pair (#{key}: #{val}) in the finish condition. " \
+                                   'Action needs this symbol to be the name of a method on the ' \
+                                   "followed object (#{@follow.class})"
+            end
+            unless @follow.respond_to?(val)
+              raise ArgumentError, "You provided an object to follow, but it doesn't respond to " \
+                                   "'##{val}' (for finish '#{key}')"
             end
           end
         end
@@ -163,11 +194,12 @@ module Zif
         # puts "Action: #{@start} -> #{@finish} in #{@duration} using #{@easing}.  Block present? #{block_given?}"
         reset_duration
       end
+      # rubocop:enable Metrics/PerceivedComplexity
 
       # Recalculates the start conditions for the action based on node state.  Easing is calculated as difference
       # between start and finish conditions over time.
       def reset_start
-        @finish.keys.each do |key|
+        @finish.each_key do |key|
           @start[key] = @node.send(key)
         end
       end
@@ -189,7 +221,7 @@ module Zif
 
       # @return [Boolean] True if {progress} is 1.0
       def iteration_complete?
-        progress == 1.0
+        progress >= 1.0
       end
 
       # @return [Boolean] True if there are no more {repeat}s left on this action
@@ -208,13 +240,14 @@ module Zif
       def perform_tick
         @dirty = false
         @finish.each do |key, val|
+          target = @follow ? @follow.send(val) : val
           start = @node.send(key)
           # puts "  easing #{key} #{start} -> #{val}"
           if start.is_a? Numeric
-            change_to = ease(@start[key], val)
+            change_to = ease(@start[key], target)
             change_to = change_to.send(@rounding) unless @rounding == :none
           else
-            change_to = val
+            change_to = target
           end
           @dirty = true if start != change_to
 
@@ -240,9 +273,7 @@ module Zif
       # @return [Numeric] Returns a value between +start_val+ and +finish_val+ based on function specified by {easing}
       # @api private
       def ease(start_val, finish_val)
-        ret = ((finish_val - start_val) * send(@easing)) + start_val
-        # puts "Action#ease: #{start_val} -> #{@easing} (#{self.send(@easing)}) -> #{finish_val} = #{ret}"
-        ret
+        ((finish_val - start_val) * send(@easing)) + start_val
       end
 
       # Calls {callback} with self
