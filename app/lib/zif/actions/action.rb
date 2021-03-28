@@ -129,6 +129,7 @@ module Zif
       # @param [Integer, Symbol] repeat (see {Action::REPEAT_NAMES} for valid symbols)
       # @param [Block] block Callback to perform when action completes
       # rubocop:disable Metrics/PerceivedComplexity
+      # rubocop:disable Layout/LineLength
       def initialize(
         node,
         finish,
@@ -170,14 +171,10 @@ module Zif
         if @follow
           finish.each do |key, val|
             unless val.is_a? Symbol
-              raise ArgumentError, "You provided an object to follow.  A Symbol was expected instead of '#{val}' " \
-                                   "(#{val.class}) for the key-value pair (#{key}: #{val}) in the finish condition. " \
-                                   'Action needs this symbol to be the name of a method on the ' \
-                                   "followed object (#{@follow.class})"
+              raise ArgumentError, "You provided an object to follow. A Symbol was expected instead of '#{val}' (#{val.class}) for the key-value pair (#{key}: #{val}) in the finish condition. Action needs this symbol to be the name of a method on the followed object (#{@follow.class})"
             end
             unless @follow.respond_to?(val)
-              raise ArgumentError, "You provided an object to follow, but it doesn't respond to " \
-                                   "'##{val}' (for finish '#{key}')"
+              raise ArgumentError, "You provided an object to follow, but it doesn't respond to '##{val}' (for finish '#{key}')"
             end
           end
         end
@@ -195,6 +192,7 @@ module Zif
         reset_duration
       end
       # rubocop:enable Metrics/PerceivedComplexity
+      # rubocop:enable Layout/LineLength
 
       # Recalculates the start conditions for the action based on node state.  Easing is calculated as difference
       # between start and finish conditions over time.
