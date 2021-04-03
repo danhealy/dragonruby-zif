@@ -161,30 +161,28 @@ module Zif
       # Converts this label into a list of new labels for individual lines which can fit inside the given width.
       # @param [Integer] width The maximum width per line
       # @return [Array<Zif::UI::Label] An array of new labels for this text
-      def wrap(width, indent: "")
-        return [self] unless @full_text.length > 0
+      def wrap(width, indent: '')
+        return [self] unless @full_text.length.positive?
 
-        words = @full_text.gsub("\\", "").gsub("\n", "\\n").split(" ")
+        words = @full_text.gsub('\\', '').gsub("\n", '\\n').split(' ')
         new_labels = []
-        cur_label = self.dup
-        cur_label.text = ""
+        cur_label = dup
+        cur_label.text = ''
 
         while words.any?
           cur_word = words.shift
 
           # If this word contains newlines, split into new words and add the extras back to 'words'
           lines = cur_word.split("\n")
-          if lines.length > 0
-            words.unshift(*lines[1..-1])
-          end
+          words.unshift(*lines[1..-1]) if lines.length.positive?
           cur_word = lines[0]
 
           existing_text = cur_label.text
-          cur_label.text = existing_text + (existing_text == "" ? "" : " ") + cur_word
+          cur_label.text = existing_text + (existing_text == '' ? '' : ' ') + cur_word
           cur_label.recalculate_minimums
           cur_rect = cur_label.rect
           if cur_rect[0] > width
-            if existing_text == ""
+            if existing_text == ''
               # One really long word.
               cur_label.truncate(width)
             else
@@ -193,7 +191,7 @@ module Zif
               new_labels << cur_label
               old_y = cur_label.y
 
-              cur_label = self.dup
+              cur_label = dup
               cur_label.text = indent + cur_word
               cur_label.recalculate_minimums
               cur_label.truncate(width)

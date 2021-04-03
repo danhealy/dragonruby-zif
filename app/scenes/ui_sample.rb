@@ -21,6 +21,7 @@ module ExampleApp
     # This is a good spot to set up services, and manually control the global $gtk.args.outputs
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Layout/LineLength
     def prepare_scene
       super
       mark('#prepare_scene: begin')
@@ -56,8 +57,8 @@ module ExampleApp
       @cutout.y = 60 + 25
 
       @wrapping_label = FutureLabel.new(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        size: -2,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        size:      -2,
         alignment: :left
       ).tap do |l|
         l.x = @cutout.x + 10
@@ -231,6 +232,7 @@ module ExampleApp
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Layout/LineLength
 
     def change_color
       @cur_color = %i[blue green red white yellow].sample
