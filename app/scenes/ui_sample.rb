@@ -55,6 +55,19 @@ module ExampleApp
       @cutout.x = 60 + 25
       @cutout.y = 60 + 25
 
+      @wrapping_label = FutureLabel.new(
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        size: -2,
+        alignment: :left
+      ).tap do |l|
+        l.x = @cutout.x + 10
+        l.y = @cutout.y + @cutout.h - 10
+        l.r = 0
+        l.g = 0
+        l.b = 0
+        l.a = 255
+      end
+
       # -------------------------------------------------------------------------
       # Progress bars
       @count_progress = ProgressBar.new(:count_progress, 400, 0, @cur_color)
@@ -266,6 +279,8 @@ module ExampleApp
       if (cur_w > 75) && (cur_h > 120)
         @cutout.show
         @cutout.resize(cur_w - 50, cur_h - 100)
+        @wrapping_label.y = @cutout.y + @cutout.h - 10
+        $gtk.args.outputs.labels << @wrapping_label.wrap(@cutout.w - 20).take((@cutout.h - 20).idiv(18))
       else
         @cutout.hide
       end
