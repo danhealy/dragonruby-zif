@@ -173,12 +173,12 @@
         
         <p>Zif is a collection of features commonly required in 2D games.  The name is a reference to <a href="https://console5.com/wiki/Improving_NES-001_Reliability">Zero Insertion Force connectors used on the original Nintendo</a> - You can drop it in your project and it should just work.  Everything is namespaced to <code class="language-plaintext highlighter-rouge">Zif</code> so any existing classes or namespaces you have should be preserved.</p>
 
-<p>This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class level documentation - e.g. <code class="language-plaintext highlighter-rouge">Zif::Sprite</code>.</p>
+<p>This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class API level documentation - e.g. <a href="https://danhealy.github.io/dragonruby-zif/docs/Zif/Sprite.html"><code class="language-plaintext highlighter-rouge">Zif::Sprite</code></a>.</p>
 
 <p><strong>The best version of this README is available here:</strong>
 <a href="https://danhealy.github.io/dragonruby-zif/">https://danhealy.github.io/dragonruby-zif/</a></p>
 
-<p>API documentation is available at <a href="https://danhealy.github.io/dragonruby-zif/docs/">https://danhealy.github.io/dragonruby-zif/docs/</a></p>
+<p>Full API documentation is available at <a href="https://danhealy.github.io/dragonruby-zif/docs/">https://danhealy.github.io/dragonruby-zif/docs/</a></p>
 
 <h2 id="example-app">Example App</h2>
 <p>This repo is an example app showcasing the major features - the <code class="language-plaintext highlighter-rouge">Zif</code> library itself is entirely contained within the <code class="language-plaintext highlighter-rouge">app/lib</code> directory.</p>
@@ -368,7 +368,9 @@
 
 <h3 id="zifscene"><code class="language-plaintext highlighter-rouge">Zif::Scene</code></h3>
 
-<p>A <code class="language-plaintext highlighter-rouge">Scene</code> is a full-screen view of your game.  The concept in <code class="language-plaintext highlighter-rouge">Zif::Game</code> is to show one <code class="language-plaintext highlighter-rouge">Scene</code> at a time.  So each <code class="language-plaintext highlighter-rouge">Scene</code> in your game should be a subclass of <code class="language-plaintext highlighter-rouge">Zif::Scene</code> which overrides <code class="language-plaintext highlighter-rouge">Zif::Scene#perform_tick</code>.  Using the structure in <code class="language-plaintext highlighter-rouge">Zif::Game</code>, <code class="language-plaintext highlighter-rouge">#perform_tick</code> comes after input handling and before updating <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code>s.  So your subclass should use <code class="language-plaintext highlighter-rouge">#perform_tick</code> to add/remove <code class="language-plaintext highlighter-rouge">Zif::Clickable</code>s/<code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code>s, and respond to any detected input.  Switching scenes is handled in <code class="language-plaintext highlighter-rouge">Zif::Game</code>, based on the return value of <code class="language-plaintext highlighter-rouge">#perform_tick</code>.  You can optionally define <code class="language-plaintext highlighter-rouge">Zif::Scene#prepare_scene</code> - a method invoked prior to the first tick it becomes the active scene, and <code class="language-plaintext highlighter-rouge">Zif::Scene#unload_scene</code> which is invoked after the Scene has been switched out.</p>
+<p>A <code class="language-plaintext highlighter-rouge">Scene</code> is a full-screen view of your game.  The concept in <code class="language-plaintext highlighter-rouge">Zif::Game</code> is to show one <code class="language-plaintext highlighter-rouge">Scene</code> at a time.  So each <code class="language-plaintext highlighter-rouge">Scene</code> in your game should be a subclass of <code class="language-plaintext highlighter-rouge">Zif::Scene</code> which overrides <code class="language-plaintext highlighter-rouge">Zif::Scene#perform_tick</code>.  Using the structure in <code class="language-plaintext highlighter-rouge">Zif::Game</code>, <code class="language-plaintext highlighter-rouge">#perform_tick</code> comes after input handling and before updating <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code>s.  So your subclass should use <code class="language-plaintext highlighter-rouge">#perform_tick</code> to add/remove <code class="language-plaintext highlighter-rouge">Zif::Clickable</code>s/<code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code>s, and respond to any detected input.  Switching scenes is handled in <code class="language-plaintext highlighter-rouge">Zif::Game</code>, based on the return value of <code class="language-plaintext highlighter-rouge">#perform_tick</code>.</p>
+
+<p>You can optionally define <code class="language-plaintext highlighter-rouge">Zif::Scene#prepare_scene</code> - a method invoked prior to the first tick it becomes the active scene, and <code class="language-plaintext highlighter-rouge">Zif::Scene#unload_scene</code> which is invoked after the Scene has been switched out.</p>
 
 <p><strong>Example usage:</strong></p>
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">OpeningScene</span> <span class="o">&lt;</span> <span class="no">Zif</span><span class="o">::</span><span class="no">Scene</span>
@@ -426,8 +428,7 @@
 <p>Inspried by <a href="https://developer.apple.com/documentation/spritekit/skaction">SpriteKit’s Actions</a> and <a href="https://www.youtube.com/watch?v=mr5xkf6zSzk">Squirrel Eiserloh’s GDC talk on nonlinear transformations</a>.</p>
 
 <h3 id="zifactionsaction--zifactionsactionable"><code class="language-plaintext highlighter-rouge">Zif::Actions::Action</code> &amp; <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code></h3>
-<p>ß
-An Action is a transition of a set of attributes over time using an easing function (aka tweening, easing).</p>
+<p>An Action is a transition of a set of attributes over time using an easing function (aka tweening, easing).</p>
 
 <p>Your objects can accept Actions by mixing in <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code> and calling the <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable#run_action</code> method.  You can specify the number of times the Action should be repeated, and set a callback for when the Action is finished.</p>
 
@@ -439,7 +440,7 @@ An Action is a transition of a set of attributes over time using an easing funct
 <span class="c1"># starting slowly, then flip the sprite at the end.  Note that starting</span>
 <span class="c1"># position is just taken from the current state of @dragon rather than</span>
 <span class="c1"># specified.</span>
-<span class="vi">@dragon</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+<span class="vi">@dragon</span><span class="p">.</span><span class="nf">run_action</span><span class="p">(</span>
   <span class="vi">@dragon</span><span class="p">.</span><span class="nf">new_action</span><span class="p">({</span><span class="ss">x: </span><span class="mi">1000</span><span class="p">},</span> <span class="ss">duration: </span><span class="mi">1</span><span class="p">.</span><span class="nf">seconds</span><span class="p">,</span> <span class="ss">easing: :smooth_start</span><span class="p">)</span> <span class="k">do</span>
     <span class="vi">@dragon</span><span class="p">.</span><span class="nf">flip_horizontally</span> <span class="o">=</span> <span class="kp">true</span>
   <span class="k">end</span>
@@ -450,13 +451,13 @@ An Action is a transition of a set of attributes over time using an easing funct
 
 <p>Take a look at the code for <code class="language-plaintext highlighter-rouge">@dragon</code> inside <code class="language-plaintext highlighter-rouge">ExampleApp::UISample</code> for a simple working example.</p>
 
-<p>More complicated examples can be seen in <code class="language-plaintext highlighter-rouge">ExampleApp::World</code> - The dragon is using Actions to move across the map, and the map itself is panning to track the dragon using Actions.</p>
+<p>More complicated examples can be seen in <code class="language-plaintext highlighter-rouge">ExampleApp::World</code> - The dragon is using Actions to move across the map, and the map itself is panning to track the dragon using Actions.  The <code class="language-plaintext highlighter-rouge">ExampleApp::Pixie</code> class demonstrates using the <code class="language-plaintext highlighter-rouge">follow:</code> param to set the finish condition based on another object.</p>
 
 <h3 id="zifactionssequence"><code class="language-plaintext highlighter-rouge">Zif::Actions::Sequence</code></h3>
 <p>A Sequence is a series of <code class="language-plaintext highlighter-rouge">Zif::Actions::Action</code> to be run in order.  Behaves like an Action, you run it using the same <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable#run_action</code> method.  You can specify the number of times the sequence should be repeated, and set a callback for when the sequence is finished.</p>
 
 <p><strong>Example usage:</strong></p>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="vi">@dragon</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="vi">@dragon</span><span class="p">.</span><span class="nf">run_action</span><span class="p">(</span>
   <span class="no">Zif</span><span class="o">::</span><span class="no">Sequence</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
     <span class="p">[</span>
       <span class="c1"># Move from starting position to 1000x over 1 second, starting slowly,</span>
@@ -625,9 +626,11 @@ An Action is a transition of a set of attributes over time using an easing funct
 <p>Simple UI components. Examples for these classes exist in <code class="language-plaintext highlighter-rouge">ExampleApp::UISample</code>.</p>
 
 <h3 id="zifuilabel"><code class="language-plaintext highlighter-rouge">Zif::UI::Label</code></h3>
-<p>A wrapper for the <code class="language-plaintext highlighter-rouge">label</code> DRGTK primitive: displaying text using a font, size, alignment, color. Includes <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code>!  Supports text truncation by calculating it’s own width.</p>
+<p>A wrapper for the <code class="language-plaintext highlighter-rouge">label</code> DRGTK primitive: displaying text using a font, size, alignment, color. Includes <code class="language-plaintext highlighter-rouge">Zif::Actions::Actionable</code>!  Supports text truncation by calculating it’s own width, and supports word wrapping.</p>
 
 <p>See the documentation for details: <a href="https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/Label.html"><code class="language-plaintext highlighter-rouge">Zif::UI::Label</code></a></p>
+
+<p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/resize_word_wrap.gif?raw=true" alt="" /></p>
 
 <h3 id="zifuitwostagebutton"><code class="language-plaintext highlighter-rouge">Zif::UI::TwoStageButton</code></h3>
 <p>This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.</p>

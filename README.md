@@ -460,9 +460,11 @@ A working example is available in `ExampleApp::World`.
 Simple UI components. Examples for these classes exist in `ExampleApp::UISample`.
 
 ### `Zif::UI::Label`
-A wrapper for the `label` DRGTK primitive: displaying text using a font, size, alignment, color. Includes `Zif::Actions::Actionable`!  Supports text truncation by calculating it's own width.
+A wrapper for the `label` DRGTK primitive: displaying text using a font, size, alignment, color. Includes `Zif::Actions::Actionable`!  Supports text truncation by calculating it's own width, and supports word wrapping.
 
 See the documentation for details: [`Zif::UI::Label`](https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/Label.html)
+
+![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/resize_word_wrap.gif?raw=true)
 
 ### `Zif::UI::TwoStageButton`
 This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.

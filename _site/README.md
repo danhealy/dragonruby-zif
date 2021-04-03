@@ -2,12 +2,12 @@
 
 Zif is a collection of features commonly required in 2D games.  The name is a reference to [Zero Insertion Force connectors used on the original Nintendo](https://console5.com/wiki/Improving_NES-001_Reliability) - You can drop it in your project and it should just work.  Everything is namespaced to `Zif` so any existing classes or namespaces you have should be preserved.
 
-This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class level documentation - e.g. `Zif::Sprite`.
+This readme contains a basic overview of the functionality.  If you are looking for more detail, please check the class API level documentation - e.g. [`Zif::Sprite`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Sprite.html).
 
 **The best version of this README is available here:**
 [https://danhealy.github.io/dragonruby-zif/](https://danhealy.github.io/dragonruby-zif/)
 
-API documentation is available at [https://danhealy.github.io/dragonruby-zif/docs/](https://danhealy.github.io/dragonruby-zif/docs/)
+Full API documentation is available at [https://danhealy.github.io/dragonruby-zif/docs/](https://danhealy.github.io/dragonruby-zif/docs/)
 
 ## Example App
 This repo is an example app showcasing the major features - the `Zif` library itself is entirely contained within the `app/lib` directory.
@@ -196,7 +196,9 @@ See `ExampleApp::ZifExample` for a working example.
 
 ### `Zif::Scene`
 
-A `Scene` is a full-screen view of your game.  The concept in `Zif::Game` is to show one `Scene` at a time.  So each `Scene` in your game should be a subclass of `Zif::Scene` which overrides `Zif::Scene#perform_tick`.  Using the structure in `Zif::Game`, `#perform_tick` comes after input handling and before updating `Zif::Actions::Actionable`s.  So your subclass should use `#perform_tick` to add/remove `Zif::Clickable`s/`Zif::Actions::Actionable`s, and respond to any detected input.  Switching scenes is handled in `Zif::Game`, based on the return value of `#perform_tick`.  You can optionally define `Zif::Scene#prepare_scene` - a method invoked prior to the first tick it becomes the active scene, and `Zif::Scene#unload_scene` which is invoked after the Scene has been switched out.
+A `Scene` is a full-screen view of your game.  The concept in `Zif::Game` is to show one `Scene` at a time.  So each `Scene` in your game should be a subclass of `Zif::Scene` which overrides `Zif::Scene#perform_tick`.  Using the structure in `Zif::Game`, `#perform_tick` comes after input handling and before updating `Zif::Actions::Actionable`s.  So your subclass should use `#perform_tick` to add/remove `Zif::Clickable`s/`Zif::Actions::Actionable`s, and respond to any detected input.  Switching scenes is handled in `Zif::Game`, based on the return value of `#perform_tick`.
+
+You can optionally define `Zif::Scene#prepare_scene` - a method invoked prior to the first tick it becomes the active scene, and `Zif::Scene#unload_scene` which is invoked after the Scene has been switched out.
 
 **Example usage:**
 ```ruby
@@ -255,7 +257,6 @@ See `ExampleApp::ZifExampleScene` for a working example - this scene class is sh
 Inspried by [SpriteKit's Actions](https://developer.apple.com/documentation/spritekit/skaction) and [Squirrel Eiserloh's GDC talk on nonlinear transformations](https://www.youtube.com/watch?v=mr5xkf6zSzk).
 
 ### `Zif::Actions::Action` & `Zif::Actions::Actionable`
-ß
 An Action is a transition of a set of attributes over time using an easing function (aka tweening, easing).
 
 Your objects can accept Actions by mixing in `Zif::Actions::Actionable` and calling the `Zif::Actions::Actionable#run_action` method.  You can specify the number of times the Action should be repeated, and set a callback for when the Action is finished.
@@ -269,7 +270,7 @@ An Actionable can have several Actions running simultaneously, and they can be s
 # starting slowly, then flip the sprite at the end.  Note that starting
 # position is just taken from the current state of @dragon rather than
 # specified.
-@dragon.run(
+@dragon.run_action(
   @dragon.new_action({x: 1000}, duration: 1.seconds, easing: :smooth_start) do
     @dragon.flip_horizontally = true
   end
@@ -280,14 +281,14 @@ See the documentation for details: [`Zif::Actions::Action`](https://danhealy.git
 
 Take a look at the code for `@dragon` inside `ExampleApp::UISample` for a simple working example.
 
-More complicated examples can be seen in `ExampleApp::World` - The dragon is using Actions to move across the map, and the map itself is panning to track the dragon using Actions.
+More complicated examples can be seen in `ExampleApp::World` - The dragon is using Actions to move across the map, and the map itself is panning to track the dragon using Actions.  The `ExampleApp::Pixie` class demonstrates using the `follow:` param to set the finish condition based on another object.
 
 ### `Zif::Actions::Sequence`
 A Sequence is a series of `Zif::Actions::Action` to be run in order.  Behaves like an Action, you run it using the same `Zif::Actions::Actionable#run_action` method.  You can specify the number of times the sequence should be repeated, and set a callback for when the sequence is finished.
 
 **Example usage:**
 ```ruby
-@dragon.run(
+@dragon.run_action(
   Zif::Sequence.new(
     [
       # Move from starting position to 1000x over 1 second, starting slowly,
@@ -459,9 +460,11 @@ A working example is available in `ExampleApp::World`.
 Simple UI components. Examples for these classes exist in `ExampleApp::UISample`.
 
 ### `Zif::UI::Label`
-A wrapper for the `label` DRGTK primitive: displaying text using a font, size, alignment, color. Includes `Zif::Actions::Actionable`!  Supports text truncation by calculating it's own width.
+A wrapper for the `label` DRGTK primitive: displaying text using a font, size, alignment, color. Includes `Zif::Actions::Actionable`!  Supports text truncation by calculating it's own width, and supports word wrapping.
 
 See the documentation for details: [`Zif::UI::Label`](https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/Label.html)
+
+![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/resize_word_wrap.gif?raw=true)
 
 ### `Zif::UI::TwoStageButton`
 This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.

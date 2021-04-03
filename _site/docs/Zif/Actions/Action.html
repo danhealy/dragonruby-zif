@@ -341,6 +341,33 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#follow-instance_method" title="#follow (instance method)">#<strong>follow</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An object being followed.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#repeat-instance_method" title="#repeat (instance method)">#<strong>repeat</strong>  &#x21d2; Numeric </a>
     
 
@@ -510,7 +537,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; Action </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(node, finish, follow: nil, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; Action </a>
     
 
     
@@ -527,7 +554,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of Action.</p>
+<p>rubocop:disable Metrics/PerceivedComplexity rubocop:disable Layout/LineLength.</p>
 </div></span>
   
 </li>
@@ -1113,7 +1140,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(node, finish, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Actions::Action (class)">Action</a></span></tt> 
+    #<strong>initialize</strong>(node, finish, follow: nil, duration: 1.second, easing: :linear, rounding: :round, repeat: 1, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::Actions::Action (class)">Action</a></span></tt> 
   
 
   
@@ -1132,7 +1159,7 @@
   </div>
 
 
-<p>Returns a new instance of Action.</p>
+<p>rubocop:disable Metrics/PerceivedComplexity rubocop:disable Layout/LineLength</p>
 
 
   </div>
@@ -1231,6 +1258,24 @@
   
     <li>
       
+        <span class='name'>follow</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Another object to follow.  The finish condition will be reset each tick by the follow object&#39;s value for the provided keys.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>duration</span>
       
       
@@ -1321,13 +1366,6 @@
       <pre class="lines">
 
 
-126
-127
-128
-129
-130
-131
-132
 133
 134
 135
@@ -1360,17 +1398,55 @@
 162
 163
 164
-165</pre>
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 133</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='comma'>,</span> <span class='id identifier rubyid_finish'>finish</span><span class='comma'>,</span> <span class='label'>duration:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_second'>second</span><span class='comma'>,</span> <span class='label'>easing:</span> <span class='symbol'>:linear</span><span class='comma'>,</span> <span class='label'>rounding:</span> <span class='symbol'>:round</span><span class='comma'>,</span> <span class='label'>repeat:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_node'>node</span><span class='comma'>,</span>
+  <span class='id identifier rubyid_finish'>finish</span><span class='comma'>,</span>
+  <span class='label'>follow:</span>   <span class='kw'>nil</span><span class='comma'>,</span>
+  <span class='label'>duration:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_second'>second</span><span class='comma'>,</span>
+  <span class='label'>easing:</span>   <span class='symbol'>:linear</span><span class='comma'>,</span>
+  <span class='label'>rounding:</span> <span class='symbol'>:round</span><span class='comma'>,</span>
+  <span class='label'>repeat:</span>   <span class='int'>1</span><span class='comma'>,</span>
+  <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+<span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Actions.html" title="Zif::Actions (module)">Actions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Actionable.html" title="Zif::Actions::Actionable (module)">Actionable</a></span></span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid node: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_node'>node</span><span class='embexpr_end'>}</span><span class='tstring_content'>, expected a Zif::Actions::Actionable</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 
   <span class='ivar'>@node</span> <span class='op'>=</span> <span class='id identifier rubyid_node'>node</span>
+  <span class='ivar'>@follow</span> <span class='op'>=</span> <span class='id identifier rubyid_follow'>follow</span>
 
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_easing'>easing</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid easing function: &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_easing'>easing</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;.  Must be in </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#EASING_FUNCS-constant" title="Zif::Actions::Action::EASING_FUNCS (constant)">EASING_FUNCS</a></span></span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -1385,10 +1461,21 @@
   <span class='ivar'>@rounding</span> <span class='op'>=</span> <span class='id identifier rubyid_rounding'>rounding</span>
 
   <span class='ivar'>@start</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_finish'>finish</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+  <span class='id identifier rubyid_finish'>finish</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
     <span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req_meth'>req_meth</span><span class='op'>|</span>
       <span class='kw'>unless</span> <span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_req_meth'>req_meth</span><span class='rparen'>)</span>
-        <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid finish condition: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@node</span><span class='embexpr_end'>}</span><span class='tstring_content'> doesn&#39;t have &#39;#</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_req_meth'>req_meth</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid finish condition: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@node</span><span class='embexpr_end'>}</span><span class='tstring_content'> doesn&#39;t have a method named &#39;#</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_req_meth'>req_meth</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='ivar'>@follow</span>
+    <span class='id identifier rubyid_finish'>finish</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='op'>|</span>
+      <span class='kw'>unless</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Symbol</span>
+        <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You provided an object to follow. A Symbol was expected instead of &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39; (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>) for the key-value pair (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_content'>) in the finish condition. Action needs this symbol to be the name of a method on the followed object (</span><span class='embexpr_beg'>#{</span><span class='ivar'>@follow</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+      <span class='kw'>unless</span> <span class='ivar'>@follow</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You provided an object to follow, but it doesn&#39;t respond to &#39;#</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39; (for finish &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;)</span><span class='tstring_end'>&quot;</span></span>
       <span class='kw'>end</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -1461,12 +1548,12 @@
       <pre class="lines">
 
 
-22
-23
-24</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback'>callback</span>
   <span class='ivar'>@callback</span>
@@ -1522,12 +1609,12 @@
       <pre class="lines">
 
 
-37
-38
-39</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dirty'>dirty</span>
   <span class='ivar'>@dirty</span>
@@ -1583,12 +1670,12 @@
       <pre class="lines">
 
 
-31
-32
-33</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_duration'>duration</span>
   <span class='ivar'>@duration</span>
@@ -1644,12 +1731,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_easing'>easing</span>
   <span class='ivar'>@easing</span>
@@ -1766,15 +1853,76 @@
       <pre class="lines">
 
 
-43
-44
-45</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_finish_early'>finish_early</span>
   <span class='ivar'>@finish_early</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="follow=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="follow-instance_method">
+  
+    #<strong>follow</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns An object being followed.  Reset <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span> based on this object&#39;s values each tick.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An object being followed.  Reset <span class='object_link'><a href="#finish-instance_method" title="Zif::Actions::Action#finish (method)">#finish</a></span> based on this object&#39;s values each tick.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_follow'>follow</span>
+  <span class='ivar'>@follow</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1827,12 +1975,12 @@
       <pre class="lines">
 
 
-28
-29
-30</pre>
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_repeat'>repeat</span>
   <span class='ivar'>@repeat</span>
@@ -1888,12 +2036,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rounding'>rounding</span>
   <span class='ivar'>@rounding</span>
@@ -2010,12 +2158,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started_at'>started_at</span>
   <span class='ivar'>@started_at</span>
@@ -2076,13 +2224,13 @@
       <pre class="lines">
 
 
-196
-197
-198
-199</pre>
+226
+227
+228
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete?'>complete?</span>
   <span class='comment'># puts &quot;Action#complete?: Action complete! #{self.inspect} #{@node.class}&quot; if @repeat.zero?
@@ -2125,12 +2273,12 @@
       <pre class="lines">
 
 
-280
-281
-282</pre>
+309
+310
+311</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 280</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 309</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mix'>mix</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2214,19 +2362,15 @@
       <pre class="lines">
 
 
-242
-243
-244
-245
-246</pre>
+273
+274
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 242</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 273</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='id identifier rubyid_start_val'>start_val</span><span class='comma'>,</span> <span class='id identifier rubyid_finish_val'>finish_val</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_finish_val'>finish_val</span> <span class='op'>-</span> <span class='id identifier rubyid_start_val'>start_val</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='ivar'>@easing</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_start_val'>start_val</span>
-  <span class='comment'># puts &quot;Action#ease: #{start_val} -&gt; #{@easing} (#{self.send(@easing)}) -&gt; #{finish_val} = #{ret}&quot;
-</span>  <span class='id identifier rubyid_ret'>ret</span>
+  <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_finish_val'>finish_val</span> <span class='op'>-</span> <span class='id identifier rubyid_start_val'>start_val</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='ivar'>@easing</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_start_val'>start_val</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2259,12 +2403,12 @@
       <pre class="lines">
 
 
-181
-182
-183</pre>
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 181</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_finish_early!'>finish_early!</span>
   <span class='ivar'>@finish_early</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -2306,12 +2450,12 @@
       <pre class="lines">
 
 
-270
-271
-272</pre>
+299
+300
+301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 270</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 299</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_x'>x</span>
@@ -2353,12 +2497,12 @@
       <pre class="lines">
 
 
-260
-261
-262</pre>
+289
+290
+291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_immediate'>immediate</span><span class='lparen'>(</span><span class='id identifier rubyid__x'>_x</span><span class='rparen'>)</span>
   <span class='float'>1.0</span>
@@ -2412,15 +2556,15 @@
       <pre class="lines">
 
 
-191
-192
-193</pre>
+221
+222
+223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 221</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_iteration_complete?'>iteration_complete?</span>
-  <span class='id identifier rubyid_progress'>progress</span> <span class='op'>==</span> <span class='float'>1.0</span>
+  <span class='id identifier rubyid_progress'>progress</span> <span class='op'>&gt;=</span> <span class='float'>1.0</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2459,12 +2603,12 @@
       <pre class="lines">
 
 
-265
-266
-267</pre>
+294
+295
+296</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 294</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_linear'>linear</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span>
@@ -2506,12 +2650,12 @@
       <pre class="lines">
 
 
-275
-276
-277</pre>
+304
+305
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 304</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mix'>mix</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='symbol'>:linear</span><span class='comma'>,</span> <span class='id identifier rubyid_rate'>rate</span><span class='op'>=</span><span class='float'>0.5</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='int'>1</span> <span class='op'>-</span> <span class='id identifier rubyid_rate'>rate</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_rate'>rate</span> <span class='op'>*</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -2551,13 +2695,13 @@
       <pre class="lines">
 
 
-250
-251
-252
-253</pre>
+279
+280
+281
+282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 250</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 279</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_callback'>perform_callback</span>
   <span class='comment'># puts &quot;Action#perform_callback: Callback triggered&quot;
@@ -2616,49 +2760,51 @@
       <pre class="lines">
 
 
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236</pre>
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 238</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
   <span class='ivar'>@dirty</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='ivar'>@finish</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='op'>|</span>
+    <span class='id identifier rubyid_target'>target</span> <span class='op'>=</span> <span class='ivar'>@follow</span> <span class='op'>?</span> <span class='ivar'>@follow</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_val'>val</span>
     <span class='id identifier rubyid_start'>start</span> <span class='op'>=</span> <span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
     <span class='comment'># puts &quot;  easing #{key} #{start} -&gt; #{val}&quot;
 </span>    <span class='kw'>if</span> <span class='id identifier rubyid_start'>start</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Numeric</span>
-      <span class='id identifier rubyid_change_to'>change_to</span> <span class='op'>=</span> <span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='ivar'>@start</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_change_to'>change_to</span> <span class='op'>=</span> <span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='ivar'>@start</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_target'>target</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_change_to'>change_to</span> <span class='op'>=</span> <span class='id identifier rubyid_change_to'>change_to</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='ivar'>@rounding</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@rounding</span> <span class='op'>==</span> <span class='symbol'>:none</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_change_to'>change_to</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+      <span class='id identifier rubyid_change_to'>change_to</span> <span class='op'>=</span> <span class='id identifier rubyid_target'>target</span>
     <span class='kw'>end</span>
     <span class='ivar'>@dirty</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_start'>start</span> <span class='op'>!=</span> <span class='id identifier rubyid_change_to'>change_to</span>
 
@@ -2727,12 +2873,12 @@
       <pre class="lines">
 
 
-186
-187
-188</pre>
+216
+217
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 186</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 216</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progress'>progress</span>
   <span class='ivar'>@finish_early</span> <span class='op'>?</span> <span class='float'>1.0</span> <span class='op'>:</span> <span class='lparen'>(</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>-</span> <span class='ivar'>@started_at</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='ivar'>@duration</span><span class='rparen'>)</span>
@@ -2768,12 +2914,12 @@
       <pre class="lines">
 
 
-176
-177
-178</pre>
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset_duration'>reset_duration</span>
   <span class='ivar'>@started_at</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>-</span> <span class='int'>1</span>
@@ -2809,17 +2955,17 @@
       <pre class="lines">
 
 
-169
-170
-171
-172
-173</pre>
+199
+200
+201
+202
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 199</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset_start'>reset_start</span>
-  <span class='ivar'>@finish</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+  <span class='ivar'>@finish</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
     <span class='ivar'>@start</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@node</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2860,12 +3006,12 @@
       <pre class="lines">
 
 
-285
-286
-287</pre>
+314
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 285</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 314</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start'>smooth_start</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -2907,12 +3053,12 @@
       <pre class="lines">
 
 
-290
-291
-292</pre>
+319
+320
+321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 319</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start3'>smooth_start3</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -2954,12 +3100,12 @@
       <pre class="lines">
 
 
-295
-296
-297</pre>
+324
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 295</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start4'>smooth_start4</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -3001,12 +3147,12 @@
       <pre class="lines">
 
 
-300
-301
-302</pre>
+329
+330
+331</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 300</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 329</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_start5'>smooth_start5</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span>
@@ -3048,12 +3194,12 @@
       <pre class="lines">
 
 
-325
-326
-327</pre>
+354
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 325</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 354</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step'>smooth_step</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -3095,12 +3241,12 @@
       <pre class="lines">
 
 
-330
-331
-332</pre>
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 330</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step3'>smooth_step3</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start3</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop3</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -3142,12 +3288,12 @@
       <pre class="lines">
 
 
-335
-336
-337</pre>
+364
+365
+366</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 335</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step4'>smooth_step4</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start4</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop4</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -3189,12 +3335,12 @@
       <pre class="lines">
 
 
-340
-341
-342</pre>
+369
+370
+371</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 340</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 369</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_step5'>smooth_step5</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_crossfade'>crossfade</span><span class='lparen'>(</span><span class='symbol'>:smooth_start5</span><span class='comma'>,</span> <span class='symbol'>:smooth_stop5</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
@@ -3236,12 +3382,12 @@
       <pre class="lines">
 
 
-305
-306
-307</pre>
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 305</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop'>smooth_stop</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start'>smooth_start</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3283,12 +3429,12 @@
       <pre class="lines">
 
 
-310
-311
-312</pre>
+339
+340
+341</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 310</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop3'>smooth_stop3</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start3'>smooth_start3</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3330,12 +3476,12 @@
       <pre class="lines">
 
 
-315
-316
-317</pre>
+344
+345
+346</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 315</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 344</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop4'>smooth_stop4</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start4'>smooth_start4</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3377,12 +3523,12 @@
       <pre class="lines">
 
 
-320
-321
-322</pre>
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 320</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/action.rb', line 349</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_smooth_stop5'>smooth_stop5</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='id identifier rubyid_progress'>progress</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_smooth_start5'>smooth_start5</span><span class='lparen'>(</span><span class='id identifier rubyid_flip'>flip</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3397,9 +3543,9 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Mar  8 02:52:58 2021 by
+  Generated on Sat Apr  3 11:19:49 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.6.3).
+  0.9.26 (ruby-2.7.2).
 </div>
 
     </div>

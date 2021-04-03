@@ -480,8 +480,7 @@
 141
 142
 143
-144
-145</pre>
+144</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 10</span>
@@ -560,13 +559,12 @@
 
   <span class='ivar'>@compound_sprite</span><span class='period'>.</span><span class='id identifier rubyid_sprites'>sprites</span> <span class='op'>+=</span> <span class='ivar'>@dragons</span>
 
-  <span class='id identifier rubyid_lead_dragon'>lead_dragon</span> <span class='op'>=</span> <span class='ivar'>@dragons</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
-
   <span class='int'>50</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
     <span class='id identifier rubyid__wait'>_wait</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_divmod'>divmod</span><span class='lparen'>(</span><span class='int'>10</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_pixie'>pixie</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Pixie.html" title="ExampleApp::Pixie (class)">Pixie</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Pixie.html#initialize-instance_method" title="ExampleApp::Pixie#initialize (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
-      <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='id identifier rubyid_lead_dragon'>lead_dragon</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span>
-      <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='id identifier rubyid_lead_dragon'>lead_dragon</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>
+      <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='ivar'>@dragons</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_x'>x</span>
+      <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='ivar'>@dragons</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>
+      <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='int'>0</span>
     <span class='kw'>end</span>
 
     <span class='comment'># Start spraying
@@ -697,6 +695,7 @@
       <pre class="lines">
 
 
+164
 165
 166
 167
@@ -712,11 +711,10 @@
 177
 178
 179
-180
-181</pre>
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#perform_tick: Start</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -755,6 +753,7 @@
       <pre class="lines">
 
 
+182
 183
 184
 185
@@ -775,11 +774,10 @@
 200
 201
 202
-203
-204</pre>
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pixie_spray'>pixie_spray</span><span class='lparen'>(</span><span class='id identifier rubyid_pix'>pix</span><span class='comma'>,</span> <span class='id identifier rubyid_layer'>layer</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_idx'>idx</span> <span class='op'>=</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span>
@@ -834,6 +832,7 @@
       <pre class="lines">
 
 
+147
 148
 149
 150
@@ -848,11 +847,10 @@
 159
 160
 161
-162
-163</pre>
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/compound_sprite_test.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepare_scene'>prepare_scene</span>
   <span class='kw'>super</span>
@@ -880,9 +878,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Mar 12 18:02:43 2021 by
+  Generated on Sat Apr  3 11:19:50 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.6.3).
+  0.9.26 (ruby-2.7.2).
 </div>
 
     </div>

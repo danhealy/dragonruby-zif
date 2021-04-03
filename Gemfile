@@ -2,6 +2,7 @@
 source 'https://rubygems.org'
 
 gem "rubocop"
+gem "yard"
 group :jekyll_plugins do
   gem "github-pages", "~> 212"
   gem "jekyll-readme-index"
