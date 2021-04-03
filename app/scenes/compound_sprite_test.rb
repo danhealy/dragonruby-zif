@@ -81,13 +81,12 @@ module ExampleApp
 
       @compound_sprite.sprites += @dragons
 
-      lead_dragon = @dragons[1]
-
       50.times do |i|
         _wait, layer = i.divmod(10)
         pixie = Pixie.new.tap do |s|
-          s.x = lead_dragon.x
-          s.y = lead_dragon.y
+          s.x = @dragons[1].x
+          s.y = @dragons[1].y
+          s.a = 0
         end
 
         # Start spraying
