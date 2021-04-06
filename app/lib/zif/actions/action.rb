@@ -134,7 +134,7 @@ module Zif
         node,
         finish,
         follow:   nil,
-        duration: 1.second,
+        duration: 1.seconds,
         easing:   :linear,
         rounding: :round,
         repeat:   1,
