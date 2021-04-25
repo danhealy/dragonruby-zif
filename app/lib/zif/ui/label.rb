@@ -4,6 +4,8 @@ module Zif
     class Label
       include Zif::Actions::Actionable
 
+      MAGIC_NEWLINE_DELIMITER = '+newline+'.freeze
+
       ALIGNMENT = {
         left:   0,
         center: 1,
@@ -164,18 +166,21 @@ module Zif
       def wrap(width, indent: '')
         return [self] unless @full_text.length.positive?
 
-        words = @full_text.gsub('\\', '').gsub("\n", '\\n').split(' ')
+        words = @full_text.gsub('\\', '').gsub("\n", MAGIC_NEWLINE_DELIMITER).split(' ')
         new_labels = []
         cur_label = dup
         cur_label.text = ''
 
         while words.any?
+          finish_line = false
           cur_word = words.shift
 
           # If this word contains newlines, split into new words and add the extras back to 'words'
-          lines = cur_word.split("\n")
-          words.unshift(*lines[1..-1]) if lines.length.positive?
-          cur_word = lines[0]
+          cur_word, remainder = cur_word.split(MAGIC_NEWLINE_DELIMITER, 2)
+          if remainder
+            finish_line = true
+            words.unshift(remainder)
+          end
 
           existing_text = cur_label.text
           cur_label.text = existing_text + (existing_text == '' ? '' : ' ') + cur_word
@@ -183,20 +188,15 @@ module Zif
           cur_rect = cur_label.rect
           if cur_rect[0] > width
             if existing_text == ''
-              # One really long word.
               cur_label.truncate(width)
             else
-              cur_label.text = existing_text
-              cur_label.recalculate_minimums
-              new_labels << cur_label
-              old_y = cur_label.y
-
-              cur_label = dup
-              cur_label.text = indent + cur_word
-              cur_label.recalculate_minimums
-              cur_label.truncate(width)
-              cur_label.y = old_y - cur_rect[1]
+              old_label, cur_label = split_labels(cur_label, existing_text, indent + cur_word, width, cur_rect[1])
+              new_labels << old_label
             end
+          end
+          if finish_line
+            old_label, cur_label = split_labels(cur_label, cur_label.text, '', width, cur_rect[1])
+            new_labels << old_label
           end
         end
 
@@ -205,6 +205,22 @@ module Zif
         new_labels << cur_label
 
         new_labels
+      end
+
+      # @api private
+      def split_labels(label, a, b, width, height)
+        label.text = a
+        label.recalculate_minimums
+        label.truncate(width)
+
+        old_y = label.y
+
+        b_label = dup
+        b_label.text = b
+        b_label.recalculate_minimums
+        b_label.truncate(width)
+        b_label.y = old_y - height
+        [label, b_label]
       end
 
       # @api private
