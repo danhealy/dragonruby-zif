@@ -59,19 +59,16 @@ module Zif
 
       # Add a {Zif::KeyPressable} object to the list of keypressables to check every tick.
       # Keypressable objects should respond to handle_key(key, kind=:down)
-      # also note to handle focus events, the object will also be added to the clickable list
       #
       # @param [Zif::KeyPressable] key_pressable A Keypressable object
       def register_key_pressable(key_pressable)
         @key_pressables << key_pressable
-        register_clickable(key_pressable) # we want to handle focus and clicks
         key_pressable
       end
 
       # Removes an {Zif::KeyPressable} from the keypressables array.
       # @param [Zif::KeyPressable] key_pressable
       def remove_key_pressable(key_pressable)
-        remove_clickable(key_pressable)
         @key_pressables.delete(key_pressable)
       end
 

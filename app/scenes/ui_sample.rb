@@ -123,9 +123,8 @@ module ExampleApp
         l.x = @button.x + @button.w + 50
         l.y = @button.y + @button.h - 10
         l.color = [255, 255, 255].freeze
-        l.border_color = [53, 186, 243].freeze
         l.max_length = 15
-        l.on_focus_changed = ->(input) { update_input_focus_border(input) }
+        l.has_focus = true  # in your app you might handle click events to set this, here we're going to grab everything
         # l.desired_keys = %i[zero one two three four five six seven eight nine]
       end
 
@@ -261,13 +260,6 @@ module ExampleApp
       ($gtk.args.tick_count % @random_lengths[0]).zero?
     end
 
-    def update_input_focus_border(input)
-      $gtk.args.outputs.static_borders.delete(input.focus_border) unless input.focus_border.nil?
-      return unless input.has_focus
-
-      $gtk.args.outputs.static_borders << input.focus_border
-    end
-
     def perform_tick
       mark('#perform_tick: begin')
       $gtk.args.outputs.background_color = [0, 0, 0, 0]
@@ -284,10 +276,7 @@ module ExampleApp
       finished = super
 
       mark('#perform_tick: finished super')
-      if finished
-        $gtk.args.outputs.static_borders.delete(@input.focus_border) unless @input.focus_border.nil?
-        return finished
-      end
+      return finished if finished
 
       @force_next_scene ||= @load_next_scene_next_tick # rubocop:disable Naming/MemoizedInstanceVariableName
     end
