@@ -207,6 +207,11 @@ module Zif
         new_labels
       end
 
+      # @return [Integer] Returns right edge of the label's current size
+      def right
+        x + rect[0]
+      end
+
       # @api private
       def split_labels(label, a, b, width, height)
         label.text = a

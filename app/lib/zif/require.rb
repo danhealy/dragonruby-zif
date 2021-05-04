@@ -2,6 +2,7 @@
 require 'app/lib/zif/zif.rb'
 require 'app/lib/zif/serializable.rb'
 require 'app/lib/zif/clickable.rb'
+require 'app/lib/zif/key_pressable.rb'
 require 'app/lib/zif/services/service_group.rb'
 require 'app/lib/zif/services/input_service.rb'
 require 'app/lib/zif/services/tick_trace_service.rb'
@@ -24,6 +25,7 @@ require 'app/lib/zif/actions/actionable.rb'
 
 # Depends on actionable.rb
 require 'app/lib/zif/ui/label.rb'
+require 'app/lib/zif/ui/input.rb'
 
 # Depends on sequence.rb - expects an Actionable class
 require 'app/lib/zif/actions/animatable.rb'

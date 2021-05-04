@@ -119,6 +119,16 @@ module ExampleApp
         text: 'Buttons.'
       }.merge(DEBUG_LABEL_COLOR)
 
+      @input = Zif::UI::Input.new('TYPE HERE ', size: 1).tap do |l|
+        l.x = @button.x + @button.w + 50
+        l.y = @button.y + @button.h - 10
+        l.color = [255, 255, 255].freeze
+        l.border_color = [53, 186, 243].freeze
+        l.max_length = 15
+        l.on_focus_changed = ->(input) { update_input_focus_border(input) }
+        # l.desired_keys = %i[zero one two three four five six seven eight nine]
+      end
+
       @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
         mark_and_print('delay_button: Button was clicked - demonstrating Tick Trace service')
         sleep(0.5)
@@ -207,6 +217,7 @@ module ExampleApp
       $game.services[:action_service].register_actionable(@dragon)
       $game.services[:input_service].register_clickable(@button)
       $game.services[:input_service].register_clickable(@delay_button)
+      $game.services[:input_service].register_key_pressable(@input)
 
       # If you're retaining a reference to sprites that will be displayed across every tick, it's best for performance
       # reasons if you use the static_sprites output.  You can always set the alpha of a sprite to zero to temporarily
@@ -250,6 +261,13 @@ module ExampleApp
       ($gtk.args.tick_count % @random_lengths[0]).zero?
     end
 
+    def update_input_focus_border(input)
+      $gtk.args.outputs.static_borders.delete(input.focus_border) unless input.focus_border.nil?
+      return unless input.has_focus
+
+      $gtk.args.outputs.static_borders << input.focus_border
+    end
+
     def perform_tick
       mark('#perform_tick: begin')
       $gtk.args.outputs.background_color = [0, 0, 0, 0]
@@ -260,12 +278,16 @@ module ExampleApp
       update_glass_panel
       update_progress_bar
       update_interactable_button
+      $gtk.args.outputs.labels << [@input] # you have to add the input on each tick to track changes
 
       mark('#perform_tick: finished updates')
       finished = super
 
       mark('#perform_tick: finished super')
-      return finished if finished
+      if finished
+        $gtk.args.outputs.static_borders.delete(@input.focus_border) unless @input.focus_border.nil?
+        return finished
+      end
 
       @force_next_scene ||= @load_next_scene_next_tick # rubocop:disable Naming/MemoizedInstanceVariableName
     end

@@ -135,6 +135,7 @@ module Zif
       mark('#standard_tick: begin')
 
       @services[:input_service].process_click
+      @services[:input_service].process_key_event
       mark('#standard_tick: input_service #process_click')
 
       tick_result = @scene.perform_tick
