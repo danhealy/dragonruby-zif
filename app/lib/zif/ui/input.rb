@@ -120,10 +120,9 @@ module Zif
       # def update_input_focus_border(input)
       #   $gtk.args.outputs.static_borders.delete(input.focus_border) unless input.focus_border.nil?
       #   return unless input.has_focus
-
+      #
       #   $gtk.args.outputs.static_borders << input.focus_border
       # end
-
     end
   end
 end
