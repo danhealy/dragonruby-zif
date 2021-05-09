@@ -143,15 +143,15 @@ module Zif
       def process_key_event
         return if @key_pressables.empty?
 
-        keys_down = $gtk.args.inputs.text
-        $gtk.args.inputs.keyboard.key_down.truthy_keys.each do |k|
-          keys_down << k if Zif::UI::Input::DEFAULT_SPECIAL_KEYS.include?(k)
-        end
+        text_keys = $gtk.args.inputs.text
+        all_keys = $gtk.args.inputs.keyboard.key_down.truthy_keys
 
-        keys_down.each do |key|
+        text_keys << nil if text_keys.empty? && !all_keys.empty?
+
+        text_keys.each do |key|
           @key_pressables.each do |key_pressable|
-            # puts "Zif::Services::InputService#process_key_event:#{key} key_pressable:#{key_pressable.class} #{key_pressable}"
-            key_pressable.handle_key(key, :down)
+            # puts "Zif::Services::InputService#process_key_event:#{key} #{all_keys} key_pressable:#{key_pressable.class} #{key_pressable}"
+            key_pressable.handle_key(key, all_keys)
           end
         end
         nil

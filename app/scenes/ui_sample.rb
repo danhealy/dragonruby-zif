@@ -125,7 +125,7 @@ module ExampleApp
         l.color = [255, 255, 255].freeze
         l.max_length = 15
         l.has_focus = true # in your app you might handle click events to set this, here we're going to grab everything
-        # l.desired_keys = %w[0 1 2 3 4 5 6 7 8 9]
+        # l.filter_keys = Zif::UI::Input::FILTER_ALPHA_NUMERIC_UPPERCASE
       end
       $gtk.args.outputs.static_labels << [@input]
 

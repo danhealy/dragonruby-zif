@@ -8,12 +8,12 @@ module Zif
     # @return [Lambda] Called when the key is pressed down.  Called with the +key+ that was pressed
     attr_accessor :on_key_down
 
-    # @param [<Symbol>] key see GTK::KeyboardKeys for symbols
-    # @param [<Symbol>] kind The kind of key coming through, right now we're only sending downs
+    # @param [<String>] text_key a single character from the keyboard, suitable for adding to the field
+    # @param [Array<Symbol>] all_keys truthy values from the keyboard includes modifiers like delete and backspace.
     # @return nil
-    def handle_key(key, _kind=:down)
+    def handle_key(text_key, all_keys)
       # puts "KeyPressable:#{@name}: handle_key?: #{key} :#{_kind} :#{on_key_down}"
-      on_key_down&.call(key)
+      on_key_down&.call(text_key, all_keys)
     end
   end
 end

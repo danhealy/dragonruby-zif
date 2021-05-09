@@ -18,7 +18,7 @@ module Zif
       attr_accessor :max_length
 
       # @return [Array<String>] List of characters to accept as valid input. Defaults to nil to allow all characters.
-      attr_accessor :desired_keys
+      attr_accessor :filter_keys
 
       # @return [Array<Symbol>] List of additional symbols to process, but not to append to the field. Defaults to [:delete, :backspace] and handles those.
       attr_accessor :special_keys
@@ -26,50 +26,37 @@ module Zif
       # @return [Boolean] Input fields only record key strokes when it has focus, set to +true+ when you want to capture keys. Defaults to +false+
       attr_accessor :has_focus
 
-      DEFAULT_DESIRED_KEYS = [
-        :exclamation_point, :space, :plus, :at,
-        :period, :comma, :underscore, :hyphen,
-        :zero, :one, :two, :three, :four,
-        :five, :six, :seven, :eight, :nine,
-        :a, :b, :c, :d, :e, :f, :g, :h,
-        :i, :j, :k, :l, :m, :n, :o, :p,
-        :q, :r, :s, :t, :u, :v, :w, :x,
-        :y, :z
-      ].freeze
-
-      DEFAULT_SPECIAL_KEYS = [
-        :backspace, :delete
-      ].freeze
+      # convience values for @filter_keys
+      FILTER_NUMERIC = ('0'..'9').to_a.freeze
+      FILTER_ALPHA_LOWERCASE = ('a'..'z').to_a.freeze
+      FILTER_ALPHA = (FILTER_ALPHA_LOWERCASE + FILTER_ALPHA_LOWERCASE.map(&:upcase)).freeze
+      FILTER_ALPHA_NUMERIC = (FILTER_NUMERIC + FILTER_ALPHA).freeze
+      FILTER_ALPHA_NUMERIC_UPPERCASE = (FILTER_NUMERIC + FILTER_ALPHA).map(&:upcase).freeze
 
       def initialize(text='', size: -1, alignment: :left, font: 'font.tff', ellipsis: '…', r: 51, g: 51, b: 51, a: 255)
         # super # calling super without args should have worked and passed the args up, but apparently only text??
         # https://github.com/DragonRuby/dragonruby-game-toolkit-contrib/issues/78
         super(text, size: size, alignment: alignment, font: font, ellipsis: ellipsis, r: r, g: g, b: b, a: a)
 
-        default_key_mappings
-        @on_key_down = ->(key) { handle_input(key) }
+        @on_key_down = ->(text_key, all_keys) { handle_input(text_key, all_keys) }
+        @filter_keys = nil
       end
 
       # @api private
-      def default_key_mappings
-        @desired_keys = nil
-        @special_keys = DEFAULT_SPECIAL_KEYS
-      end
-
-      # @api private
-      def handle_input(key)
+      def handle_input(text_key, all_keys)
         return false unless has_focus
 
-        unless @special_keys.include?(key) || @desired_keys.nil?
-          return false unless @desired_keys.include?(key.to_s)
+        delete = (all_keys & %i[delete backspace]).any?
+        unless delete || @filter_keys.nil?
+          return false unless @filter_keys.include?(text_key)
         end
 
-        return false if max_length.positive? && key != :backspace && key != :delete && text.length >= max_length
+        return false if max_length.positive? && !delete && text.length >= max_length
 
-        if key == :backspace || key == :delete
+        if delete
           self.text = text.chop
         else
-          text.concat(key)
+          text.concat(text_key) unless text_key.nil?
         end
         true
       end
