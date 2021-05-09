@@ -42,7 +42,6 @@ module Zif
         @filter_keys = nil
       end
 
-      # @api private
       def handle_input(text_key, all_keys)
         return false unless has_focus
 
