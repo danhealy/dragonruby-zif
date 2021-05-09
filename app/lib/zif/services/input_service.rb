@@ -143,25 +143,16 @@ module Zif
       def process_key_event
         return if @key_pressables.empty?
 
-        key_down = $gtk.args.inputs.keyboard.key_down.truthy_keys
-        # sometimes it's [:char, :raw_key, :s, :shift]
-        # sometimes it's [:char, :raw_key, :shift, :d]
-        # sometimes it's [:char, :raw_key, :shift_left, :d, :control_left, :control]
-        # so let's not care about shifts
-        key_down.delete(:shift)
-        return if key_down.empty?
-
-        if key_down == %i[char raw_key]
-          # this is a repeat char, aaaaaa, leave @last_key alone
-        elsif key_down[0] == :char # [:char, :raw_key, :s]
-          @last_key = key_down[2]
-        elsif key_down[0] == :raw_key # [:raw_key, :shift_left]
-          @last_key = key_down[1]
+        keys_down = $gtk.args.inputs.text
+        $gtk.args.inputs.keyboard.key_down.truthy_keys.each do |k|
+          keys_down << k if Zif::UI::Input::DEFAULT_SPECIAL_KEYS.include?(k)
         end
 
-        @key_pressables.each do |key_pressable|
-          # puts "Zif::Services::InputService#process_key_event:#{key_down} #{@last_key} key_pressable:#{key_pressable.class} #{key_pressable}"
-          key_pressable.handle_key(@last_key, :down)
+        keys_down.each do |key|
+          @key_pressables.each do |key_pressable|
+            # puts "Zif::Services::InputService#process_key_event:#{key} key_pressable:#{key_pressable.class} #{key_pressable}"
+            key_pressable.handle_key(key, :down)
+          end
         end
         nil
       end

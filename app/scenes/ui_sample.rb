@@ -119,14 +119,15 @@ module ExampleApp
         text: 'Buttons.'
       }.merge(DEBUG_LABEL_COLOR)
 
-      @input = Zif::UI::Input.new('TYPE HERE ', size: 1).tap do |l|
+      @input = Zif::UI::Input.new('TYPE HERE', size: 1).tap do |l|
         l.x = @button.x + @button.w + 50
         l.y = @button.y + @button.h - 10
         l.color = [255, 255, 255].freeze
         l.max_length = 15
-        l.has_focus = true  # in your app you might handle click events to set this, here we're going to grab everything
-        # l.desired_keys = %i[zero one two three four five six seven eight nine]
+        l.has_focus = true # in your app you might handle click events to set this, here we're going to grab everything
+        # l.desired_keys = %w[0 1 2 3 4 5 6 7 8 9]
       end
+      $gtk.args.outputs.static_labels << [@input]
 
       @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
         mark_and_print('delay_button: Button was clicked - demonstrating Tick Trace service')
@@ -270,7 +271,6 @@ module ExampleApp
       update_glass_panel
       update_progress_bar
       update_interactable_button
-      $gtk.args.outputs.labels << [@input] # you have to add the input on each tick to track changes
 
       mark('#perform_tick: finished updates')
       finished = super

@@ -1,27 +1,30 @@
 module Zif
   module UI
     # A basic input field that can accept keystrokes and record and display changes
-    # to have it recieve key strokes it needs to be registered
+    #
+    # to have it receive key strokes it needs to be registered
     #    $game.services[:input_service].register_key_pressable(@input)
     #
-    # to be able to update the display in response to those, you should to add it as a label every tick
-    #    perform tick args
-    #      ...
-    #      $gtk.args.outputs.labels << [@input]
-    #      ...
+    # and added to the static_labels so that it draws on the screen.
+    #      $gtk.args.outputs.static_labels << [@input]
     #
     class Input < Label
       include Zif::KeyPressable
       include Zif::Serializable
 
       attr_rect
-      attr_accessor :max_length
-      attr_accessor :desired_keys, :special_keys, :map_keys
-      attr_accessor :has_focus
 
-      @desired_keys = nil
-      @special_keys = nil
-      @map_keys     = nil
+      # @return [Integer] Constrain input to max_length number of characters. Defaults to zero to allow any number of characters.
+      attr_accessor :max_length
+
+      # @return [Array<String>] List of characters to accept as valid input. Defaults to nil to allow all characters.
+      attr_accessor :desired_keys
+
+      # @return [Array<Symbol>] List of additional symbols to process, but not to append to the field. Defaults to [:delete, :backspace] and handles those.
+      attr_accessor :special_keys
+
+      # @return [Boolean] Input fields only record key strokes when it has focus, set to +true+ when you want to capture keys. Defaults to +false+
+      attr_accessor :has_focus
 
       DEFAULT_DESIRED_KEYS = [
         :exclamation_point, :space, :plus, :at,
@@ -35,9 +38,7 @@ module Zif
       ].freeze
 
       DEFAULT_SPECIAL_KEYS = [
-        :backspace, :delete, :enter,
-        :home, :end, :pageup, :pagedown,
-        :left, :right
+        :backspace, :delete
       ].freeze
 
       def initialize(text='', size: -1, alignment: :left, font: 'font.tff', ellipsis: '…', r: 51, g: 51, b: 51, a: 255)
@@ -49,25 +50,26 @@ module Zif
         @on_key_down = ->(key) { handle_input(key) }
       end
 
+      # @api private
       def default_key_mappings
-        @desired_keys = DEFAULT_DESIRED_KEYS
+        @desired_keys = nil
         @special_keys = DEFAULT_SPECIAL_KEYS
-
-        @map_keys = {}
-        GTK::KeyboardKeys.char_to_method_hash.each do |k, v|
-          @map_keys[v[0]] = k if @desired_keys.include?(v[0]) || @special_keys.include?(v[0])
-        end
       end
 
+      # @api private
       def handle_input(key)
         return false unless has_focus
-        return false unless key == :backspace || key == :delete || @desired_keys.include?(key)
-        return false if max_length.positive? && key != :backspace && text.length >= max_length
+
+        unless @special_keys.include?(key) || @desired_keys.nil?
+          return false unless @desired_keys.include?(key.to_s)
+        end
+
+        return false if max_length.positive? && key != :backspace && key != :delete && text.length >= max_length
 
         if key == :backspace || key == :delete
           self.text = text.chop
         else
-          text.concat(@map_keys[key])
+          text.concat(key)
         end
         true
       end
