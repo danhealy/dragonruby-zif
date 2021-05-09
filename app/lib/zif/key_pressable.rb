@@ -12,7 +12,7 @@ module Zif
     # @param [Array<Symbol>] all_keys truthy values from the keyboard includes modifiers like delete and backspace.
     # @return nil
     def handle_key(text_key, all_keys)
-      # puts "KeyPressable:#{@name}: handle_key?: #{key} :#{_kind} :#{on_key_down}"
+      # puts "KeyPressable: handle_key?: #{text_key} :#{all_keys}"
       on_key_down&.call(text_key, all_keys)
     end
   end
