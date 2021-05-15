@@ -119,6 +119,16 @@ module ExampleApp
         text: 'Buttons.'
       }.merge(DEBUG_LABEL_COLOR)
 
+      @input = Zif::UI::Input.new('TYPE HERE', size: 1).tap do |l|
+        l.x = @button.x + @button.w + 50
+        l.y = @button.y + @button.h - 10
+        l.color = [255, 255, 255].freeze
+        l.max_length = 15
+        l.has_focus = true # in your app you might handle click events to set this, here we're going to grab everything
+        # l.filter_keys = Zif::UI::Input::FILTER_ALPHA_NUMERIC_UPPERCASE
+      end
+      $gtk.args.outputs.static_labels << [@input]
+
       @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
         mark_and_print('delay_button: Button was clicked - demonstrating Tick Trace service')
         sleep(0.5)
@@ -207,6 +217,7 @@ module ExampleApp
       $game.services[:action_service].register_actionable(@dragon)
       $game.services[:input_service].register_clickable(@button)
       $game.services[:input_service].register_clickable(@delay_button)
+      $game.services[:input_service].register_key_pressable(@input)
 
       # If you're retaining a reference to sprites that will be displayed across every tick, it's best for performance
       # reasons if you use the static_sprites output.  You can always set the alpha of a sprite to zero to temporarily

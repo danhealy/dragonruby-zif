@@ -29,6 +29,7 @@ module Zif
         @scrollables = []
         @absorb_list = []
         @expecting_mouse_up = []
+        @key_pressables = []
       end
 
       # Add a {Zif::Clickable} object to the list of clickables to check every tick.
@@ -54,6 +55,21 @@ module Zif
       # @param [Zif::Clickable] clickable
       def remove_clickable(clickable)
         @clickables.delete(clickable)
+      end
+
+      # Add a {Zif::KeyPressable} object to the list of keypressables to check every tick.
+      # Keypressable objects should respond to handle_key(key, kind=:down)
+      #
+      # @param [Zif::KeyPressable] key_pressable A Keypressable object
+      def register_key_pressable(key_pressable)
+        @key_pressables << key_pressable
+        key_pressable
+      end
+
+      # Removes an {Zif::KeyPressable} from the keypressables array.
+      # @param [Zif::KeyPressable] key_pressable
+      def remove_key_pressable(key_pressable)
+        @key_pressables.delete(key_pressable)
       end
 
       # @todo Add Zif::Scrollable ?
@@ -122,6 +138,24 @@ module Zif
         @last_mouse_bits = mouse_bits
       end
       # rubocop:enable Metrics/PerceivedComplexity
+
+      # @api private
+      def process_key_event
+        return if @key_pressables.empty?
+
+        text_keys = $gtk.args.inputs.text
+        all_keys = $gtk.args.inputs.keyboard.key_down.truthy_keys
+
+        text_keys << nil if text_keys.empty? && !all_keys.empty?
+
+        text_keys.each do |key|
+          @key_pressables.each do |key_pressable|
+            # puts "Zif::Services::InputService#process_key_event:#{key} #{all_keys} key_pressable:#{key_pressable.class} #{key_pressable}"
+            key_pressable.handle_key(key, all_keys)
+          end
+        end
+        nil
+      end
 
       # @api private
       def process_scroll

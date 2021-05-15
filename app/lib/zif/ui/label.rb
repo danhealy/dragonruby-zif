@@ -183,7 +183,7 @@ module Zif
           end
 
           existing_text = cur_label.text
-          cur_label.text = existing_text + (existing_text == '' ? '' : ' ') + cur_word
+          cur_label.text = existing_text + (existing_text == '' ? '' : ' ') + cur_word unless cur_word.nil?
           cur_label.recalculate_minimums
           cur_rect = cur_label.rect
           if cur_rect[0] > width
@@ -205,6 +205,11 @@ module Zif
         new_labels << cur_label
 
         new_labels
+      end
+
+      # @return [Integer] Returns right edge of the label's current size
+      def right
+        x + rect[0]
       end
 
       # @api private
