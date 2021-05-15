@@ -1,6 +1,6 @@
 # This is the namespace for the Zif library, and in the +app/lib/zif/zif.rb+ file are some miscellaneous helper methods
 module Zif
-  GTK_COMPATIBLE_VERSION = '2.11'.freeze
+  GTK_COMPATIBLE_VERSION = '2.14'.freeze
 
   # @param [Numeric] i
   # @param [Numeric] max
@@ -178,8 +178,14 @@ module Zif
     return if $gtk.version == Zif::GTK_COMPATIBLE_VERSION
 
     puts '+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+'
-    puts "|      This version of the Zif framework was tested against DRGTK '#{Zif::GTK_COMPATIBLE_VERSION}'       |"
-    puts "|                You are running DragonRuby GTK Version '#{$gtk.version}'                 |"
+    against_str = "This version of the Zif framework was tested against DRGTK '#{Zif::GTK_COMPATIBLE_VERSION}'"
+    against_pad = [(77 - against_str.length).idiv(2), 0].max
+
+    running_str = "You are running DragonRuby GTK Version '#{$gtk.version}'"
+    running_pad = [(77 - running_str.length).idiv(2), 0].max
+
+    puts "|#{" " * against_pad}#{against_str}#{" " * (against_pad.even? ? against_pad : against_pad + 1)}|"
+    puts "|#{" " * running_pad}#{running_str}#{" " * (running_pad.even? ? running_pad : running_pad + 1)}|"
     puts '|                                                                             |'
     puts '| Please ensure you are using the latest versions of DRGTK and Zif:           |'
     puts '| DRGTK: http://dragonruby.herokuapp.com/toolkit/game                         |'
