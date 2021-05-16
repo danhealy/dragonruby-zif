@@ -817,7 +817,6 @@
       <pre class="lines">
 
 
-175
 176
 177
 178
@@ -828,10 +827,11 @@
 183
 184
 185
-186</pre>
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decorate_exception'>decorate_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>120</span>
@@ -1140,7 +1140,8 @@
 158
 159
 160
-161</pre>
+161
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 133</span>
@@ -1150,6 +1151,7 @@
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
   <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_process_click'>process_click</span>
+  <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='symbol'>:input_service</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_process_key_event'>process_key_event</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#standard_tick: input_service #process_click</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_tick_result'>tick_result</span> <span class='op'>=</span> <span class='ivar'>@scene</span><span class='period'>.</span><span class='id identifier rubyid_perform_tick'>perform_tick</span>
@@ -1227,17 +1229,17 @@
       <pre class="lines">
 
 
-165
 166
 167
 168
 169
 170
 171
-172</pre>
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 166</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_switch_scene'>switch_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_tick_result'>tick_result</span> <span class='kw'>if</span> <span class='id identifier rubyid_tick_result'>tick_result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Scene.html" title="Zif::Scene (class)">Scene</a></span></span><span class='rparen'>)</span>
@@ -1303,7 +1305,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Apr  3 11:19:48 2021 by
+  Generated on Sat May 15 19:25:57 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

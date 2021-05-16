@@ -466,6 +466,15 @@ See the documentation for details: [`Zif::UI::Label`](https://danhealy.github.io
 
 ![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/resize_word_wrap.gif?raw=true)
 
+### `Zif::UI::Input`
+This is a Label which includes `Zif::KeyPressable` and will add the keys being pressed to itself.  Useful for form fields.  You must manually manage its registration with the `Zif::Services::InputService` as well as control its focus via `@has_focus`.
+
+See the documentation for details: [`Zif::UI::Input`](https://danhealy.github.io/dragonruby-zif/docs/Zif/UI/Input.html), [`Zif::KeyPressable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/KeyPressable.html)
+
+A working example is available in `ExampleApp::UISample`, implemented by `ExampleApp::FormField` and `ExampleApp::FocusCheck`
+
+![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/input_field.gif?raw=true)
+
 ### `Zif::UI::TwoStageButton`
 This is the classic UI button, which has two sprites: a normal state, and a pressed state.  It accepts a label which is centered by default.
 
@@ -513,7 +522,9 @@ Clickable sprites should mixin `Zif::Clickable` or be compatible by defining a `
 
 Scrollable objects should define `#scrolled?`.  `Zif::Layers::Camera` uses this.
 
-See the documentation for details: [`Zif::Services::InputService`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/InputService.html), [`Zif::Clickable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Clickable.html)
+Objects which should receive key presses should mixin `Zif::KeyPressable`.
+
+See the documentation for details: [`Zif::Services::InputService`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Services/InputService.html), [`Zif::Clickable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Clickable.html), [`Zif::KeyPressable`](https://danhealy.github.io/dragonruby-zif/docs/Zif/KeyPressable.html)
 
 [`Zif::Layers`](https://danhealy.github.io/dragonruby-zif/docs/Zif/Layers.html) handle clicks in a hierarchical way, see documentation for info.
 
