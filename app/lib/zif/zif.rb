@@ -184,8 +184,8 @@ module Zif
     running_str = "You are running DragonRuby GTK Version '#{$gtk.version}'"
     running_pad = [(77 - running_str.length).idiv(2), 0].max
 
-    puts "|#{" " * against_pad}#{against_str}#{" " * (against_pad.even? ? against_pad : against_pad + 1)}|"
-    puts "|#{" " * running_pad}#{running_str}#{" " * (running_pad.even? ? running_pad : running_pad + 1)}|"
+    puts "|#{' ' * against_pad}#{against_str}#{' ' * (against_pad.even? ? against_pad : against_pad + 1)}|"
+    puts "|#{' ' * running_pad}#{running_str}#{' ' * (running_pad.even? ? running_pad : running_pad + 1)}|"
     puts '|                                                                             |'
     puts '| Please ensure you are using the latest versions of DRGTK and Zif:           |'
     puts '| DRGTK: http://dragonruby.herokuapp.com/toolkit/game                         |'

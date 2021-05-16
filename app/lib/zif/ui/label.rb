@@ -12,6 +12,12 @@ module Zif
         right:  2
       }.freeze
 
+      VERTICAL_ALIGNMENT = {
+        bottom: 0,
+        center: 1,
+        top:    2
+      }.freeze
+
       # @return [Numeric] X axis position
       attr_accessor :x
       # @return [Numeric] Y axis position
@@ -46,23 +52,36 @@ module Zif
       # @param [String] text {full_text}
       # @param [Integer] size {size}
       # @param [Symbol, Integer] alignment {align} +:left+, +:center+, +:right+ or +0+, +1+, +2+. See {ALIGNMENT}
+      # @param [Symbol, Integer] vertical_alignment {vertical_align} +:bottom+, +:center+, +:top+ or +0+, +1+, +2+. See {VERTICAL_ALIGNMENT}
       # @param [String] font {font}
       # @param [String] ellipsis {ellipsis}
       # @param [Integer] r {r}
       # @param [Integer] g {g}
       # @param [Integer] b {b}
       # @param [Integer] a {a}
-      def initialize(text='', size: -1, alignment: :left, font: 'font.tff', ellipsis: '…', r: 51, g: 51, b: 51, a: 255)
-        @text = text
-        @full_text = text
-        @size = size
-        @alignment = ALIGNMENT.fetch(alignment, alignment)
-        @ellipsis = ellipsis
-        @font = font
-        @r = r
-        @g = g
-        @b = b
-        @a = a
+      def initialize(
+        text='',
+        size:               -1,
+        alignment:          :left,
+        vertical_alignment: :top,
+        font:               'font.tff',
+        ellipsis:           '…',
+        r:                  51,
+        g:                  51,
+        b:                  51,
+        a:                  255
+      )
+        @text               = text
+        @full_text          = text
+        @size               = size
+        @alignment          = ALIGNMENT.fetch(alignment, alignment)
+        @vertical_alignment = VERTICAL_ALIGNMENT.fetch(vertical_alignment, vertical_alignment)
+        @ellipsis           = ellipsis
+        @font               = font
+        @r                  = r
+        @g                  = g
+        @b                  = b
+        @a                  = a
         recalculate_minimums
       end
 
@@ -86,7 +105,17 @@ module Zif
         @alignment
       end
 
+      def vertical_align=(new_alignment)
+        @vertical_alignment = VERTICAL_ALIGNMENT.fetch(new_alignment, new_alignment)
+      end
+
+      def vertical_align
+        @vertical_alignment
+      end
+
+      # These are required to satisfy draw_ffi
       alias alignment_enum align
+      alias vertical_alignment_enum vertical_align
 
       # @return [Array<Integer>] 2-element array [+w+, +h+] of the current text
       def rect

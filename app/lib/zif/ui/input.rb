@@ -33,10 +33,32 @@ module Zif
       FILTER_ALPHA_NUMERIC = (FILTER_NUMERIC + FILTER_ALPHA).freeze
       FILTER_ALPHA_NUMERIC_UPPERCASE = (FILTER_NUMERIC + FILTER_ALPHA).map(&:upcase).freeze
 
-      def initialize(text='', size: -1, alignment: :left, font: 'font.tff', ellipsis: '…', r: 51, g: 51, b: 51, a: 255)
+      def initialize(
+        text='',
+        size:               -1,
+        alignment:          :left,
+        vertical_alignment: :top,
+        font:               'font.tff',
+        ellipsis:           '…',
+        r:                  51,
+        g:                  51,
+        b:                  51,
+        a:                  255
+      )
         # super # calling super without args should have worked and passed the args up, but apparently only text??
         # https://github.com/DragonRuby/dragonruby-game-toolkit-contrib/issues/78
-        super(text, size: size, alignment: alignment, font: font, ellipsis: ellipsis, r: r, g: g, b: b, a: a)
+        super(
+          text,
+          size:               size,
+          alignment:          alignment,
+          vertical_alignment: vertical_alignment,
+          font:               font,
+          ellipsis:           ellipsis,
+          r:                  r,
+          g:                  g,
+          b:                  b,
+          a:                  a
+        )
 
         @on_key_down = ->(text_key, all_keys) { handle_input(text_key, all_keys) }
         @filter_keys = nil
@@ -45,11 +67,9 @@ module Zif
       def handle_input(text_key, all_keys)
         return false unless has_focus
 
-        delete = (all_keys & %i[delete backspace]).any?
-        unless delete || @filter_keys.nil?
-          return false unless @filter_keys.include?(text_key)
-        end
+        return false if @filter_keys&.include?(text_key)
 
+        delete = (all_keys & %i[delete backspace]).any?
         return false if max_length.positive? && !delete && text.length >= max_length
 
         if delete
