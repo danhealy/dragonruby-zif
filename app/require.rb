@@ -1,5 +1,7 @@
 # Example app specific files:
+require 'app/ui/focus_check.rb'
 require 'app/ui/labels/future_label.rb'
+require 'app/ui/labels/form_field.rb'
 require 'app/ui/panels/glass_panel.rb'
 require 'app/ui/panels/metal_panel.rb'
 require 'app/ui/panels/metal_cutout.rb'

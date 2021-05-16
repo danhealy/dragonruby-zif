@@ -43,18 +43,18 @@ module ExampleApp
       cur_w = 64 + 200 + (200 * Zif.ease($gtk.args.tick_count, @random_lengths[1])).floor
       cur_h = 64 + 200 + (200 * Zif.ease($gtk.args.tick_count, @random_lengths[2])).floor
       @metal = MetalPanel.new(cur_w, cur_h, 'Hello World', @cur_color)
-      @metal.x = 60
-      @metal.y = 60
+      @metal.x = 20
+      @metal.y = 160
       @metal_label = {
-        x:    60,
-        y:    600,
+        x:    20,
+        y:    660,
         text: 'Scaling custom 9-slice'
       }.merge(DEBUG_LABEL_COLOR)
 
       # This is the center gray "cutout" inside the metal panel
       @cutout = MetalCutout.new(cur_w - 50, cur_h - 100)
-      @cutout.x = 60 + 25
-      @cutout.y = 60 + 25
+      @cutout.x = 20 + 25
+      @cutout.y = 160 + 25
 
       @wrapping_label = FutureLabel.new(
         "Lorem ipsum\ndolor sit\namet,\nconsectetur adipiscing\n\nelit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -119,15 +119,16 @@ module ExampleApp
         text: 'Buttons.'
       }.merge(DEBUG_LABEL_COLOR)
 
-      @input = Zif::UI::Input.new('TYPE HERE', size: 1).tap do |l|
-        l.x = @button.x + @button.w + 50
-        l.y = @button.y + @button.h - 10
-        l.color = [255, 255, 255].freeze
-        l.max_length = 15
-        l.has_focus = true # in your app you might handle click events to set this, here we're going to grab everything
-        # l.filter_keys = Zif::UI::Input::FILTER_ALPHA_NUMERIC_UPPERCASE
-      end
-      $gtk.args.outputs.static_labels << [@input]
+      @form_field = FormField.new(x: 20, y: 115, label: 'Text Input: ', char_width: 28)
+      @form_field_status = {
+        x:    @form_field.x,
+        y:    @form_field.y - 5,
+        text: "Form Field Has Focus: #{@form_field.input.focused?}"
+      }.merge(DEBUG_LABEL_COLOR)
+
+      # We need a full-screen overlay which does not absorb clicks to test for losing focus on the form field
+      @focus_check = FocusCheck.new
+      @focus_check.on_mouse_down = ->(_sprite, _point) { @form_field.lose_focus }
 
       @delay_button = TallButton.new(:delay_button, 300, :red, 'Simulate Lag', 2) do |_point|
         mark_and_print('delay_button: Button was clicked - demonstrating Tick Trace service')
@@ -197,6 +198,7 @@ module ExampleApp
         @prog_label,
         @button_label,
         @metal_label,
+        @form_field_status,
         {
           x:    600,
           y:    320,
@@ -215,9 +217,11 @@ module ExampleApp
       # Actionables must be registered with the action service to be notified to update based on the running Actions
       $game.services[:action_service].register_actionable(@changing_button)
       $game.services[:action_service].register_actionable(@dragon)
+      $game.services[:input_service].register_clickable(@focus_check)
       $game.services[:input_service].register_clickable(@button)
       $game.services[:input_service].register_clickable(@delay_button)
-      $game.services[:input_service].register_key_pressable(@input)
+      $game.services[:input_service].register_clickable(@form_field)
+      $game.services[:input_service].register_key_pressable(@form_field.input)
 
       # If you're retaining a reference to sprites that will be displayed across every tick, it's best for performance
       # reasons if you use the static_sprites output.  You can always set the alpha of a sprite to zero to temporarily
@@ -229,6 +233,8 @@ module ExampleApp
         @metal,
         # Make sure the cutout is after metal, since it's on top.
         @cutout,
+        # --- Input field ---
+        @form_field,
         # --- Buttons ---
         @button,
         @delay_button,
@@ -271,6 +277,7 @@ module ExampleApp
       update_glass_panel
       update_progress_bar
       update_interactable_button
+      update_form_field_status
 
       mark('#perform_tick: finished updates')
       finished = super
@@ -327,6 +334,12 @@ module ExampleApp
       label_text += (@button.is_pressed ? "It's pressed!" : 'Press one.').to_s
       @button_label.text = label_text
       mark('#update_interactable_button: complete')
+    end
+
+    def update_form_field_status
+      mark('#update_form_field_status: begin')
+      @form_field_status.text = "Form Field Has Focus: #{@form_field.input.focused?}"
+      mark('#update_form_field_status: complete')
     end
   end
 end

@@ -50,7 +50,7 @@ module ExampleApp
 
       return unless @next_scene
 
-      return @next_scene if @force_next_scene || $gtk.args.inputs.keyboard.key_up.space || !@scene_timer.positive?
+      return @next_scene if @force_next_scene || $gtk.args.inputs.keyboard.key_up.pagedown || !@scene_timer.positive?
     end
 
     def display_timer_bar
@@ -80,7 +80,7 @@ module ExampleApp
     def display_context_labels
       color = {r: 255, g: 255, b: 255, a: 255}
       wait_text = @pause_timer ? '. Paused, press pgup to unpause.' : ", or wait #{@scene_timer} ticks.  Press pgup to pause."
-      $gtk.args.outputs.labels << { x: 4, y: 720 - 2, text: "#{self.class.name}.  Press spacebar to #{@next_scene}#{wait_text}" }.merge(color)
+      $gtk.args.outputs.labels << { x: 4, y: 720 - 2, text: "#{self.class.name}.  Press pgdown to #{@next_scene}#{wait_text}" }.merge(color)
       $gtk.args.outputs.labels << { x: 0, y: 720 - 22, text: "#{tracer&.last_tick_ms} #{$gtk.args.gtk.current_framerate}fps" }.merge(color)
       $gtk.args.outputs.labels << { x: 4, y: 24, text: "Last slowest mark: #{tracer&.slowest_mark}" }.merge(color)
       $gtk.args.outputs.labels << { x: 4, y: 44, text: "Max slowest mark: #{tracer&.slowest_max_mark}" }.merge(color)

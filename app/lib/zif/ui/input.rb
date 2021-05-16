@@ -64,6 +64,12 @@ module Zif
         @filter_keys = nil
       end
 
+      # @return [Boolean] Is the text field focused?
+      def focused?
+        @has_focus
+      end
+
+      # @api private
       def handle_input(text_key, all_keys)
         return false unless has_focus
 
