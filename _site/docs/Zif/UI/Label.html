@@ -117,7 +117,7 @@
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="../../ExampleApp/FutureLabel.html" title="ExampleApp::FutureLabel (class)">ExampleApp::FutureLabel</a></span></p>
+  <p class="children"><span class='object_link'><a href="../../ExampleApp/FutureLabel.html" title="ExampleApp::FutureLabel (class)">ExampleApp::FutureLabel</a></span>, <span class='object_link'><a href="Input.html" title="Zif::UI::Input (class)">Input</a></span></p>
 </div>
 
   
@@ -128,6 +128,11 @@
 
     <dl class="constants">
       
+        <dt id="MAGIC_NEWLINE_DELIMITER-constant" class="">MAGIC_NEWLINE_DELIMITER =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>+newline+</span><span class='tstring_end'>&#39;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
         <dt id="ALIGNMENT-constant" class="">ALIGNMENT =
           
         </dt>
@@ -135,6 +140,15 @@
   <span class='label'>left:</span>   <span class='int'>0</span><span class='comma'>,</span>
   <span class='label'>center:</span> <span class='int'>1</span><span class='comma'>,</span>
   <span class='label'>right:</span>  <span class='int'>2</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="VERTICAL_ALIGNMENT-constant" class="">VERTICAL_ALIGNMENT =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>bottom:</span> <span class='int'>0</span><span class='comma'>,</span>
+  <span class='label'>center:</span> <span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>top:</span>    <span class='int'>2</span>
 <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
@@ -673,7 +687,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; Label </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, vertical_alignment: :top, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; Label </a>
     
 
     
@@ -817,6 +831,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#right-instance_method" title="#right (instance method)">#<strong>right</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns right edge of the label&#39;s current size.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#split_labels-instance_method" title="#split_labels (instance method)">#<strong>split_labels</strong>(label, a, b, width, height)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#truncate-instance_method" title="#truncate (instance method)">#<strong>truncate</strong>(width)  &#x21d2; Object </a>
     
 
@@ -834,6 +894,52 @@
     <span class="summary_desc"><div class='inline'>
 <p>Determine the largest possible portion of the text we can display End the text with an ellispsis if truncation occurs.</p>
 </div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vertical_align-instance_method" title="#vertical_align (instance method)">#<strong>vertical_align</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #vertical_alignment_enum)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vertical_align=-instance_method" title="#vertical_align= (instance method)">#<strong>vertical_align=</strong>(new_alignment)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -882,7 +988,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::UI::Label (class)">Label</a></span></tt> 
+    #<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, vertical_alignment: :top, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::UI::Label (class)">Label</a></span></tt> 
   
 
   
@@ -950,6 +1056,24 @@
         &mdash;
         <div class='inline'>
 <p><span class='object_link'><a href="#align-instance_method" title="Zif::UI::Label#align (method)">#align</a></span> <code>:left</code>, <code>:center</code>, <code>:right</code> or <code>0</code>, <code>1</code>, <code>2</code>. See <span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>vertical_alignment</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:top</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#vertical_align-instance_method" title="Zif::UI::Label#vertical_align (method)">#vertical_align</a></span> <code>:bottom</code>, <code>:center</code>, <code>:top</code> or <code>0</code>, <code>1</code>, <code>2</code>. See <span class='object_link'><a href="#VERTICAL_ALIGNMENT-constant" title="Zif::UI::Label::VERTICAL_ALIGNMENT (constant)">VERTICAL_ALIGNMENT</a></span></p>
 </div>
       
     </li>
@@ -1071,34 +1195,58 @@
       <pre class="lines">
 
 
-53
-54
-55
-56
-57
-58
-59
-60
-61
 62
 63
 64
-65</pre>
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 62</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>size:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span> <span class='label'>alignment:</span> <span class='symbol'>:left</span><span class='comma'>,</span> <span class='label'>font:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>font.tff</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>ellipsis:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>…</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>r:</span> <span class='int'>51</span><span class='comma'>,</span> <span class='label'>g:</span> <span class='int'>51</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='int'>51</span><span class='comma'>,</span> <span class='label'>a:</span> <span class='int'>255</span><span class='rparen'>)</span>
-  <span class='ivar'>@text</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
-  <span class='ivar'>@full_text</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
-  <span class='ivar'>@size</span> <span class='op'>=</span> <span class='id identifier rubyid_size'>size</span>
-  <span class='ivar'>@alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='rparen'>)</span>
-  <span class='ivar'>@ellipsis</span> <span class='op'>=</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
-  <span class='ivar'>@font</span> <span class='op'>=</span> <span class='id identifier rubyid_font'>font</span>
-  <span class='ivar'>@r</span> <span class='op'>=</span> <span class='id identifier rubyid_r'>r</span>
-  <span class='ivar'>@g</span> <span class='op'>=</span> <span class='id identifier rubyid_g'>g</span>
-  <span class='ivar'>@b</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
-  <span class='ivar'>@a</span> <span class='op'>=</span> <span class='id identifier rubyid_a'>a</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_text'>text</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>size:</span>               <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>alignment:</span>          <span class='symbol'>:left</span><span class='comma'>,</span>
+  <span class='label'>vertical_alignment:</span> <span class='symbol'>:top</span><span class='comma'>,</span>
+  <span class='label'>font:</span>               <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>font.tff</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>ellipsis:</span>           <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>…</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>r:</span>                  <span class='int'>51</span><span class='comma'>,</span>
+  <span class='label'>g:</span>                  <span class='int'>51</span><span class='comma'>,</span>
+  <span class='label'>b:</span>                  <span class='int'>51</span><span class='comma'>,</span>
+  <span class='label'>a:</span>                  <span class='int'>255</span>
+<span class='rparen'>)</span>
+  <span class='ivar'>@text</span>               <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
+  <span class='ivar'>@full_text</span>          <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
+  <span class='ivar'>@size</span>               <span class='op'>=</span> <span class='id identifier rubyid_size'>size</span>
+  <span class='ivar'>@alignment</span>          <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='rparen'>)</span>
+  <span class='ivar'>@vertical_alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#VERTICAL_ALIGNMENT-constant" title="Zif::UI::Label::VERTICAL_ALIGNMENT (constant)">VERTICAL_ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_vertical_alignment'>vertical_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_vertical_alignment'>vertical_alignment</span><span class='rparen'>)</span>
+  <span class='ivar'>@ellipsis</span>           <span class='op'>=</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
+  <span class='ivar'>@font</span>               <span class='op'>=</span> <span class='id identifier rubyid_font'>font</span>
+  <span class='ivar'>@r</span>                  <span class='op'>=</span> <span class='id identifier rubyid_r'>r</span>
+  <span class='ivar'>@g</span>                  <span class='op'>=</span> <span class='id identifier rubyid_g'>g</span>
+  <span class='ivar'>@b</span>                  <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
+  <span class='ivar'>@a</span>                  <span class='op'>=</span> <span class='id identifier rubyid_a'>a</span>
   <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1157,12 +1305,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_a'>a</span>
   <span class='ivar'>@a</span>
@@ -1218,12 +1366,12 @@
       <pre class="lines">
 
 
-22
-23
-24</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_b'>b</span>
   <span class='ivar'>@b</span>
@@ -1279,12 +1427,12 @@
       <pre class="lines">
 
 
-38
-39
-40</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
   <span class='ivar'>@ellipsis</span>
@@ -1340,12 +1488,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_font'>font</span>
   <span class='ivar'>@font</span>
@@ -1401,12 +1549,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_full_text'>full_text</span>
   <span class='ivar'>@full_text</span>
@@ -1462,12 +1610,12 @@
       <pre class="lines">
 
 
-20
-21
-22</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_g'>g</span>
   <span class='ivar'>@g</span>
@@ -1523,12 +1671,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_width'>max_width</span>
   <span class='ivar'>@max_width</span>
@@ -1584,12 +1732,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_height'>min_height</span>
   <span class='ivar'>@min_height</span>
@@ -1645,12 +1793,12 @@
       <pre class="lines">
 
 
-32
-33
-34</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_width'>min_width</span>
   <span class='ivar'>@min_width</span>
@@ -1706,12 +1854,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_r'>r</span>
   <span class='ivar'>@r</span>
@@ -1771,12 +1919,12 @@
       <pre class="lines">
 
 
-36
-37
-38</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span>
   <span class='ivar'>@size</span>
@@ -1832,12 +1980,12 @@
       <pre class="lines">
 
 
-28
-29
-30</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_text'>text</span>
   <span class='ivar'>@text</span>
@@ -1893,12 +2041,12 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_x'>x</span>
   <span class='ivar'>@x</span>
@@ -1954,12 +2102,12 @@
       <pre class="lines">
 
 
-16
-17
-18</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_y'>y</span>
   <span class='ivar'>@y</span>
@@ -2037,12 +2185,12 @@
       <pre class="lines">
 
 
-83
-84
-85</pre>
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 83</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_align'>align</span>
   <span class='ivar'>@alignment</span>
@@ -2116,12 +2264,12 @@
       <pre class="lines">
 
 
-75
-76
-77</pre>
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_align='>align=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
   <span class='ivar'>@alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
@@ -2175,17 +2323,17 @@
       <pre class="lines">
 
 
-143
-144
-145
-146
-147
-148
-149
-150</pre>
+174
+175
+176
+177
+178
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span>
   <span class='lbrace'>{</span>
@@ -2254,15 +2402,15 @@
       <pre class="lines">
 
 
-154
-155
-156
-157
-158
-159</pre>
+185
+186
+187
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 185</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color='>color=</span><span class='lparen'>(</span><span class='id identifier rubyid_rgba_array'>rgba_array</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@r</span> <span class='op'>=</span> <span class='id identifier rubyid_rgba_array'>rgba_array</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_rgba_array'>rgba_array</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -2319,12 +2467,12 @@
       <pre class="lines">
 
 
-95
-96
-97</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_full_size_rect'>full_size_rect</span>
   <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@full_text</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:round</span><span class='rparen'>)</span>
@@ -2362,12 +2510,12 @@
       <pre class="lines">
 
 
-211
-212
-213</pre>
+261
+262
+263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 211</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 261</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_primitive_marker'>primitive_marker</span>
   <span class='symbol'>:label</span>
@@ -2403,13 +2551,13 @@
       <pre class="lines">
 
 
-101
-102
-103
-104</pre>
+132
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
   <span class='ivar'>@min_width</span><span class='comma'>,</span> <span class='ivar'>@min_height</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@ellipsis</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span>
@@ -2500,13 +2648,13 @@
       <pre class="lines">
 
 
-137
-138
-139
-140</pre>
+168
+169
+170
+171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 137</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recenter_in'>recenter_in</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='label'>offset:</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='ivar'>@x</span> <span class='op'>=</span> <span class='id identifier rubyid_w'>w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
@@ -2561,12 +2709,12 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rect'>rect</span>
   <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@text</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:round</span><span class='rparen'>)</span>
@@ -2602,17 +2750,141 @@
       <pre class="lines">
 
 
-128
-129
-130
-131</pre>
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retruncate'>retruncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
   <span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="right-instance_method">
+  
+    #<strong>right</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns right edge of the label&#39;s current size</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Returns right edge of the label&#39;s current size</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+240
+241
+242</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 240</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_right'>right</span>
+  <span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="split_labels-instance_method">
+  
+    #<strong>split_labels</strong>(label, a, b, width, height)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 245</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_split_labels'>split_labels</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_a'>a</span>
+  <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
+  <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_old_y'>old_y</span> <span class='op'>=</span> <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>
+
+  <span class='id identifier rubyid_b_label'>b_label</span> <span class='op'>=</span> <span class='id identifier rubyid_dup'>dup</span>
+  <span class='id identifier rubyid_b_label'>b_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
+  <span class='id identifier rubyid_b_label'>b_label</span><span class='period'>.</span><span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
+  <span class='id identifier rubyid_b_label'>b_label</span><span class='period'>.</span><span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_b_label'>b_label</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='id identifier rubyid_old_y'>old_y</span> <span class='op'>-</span> <span class='id identifier rubyid_height'>height</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_b_label'>b_label</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2665,26 +2937,26 @@
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125</pre>
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@max_width</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_width'>width</span>
@@ -2702,6 +2974,70 @@
   <span class='kw'>end</span>
 
   <span class='ivar'>@text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vertical_align-instance_method">
+  
+    #<strong>vertical_align</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='vertical_alignment_enum-instance_method'>vertical_alignment_enum</span></span>
+    </span>
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_vertical_align'>vertical_align</span>
+  <span class='ivar'>@vertical_alignment</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="vertical_align=-instance_method">
+  
+    #<strong>vertical_align=</strong>(new_alignment)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 108</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_vertical_align='>vertical_align=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
+  <span class='ivar'>@vertical_alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#VERTICAL_ALIGNMENT-constant" title="Zif::UI::Label::VERTICAL_ALIGNMENT (constant)">VERTICAL_ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2772,37 +3108,6 @@
       <pre class="lines">
 
 
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
 195
 196
 197
@@ -2816,47 +3121,74 @@
 205
 206
 207
-208</pre>
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='label'>indent:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='kw'>self</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='ivar'>@full_text</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
 
-  <span class='id identifier rubyid_words'>words</span> <span class='op'>=</span> <span class='ivar'>@full_text</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\\</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\\n</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_words'>words</span> <span class='op'>=</span> <span class='ivar'>@full_text</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\\</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#MAGIC_NEWLINE_DELIMITER-constant" title="Zif::UI::Label::MAGIC_NEWLINE_DELIMITER (constant)">MAGIC_NEWLINE_DELIMITER</a></span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new_labels'>new_labels</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_cur_label'>cur_label</span> <span class='op'>=</span> <span class='id identifier rubyid_dup'>dup</span>
   <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
   <span class='kw'>while</span> <span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
+    <span class='id identifier rubyid_finish_line'>finish_line</span> <span class='op'>=</span> <span class='kw'>false</span>
     <span class='id identifier rubyid_cur_word'>cur_word</span> <span class='op'>=</span> <span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span>
 
     <span class='comment'># If this word contains newlines, split into new words and add the extras back to &#39;words&#39;
-</span>    <span class='id identifier rubyid_lines'>lines</span> <span class='op'>=</span> <span class='id identifier rubyid_cur_word'>cur_word</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_lines'>lines</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_lines'>lines</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
-    <span class='id identifier rubyid_cur_word'>cur_word</span> <span class='op'>=</span> <span class='id identifier rubyid_lines'>lines</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+</span>    <span class='id identifier rubyid_cur_word'>cur_word</span><span class='comma'>,</span> <span class='id identifier rubyid_remainder'>remainder</span> <span class='op'>=</span> <span class='id identifier rubyid_cur_word'>cur_word</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#MAGIC_NEWLINE_DELIMITER-constant" title="Zif::UI::Label::MAGIC_NEWLINE_DELIMITER (constant)">MAGIC_NEWLINE_DELIMITER</a></span></span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_remainder'>remainder</span>
+      <span class='id identifier rubyid_finish_line'>finish_line</span> <span class='op'>=</span> <span class='kw'>true</span>
+      <span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_remainder'>remainder</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
 
     <span class='id identifier rubyid_existing_text'>existing_text</span> <span class='op'>=</span> <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span>
-    <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_existing_text'>existing_text</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_existing_text'>existing_text</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_cur_word'>cur_word</span>
+    <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_existing_text'>existing_text</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_existing_text'>existing_text</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_cur_word'>cur_word</span> <span class='kw'>unless</span> <span class='id identifier rubyid_cur_word'>cur_word</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
     <span class='id identifier rubyid_cur_rect'>cur_rect</span> <span class='op'>=</span> <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_rect'>rect</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_cur_rect'>cur_rect</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_width'>width</span>
       <span class='kw'>if</span> <span class='id identifier rubyid_existing_text'>existing_text</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
-        <span class='comment'># One really long word.
-</span>        <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
-      <span class='kw'>else</span>
-        <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_existing_text'>existing_text</span>
-        <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
-        <span class='id identifier rubyid_new_labels'>new_labels</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_cur_label'>cur_label</span>
-        <span class='id identifier rubyid_old_y'>old_y</span> <span class='op'>=</span> <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span>
-
-        <span class='id identifier rubyid_cur_label'>cur_label</span> <span class='op'>=</span> <span class='id identifier rubyid_dup'>dup</span>
-        <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_indent'>indent</span> <span class='op'>+</span> <span class='id identifier rubyid_cur_word'>cur_word</span>
-        <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
         <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
-        <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='id identifier rubyid_old_y'>old_y</span> <span class='op'>-</span> <span class='id identifier rubyid_cur_rect'>cur_rect</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_old_label'>old_label</span><span class='comma'>,</span> <span class='id identifier rubyid_cur_label'>cur_label</span> <span class='op'>=</span> <span class='id identifier rubyid_split_labels'>split_labels</span><span class='lparen'>(</span><span class='id identifier rubyid_cur_label'>cur_label</span><span class='comma'>,</span> <span class='id identifier rubyid_existing_text'>existing_text</span><span class='comma'>,</span> <span class='id identifier rubyid_indent'>indent</span> <span class='op'>+</span> <span class='id identifier rubyid_cur_word'>cur_word</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_cur_rect'>cur_rect</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_new_labels'>new_labels</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_old_label'>old_label</span>
       <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_finish_line'>finish_line</span>
+      <span class='id identifier rubyid_old_label'>old_label</span><span class='comma'>,</span> <span class='id identifier rubyid_cur_label'>cur_label</span> <span class='op'>=</span> <span class='id identifier rubyid_split_labels'>split_labels</span><span class='lparen'>(</span><span class='id identifier rubyid_cur_label'>cur_label</span><span class='comma'>,</span> <span class='id identifier rubyid_cur_label'>cur_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_cur_rect'>cur_rect</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_new_labels'>new_labels</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_old_label'>old_label</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -2876,7 +3208,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Apr  3 11:19:48 2021 by
+  Generated on Sun May 30 12:56:48 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

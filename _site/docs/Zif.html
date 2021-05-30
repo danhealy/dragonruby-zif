@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>app/lib/zif/zif.rb<span class="defines">,<br />
-  app/lib/zif/game.rb,<br /> app/lib/zif/scene.rb,<br /> app/lib/zif/sprite.rb,<br /> app/lib/zif/ui/label.rb,<br /> app/lib/zif/clickable.rb,<br /> app/lib/zif/traceable.rb,<br /> app/lib/zif/assignable.rb,<br /> app/lib/zif/serializable.rb,<br /> app/lib/zif/layers/camera.rb,<br /> app/lib/zif/render_target.rb,<br /> app/lib/zif/ui/nine_panel.rb,<br /> app/lib/zif/actions/action.rb,<br /> app/lib/zif/compound_sprite.rb,<br /> app/lib/zif/layers/tileable.rb,<br /> app/lib/zif/actions/sequence.rb,<br /> app/lib/zif/layers/layerable.rb,<br /> app/lib/zif/actions/actionable.rb,<br /> app/lib/zif/actions/animatable.rb,<br /> app/lib/zif/layers/bitmaskable.rb,<br /> app/lib/zif/layers/layer_group.rb,<br /> app/lib/zif/layers/tiled_layer.rb,<br /> app/lib/zif/ui/nine_panel_edge.rb,<br /> app/lib/zif/layers/active_layer.rb,<br /> app/lib/zif/layers/simple_layer.rb,<br /> app/lib/zif/ui/two_stage_button.rb,<br /> app/lib/zif/services/input_service.rb,<br /> app/lib/zif/services/service_group.rb,<br /> app/lib/zif/services/action_service.rb,<br /> app/lib/zif/services/sprite_registry.rb,<br /> app/lib/zif/layers/active_tiled_layer.rb,<br /> app/lib/zif/services/tick_trace_service.rb,<br /> app/lib/zif/layers/bitmasked_tiled_layer.rb,<br /> app/lib/zif/layers/active_bitmasked_tiled_layer.rb</span>
+  app/lib/zif/game.rb,<br /> app/lib/zif/scene.rb,<br /> app/lib/zif/sprite.rb,<br /> app/lib/zif/ui/input.rb,<br /> app/lib/zif/ui/label.rb,<br /> app/lib/zif/clickable.rb,<br /> app/lib/zif/traceable.rb,<br /> app/lib/zif/assignable.rb,<br /> app/lib/zif/serializable.rb,<br /> app/lib/zif/key_pressable.rb,<br /> app/lib/zif/layers/camera.rb,<br /> app/lib/zif/render_target.rb,<br /> app/lib/zif/ui/nine_panel.rb,<br /> app/lib/zif/actions/action.rb,<br /> app/lib/zif/compound_sprite.rb,<br /> app/lib/zif/layers/tileable.rb,<br /> app/lib/zif/actions/sequence.rb,<br /> app/lib/zif/layers/layerable.rb,<br /> app/lib/zif/actions/actionable.rb,<br /> app/lib/zif/actions/animatable.rb,<br /> app/lib/zif/layers/bitmaskable.rb,<br /> app/lib/zif/layers/layer_group.rb,<br /> app/lib/zif/layers/tiled_layer.rb,<br /> app/lib/zif/ui/nine_panel_edge.rb,<br /> app/lib/zif/layers/active_layer.rb,<br /> app/lib/zif/layers/simple_layer.rb,<br /> app/lib/zif/ui/two_stage_button.rb,<br /> app/lib/zif/services/input_service.rb,<br /> app/lib/zif/services/service_group.rb,<br /> app/lib/zif/services/action_service.rb,<br /> app/lib/zif/services/sprite_registry.rb,<br /> app/lib/zif/layers/active_tiled_layer.rb,<br /> app/lib/zif/services/tick_trace_service.rb,<br /> app/lib/zif/layers/bitmasked_tiled_layer.rb,<br /> app/lib/zif/layers/active_bitmasked_tiled_layer.rb</span>
 </dd>
   </dl>
   
@@ -100,7 +100,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Zif/Actions.html" title="Zif::Actions (module)">Actions</a></span>, <span class='object_link'><a href="Zif/Assignable.html" title="Zif::Assignable (module)">Assignable</a></span>, <span class='object_link'><a href="Zif/Clickable.html" title="Zif::Clickable (module)">Clickable</a></span>, <span class='object_link'><a href="Zif/Layers.html" title="Zif::Layers (module)">Layers</a></span>, <span class='object_link'><a href="Zif/Serializable.html" title="Zif::Serializable (module)">Serializable</a></span>, <span class='object_link'><a href="Zif/Services.html" title="Zif::Services (module)">Services</a></span>, <span class='object_link'><a href="Zif/Traceable.html" title="Zif::Traceable (module)">Traceable</a></span>, <span class='object_link'><a href="Zif/UI.html" title="Zif::UI (module)">UI</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Zif/Actions.html" title="Zif::Actions (module)">Actions</a></span>, <span class='object_link'><a href="Zif/Assignable.html" title="Zif::Assignable (module)">Assignable</a></span>, <span class='object_link'><a href="Zif/Clickable.html" title="Zif::Clickable (module)">Clickable</a></span>, <span class='object_link'><a href="Zif/KeyPressable.html" title="Zif::KeyPressable (module)">KeyPressable</a></span>, <span class='object_link'><a href="Zif/Layers.html" title="Zif::Layers (module)">Layers</a></span>, <span class='object_link'><a href="Zif/Serializable.html" title="Zif::Serializable (module)">Serializable</a></span>, <span class='object_link'><a href="Zif/Services.html" title="Zif::Services (module)">Services</a></span>, <span class='object_link'><a href="Zif/Traceable.html" title="Zif::Traceable (module)">Traceable</a></span>, <span class='object_link'><a href="Zif/UI.html" title="Zif::UI (module)">UI</a></span>
     
   
     
@@ -120,7 +120,7 @@
         <dt id="GTK_COMPATIBLE_VERSION-constant" class="">GTK_COMPATIBLE_VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.8</span><span class='tstring_end'>&#39;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2.14</span><span class='tstring_end'>&#39;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
   
@@ -379,7 +379,7 @@
 </li>
 
       
-        <li class="public ">
+        <li class="public deprecated">
   <span class="summary_signature">
     
       <a href="#roll-class_method" title="roll (class method)">.<strong>roll</strong>(dice: 4, sides: 16, modifier: 2)  &#x21d2; Numeric </a>
@@ -392,13 +392,33 @@
   
   
   
-  
+  <span class="deprecated note title">deprecated</span>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Chooses a number between <code>1</code> and <code>sides</code>, <code>dice</code> times, and then adds them together with <code>modifier</code>.</p>
-</div></span>
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public deprecated">
+  <span class="summary_signature">
+    
+      <a href="#roll_raw-class_method" title="roll_raw (class method)">.<strong>roll_raw</strong>(dice: 4, sides: 16)  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  <span class="deprecated note title">deprecated</span>
+  
+
+  
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'></div></span>
   
 </li>
 
@@ -406,7 +426,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#roll_raw-class_method" title="roll_raw (class method)">.<strong>roll_raw</strong>(dice: 4, sides: 16)  &#x21d2; Numeric </a>
+      <a href="#roll_raw_v2-class_method" title="roll_raw_v2 (class method)">.<strong>roll_raw_v2</strong>(dice: 1, sides: 6)  &#x21d2; Numeric </a>
     
 
     
@@ -421,7 +441,31 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Chooses a number between <code>1</code> and <code>sides</code>, <code>dice</code> times, and adds them together.</p>
+<p>v2 default arguments are to 1d6.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#roll_v2-class_method" title="roll_v2 (class method)">.<strong>roll_v2</strong>(dice: 1, sides: 6, modifier: 0)  &#x21d2; Numeric </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>v2 default arguments are to 1d6+0.</p>
 </div></span>
   
 </li>
@@ -710,28 +754,40 @@
       <pre class="lines">
 
 
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188</pre>
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_check_compatibility'>check_compatibility</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GTK_COMPATIBLE_VERSION-constant" title="Zif::GTK_COMPATIBLE_VERSION (constant)">GTK_COMPATIBLE_VERSION</a></span></span>
 
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+</span><span class='tstring_end'>&#39;</span></span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|      This version of the Zif framework was tested against DRGTK &#39;</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GTK_COMPATIBLE_VERSION-constant" title="Zif::GTK_COMPATIBLE_VERSION (constant)">GTK_COMPATIBLE_VERSION</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;       |</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|                You are running DragonRuby GTK Version &#39;</span><span class='embexpr_beg'>#{</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;                 |</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_against_str'>against_str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This version of the Zif framework was tested against DRGTK &#39;</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GTK_COMPATIBLE_VERSION-constant" title="Zif::GTK_COMPATIBLE_VERSION (constant)">GTK_COMPATIBLE_VERSION</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_against_pad'>against_pad</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lparen'>(</span><span class='int'>77</span> <span class='op'>-</span> <span class='id identifier rubyid_against_str'>against_str</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+
+  <span class='id identifier rubyid_running_str'>running_str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You are running DragonRuby GTK Version &#39;</span><span class='embexpr_beg'>#{</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_running_pad'>running_pad</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lparen'>(</span><span class='int'>77</span> <span class='op'>-</span> <span class='id identifier rubyid_running_str'>running_str</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
+
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='id identifier rubyid_against_pad'>against_pad</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_against_str'>against_str</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='lparen'>(</span><span class='id identifier rubyid_against_pad'>against_pad</span><span class='period'>.</span><span class='id identifier rubyid_even?'>even?</span> <span class='op'>?</span> <span class='id identifier rubyid_against_pad'>against_pad</span> <span class='op'>:</span> <span class='id identifier rubyid_against_pad'>against_pad</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|</span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='id identifier rubyid_running_pad'>running_pad</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_running_str'>running_str</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='lparen'>(</span><span class='id identifier rubyid_running_pad'>running_pad</span><span class='period'>.</span><span class='id identifier rubyid_even?'>even?</span> <span class='op'>?</span> <span class='id identifier rubyid_running_pad'>running_pad</span> <span class='op'>:</span> <span class='id identifier rubyid_running_pad'>running_pad</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>|</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>|                                                                             |</span><span class='tstring_end'>&#39;</span></span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| Please ensure you are using the latest versions of DRGTK and Zif:           |</span><span class='tstring_end'>&#39;</span></span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>| DRGTK: http://dragonruby.herokuapp.com/toolkit/game                         |</span><span class='tstring_end'>&#39;</span></span>
@@ -877,12 +933,12 @@
       <pre class="lines">
 
 
-171
-172
-173</pre>
+200
+201
+202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span><span class='comma'>,</span> <span class='id identifier rubyid_total'>total</span><span class='rparen'>)</span>
   <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sin'>sin</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span> <span class='op'>/</span> <span class='id identifier rubyid_total'>total</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='const'>Math</span><span class='op'>::</span><span class='const'>PI</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>2.0</span><span class='rparen'>)</span>
@@ -1515,8 +1571,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Chooses a number between <code>1</code> and <code>sides</code>, <code>dice</code> times, and then adds them together with <code>modifier</code>.</p>
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'></div></div>
+
+<p>Default arguments will be changed to match <span class='object_link'><a href="#roll_v2-class_method" title="Zif.roll_v2 (method)">roll_v2</a></span> in 3.0.0+</p>
 
 
   </div>
@@ -1605,12 +1662,12 @@
       <pre class="lines">
 
 
-148
-149
-150</pre>
+175
+176
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll'>roll</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='comma'>,</span> <span class='label'>modifier:</span> <span class='int'>2</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_roll_raw'>roll_raw</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='id identifier rubyid_dice'>dice</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_modifier'>modifier</span>
@@ -1631,8 +1688,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns Chooses a number between <code>1</code> and <code>sides</code>, <code>dice</code> times, and adds them together.</p>
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'></div></div>
+
+<p>Default arguments will be changed to match <span class='object_link'><a href="#roll_raw_v2-class_method" title="Zif.roll_raw_v2 (method)">roll_raw_v2</a></span> in 3.0.0+</p>
 
 
   </div>
@@ -1708,15 +1766,234 @@
       <pre class="lines">
 
 
-159
-160
-161</pre>
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 188</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_raw'>roll_raw</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_dice'>dice</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_z'>z</span><span class='comma'>,</span> <span class='id identifier rubyid_memo'>memo</span><span class='op'>|</span> <span class='id identifier rubyid_memo'>memo</span> <span class='op'>+</span> <span class='id identifier rubyid_z'>z</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="roll_raw_v2-class_method">
+  
+    .<strong>roll_raw_v2</strong>(dice: 1, sides: 6)  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>v2 default arguments are to 1d6</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Roll some dice</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_roll_raw_v2'>roll_raw_v2</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='rparen'>)</span>
+<span class='comment'># We roll 8, 2, 3, 16.  Added together this is 29.
+</span><span class='comment'># =&gt; 29</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dice</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sides</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>6</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Chooses a number between <code>1</code> and <code>sides</code>, <code>dice</code> times, and adds them together.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161
+162
+163</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 161</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_raw_v2'>roll_raw_v2</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>6</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_roll_raw_v2'>roll_raw_v2</span><span class='lparen'>(</span><span class='id identifier rubyid_dice'>dice</span><span class='comma'>,</span> <span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="roll_v2-class_method">
+  
+    .<strong>roll_v2</strong>(dice: 1, sides: 6, modifier: 0)  &#x21d2; <tt>Numeric</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>v2 default arguments are to 1d6+0</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Roll some dice with a modifier</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="Zif (module)">Zif</a></span></span><span class='period'>.</span><span class='id identifier rubyid_roll_v2'>roll_v2</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='comma'>,</span> <span class='label'>modifier:</span> <span class='int'>2</span><span class='rparen'>)</span>
+<span class='comment'># We roll 8, 2, 3, 16.  Added together this is 29.  At the end, the modifier is added.
+</span><span class='comment'># =&gt; 31</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dice</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sides</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>6</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifier</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Chooses a number between <code>1</code> and <code>sides</code>, <code>dice</code> times, and then adds them together with <code>modifier</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_v2'>roll_v2</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>6</span><span class='comma'>,</span> <span class='label'>modifier:</span> <span class='int'>0</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_roll'>roll</span><span class='lparen'>(</span><span class='id identifier rubyid_dice'>dice</span><span class='comma'>,</span> <span class='id identifier rubyid_sides'>sides</span><span class='comma'>,</span> <span class='id identifier rubyid_modifier'>modifier</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1883,13 +2160,13 @@
       <pre class="lines">
 
 
-165
-166
-167
-168</pre>
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 194</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_unique_name'>unique_name</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@names_used</span> <span class='op'>||=</span> <span class='int'>0</span>
@@ -1905,7 +2182,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Apr  3 11:19:47 2021 by
+  Generated on Sun May 30 12:56:46 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>

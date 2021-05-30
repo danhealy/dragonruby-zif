@@ -193,6 +193,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#process_key_event-instance_method" title="#process_key_event (instance method)">#<strong>process_key_event</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  <span class="private note title">private</span>
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#process_scroll-instance_method" title="#process_scroll (instance method)">#<strong>process_scroll</strong>  &#x21d2; Object </a>
     
 
@@ -231,6 +253,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Add a <span class='object_link'><a href="../Clickable.html" title="Zif::Clickable (module)">Clickable</a></span> object to the list of clickables to check every tick.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_key_pressable-instance_method" title="#register_key_pressable (instance method)">#<strong>register_key_pressable</strong>(key_pressable)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a <span class='object_link'><a href="../KeyPressable.html" title="Zif::KeyPressable (module)">KeyPressable</a></span> object to the list of keypressables to check every tick.</p>
 </div></span>
   
 </li>
@@ -279,6 +325,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Removes an <span class='object_link'><a href="../Clickable.html" title="Zif::Clickable (module)">Clickable</a></span> from the clickables array.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_key_pressable-instance_method" title="#remove_key_pressable (instance method)">#<strong>remove_key_pressable</strong>(key_pressable)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Removes an <span class='object_link'><a href="../KeyPressable.html" title="Zif::KeyPressable (module)">KeyPressable</a></span> from the keypressables array.</p>
 </div></span>
   
 </li>
@@ -418,22 +488,6 @@
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
 100
 101
 102
@@ -457,10 +511,26 @@
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_click'>process_click</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@clickables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -508,6 +578,75 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="process_key_event-instance_method">
+  
+    #<strong>process_key_event</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 143</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_process_key_event'>process_key_event</span>
+  <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@key_pressables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_text_keys'>text_keys</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_inputs'>inputs</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span>
+  <span class='id identifier rubyid_all_keys'>all_keys</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_inputs'>inputs</span><span class='period'>.</span><span class='id identifier rubyid_keyboard'>keyboard</span><span class='period'>.</span><span class='id identifier rubyid_key_down'>key_down</span><span class='period'>.</span><span class='id identifier rubyid_truthy_keys'>truthy_keys</span>
+
+  <span class='id identifier rubyid_text_keys'>text_keys</span> <span class='op'>&lt;&lt;</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_text_keys'>text_keys</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_all_keys'>all_keys</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_text_keys'>text_keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+    <span class='ivar'>@key_pressables</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='op'>|</span>
+      <span class='comment'># puts &quot;Zif::Services::InputService#process_key_event:#{key} #{all_keys} key_pressable:#{key_pressable.class} #{key_pressable}&quot;
+</span>      <span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='period'>.</span><span class='id identifier rubyid_handle_key'>handle_key</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_all_keys'>all_keys</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="process_scroll-instance_method">
   
     #<strong>process_scroll</strong>  &#x21d2; <tt>Object</tt> 
@@ -535,21 +674,21 @@
       <pre class="lines">
 
 
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138</pre>
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_scroll'>process_scroll</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@scrollables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -632,7 +771,6 @@
       <pre class="lines">
 
 
-41
 42
 43
 44
@@ -642,10 +780,11 @@
 48
 49
 50
-51</pre>
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_clickable'>register_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='comma'>,</span> <span class='label'>absorb_click:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@clickables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_clickable'>clickable</span>
@@ -657,6 +796,69 @@
     <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_z_index'>z_index</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid_z_index'>z_index</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_clickable'>clickable</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_key_pressable-instance_method">
+  
+    #<strong>register_key_pressable</strong>(key_pressable)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a <span class='object_link'><a href="../KeyPressable.html" title="Zif::KeyPressable (module)">KeyPressable</a></span> object to the list of keypressables to check every tick. Keypressable objects should respond to handle_key(key, kind=:down)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_pressable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../KeyPressable.html" title="Zif::KeyPressable (module)">Zif::KeyPressable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A Keypressable object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_register_key_pressable'>register_key_pressable</span><span class='lparen'>(</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='rparen'>)</span>
+  <span class='ivar'>@key_pressables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_key_pressable'>key_pressable</span>
+  <span class='id identifier rubyid_key_pressable'>key_pressable</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -697,24 +899,24 @@
       <pre class="lines">
 
 
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75</pre>
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_scrollable'>register_scrollable</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='comma'>,</span> <span class='id identifier rubyid_absorb_scroll'>absorb_scroll</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@scrollables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_scrollable'>scrollable</span>
@@ -777,15 +979,71 @@
       <pre class="lines">
 
 
-55
 56
-57</pre>
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_clickable'>remove_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='rparen'>)</span>
   <span class='ivar'>@clickables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_key_pressable-instance_method">
+  
+    #<strong>remove_key_pressable</strong>(key_pressable)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Removes an <span class='object_link'><a href="../KeyPressable.html" title="Zif::KeyPressable (module)">KeyPressable</a></span> from the keypressables array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key_pressable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../KeyPressable.html" title="Zif::KeyPressable (module)">Zif::KeyPressable</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_key_pressable'>remove_key_pressable</span><span class='lparen'>(</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='rparen'>)</span>
+  <span class='ivar'>@key_pressables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -818,12 +1076,12 @@
       <pre class="lines">
 
 
-78
-79
-80</pre>
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_scrollable'>remove_scrollable</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='rparen'>)</span>
   <span class='ivar'>@scrollables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='rparen'>)</span>
@@ -864,7 +1122,8 @@
 29
 30
 31
-32</pre>
+32
+33</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 27</span>
@@ -874,6 +1133,7 @@
   <span class='ivar'>@scrollables</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='ivar'>@absorb_list</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='ivar'>@expecting_mouse_up</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@key_pressables</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -885,7 +1145,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Apr  3 11:19:50 2021 by
+  Generated on Sun May 30 12:56:50 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>
