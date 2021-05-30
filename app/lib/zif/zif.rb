@@ -137,6 +137,33 @@ module Zif
     Math.atan2(x2 - x1, y2 - y1)
   end
 
+  # v2 default arguments are to 1d6+0
+  # @example Roll some dice with a modifier
+  #   Zif.roll_v2(dice: 4, sides: 16, modifier: 2)
+  #   # We roll 8, 2, 3, 16.  Added together this is 29.  At the end, the modifier is added.
+  #   # => 31
+  # @param [Integer] dice
+  # @param [Integer] sides
+  # @param [Numeric] modifier
+  # @return [Numeric] Chooses a number between +1+ and +sides+, +dice+ times, and then adds them together with +modifier+.
+  def self.roll_v2(dice: 1, sides: 6, modifier: 0)
+    roll(dice, sides, modifier)
+  end
+
+  # v2 default arguments are to 1d6
+  # @example Roll some dice
+  #   Zif.roll_raw_v2(dice: 4, sides: 16)
+  #   # We roll 8, 2, 3, 16.  Added together this is 29.
+  #   # => 29
+  # @param [Integer] dice
+  # @param [Integer] sides
+  # @return [Numeric] Chooses a number between +1+ and +sides+, +dice+ times, and adds them together.
+  def self.roll_raw_v2(dice: 1, sides: 6)
+    roll_raw_v2(dice, sides)
+  end
+
+  # @deprecated
+  # Default arguments will be changed to match {Zif.roll_v2} in 3.0.0+
   # @example Roll some dice with a modifier
   #   Zif.roll(dice: 4, sides: 16, modifier: 2)
   #   # We roll 8, 2, 3, 16.  Added together this is 29.  At the end, the modifier is added.
@@ -149,6 +176,8 @@ module Zif
     roll_raw(dice: dice, sides: sides) + modifier
   end
 
+  # @deprecated
+  # Default arguments will be changed to match {Zif.roll_raw_v2} in 3.0.0+
   # @example Roll some dice
   #   Zif.roll_raw(dice: 4, sides: 16)
   #   # We roll 8, 2, 3, 16.  Added together this is 29.
