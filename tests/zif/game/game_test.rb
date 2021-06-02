@@ -13,12 +13,15 @@ module GameTest
     end
   end
   SceneB = Class.new(Zif::Scene)
-
-  def test_unloads_scene(_args, assert)
-    scene_a = SceneA.new
-    game = Zif::Game.new.tap { |g| g.scene = scene_a }
-    game.perform_tick
-
-    assert.true! scene_a.unloaded
-  end
 end
+
+def test_unloads_scene(_args, assert)
+  scene_a = GameTest::SceneA.new
+  game = Zif::Game.new.tap { |g| g.scene = scene_a }
+  game.perform_tick
+
+  assert.true! scene_a.unloaded
+end
+
+$gtk.reset 100
+$gtk.log_level = :off
