@@ -143,6 +143,7 @@ module Zif
 
       next_scene = switch_scene(tick_result)
       if next_scene
+        @scene.unload_scene
         next_scene.prepare_scene
         @scene = next_scene
       else
