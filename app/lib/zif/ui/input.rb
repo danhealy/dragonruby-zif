@@ -31,7 +31,7 @@ module Zif
       FILTER_ALPHA_LOWERCASE = ('a'..'z').to_a.freeze
       FILTER_ALPHA = (FILTER_ALPHA_LOWERCASE + FILTER_ALPHA_LOWERCASE.map(&:upcase)).freeze
       FILTER_ALPHA_NUMERIC = (FILTER_NUMERIC + FILTER_ALPHA).freeze
-      FILTER_ALPHA_NUMERIC_UPPERCASE = (FILTER_NUMERIC + FILTER_ALPHA).map(&:upcase).freeze
+      FILTER_ALPHA_NUMERIC_UPPERCASE = (FILTER_NUMERIC + FILTER_ALPHA_LOWERCASE).map(&:upcase).freeze
 
       def initialize(
         text='',
@@ -73,16 +73,18 @@ module Zif
       def handle_input(text_key, all_keys)
         return false unless has_focus
 
-        return false if @filter_keys&.include?(text_key)
-
-        delete = (all_keys & %i[delete backspace]).any?
-        return false if max_length.positive? && !delete && text.length >= max_length
-
-        if delete
+        if (all_keys & %i[delete backspace]).any?
           self.text = text.chop
-        else
-          text.concat(text_key) unless text_key.nil?
+          return
         end
+
+        return false if max_length.positive? && text.length >= max_length
+
+        return true if text_key.nil?
+
+        return false if(!@filter_keys.nil? && !@filter_keys.include?(text_key))
+
+        text.concat(text_key)
         true
       end
     end
