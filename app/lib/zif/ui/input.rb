@@ -82,7 +82,7 @@ module Zif
 
         return true if text_key.nil?
 
-        return false if (!@filter_keys.nil? && !@filter_keys.include?(text_key))
+        return false if !@filter_keys.nil? && !@filter_keys.include?(text_key)
 
         text.concat(text_key)
         true
