@@ -14,24 +14,11 @@ module Zif
 
       attr_rect
 
-      # @return [Integer] Constrain input to max_length number of characters. Defaults to zero to allow any number of characters.
-      attr_accessor :max_length
-
-      # @return [Array<String>] List of characters to accept as valid input. Defaults to nil to allow all characters.
-      attr_accessor :filter_keys
-
-      # @return [Array<Symbol>] List of additional symbols to process, but not to append to the field. Defaults to [:delete, :backspace] and handles those.
-      attr_accessor :special_keys
+      # @return [Lambda] Called when character input is detected.  Called with +text+ and should return +text+ to be added to the input. Allows you to reject a keystroke or convert the display to something else.
+      attr_accessor :transform
 
       # @return [Boolean] Input fields only record key strokes when it has focus, set to +true+ when you want to capture keys. Defaults to +false+
       attr_accessor :has_focus
-
-      # convience values for @filter_keys
-      FILTER_NUMERIC = ('0'..'9').to_a.freeze
-      FILTER_ALPHA_LOWERCASE = ('a'..'z').to_a.freeze
-      FILTER_ALPHA = (FILTER_ALPHA_LOWERCASE + FILTER_ALPHA_LOWERCASE.map(&:upcase)).freeze
-      FILTER_ALPHA_NUMERIC = (FILTER_NUMERIC + FILTER_ALPHA).freeze
-      FILTER_ALPHA_NUMERIC_UPPERCASE = (FILTER_NUMERIC + FILTER_ALPHA_LOWERCASE).map(&:upcase).freeze
 
       def initialize(
         text='',
@@ -61,7 +48,7 @@ module Zif
         )
 
         @on_key_down = ->(text_key, all_keys) { handle_input(text_key, all_keys) }
-        @filter_keys = nil
+        @transform = nil
       end
 
       # @return [Boolean] Is the text field focused?
@@ -71,20 +58,17 @@ module Zif
 
       # @api private
       def handle_input(text_key, all_keys)
-        return false unless has_focus
+        return false unless focused?
 
         if (all_keys & %i[delete backspace]).any?
           self.text = text.chop
-          return
+          return true
         end
 
-        return false if max_length.positive? && text.length >= max_length
+        transformed_key = transform ? transform.call(text_key) : text_key
+        return false unless transformed_key
 
-        return true if text_key.nil?
-
-        return false if !@filter_keys.nil? && !@filter_keys.include?(text_key)
-
-        text.concat(text_key)
+        text.concat(transformed_key)
         true
       end
     end
