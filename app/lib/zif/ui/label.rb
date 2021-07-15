@@ -46,8 +46,11 @@ module Zif
       attr_accessor :ellipsis
       # @return [String] Path to the font file
       attr_accessor :font
-
+      # @return [Integer] The current Blendmode
+      attr_accessor :blendmode
+      
       alias size_enum size
+      alias blendmode_enum blendmode
 
       # @param [String] text {full_text}
       # @param [Integer] size {size}
