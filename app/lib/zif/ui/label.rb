@@ -18,6 +18,14 @@ module Zif
         top:    2
       }.freeze
 
+      BLENDMODE = {
+        none:     0,
+        alpha:    1,
+        add:      2,
+        mod:      3,
+        multiply: 4
+      }.freeze
+
       # @return [Numeric] X axis position
       attr_accessor :x
       # @return [Numeric] Y axis position
@@ -46,11 +54,6 @@ module Zif
       attr_accessor :ellipsis
       # @return [String] Path to the font file
       attr_accessor :font
-      # @return [Integer] The current Blendmode
-      attr_accessor :blendmode
-      
-      alias size_enum size
-      alias blendmode_enum blendmode
 
       # @param [String] text {full_text}
       # @param [Integer] size {size}
@@ -62,6 +65,7 @@ module Zif
       # @param [Integer] g {g}
       # @param [Integer] b {b}
       # @param [Integer] a {a}
+      # @param [Symbol, Integer] blend {blend} +:none+, +:alpha+, +:add+, +:mod+, +:multiply+ or +0+, +1+, +2+, +3+, +4+. See {BLENDMODE}
       def initialize(
         text='',
         size:               -1,
@@ -72,19 +76,21 @@ module Zif
         r:                  51,
         g:                  51,
         b:                  51,
-        a:                  255
+        a:                  255,
+        blend:              :alpha
       )
         @text               = text
         @full_text          = text
         @size               = size
-        @alignment          = ALIGNMENT.fetch(alignment, alignment)
-        @vertical_alignment = VERTICAL_ALIGNMENT.fetch(vertical_alignment, vertical_alignment)
         @ellipsis           = ellipsis
         @font               = font
         @r                  = r
         @g                  = g
         @b                  = b
         @a                  = a
+        self.blend          = blend
+        self.align          = alignment
+        self.vertical_align = vertical_alignment
         recalculate_minimums
       end
 
@@ -116,7 +122,24 @@ module Zif
         @vertical_alignment
       end
 
+      # Set blend mode using either symbol names or the enum integer values.
+      # @param [Symbol, Integer] new_blendmode {blend} +:none+, +:alpha+, +:add+, +:mod+, +:multiply+ or +0+, +1+, +2+, +3+, +4+. See {BLENDMODE}
+      # @return [Integer] The integer value for the specified blend mode
+      def blend=(new_blendmode)
+        @blendmode = BLENDMODE.fetch(new_blendmode, new_blendmode)
+      end
+
+      # @return [Integer] The integer value for the specified blend mode.  See {BLENDMODE}
+      # @example This always returns an integer, even if you set it using a symbol
+      #   mylabel.blend = :alpha  # => 1
+      #   mylabel.blend           # => 1
+      def blend
+        @blendmode
+      end
+
       # These are required to satisfy draw_ffi
+      alias size_enum size
+      alias blendmode_enum blend
       alias alignment_enum align
       alias vertical_alignment_enum vertical_align
 

@@ -25,6 +25,7 @@ module Zif
       @r                = sprite[:r]                 if sprite[:r]
       @g                = sprite[:g]                 if sprite[:g]
       @b                = sprite[:b]                 if sprite[:b]
+      @blendmode        = sprite[:blendmode]         if sprite[:blendmode]
       @tile_x           = sprite[:tile_x]            if sprite[:tile_x]
       @tile_y           = sprite[:tile_y]            if sprite[:tile_y]
       @tile_w           = sprite[:tile_w]            if sprite[:tile_w]

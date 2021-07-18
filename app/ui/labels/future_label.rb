@@ -12,8 +12,8 @@ module ExampleApp
       a: 255
     }.freeze
 
-    def initialize(text, size: -1, alignment: :left, r: COLOR[:r], g: COLOR[:g], b: COLOR[:b], a: COLOR[:a])
-      super(text, size: size, alignment: alignment, font: FONT, r: r, g: g, b: b, a: a)
+    def initialize(text, size: -1, alignment: :left, r: COLOR[:r], g: COLOR[:g], b: COLOR[:b], a: COLOR[:a], blend: :alpha)
+      super(text, size: size, alignment: alignment, font: FONT, r: r, g: g, b: b, a: a, blend: blend)
     end
   end
 end
