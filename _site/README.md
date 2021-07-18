@@ -592,3 +592,29 @@ Some features and things being considered for this library:
 - Ports of DRGTK Sample apps to "Zif style"
 
 If these sound interesting to you, make some noise in the [Dragonruby GTK Discord](https://discord.gg/T8wnRvNn7W) #oss-zif channel.
+
+# Development
+
+## Dependencies
+
+For development you should install the dependencies using Bundler. Ensure you have a recent (> 2.7) version of Ruby installed, and run `bundle install` to install the dependencies.
+
+## Testing
+
+Tests can be found in the `tests` directory.
+
+To execute the tests use the following command:
+
+```sh
+./dragonruby ./path/to/dragonruby-zif --test tests/zif.rb`
+```
+
+## Linting
+
+This project is linted with [RuboCop](https://rubocop.org/).
+
+To execute RuboCop run
+
+```sh
+rubocop -D
+```

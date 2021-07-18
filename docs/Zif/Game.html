@@ -817,7 +817,6 @@
       <pre class="lines">
 
 
-176
 177
 178
 179
@@ -828,10 +827,11 @@
 184
 185
 186
-187</pre>
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 177</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decorate_exception'>decorate_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>=</span><span class='tstring_end'>&#39;</span></span> <span class='op'>*</span> <span class='int'>120</span>
@@ -1141,7 +1141,8 @@
 159
 160
 161
-162</pre>
+162
+163</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 133</span>
@@ -1159,6 +1160,7 @@
 
   <span class='id identifier rubyid_next_scene'>next_scene</span> <span class='op'>=</span> <span class='id identifier rubyid_switch_scene'>switch_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_next_scene'>next_scene</span>
+    <span class='ivar'>@scene</span><span class='period'>.</span><span class='id identifier rubyid_unload_scene'>unload_scene</span>
     <span class='id identifier rubyid_next_scene'>next_scene</span><span class='period'>.</span><span class='id identifier rubyid_prepare_scene'>prepare_scene</span>
     <span class='ivar'>@scene</span> <span class='op'>=</span> <span class='id identifier rubyid_next_scene'>next_scene</span>
   <span class='kw'>else</span>
@@ -1229,17 +1231,17 @@
       <pre class="lines">
 
 
-166
 167
 168
 169
 170
 171
 172
-173</pre>
+173
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 166</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/game.rb', line 167</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_switch_scene'>switch_scene</span><span class='lparen'>(</span><span class='id identifier rubyid_tick_result'>tick_result</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_tick_result'>tick_result</span> <span class='kw'>if</span> <span class='id identifier rubyid_tick_result'>tick_result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Zif.html" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Scene.html" title="Zif::Scene (class)">Scene</a></span></span><span class='rparen'>)</span>
@@ -1305,7 +1307,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun May 30 12:56:47 2021 by
+  Generated on Sun Jul 18 10:09:06 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-2.7.2).
 </div>
