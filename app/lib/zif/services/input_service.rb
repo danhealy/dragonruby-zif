@@ -30,6 +30,7 @@ module Zif
         @absorb_list = []
         @expecting_mouse_up = []
         @key_pressables = []
+        @hoverables = []
       end
 
       # Add a {Zif::Clickable} object to the list of clickables to check every tick.
@@ -55,6 +56,21 @@ module Zif
       # @param [Zif::Clickable] clickable
       def remove_clickable(clickable)
         @clickables.delete(clickable)
+      end
+
+      # Add a {Zif::Hoverable} object to the list of hoverables to check every tick.
+      # Hoverable objects should respond to #hovered?(point)
+      #
+      # @param [Zif::Hoverable] hoverable A hoverable object
+      def register_hoverable(hoverable)
+        @hoverables << hoverable
+        hoverable
+      end
+
+      # Removes an {Zif::Hoverable} from the hoverables array.
+      # @param [Zif::Hoverable] hoverable
+      def remove_hoverable(hoverable)
+        @hoverables.delete(hoverable)
       end
 
       # Add a {Zif::KeyPressable} object to the list of keypressables to check every tick.
@@ -102,6 +118,7 @@ module Zif
 
         @mouse_point = $gtk.args.inputs.mouse.point
         process_scroll # Hanging this here for now.  It also needs @mouse_point
+        process_hover
 
         mouse_bits      = $gtk.args.inputs.mouse.button_bits
         mouse_up        = $gtk.args.inputs.mouse.up
@@ -169,6 +186,14 @@ module Zif
         @scrollables.each do |scrollable|
           scrollable.scrolled?(@mouse_point, wheel_direction)
         end
+      end
+
+      # @api private
+      def process_hover
+        return if @hoverables.empty?
+
+        @hoverables.each do |hoverable|
+        hoverable.hovered?(@mouse_point)
       end
     end
   end

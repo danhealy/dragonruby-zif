@@ -2,6 +2,7 @@
 require 'app/lib/zif/zif.rb'
 require 'app/lib/zif/serializable.rb'
 require 'app/lib/zif/clickable.rb'
+require 'app/lib/zif/hoverable.rb'
 require 'app/lib/zif/key_pressable.rb'
 require 'app/lib/zif/services/service_group.rb'
 require 'app/lib/zif/services/input_service.rb'
