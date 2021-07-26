@@ -193,7 +193,8 @@ module Zif
         return if @hoverables.empty?
 
         @hoverables.each do |hoverable|
-        hoverable.hovered?(@mouse_point)
+          hoverable.hovered?(@mouse_point)
+        end
       end
     end
   end
