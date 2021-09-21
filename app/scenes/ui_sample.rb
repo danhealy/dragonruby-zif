@@ -71,6 +71,17 @@ module ExampleApp
       end
 
       # -------------------------------------------------------------------------
+      # Hoverables
+      @hover_label = HoverLabel.new("Hover Over Me").tap do |l|
+        l.size = -2
+        l.x = 1000
+        l.y = 50
+        _r = l.full_size_rect
+        l.hover_rect = { x:l.x, y:l.y - _r[1], w:_r[0], h:_r[1] }
+      end
+
+
+      # -------------------------------------------------------------------------
       # Progress bars
       @count_progress = ProgressBar.new(:count_progress, 400, 0, @cur_color)
       @count_progress.x = 600
@@ -199,6 +210,7 @@ module ExampleApp
         @prog_label,
         @button_label,
         @metal_label,
+        @hover_label,
         @form_field_status,
         {
           x:    600,
@@ -223,6 +235,8 @@ module ExampleApp
       $game.services[:input_service].register_clickable(@delay_button)
       $game.services[:input_service].register_clickable(@form_field)
       $game.services[:input_service].register_key_pressable(@form_field.input)
+      $game.services[:input_service].register_hoverable(@hover_label)
+      $game.services[:input_service].register_clickable(@hover_label) # needs to be clickable too
 
       # If you're retaining a reference to sprites that will be displayed across every tick, it's best for performance
       # reasons if you use the static_sprites output.  You can always set the alpha of a sprite to zero to temporarily
