@@ -6,7 +6,7 @@
 <title>
   Class: Zif::Layers::SimpleLayer
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -115,9 +115,9 @@
 
 <p>In contrast, <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> is built on <span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span> and therefore must rerender every sprite on every tick.  This is balanced by not incurring a performance / memory penalty by rendering a sprite the size of the entire <span class='object_link'><a href="LayerGroup.html" title="Zif::Layers::LayerGroup (class)">LayerGroup</a></span> width times height.</p>
 
-<p>Deciding between <span class='object_link'><a href="" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> and <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> depends on your application.  Try organizing your layers into those that don&#39;t change at all, or only change when action (like camera movement) isn&#39;t happening, and put those sprites into a <span class='object_link'><a href="" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span>.  Then take all of the sprites which do need to change often, or are necessary for action, and put those in <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span>s.</p>
+<p>Deciding between <span class='object_link'><a href="" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> and <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> depends on your application.  Try organizing your layers into those that don’t change at all, or only change when action (like camera movement) isn’t happening, and put those sprites into a <span class='object_link'><a href="" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span>.  Then take all of the sprites which do need to change often, or are necessary for action, and put those in <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span>s.</p>
 
-<p>You can use this or <span class='object_link'><a href="" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> directly when the sprites contained don&#39;t need to snap to the tile grid set up in the <span class='object_link'><a href="LayerGroup.html" title="Zif::Layers::LayerGroup (class)">LayerGroup</a></span>.  Otherwise, you should use <span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">TiledLayer</a></span> or <span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">ActiveTiledLayer</a></span></p>
+<p>You can use this or <span class='object_link'><a href="" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> directly when the sprites contained don’t need to snap to the tile grid set up in the <span class='object_link'><a href="LayerGroup.html" title="Zif::Layers::LayerGroup (class)">LayerGroup</a></span>.  Otherwise, you should use <span class='object_link'><a href="TiledLayer.html" title="Zif::Layers::TiledLayer (class)">TiledLayer</a></span> or <span class='object_link'><a href="ActiveTiledLayer.html" title="Zif::Layers::ActiveTiledLayer (class)">ActiveTiledLayer</a></span></p>
 
 
   </div>
@@ -357,7 +357,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>This only removes it from the data layer, you&#39;ll need to redraw to remove it visually.</p>
+<p>This only removes it from the data layer, you’ll need to redraw to remove it visually.</p>
 </div></span>
   
 </li>
@@ -889,7 +889,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>This only removes it from the data layer, you&#39;ll need to redraw to remove it visually</p>
+<p>This only removes it from the data layer, you’ll need to redraw to remove it visually</p>
 
 
   </div>
@@ -1040,9 +1040,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 18 10:09:09 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 16:30:39 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>

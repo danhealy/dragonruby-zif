@@ -6,7 +6,7 @@
 <title>
   Class: ExampleApp::FutureLabel
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -158,7 +158,7 @@
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="../Zif/UI/Label.html" title="Zif::UI::Label (class)">Zif::UI::Label</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Zif/UI/Label.html#a-instance_method" title="Zif::UI::Label#a (method)">#a</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#b-instance_method" title="Zif::UI::Label#b (method)">#b</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#ellipsis-instance_method" title="Zif::UI::Label#ellipsis (method)">#ellipsis</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#font-instance_method" title="Zif::UI::Label#font (method)">#font</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#full_text-instance_method" title="Zif::UI::Label#full_text (method)">#full_text</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#g-instance_method" title="Zif::UI::Label#g (method)">#g</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#max_width-instance_method" title="Zif::UI::Label#max_width (method)">#max_width</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#min_height-instance_method" title="Zif::UI::Label#min_height (method)">#min_height</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#min_width-instance_method" title="Zif::UI::Label#min_width (method)">#min_width</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#r-instance_method" title="Zif::UI::Label#r (method)">#r</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#size-instance_method" title="Zif::UI::Label#size (method)">#size</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#text-instance_method" title="Zif::UI::Label#text (method)">#text</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#x-instance_method" title="Zif::UI::Label#x (method)">#x</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#y-instance_method" title="Zif::UI::Label#y (method)">#y</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Zif/UI/Label.html#a-instance_method" title="Zif::UI::Label#a (method)">#a</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#anchor_x-instance_method" title="Zif::UI::Label#anchor_x (method)">#anchor_x</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#anchor_y-instance_method" title="Zif::UI::Label#anchor_y (method)">#anchor_y</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#b-instance_method" title="Zif::UI::Label#b (method)">#b</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#ellipsis-instance_method" title="Zif::UI::Label#ellipsis (method)">#ellipsis</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#font-instance_method" title="Zif::UI::Label#font (method)">#font</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#full_text-instance_method" title="Zif::UI::Label#full_text (method)">#full_text</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#g-instance_method" title="Zif::UI::Label#g (method)">#g</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#max_width-instance_method" title="Zif::UI::Label#max_width (method)">#max_width</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#min_height-instance_method" title="Zif::UI::Label#min_height (method)">#min_height</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#min_width-instance_method" title="Zif::UI::Label#min_width (method)">#min_width</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#r-instance_method" title="Zif::UI::Label#r (method)">#r</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#size-instance_method" title="Zif::UI::Label#size (method)">#size</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#size_px-instance_method" title="Zif::UI::Label#size_px (method)">#size_px</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#text-instance_method" title="Zif::UI::Label#text (method)">#text</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#x-instance_method" title="Zif::UI::Label#x (method)">#x</a></span>, <span class='object_link'><a href="../Zif/UI/Label.html#y-instance_method" title="Zif::UI::Label#y (method)">#y</a></span></p>
 
   
   
@@ -267,12 +267,30 @@
 
 15
 16
-17</pre>
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/ui/labels/future_label.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>size:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span> <span class='label'>alignment:</span> <span class='symbol'>:left</span><span class='comma'>,</span> <span class='label'>r:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:r</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>g:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>a:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>blend:</span> <span class='symbol'>:alpha</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span>
+  <span class='label'>size:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>alignment:</span> <span class='symbol'>:left</span><span class='comma'>,</span>
+  <span class='label'>r:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:r</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>g:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:g</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>b:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>a:</span> <span class='const'><span class='object_link'><a href="#COLOR-constant" title="ExampleApp::FutureLabel::COLOR (constant)">COLOR</a></span></span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='label'>blend:</span> <span class='symbol'>:alpha</span>
+<span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>size:</span> <span class='id identifier rubyid_size'>size</span><span class='comma'>,</span> <span class='label'>alignment:</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span> <span class='label'>font:</span> <span class='const'><span class='object_link'><a href="#FONT-constant" title="ExampleApp::FutureLabel::FONT (constant)">FONT</a></span></span><span class='comma'>,</span> <span class='label'>r:</span> <span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='label'>g:</span> <span class='id identifier rubyid_g'>g</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='label'>a:</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='label'>blend:</span> <span class='id identifier rubyid_blend'>blend</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -286,9 +304,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 18 10:09:08 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 16:30:39 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>

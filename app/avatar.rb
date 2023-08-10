@@ -4,6 +4,7 @@ module ExampleApp
     attr_accessor :max_x, :max_y, :map_bounds
     attr_accessor :walking, :moving_to, :movement_action
 
+    # rubocop:disable Layout/ExtraSpacing
     DIRECTIONS = {
       [ 0,  1] => :n,
       [ 0, -1] => :s,
@@ -15,6 +16,7 @@ module ExampleApp
       [-1,  1] => :w,
       [-1, -1] => :w
     }.freeze
+    # rubocop:enable Layout/ExtraSpacing
 
     WALK_SPEED = 8
 

@@ -29,6 +29,3 @@ def test_clicked_forwards_to_contained_sprite(_args, assert)
 
   assert.equal! called_args, [sprite, [50, 50]]
 end
-
-$gtk.reset 100
-$gtk.log_level = :off

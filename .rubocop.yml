@@ -82,7 +82,7 @@ Layout/HashAlignment:
 # Ignoring comment lines due to YARD
 Layout/LineLength:
   Max: 120
-  IgnoredPatterns: ['^ *# ']
+  AllowedPatterns: ['^ *# ']
 
 Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space

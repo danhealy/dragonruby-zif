@@ -6,7 +6,7 @@
 <title>
   Class: Zif::RenderTarget
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -1887,7 +1887,7 @@
   You should avoid using this method if possible, as it may be removed or be changed in the future.
 </p>
 
-<p>Like <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>, returns a Zif::Sprite referencing <span class='object_link'><a href="#name-instance_method" title="Zif::RenderTarget#name (method)">#name</a></span> as <code>path</code> at the full width. This is private because it&#39;s used internally in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>, it should not be modified externally</p>
+<p>Like <span class='object_link'><a href="#containing_sprite-instance_method" title="Zif::RenderTarget#containing_sprite (method)">#containing_sprite</a></span>, returns a Zif::Sprite referencing <span class='object_link'><a href="#name-instance_method" title="Zif::RenderTarget#name (method)">#name</a></span> as <code>path</code> at the full width. This is private because it’s used internally in <span class='object_link'><a href="#redraw_from_buffer-instance_method" title="Zif::RenderTarget#redraw_from_buffer (method)">#redraw_from_buffer</a></span>, it should not be modified externally</p>
 
 
   </div>
@@ -2179,7 +2179,7 @@
 
 <p>One drawback of using this is that you are forced to specify a single rectangle area which is changing.</p>
 
-<p>Another drawback to using this is that the <code>path</code> for any sprite referencing the RenderTarget needs to change every time the buffer is switched.  Since this references it&#39;s own containing sprite, we can update the path for that sprite automatically, but if there exist any additional sprites referencing the <code>path</code> (like if you have a map and a minimap pointing to the same <code>path</code>), those will have to be updated manually. To support this, you can pass additional containing sprites as an array to have their <code>path</code> updated.</p>
+<p>Another drawback to using this is that the <code>path</code> for any sprite referencing the RenderTarget needs to change every time the buffer is switched.  Since this references it’s own containing sprite, we can update the path for that sprite automatically, but if there exist any additional sprites referencing the <code>path</code> (like if you have a map and a minimap pointing to the same <code>path</code>), those will have to be updated manually. To support this, you can pass additional containing sprites as an array to have their <code>path</code> updated.</p>
 
 <p>See the <span class='object_link'><a href="../ExampleApp/DoubleBufferRenderTest.html" title="ExampleApp::DoubleBufferRenderTest (class)">ExampleApp::DoubleBufferRenderTest</a></span> scene for a working example.</p>
 
@@ -2587,9 +2587,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun May 30 12:56:48 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 16:30:38 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>

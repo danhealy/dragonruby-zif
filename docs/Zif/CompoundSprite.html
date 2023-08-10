@@ -6,7 +6,7 @@
 <title>
   Class: Zif::CompoundSprite
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -108,19 +108,19 @@
 
 <p>This class acts like a (inherits from) spriteSprite but can itself accept a list of <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> and <span class='object_link'><a href="#labels-instance_method" title="Zif::CompoundSprite#labels (method)">#labels</a></span>, like <tt>$gtk.args.outputs</tt>.  Sprites and labels added to these arrays will be drawn using the <span class='object_link'><a href="#draw_override-instance_method" title="Zif::CompoundSprite#draw_override (method)">#draw_override</a></span> method, which is checked by DragonRuby GTK during the draw cycle.</p>
 
-<p>You can use <code>CompoundSprite</code> to draw several sprites which need to move together or relative to each other.  You can move the entire collection by changing the <code>CompoundSprite</code>&#39;s <code>x</code> and <code>y</code> values, and you can move the component sprites relative to each other individually. This is because this object itself is not drawn directly, per se (+@path+ is ignored), but has <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>, <code>source_x</code>, <code>source_y</code>, <code>source_w</code>, <code>source_h</code> values which act as modifiers to the contents of <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> it is drawing.</p>
+<p>You can use <code>CompoundSprite</code> to draw several sprites which need to move together or relative to each other.  You can move the entire collection by changing the <code>CompoundSprite</code>‘s <code>x</code> and <code>y</code> values, and you can move the component sprites relative to each other individually. This is because this object itself is not drawn directly, per se (+@path+ is ignored), but has <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code>, <code>source_x</code>, <code>source_y</code>, <code>source_w</code>, <code>source_h</code> values which act as modifiers to the contents of <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> it is drawing.</p>
 
 <p>A sprite which has been added to the <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> array will be drawn in the following way:</p>
 <ul><li>
-<p>The <code>CompoundSprite</code>&#39;s <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code> act as a viewable rectangle on the main screen and are absolute values compared to the game resolution.  Sprites which would be drawn completely outside of this rect will be ignored. *<strong>Important!</strong>* This is unlike Render Targets or regular sprites, which cut off the image cleanly at these boundaries.  The <code>CompoundSprite</code> is a virtual effect which can&#39;t slice a sprite in half.  Therefore, the entire sprite is rendered if even a portion is visible in the viewable rect.</p>
+<p>The <code>CompoundSprite</code>‘s <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code> act as a viewable rectangle on the main screen and are absolute values compared to the game resolution.  Sprites which would be drawn completely outside of this rect will be ignored. **Important!** This is unlike Render Targets or regular sprites, which cut off the image cleanly at these boundaries.  The <code>CompoundSprite</code> is a virtual effect which can’t slice a sprite in half.  Therefore, the entire sprite is rendered if even a portion is visible in the viewable rect.</p>
 </li><li>
-<p>The <code>CompoundSprite</code>&#39;s <code>source_x</code>, <code>source_y</code>, <code>source_w</code>, <code>source_h</code> act like these attributes would if displaying a normal image instead of a collection of sprites.  They are relative values of the <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> it is drawing.</p>
+<p>The <code>CompoundSprite</code>‘s <code>source_x</code>, <code>source_y</code>, <code>source_w</code>, <code>source_h</code> act like these attributes would if displaying a normal image instead of a collection of sprites.  They are relative values of the <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> it is drawing.</p>
 <ul><li>
-<p><code>source_x</code>, <code>source_y</code> reposition the origin of the viewport into the <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> array. E.g. If you have a sprite @ <code>0x/0y</code> with <code>10w/10h</code> it will not be drawn if the <code>CompoundSprite</code>&#39;s <code>source_x</code> and <code>source_y</code> exceeds <code>10/10</code></p>
+<p><code>source_x</code>, <code>source_y</code> reposition the origin of the viewport into the <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> array. E.g. If you have a sprite @ <code>0x/0y</code> with <code>10w/10h</code> it will not be drawn if the <code>CompoundSprite</code>‘s <code>source_x</code> and <code>source_y</code> exceeds <code>10/10</code></p>
 </li><li>
 <p><code>source_w</code>, <code>source_h</code> describe the extent of the viewport into the <span class='object_link'><a href="#sprites-instance_method" title="Zif::CompoundSprite#sprites (method)">#sprites</a></span> array. E.g. If the <code>CompoundSprite</code> has <tt>0x, 0y, 20w, 20h</tt>, and <tt>0 source_x, 0 source_y, 10 source_w, 10 source_h</tt>, the example <tt>0x, 0y, 10w, 10h</tt> sprite will be displayed twice as large as normal.</p>
 </li><li>
-<p>*<strong>Important!</strong>* As above, unlike a normal sprite, changing the <code>source_x</code>, <code>source_y</code>, <code>source_w</code>, <code>source_h</code> will not cause sprites drawn this way to be sliced in any way.  It will simply zoom and pan the complete sprites, and possibly ignore them if they exceed the extent of the viewable rectangle or the source viewport.</p>
+<p>**Important!** As above, unlike a normal sprite, changing the <code>source_x</code>, <code>source_y</code>, <code>source_w</code>, <code>source_h</code> will not cause sprites drawn this way to be sliced in any way.  It will simply zoom and pan the complete sprites, and possibly ignore them if they exceed the extent of the viewable rectangle or the source viewport.</p>
 </li></ul>
 </li></ul>
 
@@ -922,9 +922,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 18 10:09:08 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 16:30:39 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>

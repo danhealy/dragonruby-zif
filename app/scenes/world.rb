@@ -193,7 +193,7 @@ module ExampleApp
 
       return unless @camera
 
-      point = $gtk.args.mouse.point
+      point = [$args.inputs.mouse.x, $args.inputs.mouse.y]
 
       $gtk.args.outputs.labels << { x: 8, y: 720 - 88, text: "Camera: #{@camera.pos.join('x')} -> #{@camera.cur_w}x#{@camera.cur_h}.  Target #{@camera.target_x}x#{@camera.target_y}" }.merge(color)
       $gtk.args.outputs.labels << { x: 8, y: 720 - 108, text: "Mouse: #{point} window -> #{translate_point_to_camera(point)} world" }.merge(color)

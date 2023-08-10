@@ -6,7 +6,7 @@
 <title>
   Class: Zif::Services::SpriteRegistry
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -326,7 +326,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Creates a new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> which by convention is named the same as it&#39;s <code>path</code>, in “app/sprites/&lt;name&gt;.png” You can, of course, modify the prototype after creation.</p>
+<p>Creates a new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> which by convention is named the same as it’s <code>path</code>, in “app/sprites/&lt;name&gt;.png” You can, of course, modify the prototype after creation.</p>
 </div></span>
   
 </li>
@@ -852,17 +852,17 @@
     
 <p>Some background on autotiling (note the author uses a different numbering scheme - NEWS instead of NESW) <a href="https://gamedevelopment.tutsplus.com/tutorials/cms-25673">gamedevelopment.tutsplus.com/tutorials/cms-25673</a></p>
 
-<p>This method will automatically register all of the tiles for autotiling with BitmaskedTiledLayer. It&#39;ll register every possible direction, aliasing the ones that don&#39;t actually exist to the ones that do, depending on the number of edges specified (16 for cardinal directions only, 48 for inside corners, or 256 for every possibility). This expects that the actual filenames are using cardinal directions &amp; diagonal directions, separated by underscores, in the following order:</p>
+<p>This method will automatically register all of the tiles for autotiling with BitmaskedTiledLayer. It’ll register every possible direction, aliasing the ones that don’t actually exist to the ones that do, depending on the number of edges specified (16 for cardinal directions only, 48 for inside corners, or 256 for every possibility). This expects that the actual filenames are using cardinal directions &amp; diagonal directions, separated by underscores, in the following order:</p>
 
 <p>_north _east _south _west _ne _se _sw _nw</p>
 
 <p>It will also alias these to the raw bitmask value.</p>
 
-<p>Let&#39;s work through an example so this is clearer.  You are using a 48-tile set, so you have two different versions of the tile that has an adjacent tile to the north and east, either the corner is cut or not. The one where the corner is not cut - the only adjacent tiles are north, northeast and east - looks like |_ You need to have the file for this at “sprites/name_north_east_ne.png” From that one file, it will generate the following aliases:</p>
+<p>Let’s work through an example so this is clearer.  You are using a 48-tile set, so you have two different versions of the tile that has an adjacent tile to the north and east, either the corner is cut or not. The one where the corner is not cut - the only adjacent tiles are north, northeast and east - looks like |_ You need to have the file for this at “sprites/name_north_east_ne.png” From that one file, it will generate the following aliases:</p>
 <ul><li>
 <p>name_north_east_ne (the actual sprite)</p>
 </li><li>
-<p>All of the corner cases that don&#39;t actually exist because this is just the 48-set and not the full 256 name_north_east_ne_se, name_north_east_ne_sw, name_north_east_ne_nw, name_north_east_ne_se_sw, …</p>
+<p>All of the corner cases that don’t actually exist because this is just the 48-set and not the full 256 name_north_east_ne_se, name_north_east_ne_sw, name_north_east_ne_nw, name_north_east_ne_se_sw, …</p>
 </li><li>
 <p>Both of the above, but using the raw bitmask integer instead of the cardinal directions: 1+2+16= name_19, 1+2+16+32= name_51, …</p>
 </li></ul>
@@ -1088,7 +1088,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Creates a new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> which by convention is named the same as it&#39;s <code>path</code>, in “app/sprites/&lt;name&gt;.png” You can, of course, modify the prototype after creation</p>
+<p>Creates a new <span class='object_link'><a href="../Sprite.html" title="Zif::Sprite (class)">Zif::Sprite</a></span> which by convention is named the same as it’s <code>path</code>, in “app/sprites/&lt;name&gt;.png” You can, of course, modify the prototype after creation</p>
 
 
   </div>
@@ -1356,9 +1356,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 18 10:09:09 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 16:30:39 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>
