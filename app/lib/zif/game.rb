@@ -88,7 +88,7 @@ module Zif
       @scene_registry = {}
       @pause_actions = false
 
-      # Zif.check_compatibility
+      Zif.check_compatibility
     end
 
     # Register a {Zif::Scene} subclass by a Symbol name, for scene transitions.

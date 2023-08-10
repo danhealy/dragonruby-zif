@@ -1,27 +1,21 @@
 require 'tests/test_helpers.rb'
 
-module GameTest
-  class SceneA < Zif::Scene
+def test_unloads_scene(_args, assert)
+  test_scene_class = Class.new(Zif::Scene) do
     attr_reader :unloaded
 
     def perform_tick
-      SceneB
+      Class.new(Zif::Scene)
     end
 
     def unload_scene
       @unloaded = true
     end
   end
-  SceneB = Class.new(Zif::Scene)
-end
 
-def test_unloads_scene(_args, assert)
-  scene_a = GameTest::SceneA.new
-  game = Zif::Game.new.tap { |g| g.scene = scene_a }
+  test_scene = test_scene_class.new
+  game = Zif::Game.new.tap { |g| g.scene = test_scene }
   game.perform_tick
 
-  assert.true! scene_a.unloaded
+  assert.true! test_scene.unloaded
 end
-
-$gtk.reset 100
-$gtk.log_level = :off

@@ -43,6 +43,3 @@ def test_clicked_mouse_down_handler(_args, assert)
 
   assert.equal! called_args, [sprite, [50, 50]]
 end
-
-$gtk.reset 100
-$gtk.log_level = :off
