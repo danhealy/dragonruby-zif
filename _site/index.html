@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="dragonruby-zif">
 <meta property="og:title" content="Zif: A Drop-in Framework for DragonRuby GTK">
-<meta property="og:url" content="http://localhost:4000/">
+<meta property="og:url" content="/">
 
 
   <meta property="og:description" content="Zif: A Drop-in Framework for DragonRuby GTK">
@@ -34,7 +34,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/">
+<link rel="canonical" href="/">
 
 
 
@@ -45,7 +45,7 @@
     
       "@type": "Person",
       "name": null,
-      "url": "http://localhost:4000/"
+      "url": "/"
     
   }
 </script>
@@ -767,6 +767,14 @@ Zif::Services::TickTraceService: Slow tick. 504.920ms elapsed &gt;  20.000ms thr
 
 <p>For development you should install the dependencies using Bundler. Ensure you have a recent (&gt; 2.7) version of Ruby installed, and run <code class="language-plaintext highlighter-rouge">bundle install</code> to install the dependencies.</p>
 
+<p>If EventMachine won’t install, on MacOS at least, try:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>openssl@1.1
+gem <span class="nb">install </span>eventmachine <span class="nt">--</span> <span class="nt">--with-openssl-dir</span><span class="o">=</span><span class="si">$(</span>brew <span class="nt">--prefix</span> openssl@1.1<span class="si">)</span>
+</code></pre></div></div>
+
+<p>and then <code class="language-plaintext highlighter-rouge">bundle install</code> again.</p>
+
 <h2 id="testing">Testing</h2>
 
 <p>Tests can be found in the <code class="language-plaintext highlighter-rouge">tests</code> directory.</p>
@@ -830,7 +838,7 @@ Zif::Services::TickTraceService: Slow tick. 504.920ms elapsed &gt;  20.000ms thr
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2021 dragonruby-zif. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2023 dragonruby-zif. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

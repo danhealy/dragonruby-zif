@@ -599,6 +599,15 @@ If these sound interesting to you, make some noise in the [Dragonruby GTK Discor
 
 For development you should install the dependencies using Bundler. Ensure you have a recent (> 2.7) version of Ruby installed, and run `bundle install` to install the dependencies.
 
+If EventMachine won't install, on MacOS at least, try:
+
+```sh
+brew install openssl@1.1
+gem install eventmachine -- --with-openssl-dir=$(brew --prefix openssl@1.1)
+```
+
+and then `bundle install` again.
+
 ## Testing
 
 Tests can be found in the `tests` directory.

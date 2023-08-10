@@ -6,7 +6,7 @@
 <title>
   Class: Zif::Layers::LayerGroup
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -113,7 +113,7 @@
 
 <p>Has a concept of <code>logical</code> position as a multiple of <code>tile</code> width/height, applicable to any <span class='object_link'><a href="Tileable.html" title="Zif::Layers::Tileable (module)">Tileable</a></span> layers. For example, if your tiles are 16px wide, the 5th tile is at <tt>@logical_x==4</tt> but at <tt>@x==64</tt> on the layer.</p>
 
-<p>Of all things in the Zif library, this is probably the most opinionated - It&#39;s for a 2d game made of rectangular, non-overlapping tiles where the play area is larger than the screen.  As always YMMV</p>
+<p>Of all things in the Zif library, this is probably the most opinionated - It’s for a 2d game made of rectangular, non-overlapping tiles where the play area is larger than the screen.  As always YMMV</p>
 
 <p>As an example, you can have a “tiles” layer which gets redrawn only at the start of the game, an “interactive objects” layer which gets redrawn whenever objects appear or disappear, and then an “avatar” layer which gets redrawn constantly.  The advantage of using <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>s and <span class='object_link'><a href="../CompoundSprite.html" title="Zif::CompoundSprite (class)">CompoundSprite</a></span>s here is to keep the positioning consistent across all of the layers.  You can just pass all of the containing sprites to <span class='object_link'><a href="Camera.html" title="Zif::Layers::Camera (class)">Camera</a></span> and it will pan them all in unison.</p>
 
@@ -123,7 +123,7 @@
 <ul><li>
 <p>The memory requirements for anything based on <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> is the number of layers times the area of each layer.  Consider using <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> if you have a lot of layers with few sprites in them.</p>
 </li><li>
-<p>It is <strong>expensive</strong> to redraw a <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span> (<span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span>) with thousands of sprites. Consider: 1280x720 (screen size) / 16x16 (a small tile) -&gt; 80*45 tiles = 3600 tiles. Of course it&#39;s more expensive to draw every tile every tick (using <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span>), but you will see noticable hiccups if you redraw the render target often.  Try not to redraw <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>s with lots of sprites while action is happening.</p>
+<p>It is <strong>expensive</strong> to redraw a <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span> (<span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span>) with thousands of sprites. Consider: 1280x720 (screen size) / 16x16 (a small tile) -&gt; 80*45 tiles = 3600 tiles. Of course it’s more expensive to draw every tile every tick (using <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span>), but you will see noticable hiccups if you redraw the render target often.  Try not to redraw <span class='object_link'><a href="../RenderTarget.html" title="Zif::RenderTarget (class)">RenderTarget</a></span>s with lots of sprites while action is happening.</p>
 </li><li>
 <p>The takeaway is this: try to organize your layers between things that change often, and things that can be prerendered or need few updates duing play. Then choose between <span class='object_link'><a href="SimpleLayer.html" title="Zif::Layers::SimpleLayer (class)">SimpleLayer</a></span> and <span class='object_link'><a href="ActiveLayer.html" title="Zif::Layers::ActiveLayer (class)">ActiveLayer</a></span> as appropriate.</p>
 </li></ul>
@@ -2809,9 +2809,9 @@ $gtk.args.outputs.static_sprites &lt;&lt; @camera.layers
 </div>
 
       <div id="footer">
-  Generated on Sun Jul 18 10:09:08 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 15:47:46 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>

@@ -9,4 +9,5 @@ group :jekyll_plugins do
   gem 'jekyll-include-cache'
   gem 'jekyll-readme-index'
   gem 'jekyll-titles-from-headings'
+  gem 'webrick'
 end

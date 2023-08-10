@@ -112,7 +112,7 @@ module ExampleApp
         Zif::Actions::Sequence.new(
           [
             dragon_label.new_action({x: 1000}, duration: 10.seconds, easing: :smooth_start),
-            dragon_label.new_action({x: 0   }, duration: 10.seconds, easing: :smooth_stop)
+            dragon_label.new_action({x: 0   }, duration: 10.seconds, easing: :smooth_stop) # rubocop:disable Layout/ExtraSpacing
           ],
           repeat: :forever
         )

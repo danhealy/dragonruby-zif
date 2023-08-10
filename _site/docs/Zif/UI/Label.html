@@ -6,7 +6,7 @@
 <title>
   Class: Zif::UI::Label
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -107,7 +107,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>A basic label which is aware of it&#39;s size and can be truncated</p>
+<p>A basic label which is aware of it’s size and can be truncated</p>
 
 
   </div>
@@ -151,6 +151,17 @@
   <span class='label'>top:</span>    <span class='int'>2</span>
 <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
+        <dt id="BLENDMODE-constant" class="">BLENDMODE =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>none:</span>     <span class='int'>0</span><span class='comma'>,</span>
+  <span class='label'>alpha:</span>    <span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>add:</span>      <span class='int'>2</span><span class='comma'>,</span>
+  <span class='label'>mod:</span>      <span class='int'>3</span><span class='comma'>,</span>
+  <span class='label'>multiply:</span> <span class='int'>4</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
     </dl>
   
 
@@ -182,6 +193,60 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Alpha channel (Transparency) (<code>0-255</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anchor_x-instance_method" title="#anchor_x (instance method)">#<strong>anchor_x</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute anchor_x.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anchor_y-instance_method" title="#anchor_y (instance method)">#<strong>anchor_y</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute anchor_y.</p>
 </div></span>
   
 </li>
@@ -468,6 +533,33 @@
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#size_px-instance_method" title="#size_px (instance method)">#<strong>size_px</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute size_px.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#text-instance_method" title="#text (instance method)">#<strong>text</strong>  &#x21d2; String </a>
     
 
@@ -617,6 +709,56 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#blend-instance_method" title="#blend (instance method)">#<strong>blend</strong>  &#x21d2; Integer </a>
+    
+
+    
+      (also: #blendmode_enum)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The integer value for the specified blend mode.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blend=-instance_method" title="#blend= (instance method)">#<strong>blend=</strong>(new_blendmode)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set blend mode using either symbol names or the enum integer values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#color-instance_method" title="#color (instance method)">#<strong>color</strong>  &#x21d2; Hash&lt;Symbol, Numeric&gt; </a>
     
 
@@ -687,7 +829,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, vertical_alignment: :top, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; Label </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, vertical_alignment: :top, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255, blend: :alpha)  &#x21d2; Label </a>
     
 
     
@@ -846,7 +988,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns right edge of the label&#39;s current size.</p>
+<p>Returns right edge of the label’s current size.</p>
 </div></span>
   
 </li>
@@ -988,7 +1130,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, vertical_alignment: :top, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::UI::Label (class)">Label</a></span></tt> 
+    #<strong>initialize</strong>(text = &#39;&#39;, size: -1,, alignment: :left, vertical_alignment: :top, font: &#39;font.tff&#39;, ellipsis: &#39;…&#39;, r: 51, g: 51, b: 51, a: 255, blend: :alpha)  &#x21d2; <tt><span class='object_link'><a href="" title="Zif::UI::Label (class)">Label</a></span></tt> 
   
 
   
@@ -1186,6 +1328,24 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>blend</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:alpha</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#blend-instance_method" title="Zif::UI::Label#blend (method)">#blend</a></span> <code>:none</code>, <code>:alpha</code>, <code>:add</code>, <code>:mod</code>, <code>:multiply</code> or <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>. See <span class='object_link'><a href="#BLENDMODE-constant" title="Zif::UI::Label::BLENDMODE (constant)">BLENDMODE</a></span></p>
+</div>
+      
+    </li>
+  
 </ul>
 
 
@@ -1195,15 +1355,6 @@
       <pre class="lines">
 
 
-62
-63
-64
-65
-66
-67
-68
-69
-70
 71
 72
 73
@@ -1219,10 +1370,21 @@
 83
 84
 85
-86</pre>
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span>
   <span class='id identifier rubyid_text'>text</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
@@ -1234,19 +1396,21 @@
   <span class='label'>r:</span>                  <span class='int'>51</span><span class='comma'>,</span>
   <span class='label'>g:</span>                  <span class='int'>51</span><span class='comma'>,</span>
   <span class='label'>b:</span>                  <span class='int'>51</span><span class='comma'>,</span>
-  <span class='label'>a:</span>                  <span class='int'>255</span>
+  <span class='label'>a:</span>                  <span class='int'>255</span><span class='comma'>,</span>
+  <span class='label'>blend:</span>              <span class='symbol'>:alpha</span>
 <span class='rparen'>)</span>
   <span class='ivar'>@text</span>               <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
   <span class='ivar'>@full_text</span>          <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
   <span class='ivar'>@size</span>               <span class='op'>=</span> <span class='id identifier rubyid_size'>size</span>
-  <span class='ivar'>@alignment</span>          <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='rparen'>)</span>
-  <span class='ivar'>@vertical_alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#VERTICAL_ALIGNMENT-constant" title="Zif::UI::Label::VERTICAL_ALIGNMENT (constant)">VERTICAL_ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_vertical_alignment'>vertical_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_vertical_alignment'>vertical_alignment</span><span class='rparen'>)</span>
   <span class='ivar'>@ellipsis</span>           <span class='op'>=</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
   <span class='ivar'>@font</span>               <span class='op'>=</span> <span class='id identifier rubyid_font'>font</span>
   <span class='ivar'>@r</span>                  <span class='op'>=</span> <span class='id identifier rubyid_r'>r</span>
   <span class='ivar'>@g</span>                  <span class='op'>=</span> <span class='id identifier rubyid_g'>g</span>
   <span class='ivar'>@b</span>                  <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span>
   <span class='ivar'>@a</span>                  <span class='op'>=</span> <span class='id identifier rubyid_a'>a</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_blend'>blend</span>          <span class='op'>=</span> <span class='id identifier rubyid_blend'>blend</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_align'>align</span>          <span class='op'>=</span> <span class='id identifier rubyid_alignment'>alignment</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_vertical_align'>vertical_align</span> <span class='op'>=</span> <span class='id identifier rubyid_vertical_alignment'>vertical_alignment</span>
   <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1305,15 +1469,101 @@
       <pre class="lines">
 
 
-32
-33
-34</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_a'>a</span>
   <span class='ivar'>@a</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="anchor_x=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="anchor_x-instance_method">
+  
+    #<strong>anchor_x</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute anchor_x.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_anchor_x'>anchor_x</span>
+  <span class='ivar'>@anchor_x</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="anchor_y=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="anchor_y-instance_method">
+  
+    #<strong>anchor_y</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute anchor_y.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_anchor_y'>anchor_y</span>
+  <span class='ivar'>@anchor_y</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1366,12 +1616,12 @@
       <pre class="lines">
 
 
-30
-31
-32</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_b'>b</span>
   <span class='ivar'>@b</span>
@@ -1427,12 +1677,12 @@
       <pre class="lines">
 
 
-46
-47
-48</pre>
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ellipsis'>ellipsis</span>
   <span class='ivar'>@ellipsis</span>
@@ -1488,12 +1738,12 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_font'>font</span>
   <span class='ivar'>@font</span>
@@ -1549,12 +1799,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_full_text'>full_text</span>
   <span class='ivar'>@full_text</span>
@@ -1610,12 +1860,12 @@
       <pre class="lines">
 
 
-28
-29
-30</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_g'>g</span>
   <span class='ivar'>@g</span>
@@ -1671,12 +1921,12 @@
       <pre class="lines">
 
 
-38
-39
-40</pre>
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_width'>max_width</span>
   <span class='ivar'>@max_width</span>
@@ -1732,12 +1982,12 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_height'>min_height</span>
   <span class='ivar'>@min_height</span>
@@ -1793,12 +2043,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_width'>min_width</span>
   <span class='ivar'>@min_width</span>
@@ -1854,12 +2104,12 @@
       <pre class="lines">
 
 
-26
-27
-28</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_r'>r</span>
   <span class='ivar'>@r</span>
@@ -1919,15 +2169,58 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span>
   <span class='ivar'>@size</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="size_px=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="size_px-instance_method">
+  
+    #<strong>size_px</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute size_px.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_size_px'>size_px</span>
+  <span class='ivar'>@size_px</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1980,12 +2273,12 @@
       <pre class="lines">
 
 
-36
-37
-38</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_text'>text</span>
   <span class='ivar'>@text</span>
@@ -2041,12 +2334,12 @@
       <pre class="lines">
 
 
-22
-23
-24</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_x'>x</span>
   <span class='ivar'>@x</span>
@@ -2102,12 +2395,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_y'>y</span>
   <span class='ivar'>@y</span>
@@ -2185,12 +2478,12 @@
       <pre class="lines">
 
 
-104
-105
-106</pre>
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_align'>align</span>
   <span class='ivar'>@alignment</span>
@@ -2264,15 +2557,170 @@
       <pre class="lines">
 
 
-96
-97
-98</pre>
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_align='>align=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
   <span class='ivar'>@alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#ALIGNMENT-constant" title="Zif::UI::Label::ALIGNMENT (constant)">ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blend-instance_method">
+  
+    #<strong>blend</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='blendmode_enum-instance_method'>blendmode_enum</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The integer value for the specified blend mode.  See <span class='object_link'><a href="#BLENDMODE-constant" title="Zif::UI::Label::BLENDMODE (constant)">BLENDMODE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>This always returns an integer, even if you set it using a symbol</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_mylabel'>mylabel</span><span class='period'>.</span><span class='id identifier rubyid_blend'>blend</span> <span class='op'>=</span> <span class='symbol'>:alpha</span>  <span class='comment'># =&gt; 1
+</span><span class='id identifier rubyid_mylabel'>mylabel</span><span class='period'>.</span><span class='id identifier rubyid_blend'>blend</span>           <span class='comment'># =&gt; 1</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The integer value for the specified blend mode.  See <span class='object_link'><a href="#BLENDMODE-constant" title="Zif::UI::Label::BLENDMODE (constant)">BLENDMODE</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 138</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_blend'>blend</span>
+  <span class='ivar'>@blendmode</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blend=-instance_method">
+  
+    #<strong>blend=</strong>(new_blendmode)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set blend mode using either symbol names or the enum integer values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_blendmode</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p><span class='object_link'><a href="#blend-instance_method" title="Zif::UI::Label#blend (method)">#blend</a></span> <code>:none</code>, <code>:alpha</code>, <code>:add</code>, <code>:mod</code>, <code>:multiply</code> or <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>. See <span class='object_link'><a href="#BLENDMODE-constant" title="Zif::UI::Label::BLENDMODE (constant)">BLENDMODE</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The integer value for the specified blend mode</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_blend='>blend=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_blendmode'>new_blendmode</span><span class='rparen'>)</span>
+  <span class='ivar'>@blendmode</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#BLENDMODE-constant" title="Zif::UI::Label::BLENDMODE (constant)">BLENDMODE</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_new_blendmode'>new_blendmode</span><span class='comma'>,</span> <span class='id identifier rubyid_new_blendmode'>new_blendmode</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2323,17 +2771,17 @@
       <pre class="lines">
 
 
-174
-175
-176
-177
-178
-179
-180
-181</pre>
+202
+203
+204
+205
+206
+207
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 202</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color'>color</span>
   <span class='lbrace'>{</span>
@@ -2402,15 +2850,15 @@
       <pre class="lines">
 
 
-185
-186
-187
-188
-189
-190</pre>
+213
+214
+215
+216
+217
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 213</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color='>color=</span><span class='lparen'>(</span><span class='id identifier rubyid_rgba_array'>rgba_array</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@r</span> <span class='op'>=</span> <span class='id identifier rubyid_rgba_array'>rgba_array</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_rgba_array'>rgba_array</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -2467,12 +2915,12 @@
       <pre class="lines">
 
 
-126
-127
-128</pre>
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_full_size_rect'>full_size_rect</span>
   <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@full_text</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:round</span><span class='rparen'>)</span>
@@ -2510,12 +2958,12 @@
       <pre class="lines">
 
 
-261
-262
-263</pre>
+289
+290
+291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 261</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_primitive_marker'>primitive_marker</span>
   <span class='symbol'>:label</span>
@@ -2551,13 +2999,13 @@
       <pre class="lines">
 
 
-132
-133
-134
-135</pre>
+160
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
   <span class='ivar'>@min_width</span><span class='comma'>,</span> <span class='ivar'>@min_height</span> <span class='op'>=</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@ellipsis</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span>
@@ -2648,13 +3096,13 @@
       <pre class="lines">
 
 
-168
-169
-170
-171</pre>
+196
+197
+198
+199</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recenter_in'>recenter_in</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='label'>offset:</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='ivar'>@x</span> <span class='op'>=</span> <span class='id identifier rubyid_w'>w</span><span class='period'>.</span><span class='id identifier rubyid_idiv'>idiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
@@ -2709,12 +3157,12 @@
       <pre class="lines">
 
 
-121
-122
-123</pre>
+149
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rect'>rect</span>
   <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_calcstringbox'>calcstringbox</span><span class='lparen'>(</span><span class='ivar'>@text</span><span class='comma'>,</span> <span class='ivar'>@size</span><span class='comma'>,</span> <span class='ivar'>@font</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:round</span><span class='rparen'>)</span>
@@ -2750,13 +3198,13 @@
       <pre class="lines">
 
 
-159
-160
-161
-162</pre>
+187
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retruncate'>retruncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_recalculate_minimums'>recalculate_minimums</span>
@@ -2779,7 +3227,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns right edge of the label&#39;s current size</p>
+<p>Returns right edge of the label’s current size</p>
 
 
   </div>
@@ -2798,7 +3246,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Returns right edge of the label&#39;s current size</p>
+<p>Returns right edge of the label’s current size</p>
 </div>
       
     </li>
@@ -2811,12 +3259,12 @@
       <pre class="lines">
 
 
-240
-241
-242</pre>
+268
+269
+270</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 240</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 268</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_right'>right</span>
   <span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='id identifier rubyid_rect'>rect</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -2854,23 +3302,23 @@
       <pre class="lines">
 
 
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258</pre>
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 273</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_split_labels'>split_labels</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_label'>label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_a'>a</span>
@@ -2937,26 +3385,26 @@
       <pre class="lines">
 
 
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156</pre>
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_truncate'>truncate</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@max_width</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_width'>width</span>
@@ -2999,12 +3447,12 @@
       <pre class="lines">
 
 
-112
-113
-114</pre>
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_vertical_align'>vertical_align</span>
   <span class='ivar'>@vertical_alignment</span>
@@ -3029,12 +3477,12 @@
       <pre class="lines">
 
 
-108
-109
-110</pre>
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_vertical_align='>vertical_align=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
   <span class='ivar'>@vertical_alignment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#VERTICAL_ALIGNMENT-constant" title="Zif::UI::Label::VERTICAL_ALIGNMENT (constant)">VERTICAL_ALIGNMENT</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='comma'>,</span> <span class='id identifier rubyid_new_alignment'>new_alignment</span><span class='rparen'>)</span>
@@ -3108,34 +3556,6 @@
       <pre class="lines">
 
 
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
 223
 224
 225
@@ -3150,10 +3570,38 @@
 234
 235
 236
-237</pre>
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/label.rb', line 223</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wrap'>wrap</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='label'>indent:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='kw'>self</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='ivar'>@full_text</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='period'>.</span><span class='id identifier rubyid_positive?'>positive?</span>
@@ -3208,9 +3656,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sun May 30 12:56:48 2021 by
-  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.26 (ruby-2.7.2).
+  Generated on Thu Aug 10 15:47:45 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.0).
 </div>
 
     </div>
