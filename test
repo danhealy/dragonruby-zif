@@ -1,0 +1,3 @@
+cd ..
+./dragonruby dragonruby-zif --test tests/zif.rb --no-tick
+cd -

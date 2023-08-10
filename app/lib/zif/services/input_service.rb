@@ -100,7 +100,7 @@ module Zif
       def process_click
         return if @clickables.empty?
 
-        @mouse_point = $gtk.args.inputs.mouse.point
+        @mouse_point = [$args.inputs.mouse.x, $args.inputs.mouse.y]
         process_scroll # Hanging this here for now.  It also needs @mouse_point
 
         mouse_bits      = $gtk.args.inputs.mouse.button_bits

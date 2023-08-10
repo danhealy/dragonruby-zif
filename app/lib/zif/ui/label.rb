@@ -55,6 +55,8 @@ module Zif
       # @return [String] Path to the font file
       attr_accessor :font
 
+      attr_accessor :size_px, :anchor_x, :anchor_y
+
       # @param [String] text {full_text}
       # @param [Integer] size {size}
       # @param [Symbol, Integer] alignment {align} +:left+, +:center+, +:right+ or +0+, +1+, +2+. See {ALIGNMENT}

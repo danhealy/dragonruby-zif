@@ -51,5 +51,5 @@ requires = [
 # "lib/library.rb" = "app/lib/library.rb"
 
 [dragonruby]
-version = "2.23"
+version = "5.4"
 edition = "standard"
