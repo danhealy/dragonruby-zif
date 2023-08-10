@@ -54,8 +54,12 @@ module Zif
       attr_accessor :ellipsis
       # @return [String] Path to the font file
       attr_accessor :font
-
-      attr_accessor :size_px, :anchor_x, :anchor_y
+      # @return [Numeric] Font size in pixels; overrides size_enum if both are provided
+      attr_accessor :size_px
+      # @return [Numeric] Anchor X for rendering relative to width; default `nil` (same as 0.0). Set to 0.5 to center horziontally, for example.
+      attr_accessor :anchor_x
+      # @return [Numeric] Anchor Y for rendering relative to height; default `nil` (same as 0.0). Set to 0.5 to center vertically, for example.
+      attr_accessor :anchor_y
 
       # @param [String] text {full_text}
       # @param [Integer] size {size}
