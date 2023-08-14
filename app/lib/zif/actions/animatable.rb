@@ -53,6 +53,9 @@ module Zif
       # Use this function when you have a single image with multiple tiles, and you want to animate across them,
       # rather than a separate image per animation frame.
       #
+      # This helper assumes that the spritesheet image is laid out in a single row of tiles, each of the same size
+      # and with no spacing/padding between them.
+      #
       # @param [String, Symbol] named The name of the sequence, used when calling {run_animation_sequence}
       # @param [String] path the path to the spritesheet image.
       # @param [Integer] width The width of each tile in the spritesheet.
@@ -63,15 +66,15 @@ module Zif
       # @param [Integer, Symbol] repeat (see {Zif::Actions::Action::REPEAT_NAMES} for valid symbols)
       # @param [Block] block Passed to {Zif::Actions::Action#initialize}
       # @see Zif::Actions::Action#initialize
-      def new_tiled_animation(named:, path:, width:, height:, durations:, prop_prefix: :tile, repeat: :forever, &block)
+      def new_tiled_animation(named:, path:, width:, height:, durations:, repeat: :forever, &block)
         actions = durations.map_with_index do |duration, tile_index|
           new_action(
             {
-              path:               "sprites/#{path}.png",
-              "#{prop_prefix}_x": 0 + (tile_index * width),
-              "#{prop_prefix}_y": 0,
-              "#{prop_prefix}_w": width,
-              "#{prop_prefix}_h": height
+              path:     "sprites/#{path}.png",
+              source_x: 0 + (tile_index * width),
+              source_y: 0,
+              source_w: width,
+              source_h: height
             },
             duration: duration,
             easing:   :immediate,
