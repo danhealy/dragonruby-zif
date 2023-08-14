@@ -49,6 +49,40 @@ module Zif
         register_animation_sequence(named: named, sequence: Sequence.new(actions, repeat: repeat, &block))
       end
 
+      # Similar to +new_basic_animation+, but for a tiled animation.
+      # Use this function when you have a single image with multiple tiles, and you want to animate across them,
+      # rather than a separate image per animation frame.
+      #
+      # This helper assumes that the spritesheet image is laid out in a single row of tiles, each of the same size
+      # and with no spacing/padding between them.
+      #
+      # @param [String, Symbol] named The name of the sequence, used when calling {run_animation_sequence}
+      # @param [String] path the path to the spritesheet image.
+      # @param [Integer] width The width of each tile in the spritesheet.
+      # @param [Integer] height The height of each tile in the spritesheet.
+      # @param [Array<Integer>] durations The duration in ticks of each tile in the spritesheet.
+      #   Can be either :tile or :source, and will target props _x, _y, _w and _h. Defaults to :tile.
+      # @param [Integer, Symbol] repeat (see {Zif::Actions::Action::REPEAT_NAMES} for valid symbols)
+      # @param [Block] block Passed to {Zif::Actions::Action#initialize}
+      # @see Zif::Actions::Action#initialize
+      def new_tiled_animation(named:, path:, width:, height:, durations:, repeat: :forever, &block)
+        actions = durations.map_with_index do |duration, tile_index|
+          new_action(
+            {
+              path:     "sprites/#{path}.png",
+              source_x: 0 + (tile_index * width),
+              source_y: 0,
+              source_w: width,
+              source_h: height
+            },
+            duration: duration,
+            easing:   :immediate,
+            rounding: :none
+          )
+        end
+        register_animation_sequence(named: named, sequence: Sequence.new(actions, repeat: repeat, &block))
+      end
+
       # Manually register an animation sequence.
       # If you need more control over your {Zif::Actions::Sequence} than {#new_basic_animation} provides, you can create
       # it manually, and then register it here.

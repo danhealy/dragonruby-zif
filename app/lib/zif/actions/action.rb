@@ -286,7 +286,7 @@ module Zif
       # Insprired by https://www.youtube.com/watch?v=mr5xkf6zSzk
 
       # @note Meant to be called indirectly via setting {easing}
-      def immediate(_x)
+      def immediate(_x=nil)
         1.0
       end
 
