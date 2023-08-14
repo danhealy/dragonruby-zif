@@ -61,7 +61,6 @@ module Zif
       # @param [Integer] width The width of each tile in the spritesheet.
       # @param [Integer] height The height of each tile in the spritesheet.
       # @param [Array<Integer>] durations The duration in ticks of each tile in the spritesheet.
-      # @param [Symbol] prop_prefix The prefix of the properties to be modified by the animation.
       #   Can be either :tile or :source, and will target props _x, _y, _w and _h. Defaults to :tile.
       # @param [Integer, Symbol] repeat (see {Zif::Actions::Action::REPEAT_NAMES} for valid symbols)
       # @param [Block] block Passed to {Zif::Actions::Action#initialize}
