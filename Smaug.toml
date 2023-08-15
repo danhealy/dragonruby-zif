@@ -6,7 +6,7 @@ url = "https://danhealy.github.io/dragonruby-zif/"
 
 # Which files do you want to be automatically required from your package.
 requires = [
-  "smaug/zif/app/lib/zif/require.rb"
+  "smaug/zif/lib/require.rb"
 ]
 
 [dragonruby]

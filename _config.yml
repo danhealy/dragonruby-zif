@@ -65,6 +65,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - app
+  - lib
   - metadata
   - sprites
   - tests

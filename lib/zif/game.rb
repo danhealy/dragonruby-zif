@@ -28,7 +28,7 @@ module Zif
   #
   #   # =-=-=- In your app/main.rb -=-=-=
   #   # Require all of the Zif library:
-  #   require 'app/lib/zif/require.rb'
+  #   require 'lib/zif/require.rb'
   #   require 'my_game.rb'
   #
   #   def tick(args)

@@ -1,5 +1,5 @@
 # Require all of the Zif library:
-require 'app/lib/zif/require.rb'
+require 'lib/require.rb'
 
 # Required files for the Zif Example App:
 require 'app/require.rb'
