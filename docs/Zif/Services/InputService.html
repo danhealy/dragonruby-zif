@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/services/input_service.rb</dd>
+    <dd>lib/zif/services/input_service.rb</dd>
   </dl>
   
 </div>
@@ -440,7 +440,7 @@
 24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@last_mouse_bits</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -530,7 +530,7 @@
 139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_click'>process_click</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@clickables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -623,7 +623,7 @@
 158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 143</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_key_event'>process_key_event</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@key_pressables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -688,7 +688,7 @@
 172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_scroll'>process_scroll</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@scrollables</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -784,7 +784,7 @@
 52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_clickable'>register_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='comma'>,</span> <span class='label'>absorb_click:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@clickables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_clickable'>clickable</span>
@@ -854,7 +854,7 @@
 67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_key_pressable'>register_key_pressable</span><span class='lparen'>(</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='rparen'>)</span>
   <span class='ivar'>@key_pressables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_key_pressable'>key_pressable</span>
@@ -916,7 +916,7 @@
 91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_scrollable'>register_scrollable</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='comma'>,</span> <span class='id identifier rubyid_absorb_scroll'>absorb_scroll</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='ivar'>@scrollables</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_scrollable'>scrollable</span>
@@ -984,7 +984,7 @@
 58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_clickable'>remove_clickable</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='rparen'>)</span>
   <span class='ivar'>@clickables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_clickable'>clickable</span><span class='rparen'>)</span>
@@ -1040,7 +1040,7 @@
 73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_key_pressable'>remove_key_pressable</span><span class='lparen'>(</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='rparen'>)</span>
   <span class='ivar'>@key_pressables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key_pressable'>key_pressable</span><span class='rparen'>)</span>
@@ -1081,7 +1081,7 @@
 96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_scrollable'>remove_scrollable</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='rparen'>)</span>
   <span class='ivar'>@scrollables</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_scrollable'>scrollable</span><span class='rparen'>)</span>
@@ -1126,7 +1126,7 @@
 33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/input_service.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/input_service.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='ivar'>@clickables</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1145,9 +1145,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:39 2023 by
+  Generated on Tue Aug 15 20:07:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

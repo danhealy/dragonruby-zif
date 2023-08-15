@@ -83,7 +83,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/serializable.rb</dd>
+    <dd>lib/zif/serializable.rb</dd>
   </dl>
   
 </div>
@@ -287,7 +287,7 @@ end</code></pre>
 45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/serializable.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/serializable.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exclude_from_serialize'>exclude_from_serialize</span>
   <span class='qwords_beg'>%w[</span><span class='tstring_content'>args</span><span class='tstring_end'>]</span></span> <span class='comment'># Too much spam
@@ -346,7 +346,7 @@ end</code></pre>
 22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/serializable.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/serializable.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -412,7 +412,7 @@ end</code></pre>
 39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/serializable.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/serializable.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_serialize'>serialize</span>
   <span class='id identifier rubyid_attrs'>attrs</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -478,7 +478,7 @@ end</code></pre>
 27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/serializable.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/serializable.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_serialize'>serialize</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -493,9 +493,9 @@ end</code></pre>
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:37 2023 by
+  Generated on Tue Aug 15 20:07:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

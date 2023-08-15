@@ -9,8 +9,55 @@ This readme contains a basic overview of the functionality.  If you are looking 
 
 Full API documentation is available at [https://danhealy.github.io/dragonruby-zif/docs/](https://danhealy.github.io/dragonruby-zif/docs/)
 
+## Installation
+
+### Manually
+
+If you like to manage your project dependencies manually, you can simply copy the source into your project.
+
+0. Download a copy of Zif somewhere: `git clone https://github.com/danhealy/dragonruby-zif.git`.
+1. Copy the content of Zif's `lib` directory somewhere into your project.
+2. In your `main.rb`, require the parts of Zif you need. Or require everything using `require.rb`.
+
+Here is an example assuming you copied the content of Zif's `lib` directory into `lib/zif`:
+
+```ruby
+# This assumes your project looks like this:
+# /
+#   app/
+#     main.rb
+#   lib/
+#     zif/
+#       zif/
+#       require.rb
+#       zif.rb
+
+# Require all of the Zif library:
+require 'lib/zif/require.rb'
+
+def tick
+  # ....
+end
+```
+
+If you only want to require some parts, please see the `require.rb` file for more information.
+
+### Using smaug
+
+Simply add the following line to your project's `Smaug.toml` under `[dependencies]`:
+
+```toml
+# This will install zif from the `main` branch.
+# You can add an optional `tag = "vX.Y.Z"` if you want to use a specific release.
+zif = { repo = "https://github.com/danhealy/dragonruby-zif" }
+```
+
+And then run `smaug install` to fetch Zif as a dependency.
+This will automatically add all the necessary requires in your `smaug.rb`!
+
 ## Example App
-This repo is an example app showcasing the major features - the `Zif` library itself is entirely contained within the `app/lib` directory.
+This repo also contains an example app showcasing the major features of Zif.
+You can see the source code of this app in the `app` directory.
 
 ![](https://github.com/danhealy/docs/blob/main/dragonruby-zif/ui_sample.gif?raw=true)
 
@@ -19,25 +66,6 @@ This repo is an example app showcasing the major features - the `Zif` library it
 2. Change directory in your terminal to `dragonruby-zif-testbed`
 3. Clone this entire `dragonruby-zif` repo inside the `dragonruby-zif-testbed` directory - `git clone https://github.com/danhealy/dragonruby-zif.git`.
 4. Run using `./dragonruby dragonruby-zif/`
-
-## Installation in your app:
-
-App dependencies in DRGTK currently have to be managed manually, by copying the source into your project.
-
-0. Download a copy of Zif somewhere: `git clone https://github.com/danhealy/dragonruby-zif.git`.
-1. Create a `lib` directory inside your project's `app` directory, and then copy Zif's `app/lib/zif` directory into it.
-2. In your `main.rb`, require the parts of Zif you need.  To require everything:
-
-```ruby
-# Require all of the Zif library:
-require 'app/lib/zif/require.rb'
-
-def tick
-  # ....
-end
-```
-
-If you only want to require some parts, please see the `require.rb` file for more information.
 
 # Motivation
 
@@ -179,7 +207,7 @@ end
 
 # =-=-=- In your app/main.rb -=-=-=
 # Require all of the Zif library:
-require 'app/lib/zif/require.rb'
+require 'lib/zif/require.rb'
 require 'my_game.rb'
 def tick(args)
   if args.tick_count == 2

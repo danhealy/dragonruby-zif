@@ -83,7 +83,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/clickable.rb</dd>
+    <dd>lib/zif/clickable.rb</dd>
   </dl>
   
 </div>
@@ -310,7 +310,7 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/clickable.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/clickable.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_mouse_changed'>on_mouse_changed</span>
   <span class='ivar'>@on_mouse_changed</span>
@@ -371,7 +371,7 @@
 12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/clickable.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/clickable.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_mouse_down'>on_mouse_down</span>
   <span class='ivar'>@on_mouse_down</span>
@@ -432,7 +432,7 @@
 15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/clickable.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/clickable.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span>
   <span class='ivar'>@on_mouse_up</span>
@@ -498,7 +498,7 @@
 27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/clickable.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/clickable.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_absorb_click?'>absorb_click?</span>
   <span class='id identifier rubyid_on_mouse_up'>on_mouse_up</span> <span class='op'>||</span> <span class='id identifier rubyid_on_mouse_down'>on_mouse_down</span> <span class='op'>||</span> <span class='id identifier rubyid_on_mouse_changed'>on_mouse_changed</span>
@@ -610,7 +610,7 @@
 51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/clickable.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/clickable.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clicked?'>clicked?</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='comma'>,</span> <span class='id identifier rubyid_kind'>kind</span><span class='op'>=</span><span class='symbol'>:up</span><span class='rparen'>)</span>
   <span class='comment'># puts &quot;Clickable:#{@name}: clicked? #{kind} #{kind.class} #{point} -&gt; #{rect} = #{point.inside_rect?(self)}&quot;
@@ -640,9 +640,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:37 2023 by
+  Generated on Tue Aug 15 20:07:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

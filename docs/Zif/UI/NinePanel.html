@@ -98,7 +98,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/ui/nine_panel.rb</dd>
+    <dd>lib/zif/ui/nine_panel.rb</dd>
   </dl>
   
 </div>
@@ -899,7 +899,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../Actions/Animatable.html" title="Zif::Actions::Animatable (module)">Actions::Animatable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#new_tiled_animation-instance_method" title="Zif::Actions::Animatable#new_tiled_animation (method)">#new_tiled_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
 
   
   
@@ -991,7 +991,7 @@
 31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='const'>Zif</span><span class='period'>.</span><span class='id identifier rubyid_unique_name'>unique_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nine_panel</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -1059,7 +1059,7 @@
 16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_corners'>corners</span>
   <span class='ivar'>@corners</span>
@@ -1120,7 +1120,7 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_edges'>edges</span>
   <span class='ivar'>@edges</span>
@@ -1181,7 +1181,7 @@
 20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 18</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fill'>fill</span>
   <span class='ivar'>@fill</span>
@@ -1247,7 +1247,7 @@
 77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_height'>height</span>
   <span class='ivar'>@h</span>
@@ -1313,7 +1313,7 @@
 72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_height='>height=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_height'>new_height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_resize_height'>resize_height</span><span class='lparen'>(</span><span class='id identifier rubyid_new_height'>new_height</span><span class='rparen'>)</span>
@@ -1373,7 +1373,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1434,7 +1434,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1495,7 +1495,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1556,7 +1556,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1617,7 +1617,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1678,7 +1678,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1739,7 +1739,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1800,7 +1800,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1880,7 +1880,7 @@
 40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resize'>resize</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='comma'>,</span> <span class='id identifier rubyid_height'>height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_resize_width'>resize_width</span><span class='lparen'>(</span><span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span>
@@ -1930,7 +1930,7 @@
 52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resize_height'>resize_height</span><span class='lparen'>(</span><span class='id identifier rubyid__height'>_height</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> is expected to define #resize_height, to properly set component sprite attributes</span><span class='tstring_end'>&quot;</span></span>
@@ -1978,7 +1978,7 @@
 46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resize_width'>resize_width</span><span class='lparen'>(</span><span class='id identifier rubyid__width'>_width</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'> is expected to define #resize_width, to properly set component sprite attributes</span><span class='tstring_end'>&quot;</span></span>
@@ -2051,7 +2051,7 @@
 144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sprites'>sprites</span>
   <span class='kw'>unless</span> <span class='ivar'>@sprites_assigned</span>
@@ -2121,7 +2121,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2182,7 +2182,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2243,7 +2243,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2304,7 +2304,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2365,7 +2365,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2426,7 +2426,7 @@
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 99</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper_left</span><span class='words_sep'> </span><span class='tstring_content'>upper_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_right</span><span class='words_sep'> </span><span class='tstring_content'>lower_left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_corner</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@corners</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2487,7 +2487,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2548,7 +2548,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 121</span>
 
 <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>upper</span><span class='words_sep'> </span><span class='tstring_content'>right</span><span class='words_sep'> </span><span class='tstring_content'>lower</span><span class='words_sep'> </span><span class='tstring_content'>left</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_idx'>idx</span><span class='op'>|</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_edge</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@edges</span><span class='lbracket'>[</span><span class='id identifier rubyid_idx'>idx</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -2608,7 +2608,7 @@
 66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_width'>width</span>
   <span class='ivar'>@w</span>
@@ -2669,7 +2669,7 @@
 61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/nine_panel.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/nine_panel.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_width='>width=</span><span class='lparen'>(</span><span class='id identifier rubyid_new_width'>new_width</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_resize_width'>resize_width</span><span class='lparen'>(</span><span class='id identifier rubyid_new_width'>new_width</span><span class='rparen'>)</span>
@@ -2684,9 +2684,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:38 2023 by
+  Generated on Tue Aug 15 20:07:39 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="dragonruby-zif">
 <meta property="og:title" content="Zif: A Drop-in Framework for DragonRuby GTK">
-<meta property="og:url" content="/">
+<meta property="og:url" content="http://localhost:4000/">
 
 
   <meta property="og:description" content="Zif: A Drop-in Framework for DragonRuby GTK">
@@ -34,7 +34,7 @@
 
 
 
-<link rel="canonical" href="/">
+<link rel="canonical" href="http://localhost:4000/">
 
 
 
@@ -45,7 +45,7 @@
     
       "@type": "Person",
       "name": null,
-      "url": "/"
+      "url": "http://localhost:4000/"
     
   }
 </script>
@@ -166,7 +166,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#example-app">Example App</a><ul><li><a href="#running-the-example-app">Running the Example App:</a></li></ul></li><li><a href="#installation-in-your-app">Installation in your app:</a></li><li><a href="#basic-features">Basic Features</a><ul><li><a href="#zifsprite">Zif::Sprite</a></li><li><a href="#zifcompoundsprite">Zif::CompoundSprite</a></li><li><a href="#zifrendertarget">Zif::RenderTarget</a></li><li><a href="#zifgame">Zif::Game</a></li><li><a href="#zifscene">Zif::Scene</a></li></ul></li><li><a href="#zifactions-aka-tweening-easing">Zif::Actions (aka tweening, easing)</a><ul><li><a href="#zifactionsaction--zifactionsactionable">Zif::Actions::Action &amp; Zif::Actions::Actionable</a></li><li><a href="#zifactionssequence">Zif::Actions::Sequence</a></li><li><a href="#zifactionsanimatable">Zif::Actions::Animatable</a></li></ul></li><li><a href="#ziflayers">Zif::Layers</a><ul><li><a href="#ziflayerslayergroup">Zif::Layers::LayerGroup</a></li><li><a href="#ziflayerssimplelayer">Zif::Layers::SimpleLayer</a></li><li><a href="#ziflayersactivelayer">Zif::Layers::ActiveLayer</a></li><li><a href="#deciding-between-ziflayerssimplelayer--ziflayersactivelayer">Deciding between Zif::Layers::SimpleLayer &amp; Zif::Layers::ActiveLayer</a></li><li><a href="#ziflayerstileable">Zif::Layers::Tileable</a></li><li><a href="#ziflayersbitmaskable">Zif::Layers::Bitmaskable</a></li><li><a href="#ziflayerscamera">Zif::Layers::Camera</a></li></ul></li><li><a href="#zifui">Zif::UI</a><ul><li><a href="#zifuilabel">Zif::UI::Label</a></li><li><a href="#zifuiinput">Zif::UI::Input</a></li><li><a href="#zifuitwostagebutton">Zif::UI::TwoStageButton</a></li><li><a href="#zifuininepanel">Zif::UI::NinePanel</a></li></ul></li><li><a href="#zifservices--zifservicesservicegroup">Zif::Services &amp; Zif::Services::ServiceGroup</a><ul><li><a href="#zifservicesactionservice">Zif::Services::ActionService</a></li><li><a href="#zifservicesinputservice">Zif::Services::InputService</a></li><li><a href="#zifservicesspriteregistry">Zif::Services::SpriteRegistry</a></li><li><a href="#zifservicesticktraceservice--ziftraceable">Zif::Services::TickTraceService &amp; Zif::Traceable</a></li></ul></li><li><a href="#dependencies">Dependencies</a></li><li><a href="#testing">Testing</a></li><li><a href="#linting">Linting</a></li></ul>
+              <ul class="toc__menu"><li><a href="#installation">Installation</a><ul><li><a href="#manually">Manually</a></li><li><a href="#using-smaug">Using smaug</a></li></ul></li><li><a href="#example-app">Example App</a><ul><li><a href="#running-the-example-app">Running the Example App:</a></li></ul></li><li><a href="#basic-features">Basic Features</a><ul><li><a href="#zifsprite">Zif::Sprite</a></li><li><a href="#zifcompoundsprite">Zif::CompoundSprite</a></li><li><a href="#zifrendertarget">Zif::RenderTarget</a></li><li><a href="#zifgame">Zif::Game</a></li><li><a href="#zifscene">Zif::Scene</a></li></ul></li><li><a href="#zifactions-aka-tweening-easing">Zif::Actions (aka tweening, easing)</a><ul><li><a href="#zifactionsaction--zifactionsactionable">Zif::Actions::Action &amp; Zif::Actions::Actionable</a></li><li><a href="#zifactionssequence">Zif::Actions::Sequence</a></li><li><a href="#zifactionsanimatable">Zif::Actions::Animatable</a></li></ul></li><li><a href="#ziflayers">Zif::Layers</a><ul><li><a href="#ziflayerslayergroup">Zif::Layers::LayerGroup</a></li><li><a href="#ziflayerssimplelayer">Zif::Layers::SimpleLayer</a></li><li><a href="#ziflayersactivelayer">Zif::Layers::ActiveLayer</a></li><li><a href="#deciding-between-ziflayerssimplelayer--ziflayersactivelayer">Deciding between Zif::Layers::SimpleLayer &amp; Zif::Layers::ActiveLayer</a></li><li><a href="#ziflayerstileable">Zif::Layers::Tileable</a></li><li><a href="#ziflayersbitmaskable">Zif::Layers::Bitmaskable</a></li><li><a href="#ziflayerscamera">Zif::Layers::Camera</a></li></ul></li><li><a href="#zifui">Zif::UI</a><ul><li><a href="#zifuilabel">Zif::UI::Label</a></li><li><a href="#zifuiinput">Zif::UI::Input</a></li><li><a href="#zifuitwostagebutton">Zif::UI::TwoStageButton</a></li><li><a href="#zifuininepanel">Zif::UI::NinePanel</a></li></ul></li><li><a href="#zifservices--zifservicesservicegroup">Zif::Services &amp; Zif::Services::ServiceGroup</a><ul><li><a href="#zifservicesactionservice">Zif::Services::ActionService</a></li><li><a href="#zifservicesinputservice">Zif::Services::InputService</a></li><li><a href="#zifservicesspriteregistry">Zif::Services::SpriteRegistry</a></li><li><a href="#zifservicesticktraceservice--ziftraceable">Zif::Services::TickTraceService &amp; Zif::Traceable</a></li></ul></li><li><a href="#dependencies">Dependencies</a></li><li><a href="#testing">Testing</a></li><li><a href="#linting">Linting</a></li></ul>
 
             </nav>
           </aside>
@@ -180,8 +180,55 @@
 
 <p>Full API documentation is available at <a href="https://danhealy.github.io/dragonruby-zif/docs/">https://danhealy.github.io/dragonruby-zif/docs/</a></p>
 
+<h2 id="installation">Installation</h2>
+
+<h3 id="manually">Manually</h3>
+
+<p>If you like to manage your project dependencies manually, you can simply copy the source into your project.</p>
+
+<ol>
+  <li>Download a copy of Zif somewhere: <code class="language-plaintext highlighter-rouge">git clone https://github.com/danhealy/dragonruby-zif.git</code>.</li>
+  <li>Copy the content of Zif’s <code class="language-plaintext highlighter-rouge">lib</code> directory somewhere into your project.</li>
+  <li>In your <code class="language-plaintext highlighter-rouge">main.rb</code>, require the parts of Zif you need. Or require everything using <code class="language-plaintext highlighter-rouge">require.rb</code>.</li>
+</ol>
+
+<p>Here is an example assuming you copied the content of Zif’s <code class="language-plaintext highlighter-rouge">lib</code> directory into <code class="language-plaintext highlighter-rouge">lib/zif</code>:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This assumes your project looks like this:</span>
+<span class="c1"># /</span>
+<span class="c1">#   app/</span>
+<span class="c1">#     main.rb</span>
+<span class="c1">#   lib/</span>
+<span class="c1">#     zif/</span>
+<span class="c1">#       zif/</span>
+<span class="c1">#       require.rb</span>
+<span class="c1">#       zif.rb</span>
+
+<span class="c1"># Require all of the Zif library:</span>
+<span class="nb">require</span> <span class="s1">'lib/zif/require.rb'</span>
+
+<span class="k">def</span> <span class="nf">tick</span>
+  <span class="c1"># ....</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>If you only want to require some parts, please see the <code class="language-plaintext highlighter-rouge">require.rb</code> file for more information.</p>
+
+<h3 id="using-smaug">Using smaug</h3>
+
+<p>Simply add the following line to your project’s <code class="language-plaintext highlighter-rouge">Smaug.toml</code> under <code class="language-plaintext highlighter-rouge">[dependencies]</code>:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This will install zif from the `main` branch.</span>
+<span class="c"># You can add an optional `tag = "vX.Y.Z"` if you want to use a specific release.</span>
+<span class="nn">zif</span> <span class="o">=</span> <span class="p">{</span> <span class="py">repo</span> <span class="p">=</span> <span class="s">"https://github.com/danhealy/dragonruby-zif"</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>And then run <code class="language-plaintext highlighter-rouge">smaug install</code> to fetch Zif as a dependency.
+This will automatically add all the necessary requires in your <code class="language-plaintext highlighter-rouge">smaug.rb</code>!</p>
+
 <h2 id="example-app">Example App</h2>
-<p>This repo is an example app showcasing the major features - the <code class="language-plaintext highlighter-rouge">Zif</code> library itself is entirely contained within the <code class="language-plaintext highlighter-rouge">app/lib</code> directory.</p>
+<p>This repo also contains an example app showcasing the major features of Zif.
+You can see the source code of this app in the <code class="language-plaintext highlighter-rouge">app</code> directory.</p>
 
 <p><img src="https://github.com/danhealy/docs/blob/main/dragonruby-zif/ui_sample.gif?raw=true" alt="" /></p>
 
@@ -192,26 +239,6 @@
   <li>Clone this entire <code class="language-plaintext highlighter-rouge">dragonruby-zif</code> repo inside the <code class="language-plaintext highlighter-rouge">dragonruby-zif-testbed</code> directory - <code class="language-plaintext highlighter-rouge">git clone https://github.com/danhealy/dragonruby-zif.git</code>.</li>
   <li>Run using <code class="language-plaintext highlighter-rouge">./dragonruby dragonruby-zif/</code></li>
 </ol>
-
-<h2 id="installation-in-your-app">Installation in your app:</h2>
-
-<p>App dependencies in DRGTK currently have to be managed manually, by copying the source into your project.</p>
-
-<ol>
-  <li>Download a copy of Zif somewhere: <code class="language-plaintext highlighter-rouge">git clone https://github.com/danhealy/dragonruby-zif.git</code>.</li>
-  <li>Create a <code class="language-plaintext highlighter-rouge">lib</code> directory inside your project’s <code class="language-plaintext highlighter-rouge">app</code> directory, and then copy Zif’s <code class="language-plaintext highlighter-rouge">app/lib/zif</code> directory into it.</li>
-  <li>In your <code class="language-plaintext highlighter-rouge">main.rb</code>, require the parts of Zif you need.  To require everything:</li>
-</ol>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Require all of the Zif library:</span>
-<span class="nb">require</span> <span class="s1">'app/lib/zif/require.rb'</span>
-
-<span class="k">def</span> <span class="nf">tick</span>
-  <span class="c1"># ....</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p>If you only want to require some parts, please see the <code class="language-plaintext highlighter-rouge">require.rb</code> file for more information.</p>
 
 <h1 id="motivation">Motivation</h1>
 
@@ -351,7 +378,7 @@
 
 <span class="c1"># =-=-=- In your app/main.rb -=-=-=</span>
 <span class="c1"># Require all of the Zif library:</span>
-<span class="nb">require</span> <span class="s1">'app/lib/zif/require.rb'</span>
+<span class="nb">require</span> <span class="s1">'lib/zif/require.rb'</span>
 <span class="nb">require</span> <span class="s1">'my_game.rb'</span>
 <span class="k">def</span> <span class="nf">tick</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="nf">tick_count</span> <span class="o">==</span> <span class="mi">2</span>

@@ -83,7 +83,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/actions/animatable.rb</dd>
+    <dd>lib/zif/actions/animatable.rb</dd>
   </dl>
   
 </div>
@@ -196,6 +196,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>Creates and registers a new <span class='object_link'><a href="Sequence.html" title="Zif::Actions::Sequence (class)">Sequence</a></span> named <code>named</code> to animate across the <code>paths_and_durations</code> array.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_tiled_animation-instance_method" title="#new_tiled_animation (instance method)">#<strong>new_tiled_animation</strong>(named:, path:, width:, height:, durations:, repeat: :forever, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Similar to <code>new_basic_animation</code>, but for a tiled animation.</p>
 </div></span>
   
 </li>
@@ -331,7 +355,7 @@
 9</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/animatable.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_animation_sequences'>animation_sequences</span>
   <span class='ivar'>@animation_sequences</span>
@@ -392,7 +416,7 @@
 12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/animatable.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cur_animation'>cur_animation</span>
   <span class='ivar'>@cur_animation</span>
@@ -549,11 +573,207 @@
 50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/animatable.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_basic_animation'>new_basic_animation</span><span class='lparen'>(</span><span class='label'>named:</span><span class='comma'>,</span> <span class='label'>paths_and_durations:</span><span class='comma'>,</span> <span class='label'>repeat:</span> <span class='symbol'>:forever</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_actions'>actions</span> <span class='op'>=</span> <span class='id identifier rubyid_paths_and_durations'>paths_and_durations</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_duration'>duration</span><span class='rparen'>)</span><span class='op'>|</span>
     <span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>path:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>.png</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>duration:</span> <span class='id identifier rubyid_duration'>duration</span><span class='comma'>,</span> <span class='label'>easing:</span> <span class='symbol'>:immediate</span><span class='comma'>,</span> <span class='label'>rounding:</span> <span class='symbol'>:none</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_register_animation_sequence'>register_animation_sequence</span><span class='lparen'>(</span><span class='label'>named:</span> <span class='id identifier rubyid_named'>named</span><span class='comma'>,</span> <span class='label'>sequence:</span> <span class='const'><span class='object_link'><a href="Sequence.html" title="Zif::Actions::Sequence (class)">Sequence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Sequence.html#initialize-instance_method" title="Zif::Actions::Sequence#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_actions'>actions</span><span class='comma'>,</span> <span class='label'>repeat:</span> <span class='id identifier rubyid_repeat'>repeat</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new_tiled_animation-instance_method">
+  
+    #<strong>new_tiled_animation</strong>(named:, path:, width:, height:, durations:, repeat: :forever, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Similar to <code>new_basic_animation</code>, but for a tiled animation. Use this function when you have a single image with multiple tiles, and you want to animate across them, rather than a separate image per animation frame.</p>
+
+<p>This helper assumes that the spritesheet image is laid out in a single row of tiles, each of the same size and with no spacing/padding between them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>named</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the sequence, used when calling <span class='object_link'><a href="#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the path to the spritesheet image.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The width of each tile in the spritesheet.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>height</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The height of each tile in the spritesheet.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>durations</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The duration in ticks of each tile in the spritesheet. Can be either :tile or :source, and will target props _x, _y, _w and _h. Defaults to :tile.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>repeat</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>Symbol</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>:forever</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>(see <span class='object_link'><a href="Action.html#REPEAT_NAMES-constant" title="Zif::Actions::Action::REPEAT_NAMES (constant)">Zif::Actions::Action::REPEAT_NAMES</a></span> for valid symbols)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>block</span>
+      
+      
+        <span class='type'>(<tt>Block</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Passed to <span class='object_link'><a href="Action.html#initialize-instance_method" title="Zif::Actions::Action#initialize (method)">Zif::Actions::Action#initialize</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Action.html#initialize-instance_method" title="Zif::Actions::Action#initialize (method)">Zif::Actions::Action#initialize</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_tiled_animation'>new_tiled_animation</span><span class='lparen'>(</span><span class='label'>named:</span><span class='comma'>,</span> <span class='label'>path:</span><span class='comma'>,</span> <span class='label'>width:</span><span class='comma'>,</span> <span class='label'>height:</span><span class='comma'>,</span> <span class='label'>durations:</span><span class='comma'>,</span> <span class='label'>repeat:</span> <span class='symbol'>:forever</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_actions'>actions</span> <span class='op'>=</span> <span class='id identifier rubyid_durations'>durations</span><span class='period'>.</span><span class='id identifier rubyid_map_with_index'>map_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_duration'>duration</span><span class='comma'>,</span> <span class='id identifier rubyid_tile_index'>tile_index</span><span class='op'>|</span>
+    <span class='id identifier rubyid_new_action'>new_action</span><span class='lparen'>(</span>
+      <span class='lbrace'>{</span>
+        <span class='label'>path:</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sprites/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_path'>path</span><span class='embexpr_end'>}</span><span class='tstring_content'>.png</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+        <span class='label'>source_x:</span> <span class='int'>0</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_tile_index'>tile_index</span> <span class='op'>*</span> <span class='id identifier rubyid_width'>width</span><span class='rparen'>)</span><span class='comma'>,</span>
+        <span class='label'>source_y:</span> <span class='int'>0</span><span class='comma'>,</span>
+        <span class='label'>source_w:</span> <span class='id identifier rubyid_width'>width</span><span class='comma'>,</span>
+        <span class='label'>source_h:</span> <span class='id identifier rubyid_height'>height</span>
+      <span class='rbrace'>}</span><span class='comma'>,</span>
+      <span class='label'>duration:</span> <span class='id identifier rubyid_duration'>duration</span><span class='comma'>,</span>
+      <span class='label'>easing:</span>   <span class='symbol'>:immediate</span><span class='comma'>,</span>
+      <span class='label'>rounding:</span> <span class='symbol'>:none</span>
+    <span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_register_animation_sequence'>register_animation_sequence</span><span class='lparen'>(</span><span class='label'>named:</span> <span class='id identifier rubyid_named'>named</span><span class='comma'>,</span> <span class='label'>sequence:</span> <span class='const'><span class='object_link'><a href="Sequence.html" title="Zif::Actions::Sequence (class)">Sequence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Sequence.html#initialize-instance_method" title="Zif::Actions::Sequence#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_actions'>actions</span><span class='comma'>,</span> <span class='label'>repeat:</span> <span class='id identifier rubyid_repeat'>repeat</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -624,15 +844,15 @@
       <pre class="lines">
 
 
-57
-58
-59
-60
-61
-62</pre>
+91
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/animatable.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_animation_sequence'>register_animation_sequence</span><span class='lparen'>(</span><span class='label'>named:</span><span class='comma'>,</span> <span class='label'>sequence:</span><span class='rparen'>)</span>
   <span class='comment'># puts &quot;Registering animation #{named} with repeat #{sequence.repeat}&quot;
@@ -711,20 +931,20 @@
       <pre class="lines">
 
 
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79</pre>
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/animatable.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_animation_sequence'>run_animation_sequence</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No animation sequence named &#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39; registered</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
@@ -768,15 +988,15 @@
       <pre class="lines">
 
 
-82
-83
-84
-85
-86
-87</pre>
+116
+117
+118
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/actions/animatable.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop_animating'>stop_animating</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='ivar'>@cur_animation</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@animation_sequences</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='ivar'>@cur_animation</span><span class='rbracket'>]</span>
@@ -794,9 +1014,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:37 2023 by
+  Generated on Tue Aug 15 20:07:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

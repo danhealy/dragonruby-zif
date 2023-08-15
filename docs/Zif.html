@@ -78,8 +78,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/zif.rb<span class="defines">,<br />
-  app/lib/zif/game.rb,<br /> app/lib/zif/scene.rb,<br /> app/lib/zif/sprite.rb,<br /> app/lib/zif/ui/input.rb,<br /> app/lib/zif/ui/label.rb,<br /> app/lib/zif/clickable.rb,<br /> app/lib/zif/traceable.rb,<br /> app/lib/zif/assignable.rb,<br /> app/lib/zif/serializable.rb,<br /> app/lib/zif/key_pressable.rb,<br /> app/lib/zif/layers/camera.rb,<br /> app/lib/zif/render_target.rb,<br /> app/lib/zif/ui/nine_panel.rb,<br /> app/lib/zif/actions/action.rb,<br /> app/lib/zif/compound_sprite.rb,<br /> app/lib/zif/layers/tileable.rb,<br /> app/lib/zif/actions/sequence.rb,<br /> app/lib/zif/layers/layerable.rb,<br /> app/lib/zif/actions/actionable.rb,<br /> app/lib/zif/actions/animatable.rb,<br /> app/lib/zif/layers/bitmaskable.rb,<br /> app/lib/zif/layers/layer_group.rb,<br /> app/lib/zif/layers/tiled_layer.rb,<br /> app/lib/zif/ui/nine_panel_edge.rb,<br /> app/lib/zif/layers/active_layer.rb,<br /> app/lib/zif/layers/simple_layer.rb,<br /> app/lib/zif/ui/two_stage_button.rb,<br /> app/lib/zif/services/input_service.rb,<br /> app/lib/zif/services/service_group.rb,<br /> app/lib/zif/services/action_service.rb,<br /> app/lib/zif/services/sprite_registry.rb,<br /> app/lib/zif/layers/active_tiled_layer.rb,<br /> app/lib/zif/services/tick_trace_service.rb,<br /> app/lib/zif/layers/bitmasked_tiled_layer.rb,<br /> app/lib/zif/layers/active_bitmasked_tiled_layer.rb</span>
+    <dd>lib/zif.rb<span class="defines">,<br />
+  lib/zif/game.rb,<br /> lib/zif/scene.rb,<br /> lib/zif/sprite.rb,<br /> lib/zif/ui/input.rb,<br /> lib/zif/ui/label.rb,<br /> lib/zif/clickable.rb,<br /> lib/zif/traceable.rb,<br /> lib/zif/assignable.rb,<br /> lib/zif/serializable.rb,<br /> lib/zif/key_pressable.rb,<br /> lib/zif/layers/camera.rb,<br /> lib/zif/render_target.rb,<br /> lib/zif/ui/nine_panel.rb,<br /> lib/zif/actions/action.rb,<br /> lib/zif/compound_sprite.rb,<br /> lib/zif/layers/tileable.rb,<br /> lib/zif/actions/sequence.rb,<br /> lib/zif/layers/layerable.rb,<br /> lib/zif/actions/actionable.rb,<br /> lib/zif/actions/animatable.rb,<br /> lib/zif/layers/bitmaskable.rb,<br /> lib/zif/layers/layer_group.rb,<br /> lib/zif/layers/tiled_layer.rb,<br /> lib/zif/ui/nine_panel_edge.rb,<br /> lib/zif/layers/active_layer.rb,<br /> lib/zif/layers/simple_layer.rb,<br /> lib/zif/ui/two_stage_button.rb,<br /> lib/zif/services/input_service.rb,<br /> lib/zif/services/service_group.rb,<br /> lib/zif/services/action_service.rb,<br /> lib/zif/services/sprite_registry.rb,<br /> lib/zif/layers/active_tiled_layer.rb,<br /> lib/zif/services/tick_trace_service.rb,<br /> lib/zif/layers/bitmasked_tiled_layer.rb,<br /> lib/zif/layers/active_bitmasked_tiled_layer.rb</span>
 </dd>
   </dl>
   
@@ -88,7 +88,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>This is the namespace for the Zif library, and in the <code>app/lib/zif/zif.rb</code> file are some miscellaneous helper methods</p>
+<p>This is the namespace for the Zif library, and in the <code>lib/zif.rb</code> file are some miscellaneous helper methods</p>
 
 
   </div>
@@ -612,7 +612,7 @@
 29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_positions'>add_positions</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_position_math'>position_math</span><span class='lparen'>(</span><span class='symbol'>:plus</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
@@ -716,7 +716,7 @@
 19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_boomerang'>boomerang</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_max'>max</span>
@@ -774,7 +774,7 @@
 223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_check_compatibility'>check_compatibility</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="" title="Zif (module)">Zif</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GTK_COMPATIBLE_VERSION-constant" title="Zif::GTK_COMPATIBLE_VERSION (constant)">GTK_COMPATIBLE_VERSION</a></span></span>
@@ -896,7 +896,7 @@
 129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_distance'>distance</span><span class='lparen'>(</span><span class='id identifier rubyid_x1'>x1</span><span class='comma'>,</span> <span class='id identifier rubyid_y1'>y1</span><span class='comma'>,</span> <span class='id identifier rubyid_x2'>x2</span><span class='comma'>,</span> <span class='id identifier rubyid_y2'>y2</span><span class='rparen'>)</span>
   <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sqrt'>sqrt</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_x2'>x2</span> <span class='op'>-</span> <span class='id identifier rubyid_x1'>x1</span><span class='rparen'>)</span><span class='op'>**</span><span class='int'>2</span> <span class='op'>+</span> <span class='lparen'>(</span><span class='id identifier rubyid_y2'>y2</span> <span class='op'>-</span> <span class='id identifier rubyid_y1'>y1</span><span class='rparen'>)</span><span class='op'>**</span><span class='int'>2</span><span class='rparen'>)</span>
@@ -938,7 +938,7 @@
 202</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ease'>ease</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span><span class='comma'>,</span> <span class='id identifier rubyid_total'>total</span><span class='rparen'>)</span>
   <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sin'>sin</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span> <span class='op'>/</span> <span class='id identifier rubyid_total'>total</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='const'>Math</span><span class='op'>::</span><span class='const'>PI</span><span class='rparen'>)</span> <span class='op'>/</span> <span class='float'>2.0</span><span class='rparen'>)</span>
@@ -1086,7 +1086,7 @@
 119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_hsv_to_rgb'>hsv_to_rgb</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='id identifier rubyid_s'>s</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>359</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_h'>h</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>360</span><span class='rparen'>)</span>
@@ -1254,7 +1254,7 @@
 58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_position_math'>position_math</span><span class='lparen'>(</span><span class='id identifier rubyid_op'>op</span><span class='op'>=</span><span class='symbol'>:plus</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='op'>=</span><span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='lbracket'>[</span><span class='int'>2</span><span class='comma'>,</span> <span class='int'>3</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='lbracket'>[</span>
@@ -1364,7 +1364,7 @@
 138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_radian_angle_between_points'>radian_angle_between_points</span><span class='lparen'>(</span><span class='id identifier rubyid_x1'>x1</span><span class='comma'>,</span> <span class='id identifier rubyid_y1'>y1</span><span class='comma'>,</span> <span class='id identifier rubyid_x2'>x2</span><span class='comma'>,</span> <span class='id identifier rubyid_y2'>y2</span><span class='rparen'>)</span>
   <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_atan2'>atan2</span><span class='lparen'>(</span><span class='id identifier rubyid_x2'>x2</span> <span class='op'>-</span> <span class='id identifier rubyid_x1'>x1</span><span class='comma'>,</span> <span class='id identifier rubyid_y2'>y2</span> <span class='op'>-</span> <span class='id identifier rubyid_y1'>y1</span><span class='rparen'>)</span>
@@ -1459,7 +1459,7 @@
 73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_rand_rgb'>rand_rgb</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span><span class='rparen'>)</span>
   <span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_base'>base</span> <span class='op'>+</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_max'>max</span> <span class='op'>-</span> <span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1550,7 +1550,7 @@
 66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_relative_rand'>relative_rand</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>-</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_fdiv'>fdiv</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
@@ -1667,7 +1667,7 @@
 177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll'>roll</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='comma'>,</span> <span class='label'>modifier:</span> <span class='int'>2</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_roll_raw'>roll_raw</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='id identifier rubyid_dice'>dice</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_modifier'>modifier</span>
@@ -1771,7 +1771,7 @@
 190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 188</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 188</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_raw'>roll_raw</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>4</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>16</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_dice'>dice</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_z'>z</span><span class='comma'>,</span> <span class='id identifier rubyid_memo'>memo</span><span class='op'>|</span> <span class='id identifier rubyid_memo'>memo</span> <span class='op'>+</span> <span class='id identifier rubyid_z'>z</span> <span class='rbrace'>}</span>
@@ -1874,7 +1874,7 @@
 163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_raw_v2'>roll_raw_v2</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>6</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_roll_raw_v2'>roll_raw_v2</span><span class='lparen'>(</span><span class='id identifier rubyid_dice'>dice</span><span class='comma'>,</span> <span class='id identifier rubyid_sides'>sides</span><span class='rparen'>)</span>
@@ -1990,7 +1990,7 @@
 151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_roll_v2'>roll_v2</span><span class='lparen'>(</span><span class='label'>dice:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>sides:</span> <span class='int'>6</span><span class='comma'>,</span> <span class='label'>modifier:</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_roll'>roll</span><span class='lparen'>(</span><span class='id identifier rubyid_dice'>dice</span><span class='comma'>,</span> <span class='id identifier rubyid_sides'>sides</span><span class='comma'>,</span> <span class='id identifier rubyid_modifier'>modifier</span><span class='rparen'>)</span>
@@ -2084,7 +2084,7 @@
 39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sub_positions'>sub_positions</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_position_math'>position_math</span><span class='lparen'>(</span><span class='symbol'>:minus</span><span class='comma'>,</span> <span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
@@ -2166,7 +2166,7 @@
 197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/zif.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/zif.rb', line 194</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_unique_name'>unique_name</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@names_used</span> <span class='op'>||=</span> <span class='int'>0</span>
@@ -2182,9 +2182,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:37 2023 by
+  Generated on Tue Aug 15 20:07:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

@@ -98,7 +98,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/ui/two_stage_button.rb</dd>
+    <dd>lib/zif/ui/two_stage_button.rb</dd>
   </dl>
   
 </div>
@@ -578,7 +578,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../Actions/Animatable.html" title="Zif::Actions::Animatable (module)">Actions::Animatable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#new_tiled_animation-instance_method" title="Zif::Actions::Animatable#new_tiled_animation (method)">#new_tiled_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
 
   
   
@@ -694,7 +694,7 @@
 46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='const'>Zif</span><span class='period'>.</span><span class='id identifier rubyid_unique_name'>unique_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>two_stage_button</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -770,7 +770,7 @@
 28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_is_pressed'>is_pressed</span>
   <span class='ivar'>@is_pressed</span>
@@ -831,7 +831,7 @@
 30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label_y_offset'>label_y_offset</span>
   <span class='ivar'>@label_y_offset</span>
@@ -892,7 +892,7 @@
 24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_normal'>normal</span>
   <span class='ivar'>@normal</span>
@@ -953,7 +953,7 @@
 26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pressed'>pressed</span>
   <span class='ivar'>@pressed</span>
@@ -1014,7 +1014,7 @@
 32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pressed_height'>pressed_height</span>
   <span class='ivar'>@pressed_height</span>
@@ -1080,7 +1080,7 @@
 80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
   <span class='ivar'>@labels</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -1124,7 +1124,7 @@
 105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label_text='>label_text=</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_label'>label</span>
@@ -1170,7 +1170,7 @@
 59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_press'>press</span>
   <span class='ivar'>@is_pressed</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -1216,7 +1216,7 @@
 89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recenter_label'>recenter_label</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_label'>label</span>
@@ -1284,7 +1284,7 @@
 97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retruncate_label'>retruncate_label</span><span class='lparen'>(</span><span class='id identifier rubyid_padding'>padding</span><span class='op'>=</span><span class='int'>0</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_label'>label</span>
@@ -1347,7 +1347,7 @@
 52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_toggle_on_change'>toggle_on_change</span><span class='lparen'>(</span><span class='id identifier rubyid_point'>point</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_toggle_pressed'>toggle_pressed</span> <span class='kw'>if</span> <span class='id identifier rubyid_point'>point</span><span class='period'>.</span><span class='id identifier rubyid_inside_rect?'>inside_rect?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='ivar'>@is_pressed</span>
@@ -1392,7 +1392,7 @@
 75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 69</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_toggle_pressed'>toggle_pressed</span>
   <span class='kw'>if</span> <span class='ivar'>@is_pressed</span>
@@ -1439,7 +1439,7 @@
 66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/ui/two_stage_button.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/ui/two_stage_button.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unpress'>unpress</span>
   <span class='ivar'>@is_pressed</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -1456,9 +1456,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:39 2023 by
+  Generated on Tue Aug 15 20:07:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

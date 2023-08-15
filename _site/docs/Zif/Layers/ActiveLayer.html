@@ -103,7 +103,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/layers/active_layer.rb</dd>
+    <dd>lib/zif/layers/active_layer.rb</dd>
   </dl>
   
 </div>
@@ -405,7 +405,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../Actions/Animatable.html" title="Zif::Actions::Animatable (module)">Actions::Animatable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#new_tiled_animation-instance_method" title="Zif::Actions::Animatable#new_tiled_animation (method)">#new_tiled_animation</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="../Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
 
   
   
@@ -536,7 +536,7 @@
 42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_map'>map</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -649,7 +649,7 @@
 57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_positioned_sprite'>add_positioned_sprite</span><span class='lparen'>(</span><span class='label'>sprite:</span><span class='comma'>,</span> <span class='label'>logical_x:</span><span class='comma'>,</span> <span class='label'>logical_y:</span><span class='rparen'>)</span>
   <span class='comment'># puts &quot;ActiveLayer#add_positioned_sprite: #{logical_x} #{logical_y}&quot;
@@ -709,7 +709,7 @@
 49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_containing_sprite'>containing_sprite</span>
   <span class='kw'>self</span>
@@ -750,7 +750,7 @@
 73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reinitialize_sprites'>reinitialize_sprites</span>
   <span class='ivar'>@sprites</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -809,7 +809,7 @@
 62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_sprite'>remove_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
   <span class='ivar'>@sprites</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
@@ -868,7 +868,7 @@
 79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rerender'>rerender</span>
   <span class='kw'>true</span>
@@ -927,7 +927,7 @@
 68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/active_layer.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/active_layer.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_sprites'>source_sprites</span>
   <span class='ivar'>@sprites</span>
@@ -942,9 +942,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:39 2023 by
+  Generated on Tue Aug 15 20:07:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>
