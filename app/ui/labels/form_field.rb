@@ -1,7 +1,7 @@
 module ExampleApp
   # This is an example of bundling Zif::UI::Input together with a descriptive label and a background sprite
   class FormField < Zif::CompoundSprite
-    attr_accessor :input, :background, :label
+    attr_accessor :input, :background, :label, :max_length
 
     def initialize(name: Zif.unique_name('form_field'), x: 0, y: 0, label: 'Input: ', char_width: 10)
       super(name)
@@ -12,13 +12,12 @@ module ExampleApp
       @label.x = 0
       @label.y = 25
 
-      @input = Zif::UI::Input.new('Input Placeholder', size: 0).tap do |l|
-        l.x = @label.max_width + 5
-        l.y = 25
-        l.color = [0, 0, 0].freeze
-        l.max_length = char_width
-        l.has_focus = false
-        # l.filter_keys = Zif::UI::Input::FILTER_ALPHA_NUMERIC_UPPERCASE
+      @input = Zif::UI::Input.new('Input Placeholder', size: 0).tap do |i|
+        i.x = @label.max_width + 5
+        i.y = 25
+        i.color = [0, 0, 0].freeze
+        i.has_focus = false
+        i.transform = ->(text_key) { transform_key(text_key) }
       end
 
       @background = Zif::Sprite.new.tap do |bg|
@@ -33,6 +32,7 @@ module ExampleApp
 
       @w = @label.max_width + @background.w
       @h = @background.h
+      @max_length = char_width
       @on_mouse_up = lambda do |_sprite, _point|
         gain_focus
       end
@@ -53,6 +53,12 @@ module ExampleApp
       @background.r = 55
       @background.b = 55
       @background.g = 55
+    end
+
+    def transform_key(text_key)
+      return nil if max_length.positive? && @input.text.length >= max_length
+
+      text_key
     end
   end
 end
