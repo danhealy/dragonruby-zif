@@ -10,5 +10,5 @@ requires = [
 ]
 
 [dragonruby]
-version = "5.4"
+version = "5.5"
 edition = "standard"
