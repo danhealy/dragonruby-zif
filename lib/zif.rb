@@ -1,6 +1,6 @@
 # This is the namespace for the Zif library, and in the +lib/zif.rb+ file are some miscellaneous helper methods
 module Zif
-  GTK_COMPATIBLE_VERSION = '5.4'.freeze
+  GTK_COMPATIBLE_VERSION = '5.5'.freeze
 
   # @param [Numeric] i
   # @param [Numeric] max

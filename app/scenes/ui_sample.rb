@@ -108,6 +108,8 @@ module ExampleApp
           @count_progress.progress = @counter / 10.0
 
           @load_next_scene_next_tick = true if @counter >= 10
+
+          @dragon.run_animation_sequence(:coast)
         else
           puts "UISample: Button on_mouse_up, #{point}: mouse outside button. Not pressed."
         end
@@ -189,7 +191,21 @@ module ExampleApp
         paths_and_durations: 1.upto(4).map { |i| ["dragon_#{i}", 4] } + 3.downto(2).map { |i| ["dragon_#{i}", 4] }
       )
 
+      # This is an example of a one-off animation which returns to a looping animation when complete
+      @dragon.new_basic_animation(
+        named:               :coast,
+        paths_and_durations: 1.upto(4).map { |i| ["dragon_#{i}", 12] } + 3.downto(2).map { |i| ["dragon_#{i}", 12] },
+        repeat:              2
+      ) do
+        @dragon.run_animation_sequence(:fly)
+      end
+
       @dragon.run_animation_sequence(:fly)
+
+      @animation_label = {
+        x:    600,
+        y:    200,
+      }.merge(DEBUG_LABEL_COLOR)
 
       # -------------------------------------------------------------------------
       # Info Labels
@@ -205,11 +221,7 @@ module ExampleApp
           y:    320,
           text: 'Test the TickTraceService (see console output)'
         }.merge(DEBUG_LABEL_COLOR),
-        {
-          x:    600,
-          y:    200,
-          text: 'A sprite with repeating actions:'
-        }.merge(DEBUG_LABEL_COLOR)
+        @animation_label
       ]
 
       # -------------------------------------------------------------------------
@@ -313,6 +325,7 @@ module ExampleApp
       cuts = ('%04b' % (($gtk.args.tick_count / 60) % 16)).chars.map { |bit| bit == '1' }
       @glass.change_cuts(cuts)
       @glass_label.text = "Glass panel cuts: #{@glass.cuts}"
+      @animation_label.text = "A sprite (animating: #{@dragon.cur_animation}) with repeating actions:"
       mark('#update_glass_panel: complete')
     end
 

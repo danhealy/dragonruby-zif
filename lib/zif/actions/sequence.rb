@@ -71,7 +71,7 @@ module Zif
       # @api private
       def setup_action
         # puts "Sequence#setup_action #{@action_index}"
-        cur_action.repeat = @sub_repeats[@action_index]
+        reset_cur_action_repeat
         cur_action.reset_start
         cur_action.reset_duration
       end
@@ -80,10 +80,17 @@ module Zif
       # @api private
       def next_action
         # puts "Sequence#next_action"
+        reset_cur_action_repeat
         @action_index = (@action_index + 1) % @sub_actions.length
         @cur_repeat -= 1 if @action_index.zero?
 
         setup_action unless complete?
+      end
+
+      # Resets the current action's {Zif::Actions::Action#repeat} to the value it was initialized with.
+      # @api private
+      def reset_cur_action_repeat
+        cur_action.repeat = @sub_repeats[@action_index]
       end
 
       # Calls the current action's {Zif::Actions::Action#perform_tick}
