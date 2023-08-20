@@ -106,6 +106,8 @@ module Zif
         stop_animating
 
         @cur_animation = name
+        @animation_sequences[@cur_animation].restart
+        @animation_sequences[@cur_animation].cur_action.reset_start
         @animation_sequences[@cur_animation].cur_action.reset_duration
         # puts "Running animation sequence #{@cur_animation} #{@animation_sequences[@cur_animation].inspect}"
 

@@ -43,6 +43,7 @@ module Zif
         @repeat = Action::REPEAT_NAMES[repeat] || repeat
 
         restart
+        @sub_repeats = @sub_actions.map(&:repeat).freeze
         setup_action
       end
 
@@ -50,7 +51,7 @@ module Zif
       def restart
         @action_index = 0
         @cur_repeat = @repeat
-        @sub_repeats = @sub_actions.map(&:repeat).freeze
+        # @sub_repeats = @sub_actions.map(&:repeat).freeze
       end
 
       # @return [Zif::Actions::Action] the current Action in this sequence.
