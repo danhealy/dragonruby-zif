@@ -70,3 +70,4 @@ exclude:
   - sprites
   - tests
   - API_README.md
+  - Smaug.toml
