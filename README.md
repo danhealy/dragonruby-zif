@@ -655,3 +655,12 @@ To execute RuboCop run
 ```sh
 rubocop -D
 ```
+
+## Documentation
+
+If you make changes to the docs, you can use the following commands to regenerate and preview them:
+
+```bash
+yardoc -o docs --readme API_README.md
+bundle exec jekyll serve
+```
