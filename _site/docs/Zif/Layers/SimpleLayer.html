@@ -101,7 +101,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/layers/simple_layer.rb</dd>
+    <dd>lib/zif/layers/simple_layer.rb</dd>
   </dl>
   
 </div>
@@ -466,7 +466,7 @@
 44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_map'>map</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>z_index:</span> <span class='int'>0</span><span class='comma'>,</span> <span class='label'>render_only_visible:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>clear_sprites_after_draw:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='ivar'>@map</span>                      <span class='op'>=</span> <span class='id identifier rubyid_map'>map</span>
@@ -541,7 +541,7 @@
 30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear_sprites_after_draw'>clear_sprites_after_draw</span>
   <span class='ivar'>@clear_sprites_after_draw</span>
@@ -602,7 +602,7 @@
 28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_render_only_visible'>render_only_visible</span>
   <span class='ivar'>@render_only_visible</span>
@@ -663,7 +663,7 @@
 33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rerender_rect'>rerender_rect</span>
   <span class='ivar'>@rerender_rect</span>
@@ -724,7 +724,7 @@
 26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_sprites'>source_sprites</span>
   <span class='ivar'>@source_sprites</span>
@@ -823,7 +823,7 @@
 58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_positioned_sprite'>add_positioned_sprite</span><span class='lparen'>(</span><span class='label'>sprite:</span><span class='comma'>,</span> <span class='label'>logical_x:</span><span class='comma'>,</span> <span class='label'>logical_y:</span><span class='rparen'>)</span>
   <span class='comment'># puts &quot;SimpleLayer#add_positioned_sprite: #{logical_x} #{logical_y}&quot;
@@ -866,7 +866,7 @@
 50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reinitialize_sprites'>reinitialize_sprites</span>
   <span class='ivar'>@source_sprites</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -928,7 +928,7 @@
 64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_sprite'>remove_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
   <span class='ivar'>@source_sprites</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
@@ -1009,7 +1009,7 @@
 94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/simple_layer.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/simple_layer.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rerender'>rerender</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='ivar'>@should_render</span>
@@ -1040,9 +1040,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:39 2023 by
+  Generated on Tue Aug 15 20:07:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

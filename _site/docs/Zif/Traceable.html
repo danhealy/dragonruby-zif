@@ -83,7 +83,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/traceable.rb</dd>
+    <dd>lib/zif/traceable.rb</dd>
   </dl>
   
 </div>
@@ -311,7 +311,7 @@
 12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/traceable.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/traceable.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tracer_service_name'>tracer_service_name</span>
   <span class='ivar'>@tracer_service_name</span>
@@ -381,7 +381,7 @@
 22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/traceable.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/traceable.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Oh Hi Mark</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_tracer'>tracer</span><span class='op'>&amp;.</span><span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mark_prefix'>mark_prefix</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_msg'>msg</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -473,7 +473,7 @@
 40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/traceable.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/traceable.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark_and_print'>mark_and_print</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Oh Hi Mark</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>frequency:</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_full_msg'>full_msg</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_mark_prefix'>mark_prefix</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_msg'>msg</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -555,7 +555,7 @@
 50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/traceable.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/traceable.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark_prefix'>mark_prefix</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='tstring_end'>&quot;</span></span>
@@ -614,7 +614,7 @@
 15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/traceable.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/traceable.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tracer'>tracer</span><span class='lparen'>(</span><span class='id identifier rubyid_service_name'>service_name</span><span class='op'>=</span><span class='ivar'>@tracer_service_name</span><span class='rparen'>)</span>
   <span class='gvar'>$services</span><span class='lbracket'>[</span><span class='id identifier rubyid_service_name'>service_name</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span>
@@ -629,9 +629,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:37 2023 by
+  Generated on Tue Aug 15 20:07:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

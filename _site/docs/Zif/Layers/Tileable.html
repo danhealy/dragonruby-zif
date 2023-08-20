@@ -83,7 +83,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/layers/tileable.rb</dd>
+    <dd>lib/zif/layers/tileable.rb</dd>
   </dl>
   
 </div>
@@ -432,7 +432,7 @@
 48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_positioned_sprite'>add_positioned_sprite</span><span class='lparen'>(</span><span class='label'>sprite:</span><span class='comma'>,</span> <span class='label'>logical_x:</span><span class='comma'>,</span> <span class='label'>logical_y:</span><span class='rparen'>)</span>
   <span class='comment'># puts &quot;#{@layer_name}: Tileable#add_positioned_sprite #{logical_x} #{logical_y}&quot;
@@ -468,7 +468,7 @@
 135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exclude_from_serialize'>exclude_from_serialize</span>
   <span class='qwords_beg'>%w[</span><span class='tstring_content'>sprites</span><span class='words_sep'> </span><span class='tstring_content'>primitives</span><span class='tstring_end'>]</span></span>
@@ -577,7 +577,7 @@
 131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_intersecting_sprites'>intersecting_sprites</span><span class='lparen'>(</span><span class='label'>left:</span><span class='comma'>,</span> <span class='label'>bottom:</span><span class='comma'>,</span> <span class='label'>right:</span><span class='comma'>,</span> <span class='label'>top:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_visible_sprites'>visible_sprites</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_left'>left</span><span class='comma'>,</span> <span class='id identifier rubyid_bottom'>bottom</span><span class='comma'>,</span> <span class='id identifier rubyid_right'>right</span> <span class='op'>-</span> <span class='id identifier rubyid_left'>left</span><span class='comma'>,</span> <span class='id identifier rubyid_top'>top</span> <span class='op'>-</span> <span class='id identifier rubyid_bottom'>bottom</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -620,7 +620,7 @@
 32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reinitialize_sprites'>reinitialize_sprites</span>
   <span class='kw'>super</span>
@@ -683,7 +683,7 @@
 56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_positioned_sprite'>remove_positioned_sprite</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='rparen'>)</span>
   <span class='ivar'>@sprites</span><span class='lbracket'>[</span><span class='id identifier rubyid_tile_pos_to_sprite_index'>tile_pos_to_sprite_index</span><span class='lparen'>(</span><span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_sprite'>sprite</span><span class='period'>.</span><span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -760,7 +760,7 @@
 63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 61</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_tile'>remove_tile</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span>
   <span class='ivar'>@sprites</span><span class='lbracket'>[</span><span class='id identifier rubyid_tile_pos_to_sprite_index'>tile_pos_to_sprite_index</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -819,7 +819,7 @@
 24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tile'>tile</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span>
   <span class='ivar'>@sprites</span><span class='lbracket'>[</span><span class='id identifier rubyid_tile_pos_to_sprite_index'>tile_pos_to_sprite_index</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span><span class='rbracket'>]</span>
@@ -878,7 +878,7 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tile_pos_to_sprite_index'>tile_pos_to_sprite_index</span><span class='lparen'>(</span><span class='id identifier rubyid_logical_x'>logical_x</span><span class='comma'>,</span> <span class='id identifier rubyid_logical_y'>logical_y</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='id identifier rubyid_logical_y'>logical_y</span> <span class='op'>*</span> <span class='ivar'>@map</span><span class='period'>.</span><span class='id identifier rubyid_logical_width'>logical_width</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_logical_x'>logical_x</span>
@@ -1008,7 +1008,7 @@
 121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/layers/tileable.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/layers/tileable.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_visible_sprites'>visible_sprites</span><span class='lparen'>(</span><span class='id identifier rubyid_given_rect'>given_rect</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='comment'># puts &quot;Tileable#visible_sprites: #{@layer_name} &#39;#{given_rect}&#39;&quot;
@@ -1072,9 +1072,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:37 2023 by
+  Generated on Tue Aug 15 20:07:38 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

@@ -94,7 +94,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/services/service_group.rb</dd>
+    <dd>lib/zif/services/service_group.rb</dd>
   </dl>
   
 </div>
@@ -332,7 +332,7 @@
 17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/service_group.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/service_group.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@services</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -398,7 +398,7 @@
 15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/service_group.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/service_group.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_services'>services</span>
   <span class='ivar'>@services</span>
@@ -484,7 +484,7 @@
 23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/service_group.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/service_group.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
@@ -561,7 +561,7 @@
 36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/service_group.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/service_group.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='op'>[]=</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_new_service'>new_service</span><span class='rparen'>)</span>
   <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_service'>new_service</span>
@@ -640,7 +640,7 @@
 29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/service_group.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/service_group.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_named'>named</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
@@ -717,7 +717,7 @@
 43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/services/service_group.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/services/service_group.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register'>register</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_new_service'>new_service</span><span class='rparen'>)</span>
   <span class='ivar'>@services</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_service'>new_service</span>
@@ -732,9 +732,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:39 2023 by
+  Generated on Tue Aug 15 20:07:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>

@@ -96,7 +96,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/lib/zif/compound_sprite.rb</dd>
+    <dd>lib/zif/compound_sprite.rb</dd>
   </dl>
   
 </div>
@@ -402,7 +402,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Actions/Animatable.html" title="Zif::Actions::Animatable (module)">Actions::Animatable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Actions/Animatable.html#new_basic_animation-instance_method" title="Zif::Actions::Animatable#new_basic_animation (method)">#new_basic_animation</a></span>, <span class='object_link'><a href="Actions/Animatable.html#new_tiled_animation-instance_method" title="Zif::Actions::Animatable#new_tiled_animation (method)">#new_tiled_animation</a></span>, <span class='object_link'><a href="Actions/Animatable.html#register_animation_sequence-instance_method" title="Zif::Actions::Animatable#register_animation_sequence (method)">#register_animation_sequence</a></span>, <span class='object_link'><a href="Actions/Animatable.html#run_animation_sequence-instance_method" title="Zif::Actions::Animatable#run_animation_sequence (method)">#run_animation_sequence</a></span>, <span class='object_link'><a href="Actions/Animatable.html#stop_animating-instance_method" title="Zif::Actions::Animatable#stop_animating (method)">#stop_animating</a></span></p>
 
   
   
@@ -494,7 +494,7 @@
 85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/compound_sprite.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/compound_sprite.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='op'>=</span><span class='const'>Zif</span><span class='period'>.</span><span class='id identifier rubyid_unique_name'>unique_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>compound_sprite</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -562,7 +562,7 @@
 77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/compound_sprite.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/compound_sprite.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='ivar'>@labels</span>
@@ -623,7 +623,7 @@
 74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/compound_sprite.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/compound_sprite.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sprites'>sprites</span>
   <span class='ivar'>@sprites</span>
@@ -758,7 +758,7 @@
 189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/compound_sprite.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/compound_sprite.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_draw_override'>draw_override</span><span class='lparen'>(</span><span class='id identifier rubyid_ffi_draw'>ffi_draw</span><span class='rparen'>)</span>
   <span class='comment'># $services&amp;.named(:tracer)&amp;.mark(&quot;CompoundSprite(#{@name})#draw_override: begin&quot;)
@@ -906,7 +906,7 @@
 94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/lib/zif/compound_sprite.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/compound_sprite.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_rect'>source_rect</span>
   <span class='id identifier rubyid_view_actual_size!'>view_actual_size!</span> <span class='kw'>unless</span> <span class='id identifier rubyid_source_is_set?'>source_is_set?</span>
@@ -922,9 +922,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 10 16:30:39 2023 by
+  Generated on Tue Aug 15 20:07:40 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.0).
+  0.9.34 (ruby-3.2.2).
 </div>
 
     </div>
