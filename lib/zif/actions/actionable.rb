@@ -107,11 +107,11 @@ module Zif
         @dirty = false
 
         @actions ||= []
-        @actions.reject! do |act|
+        @actions.each do |act|
           dirty_act = act.perform_tick
           @dirty ||= dirty_act
-          act.complete?
         end
+        @actions.reject!(&:complete?)
       end
     end
   end
