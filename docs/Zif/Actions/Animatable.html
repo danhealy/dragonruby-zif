@@ -941,7 +941,8 @@
 110
 111
 112
-113</pre>
+113
+114</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 103</span>
@@ -952,7 +953,8 @@
   <span class='id identifier rubyid_stop_animating'>stop_animating</span>
 
   <span class='ivar'>@cur_animation</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
-  <span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='ivar'>@cur_animation</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_cur_action'>cur_action</span><span class='period'>.</span><span class='id identifier rubyid_reset_duration'>reset_duration</span>
+  <span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='ivar'>@cur_animation</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_restart'>restart</span>
+  <span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='ivar'>@cur_animation</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_setup_action'>setup_action</span>
   <span class='comment'># puts &quot;Running animation sequence #{@cur_animation} #{@animation_sequences[@cur_animation].inspect}&quot;
 </span>
   <span class='id identifier rubyid_run_action'>run_action</span><span class='lparen'>(</span><span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='ivar'>@cur_animation</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -988,15 +990,15 @@
       <pre class="lines">
 
 
-116
 117
 118
 119
 120
-121</pre>
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/zif/actions/animatable.rb', line 117</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop_animating'>stop_animating</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='ivar'>@cur_animation</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@animation_sequences</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@animation_sequences</span><span class='lbracket'>[</span><span class='ivar'>@cur_animation</span><span class='rbracket'>]</span>
@@ -1014,7 +1016,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Aug 15 20:07:38 2023 by
+  Generated on Sat Aug 26 12:12:26 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

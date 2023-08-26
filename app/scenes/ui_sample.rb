@@ -203,8 +203,8 @@ module ExampleApp
       @dragon.run_animation_sequence(:fly)
 
       @animation_label = {
-        x:    600,
-        y:    200,
+        x: 600,
+        y: 200
       }.merge(DEBUG_LABEL_COLOR)
 
       # -------------------------------------------------------------------------

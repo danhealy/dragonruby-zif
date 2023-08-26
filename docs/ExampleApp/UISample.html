@@ -950,20 +950,20 @@
       <pre class="lines">
 
 
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265</pre>
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 267</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_change_color'>change_color</span>
   <span class='ivar'>@cur_color</span> <span class='op'>=</span> <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>blue</span><span class='words_sep'> </span><span class='tstring_content'>green</span><span class='words_sep'> </span><span class='tstring_content'>red</span><span class='words_sep'> </span><span class='tstring_content'>white</span><span class='words_sep'> </span><span class='tstring_content'>yellow</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_sample'>sample</span>
@@ -1018,12 +1018,12 @@
       <pre class="lines">
 
 
-267
-268
-269</pre>
+279
+280
+281</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 279</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_color_should_change?'>color_should_change?</span>
   <span class='lparen'>(</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>%</span> <span class='ivar'>@random_lengths</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span>
@@ -1048,18 +1048,6 @@
       <pre class="lines">
 
 
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
 283
 284
 285
@@ -1067,10 +1055,22 @@
 287
 288
 289
-290</pre>
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 283</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_tick'>perform_tick</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#perform_tick: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1348,7 +1348,19 @@
 247
 248
 249
-250</pre>
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 25</span>
@@ -1439,6 +1451,8 @@
       <span class='ivar'>@count_progress</span><span class='period'>.</span><span class='id identifier rubyid_progress'>progress</span> <span class='op'>=</span> <span class='ivar'>@counter</span> <span class='op'>/</span> <span class='float'>10.0</span>
 
       <span class='ivar'>@load_next_scene_next_tick</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='ivar'>@counter</span> <span class='op'>&gt;=</span> <span class='int'>10</span>
+
+      <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run_animation_sequence'>run_animation_sequence</span><span class='lparen'>(</span><span class='symbol'>:coast</span><span class='rparen'>)</span>
     <span class='kw'>else</span>
       <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>UISample: Button on_mouse_up, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_point'>point</span><span class='embexpr_end'>}</span><span class='tstring_content'>: mouse outside button. Not pressed.</span><span class='tstring_end'>&quot;</span></span>
     <span class='kw'>end</span>
@@ -1520,7 +1534,21 @@
     <span class='label'>paths_and_durations:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_upto'>upto</span><span class='lparen'>(</span><span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span> <span class='rbrace'>}</span> <span class='op'>+</span> <span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_downto'>downto</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
   <span class='rparen'>)</span>
 
+  <span class='comment'># This is an example of a one-off animation which returns to a looping animation when complete
+</span>  <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_new_basic_animation'>new_basic_animation</span><span class='lparen'>(</span>
+    <span class='label'>named:</span>               <span class='symbol'>:coast</span><span class='comma'>,</span>
+    <span class='label'>paths_and_durations:</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_upto'>upto</span><span class='lparen'>(</span><span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='rbracket'>]</span> <span class='rbrace'>}</span> <span class='op'>+</span> <span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_downto'>downto</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dragon_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_i'>i</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>12</span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>repeat:</span>              <span class='int'>2</span>
+  <span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run_animation_sequence'>run_animation_sequence</span><span class='lparen'>(</span><span class='symbol'>:fly</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
   <span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_run_animation_sequence'>run_animation_sequence</span><span class='lparen'>(</span><span class='symbol'>:fly</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@animation_label</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>x:</span>    <span class='int'>600</span><span class='comma'>,</span>
+    <span class='label'>y:</span>    <span class='int'>200</span><span class='comma'>,</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#DEBUG_LABEL_COLOR-constant" title="ExampleApp::UISample::DEBUG_LABEL_COLOR (constant)">DEBUG_LABEL_COLOR</a></span></span><span class='rparen'>)</span>
 
   <span class='comment'># -------------------------------------------------------------------------
 </span>  <span class='comment'># Info Labels
@@ -1536,11 +1564,7 @@
       <span class='label'>y:</span>    <span class='int'>320</span><span class='comma'>,</span>
       <span class='label'>text:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Test the TickTraceService (see console output)</span><span class='tstring_end'>&#39;</span></span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#DEBUG_LABEL_COLOR-constant" title="ExampleApp::UISample::DEBUG_LABEL_COLOR (constant)">DEBUG_LABEL_COLOR</a></span></span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='lbrace'>{</span>
-      <span class='label'>x:</span>    <span class='int'>600</span><span class='comma'>,</span>
-      <span class='label'>y:</span>    <span class='int'>200</span><span class='comma'>,</span>
-      <span class='label'>text:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>A sprite with repeating actions:</span><span class='tstring_end'>&#39;</span></span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#DEBUG_LABEL_COLOR-constant" title="ExampleApp::UISample::DEBUG_LABEL_COLOR (constant)">DEBUG_LABEL_COLOR</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@animation_label</span>
   <span class='rbracket'>]</span>
 
   <span class='comment'># -------------------------------------------------------------------------
@@ -1599,14 +1623,14 @@
       <pre class="lines">
 
 
-340
-341
-342
-343
-344</pre>
+353
+354
+355
+356
+357</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 340</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 353</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_form_field_status'>update_form_field_status</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#update_form_field_status: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1633,22 +1657,24 @@
       <pre class="lines">
 
 
-311
-312
-313
-314
-315
-316
-317</pre>
+323
+324
+325
+326
+327
+328
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 311</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_glass_panel'>update_glass_panel</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#update_glass_panel: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cuts'>cuts</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%04b</span><span class='tstring_end'>&#39;</span></span> <span class='op'>%</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='gvar'>$gtk</span><span class='period'>.</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_tick_count'>tick_count</span> <span class='op'>/</span> <span class='int'>60</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>16</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_chars'>chars</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_bit'>bit</span><span class='op'>|</span> <span class='id identifier rubyid_bit'>bit</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span>
   <span class='ivar'>@glass</span><span class='period'>.</span><span class='id identifier rubyid_change_cuts'>change_cuts</span><span class='lparen'>(</span><span class='id identifier rubyid_cuts'>cuts</span><span class='rparen'>)</span>
   <span class='ivar'>@glass_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Glass panel cuts: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@glass</span><span class='period'>.</span><span class='id identifier rubyid_cuts'>cuts</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@animation_label</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A sprite (animating: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@dragon</span><span class='period'>.</span><span class='id identifier rubyid_cur_animation'>cur_animation</span><span class='embexpr_end'>}</span><span class='tstring_content'>) with repeating actions:</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#update_glass_panel: complete</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1671,16 +1697,16 @@
       <pre class="lines">
 
 
-332
-333
-334
-335
-336
-337
-338</pre>
+345
+346
+347
+348
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 332</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_interactable_button'>update_interactable_button</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#update_interactable_button: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1709,27 +1735,27 @@
       <pre class="lines">
 
 
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
 304
 305
 306
 307
 308
-309</pre>
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 292</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 304</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_metal_panel'>update_metal_panel</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#update_metal_panel: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1769,21 +1795,21 @@
       <pre class="lines">
 
 
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330</pre>
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 319</span>
+      <pre class="code"><span class="info file"># File 'app/scenes/ui_sample.rb', line 332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_progress_bar'>update_progress_bar</span>
   <span class='id identifier rubyid_mark'>mark</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#update_progress_bar: begin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1807,7 +1833,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Aug 15 20:07:39 2023 by
+  Generated on Sat Aug 26 12:12:27 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
