@@ -317,7 +317,7 @@ A Sequence is a series of `Zif::Actions::Action` to be run in order.  Behaves li
 **Example usage:**
 ```ruby
 @dragon.run_action(
-  Zif::Sequence.new(
+  Zif::Actions::Sequence.new(
     [
       # Move from starting position to 1000x over 1 second, starting slowly,
       # then flip the sprite at the end
