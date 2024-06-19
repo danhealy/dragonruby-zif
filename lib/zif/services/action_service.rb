@@ -27,7 +27,7 @@ module Zif
       # @param [Zif::Actions::Actionable] actionable
       def register_actionable(actionable)
         unless actionable.is_a?(Zif::Actions::Actionable)
-          raise ArgumentError, 'Zif::Services::ActionService#register_actionable:' /
+          raise ArgumentError, 'Zif::Services::ActionService#register_actionable:' \
                                " #{actionable} is not a Zif::Actions::Actionable"
         end
 
