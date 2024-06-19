@@ -173,6 +173,8 @@ module Zif
       @blendmode = BLENDMODE.fetch(new_blendmode, new_blendmode)
     end
 
+    alias blendmode_enum= blend=
+
     # @return [Integer] The integer value for the specified blend mode.  See {BLENDMODE}
     # @example This always returns an integer, even if you set it using a symbol
     #   mysprite.blend = :alpha  # => 1
