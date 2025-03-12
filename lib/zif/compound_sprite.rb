@@ -112,16 +112,18 @@ module Zif
 
       x_offset = dest_rect.x ? dest_rect.x : 0
       y_offset = dest_rect.y ? dest_rect.y : 0
-      x_zoom_offset = dest_rect.w or 1.0
-      y_zoom_offset = dest_rect.h or 1.0
+      x_scale = dest_rect.w ? dest_rect.w : 1.0
+      y_scale = dest_rect.h ? dest_rect.h : 1.0
 
       x_zoom, y_zoom = zoom_factor
 
-      x_zoom *= x_zoom_offset
-      y_zoom *= y_zoom_offset
+      x_zoom *= x_scale
+      y_zoom *= y_scale
 
-      cur_source_right = x_offset + (@source_x + @source_w) * x_zoom_offset
-      cur_source_top   = y_offset + (@source_y + @source_h) * y_zoom_offset
+      # cur_source_right = x_offset + (@source_x + @source_w) * x_zoom_offset
+      # cur_source_top   = y_offset + (@source_y + @source_h) * y_zoom_offset
+      cur_source_right = @source_x + @source_w
+      cur_source_top   = @source_y + @source_h
 
       # Since this "sprite" itself won't actually be drawn, we can use the positioning attributes to control the
       # contained sprites.
