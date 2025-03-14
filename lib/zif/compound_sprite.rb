@@ -103,18 +103,18 @@ module Zif
     # DRGTK docs on #draw_override:
     # http://docs.dragonruby.org/#----performance---static-sprites-as-classes-with-custom-drawing---main.rb
     # @api private
-    def draw_override(ffi_draw, dest_rect = {})
+    def draw_override(ffi_draw, parent_transform={})
       # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: begin")
       # Treat an alpha setting of 0 as an indication that it should be hidden, to match Sprite behavior
       return if @a.zero?
 
       view_actual_size! unless source_is_set?
 
-      x_offset = dest_rect.x ? dest_rect.x : 0
-      y_offset = dest_rect.y ? dest_rect.y : 0
-      x_scale = dest_rect.w ? dest_rect.w : 1.0
-      y_scale = dest_rect.h ? dest_rect.h : 1.0
-
+      x_offset = parent_transform.x ? parent_transform.x : 0
+      y_offset = parent_transform.y ? parent_transform.y : 0
+      x_scale = parent_transform.w ? parent_transform.w : 1.0
+      y_scale = parent_transform.h ? parent_transform.h : 1.0
+      
       x_zoom, y_zoom = zoom_factor
 
       x_zoom *= x_scale
@@ -208,6 +208,33 @@ module Zif
         )
       end
       # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Label drawing complete")
+    end
+
+    def transform(parent_transform={})
+      offset = { x: 0, y: 0 }.merge parent_transform.offset
+      scale = { x: 1.0, y: 1.0 }.merge parent_transform.scale
+
+      view_actual_size! unless source_is_set?
+      
+      x_zoom, y_zoom = zoom_factor
+      x_zoom *= scale.x
+      y_zoom *= scale.y
+
+      offset.x += (@x - @source_x) * x_zoom
+      offset.y += (@y - @source_y) * y_zoom
+
+      return { offset: offset, zoom: { x: x_zoom, y: y_zoom } }
+    end
+
+    def world_rect(parent_transform={})
+      trans = transform parent_transform
+
+      return {
+        x: @x + trans.offset.x,
+        y: @y + trans.offset.y,
+        w: @w * trans.zoom.x,
+        h: @h * trans.zoom.y,
+      }
     end
   end
 end
