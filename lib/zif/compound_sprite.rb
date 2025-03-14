@@ -103,25 +103,13 @@ module Zif
     # DRGTK docs on #draw_override:
     # http://docs.dragonruby.org/#----performance---static-sprites-as-classes-with-custom-drawing---main.rb
     # @api private
-    def draw_override(ffi_draw, parent_transform={})
+    def draw_override(ffi_draw, parent_transform={offset: {x: 0, y: 0}, zoom: {x: 1.0, y: 1.0}})
       # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: begin")
       # Treat an alpha setting of 0 as an indication that it should be hidden, to match Sprite behavior
       return if @a.zero?
 
-      view_actual_size! unless source_is_set?
+      trans = transform(parent_transform)
 
-      x_offset = parent_transform.x ? parent_transform.x : 0
-      y_offset = parent_transform.y ? parent_transform.y : 0
-      x_scale = parent_transform.w ? parent_transform.w : 1.0
-      y_scale = parent_transform.h ? parent_transform.h : 1.0
-      
-      x_zoom, y_zoom = zoom_factor
-
-      x_zoom *= x_scale
-      y_zoom *= y_scale
-
-      # cur_source_right = x_offset + (@source_x + @source_w) * x_zoom_offset
-      # cur_source_top   = y_offset + (@source_y + @source_h) * y_zoom_offset
       cur_source_right = @source_x + @source_w
       cur_source_top   = @source_y + @source_h
 
@@ -145,13 +133,7 @@ module Zif
         next if sprite.nil?
 
         if sprite.class <= Zif::CompoundSprite
-          dest = {
-            x: (@x - @source_x) * x_zoom + x_offset,
-            y: (@y - @source_y) * y_zoom + y_offset,
-            w: x_zoom,
-            h: y_zoom,
-          }
-          sprite.draw_override(ffi_draw, dest)
+          sprite.draw_override(ffi_draw, trans)
           next
         end
 
@@ -168,10 +150,10 @@ module Zif
           (y + h < @source_y)
 
         ffi_draw.draw_sprite_3(
-          (x - @source_x) * x_zoom + @x + x_offset,
-          (y - @source_y) * y_zoom + @y + y_offset,
-          w * x_zoom,
-          h * y_zoom,
+          (x - @source_x) * trans.zoom.x + @x + parent_transform.offset.x,
+          (y - @source_y) * trans.zoom.y + @y + parent_transform.offset.y,
+          w * trans.zoom.x,
+          h * trans.zoom.y,
           sprite.path.s_or_default,
           sprite.angle,
           sprite.a,
@@ -195,8 +177,8 @@ module Zif
       labels.each do |label|
         # TODO: Skip if not in visible window
         ffi_draw.draw_label(
-          ((label.x - @source_x) * x_zoom) + @x + x_offset,
-          ((label.y - @source_y) * y_zoom) + @y + y_offset,
+          ((label.x - @source_x) * trans.zoom.x) + @x + parent_transform.offset.x,
+          ((label.y - @source_y) * trans.zoom.y) + @y + parent_transform.offset.y,
           label.text.s_or_default,
           label.size_enum,
           label.alignment_enum,
@@ -224,17 +206,6 @@ module Zif
       offset.y += (@y - @source_y) * y_zoom
 
       return { offset: offset, zoom: { x: x_zoom, y: y_zoom } }
-    end
-
-    def world_rect(parent_transform={})
-      trans = transform parent_transform
-
-      return {
-        x: @x + trans.offset.x,
-        y: @y + trans.offset.y,
-        w: @w * trans.zoom.x,
-        h: @h * trans.zoom.y,
-      }
     end
   end
 end
