@@ -210,15 +210,15 @@ module Zif
       # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Label drawing complete")
     end
 
-    def transform(parent_transform={})
+    def transform(parent_transform={offset: {}, zoom: {}})
       offset = { x: 0, y: 0 }.merge parent_transform.offset
-      scale = { x: 1.0, y: 1.0 }.merge parent_transform.scale
+      zoom = { x: 1.0, y: 1.0 }.merge parent_transform.zoom
 
       view_actual_size! unless source_is_set?
       
       x_zoom, y_zoom = zoom_factor
-      x_zoom *= scale.x
-      y_zoom *= scale.y
+      x_zoom *= zoom.x
+      y_zoom *= zoom.y
 
       offset.x += (@x - @source_x) * x_zoom
       offset.y += (@y - @source_y) * y_zoom
