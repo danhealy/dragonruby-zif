@@ -335,7 +335,7 @@ module ExampleApp
       cur_progress_width = 150 + (50 * Zif.ease($gtk.args.tick_count, @random_lengths[4])).floor
 
       @prog.progress = cur_progress
-      @prog.resize_width(cur_progress_width)
+      @prog.resize_length(cur_progress_width)
       @prog.view_actual_size!
 
       @prog_label.text = "Progress bar: width #{cur_progress_width}, progress #{(cur_progress * 100).round}%"

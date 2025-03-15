@@ -156,7 +156,7 @@ module Zif
       @g         = 255
       @b         = 255
       @angle     = 0
-      self.blend = :alpha
+      self.blendmode_enum = :alpha
     end
 
     # @param [Hash<Symbol, Object>] sprite A hash of key-values to mass assign to a copy of this sprite.
@@ -169,21 +169,9 @@ module Zif
     # Set blend mode using either symbol names or the enum integer values.
     # @param [Symbol, Integer] new_blendmode {blend} +:none+, +:alpha+, +:add+, +:mod+, +:multiply+ or +0+, +1+, +2+, +3+, +4+. See {BLENDMODE}
     # @return [Integer] The integer value for the specified blend mode
-    def blend=(new_blendmode)
-      @blendmode = BLENDMODE.fetch(new_blendmode, new_blendmode)
+    def blendmode_enum=(new_blendmode)
+      @blendmode_enum = BLENDMODE.fetch(new_blendmode, new_blendmode)
     end
-
-    alias blendmode_enum= blend=
-
-    # @return [Integer] The integer value for the specified blend mode.  See {BLENDMODE}
-    # @example This always returns an integer, even if you set it using a symbol
-    #   mysprite.blend = :alpha  # => 1
-    #   mysprite.blend           # => 1
-    def blend
-      @blendmode
-    end
-
-    alias blendmode_enum blend
 
     # Sets {a} alpha to 255 (fully opaque)
     def show
