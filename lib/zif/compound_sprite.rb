@@ -103,12 +103,12 @@ module Zif
     # DRGTK docs on #draw_override:
     # http://docs.dragonruby.org/#----performance---static-sprites-as-classes-with-custom-drawing---main.rb
     # @api private
-    def draw_override(ffi_draw, parent_transform={offset: {x: 0, y: 0}, zoom: {x: 1.0, y: 1.0}})
+    def draw_override(ffi_draw, offset_x=0, offset_y=0, scale_x=1.0, scale_y=1.0)
       # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: begin")
       # Treat an alpha setting of 0 as an indication that it should be hidden, to match Sprite behavior
       return if @a.zero?
 
-      trans = transform(parent_transform)
+      child_offset_x, child_offset_y, child_scale_x, child_scale_y = transform(offset_x, offset_y, scale_x, scale_y)
 
       cur_source_right = @source_x + @source_w
       cur_source_top   = @source_y + @source_h
@@ -133,7 +133,7 @@ module Zif
         next if sprite.nil?
 
         if sprite.class <= Zif::CompoundSprite
-          sprite.draw_override(ffi_draw, trans)
+          sprite.draw_override(ffi_draw, child_offset_x, child_offset_y, child_scale_x, child_scale_y)
           next
         end
 
@@ -150,10 +150,10 @@ module Zif
           (y + h < @source_y)
 
         ffi_draw.draw_sprite_3(
-          (x - @source_x) * trans.zoom.x + @x + parent_transform.offset.x,
-          (y - @source_y) * trans.zoom.y + @y + parent_transform.offset.y,
-          w * trans.zoom.x,
-          h * trans.zoom.y,
+          (x - @source_x) * child_scale_x + @x + offset_x,
+          (y - @source_y) * child_scale_y + @y + offset_y,
+          w * child_scale_x,
+          h * child_scale_y,
           sprite.path.s_or_default,
           sprite.angle,
           sprite.a,
@@ -177,8 +177,8 @@ module Zif
       labels.each do |label|
         # TODO: Skip if not in visible window
         ffi_draw.draw_label(
-          ((label.x - @source_x) * trans.zoom.x) + @x + parent_transform.offset.x,
-          ((label.y - @source_y) * trans.zoom.y) + @y + parent_transform.offset.y,
+          ((label.x - @source_x) * child_scale_x) + @x + offset_x,
+          ((label.y - @source_y) * child_scale_y) + @y + offset_y,
           label.text.s_or_default,
           label.size_enum,
           label.alignment_enum,
@@ -192,20 +192,17 @@ module Zif
       # $services&.named(:tracer)&.mark("CompoundSprite(#{@name})#draw_override: Label drawing complete")
     end
 
-    def transform(parent_transform={offset: {}, zoom: {}})
-      offset = { x: 0, y: 0 }.merge parent_transform.offset
-      zoom = { x: 1.0, y: 1.0 }.merge parent_transform.zoom
-
+    def transform(offset_x=0, offset_y=0, scale_x=1.0, scale_y=1.0)
       view_actual_size! unless source_is_set?
       
       x_zoom, y_zoom = zoom_factor
-      x_zoom *= zoom.x
-      y_zoom *= zoom.y
+      x_zoom *= scale_x
+      y_zoom *= scale_y
 
-      offset.x += (@x - @source_x) * x_zoom
-      offset.y += (@y - @source_y) * y_zoom
+      offset_x += (@x - @source_x) * x_zoom
+      offset_y += (@y - @source_y) * y_zoom
 
-      return { offset: offset, zoom: { x: x_zoom, y: y_zoom } }
+      return offset_x, offset_y, x_zoom, y_zoom
     end
   end
 end
