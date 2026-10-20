@@ -1,3 +1,10 @@
+# Archived
+
+This project is archived.
+
+- The code available for you to fork and extend as you wish.
+- I suggest using [Godot](https://godotengine.org/) if you are looking for a robust game engine, appropriate for commercial use.  It includes all of the features Zif attempted to implement.
+
 # Zif: A Drop-in Framework for DragonRuby GTK
 
 Zif is a collection of features commonly required in 2D games.  The name is a reference to [Zero Insertion Force connectors used on the original Nintendo](https://console5.com/wiki/Improving_NES-001_Reliability) - You can drop it in your project and it should just work.  Everything is namespaced to `Zif` so any existing classes or namespaces you have should be preserved.
